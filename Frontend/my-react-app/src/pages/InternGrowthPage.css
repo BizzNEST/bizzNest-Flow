@@ -1,0 +1,69 @@
+/* Main page container */
+.intern-growth-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    margin: auto;
+    gap: 20px;
+    padding-top: 40px;
+}
+
+/* Title */
+.intern-growth-title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+    color: white;
+}
+
+/* Parent container for both graphs and skills */
+.growth-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 1200px;
+    gap: 30px;
+}
+
+/* Graphs Row: Two graphs side by side */
+.graphs-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 30px;
+}
+
+/* Skills Row: Two skill containers side by side */
+.skills-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 30px;
+}
+
+/* Make sure both graphs are equal in size */
+.chart-container {
+    flex: 1;
+    height: 400px; /* Consistent height */
+}
+
+/* Make sure both skill containers are equal in size */
+.skills-container > div {
+    flex: 1;
+    height: 150px; /* Consistent height */
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .graphs-container, .skills-container {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .chart-container, .skills-container > div {
+        width: 100%;
+    }
+}
