@@ -32,7 +32,7 @@
 /* ✅ Style return button */
 .returnToProjects {
     background: none;
-    border: none;
+    margin-left: 0px;
     cursor: pointer;
 }
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import growth from "../assets/growth.svg";
+import returnArrow from "../assets/returnArrow.svg";
 import './EditInterns.css';
 
 const skillLabels = {
@@ -165,16 +166,25 @@ const EditIntern = () => {
   return (
     <div className="editInternContainer">
       <div className="formWrapper">
-      <button 
-            className="growth-button" 
-            onClick={(e) => { 
-                e.stopPropagation(); 
-                navigate(`/internGrowthPage/${internID}`); 
-            }}
-        >
-            <img src={growth} alt="growth" />
-            <span>Intern Growth</span>
-        </button>
+
+      <div className="header-wrapper">
+                {/* Back button on the left */}
+                <button className="back-button" onClick={() => navigate(`/Interns`)}>
+                    <img src={returnArrow} alt="Back" />
+                </button>
+
+                {/* Intern Growth button on the right */}
+                <button 
+                    className="growth-button" 
+                    onClick={(e) => { 
+                        e.stopPropagation(); 
+                        navigate(`/internGrowthPage/${internID}`); 
+                    }}
+                >
+                    <img src={growth} alt="growth" />
+                    <span>Intern Growth</span>
+                </button>
+            </div>
         <h2>Edit Intern</h2>
         <form onSubmit={handleSubmit} className="editInternForm">
           <div className="updateNameContainer">
@@ -242,7 +252,6 @@ const EditIntern = () => {
           </div>
           <div className="buttonsContainer">
               <button type="submit">Update</button>
-              <button type="cancel" onClick={handleBack}>Back</button>
           </div>
         </form>
       </div>
