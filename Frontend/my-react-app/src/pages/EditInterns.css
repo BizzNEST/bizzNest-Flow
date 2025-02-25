@@ -5,6 +5,34 @@
     border-radius: 25px;
 }
 
+
+.growth-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px; /* Space between icon and text */
+    background: linear-gradient(to right, #00d2ff, #3a7bd5);
+    border-radius: 25px;
+    padding: 5px 15px;
+    cursor: pointer;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    transition: transform 0.15s linear, background 0.3s ease;
+}
+
+.growth-button:hover {
+    transform: scale(1.05);
+}
+
+.growth-button img{
+    width: 24px;
+    height: 24px;
+    filter: invert(1);
+}
+
+
+
 .editInternContainer{
     display: flex;
     flex-direction: column;
