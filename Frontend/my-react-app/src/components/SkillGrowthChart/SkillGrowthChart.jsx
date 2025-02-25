@@ -25,7 +25,7 @@ const SkillGrowthChart = ({ internID }) => {
                 if (data.success) {
                     setGrowthData(data.data.map(skill => ({
                         toolName: toolMap[skill.toolID] || `Tool ${skill.toolID}`,
-                        growthPercentage: parseFloat(skill.growthPercentage.toFixed(2))
+                        growthPercentage: parseFloat(skill.growthPercentage)
                     })));
                 }
             } catch (error) {
@@ -35,20 +35,6 @@ const SkillGrowthChart = ({ internID }) => {
 
         fetchGrowthData();
     }, [internID]);
-
-    // ✅ Custom Tooltip to standardize text color
-    const CustomTooltip = ({ active, payload }) => {
-        if (active && payload && payload.length) {
-            return (
-                <div className="custom-tooltip">
-                    <p className="tooltip-value">
-                        {payload[0].payload.toolName}: <strong>{parseFloat(payload[0].value).toFixed(2)}%</strong>
-                    </p>
-                </div>
-            );
-        }
-        return null;
-    };
 
     return (
         <div className="skill-growth-container">
@@ -60,13 +46,24 @@ const SkillGrowthChart = ({ internID }) => {
                     <BarChart 
                         data={growthData} 
                         margin={{ top: 20, right: 30, left: 20, bottom: 80 }}
-                        barCategoryGap={20} 
+                        barCategoryGap={20} /* ✅ Adds spacing between bars */
                     >
-                        <XAxis dataKey="toolName" angle={0} textAnchor="end" tick={{ fontSize: 14, dy: 10 }} />
+                        <XAxis 
+                            dataKey="toolName" 
+                            angle={0} 
+                            textAnchor="end" 
+                            tick={{ fontSize: 14, dy: 10 }} 
+                        />
                         <YAxis domain={[0, "auto"]} />
-                        <Tooltip content={<CustomTooltip />} cursor={{ fill: "transparent" }} /> {/* ✅ Use custom tooltip */}
+                        <Tooltip cursor={{ fill: "transparent" }} /> {/* ✅ Removes bar hover effect */}
                         <Legend />
-                        <Bar dataKey="growthPercentage" fill="#8884d8" name="Growth %" barSize={50} fillOpacity={1}>
+                        <Bar 
+                            dataKey="growthPercentage" 
+                            fill="#8884d8" 
+                            name="Growth %" 
+                            barSize={50} 
+                            fillOpacity={1} /* ✅ Ensures bars do not change color on hover */
+                        >
                             <LabelList dataKey="growthPercentage" position="top" />
                         </Bar>
                     </BarChart>
