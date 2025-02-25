@@ -9,13 +9,37 @@
     padding-top: 40px;
 }
 
-/* Title */
+/* ✅ Flexbox for header layout */
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Pushes elements apart */
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 10px 20px; /* Adds spacing */
+}
+
+/* ✅ Center the title */
 .intern-growth-title {
+    flex-grow: 1; /* Makes sure it takes the available space */
+    text-align: center;
     font-size: 28px;
     font-weight: bold;
-    margin-bottom: 20px;
-    text-align: center;
     color: white;
+}
+
+/* ✅ Style return button */
+.returnToProjects {
+    background: none;
+    margin-left: 0px;
+    cursor: pointer;
+}
+
+/* ✅ Ensure return arrow size is controlled */
+.returnArrow {
+    width: 40px;
+    height: auto;
 }
 
 /* Parent container for both graphs and skills */
