@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import growth from "../assets/growth.svg";
 import './EditInterns.css';
 
 const skillLabels = {
@@ -164,6 +165,16 @@ const EditIntern = () => {
   return (
     <div className="editInternContainer">
       <div className="formWrapper">
+      <button 
+            className="growth-button" 
+            onClick={(e) => { 
+                e.stopPropagation(); 
+                navigate(`/internGrowth/${internID}`); 
+            }}
+        >
+            <img src={growth} alt="growth" />
+            <span>Intern Growth</span>
+        </button>
         <h2>Edit Intern</h2>
         <form onSubmit={handleSubmit} className="editInternForm">
           <div className="updateNameContainer">
