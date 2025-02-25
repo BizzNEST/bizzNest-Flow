@@ -169,7 +169,7 @@ const EditIntern = () => {
             className="growth-button" 
             onClick={(e) => { 
                 e.stopPropagation(); 
-                navigate(`/internGrowth/${internID}`); 
+                navigate(`/internGrowthPage/${internID}`); 
             }}
         >
             <img src={growth} alt="growth" />

@@ -11,7 +11,7 @@ import ProtectedRoute from './components/ProtectedRoutes/ProtectedRoutes';
 import LoginSignup from './pages/LoginSignup';
 import Thankyou from './pages/Thankyou';
 import EditIntern from './pages/editIntern';
-import InternGrowthChart from './pages/InternGrowthChart';
+import InternGrowthPage from './pages/InternGrowthPage';
 import CompletedProjects from './pages/CompletedProjects';
 
 function App() {
@@ -32,7 +32,7 @@ function App() {
         <Route path="/project/:projectID" element={ <ProtectedRoute> <ProjectInfoPage /> </ProtectedRoute> }/>
         <Route path="/intern-signup" element={ <ProtectedRoute> <InternSignup /> </ProtectedRoute> }/>
         <Route path="/editIntern/:internID" element={ <ProtectedRoute><EditIntern/></ProtectedRoute>}/>
-        <Route path="/internGrowth/:internID" element={ <ProtectedRoute><InternGrowthChart/></ProtectedRoute>}/>
+        <Route path="/internGrowthPage/:internID" element={ <ProtectedRoute><InternGrowthPage/></ProtectedRoute>}/>
         <Route path="/CompletedProjects" element={ <ProtectedRoute><CompletedProjects/></ProtectedRoute>}/>
       </Routes>
     </Router>
