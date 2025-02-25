@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import './CompletedProjects.css';
+import NavBar from '../components/Navbar/NavBar';
 
 const CompletedProjects = () => {
     const [projects, setProjects] = useState([]);
+    const [isMenuOpen, setIsMenuOpen] = useState(false); // ✅ State for Navbar menu toggle
 
     useEffect(() => {
         const fetchProjects = async () => {
@@ -21,7 +23,8 @@ const CompletedProjects = () => {
 
         fetchProjects();
     }, []);
-        const handleReactivate = async (projectID) => {
+
+    const handleReactivate = async (projectID) => {
         try {
             const response = await fetch(`http://localhost:3360/restoreProject/${projectID}`, {
                 method: 'PUT',
@@ -35,19 +38,28 @@ const CompletedProjects = () => {
         } catch (error) {
             console.error('Error reactivating project:', error);
         }
-    }
+    };
+
     return (
-        <div className='completedProjectsWrapper'>
-            <h1>Completed Projects</h1>
-            <div className="completedProjectContainer">
-                {projects.map((project) => (
-                    <div className='compProjectDiv' key={project.projectID}>
-                        <h2>{project.projectTitle}</h2>
-                        <button className='Reactivate' onClick={() => handleReactivate(project.projectID)}>Reactivate</button>
-                    </div>
-                ))}
+        <div className="nav-container">
+            {/* ✅ Navbar added at the top */}
+            <NavBar setIsMenuOpen={setIsMenuOpen} isMenuOpen={isMenuOpen} />
+
+            <div className="completedProjectsWrapper">
+                <h1>Completed Projects</h1>
+                <div className="completedProjectContainer">
+                    {projects.map((project) => (
+                        <div className='compProjectDiv' key={project.projectID}>
+                            <h2>{project.projectTitle}</h2>
+                            <button className='Reactivate' onClick={() => handleReactivate(project.projectID)}>
+                                Reactivate
+                            </button>
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
     );
-}
+};
+
 export default CompletedProjects;
