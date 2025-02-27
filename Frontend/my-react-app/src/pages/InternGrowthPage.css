@@ -3,10 +3,22 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 90%;
-    margin: auto;
-    gap: 20px;
+    width: 100%;
+    height: 100vh; /* Full viewport height */
+    overflow: hidden; /* Prevent entire page from scrolling */
     padding-top: 40px;
+}
+
+/* Scrollable growth container */
+.growth-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 1200px;
+    gap: 30px;
+    overflow-y: auto; /* Enables scrolling */
+    flex-grow: 1; /* Allows it to take up available space */
+    padding-bottom: 20px; /* Prevents last item from being cut off */
 }
 
 /* ✅ Flexbox for header layout */
@@ -18,6 +30,10 @@
     max-width: 1200px;
     margin: auto;
     padding: 10px 20px; /* Adds spacing */
+    position: sticky;
+    top: 0;
+    background-color: #1a1a1a; /* Adjust as needed */
+    z-index: 10; /* Keeps it above scrolling content */
 }
 
 /* ✅ Center the title */
@@ -40,15 +56,6 @@
 .returnArrow {
     width: 40px;
     height: auto;
-}
-
-/* Parent container for both graphs and skills */
-.growth-container {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 1200px;
-    gap: 30px;
 }
 
 /* Graphs Row: Two graphs side by side */

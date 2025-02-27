@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import NavBar from "../components/Navbar/NavBar"; // Import the NavBar component
 import growth from "../assets/growth.svg";
 import returnArrow from "../assets/returnArrow.svg";
 import './EditInterns.css';
@@ -36,7 +37,6 @@ const EditIntern = () => {
             acc[skill.toolID] = skill.skillLevel || 0; // Default to 0 for missing values
             return acc;
           }, {});
-
 
           const internData = {
             firstName: data.firstName,
@@ -76,19 +76,6 @@ const EditIntern = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Organize skills by category
-      //const departmentSkills = skillLabels[formData.departmentID];
-      const webDevSkills = {};
-      const designSkills = {};
-      const filmSkills = {};
-
-      Object.entries(formData.skills).forEach(([toolID, skillLevel]) => {
-        const id = Number(toolID);
-        if (id >= 0 && id <= 2) webDevSkills[id] = skillLevel;
-        else if (id >= 3 && id <= 5) designSkills[id] = skillLevel;
-        else if (id >= 6 && id <= 7) filmSkills[id] = skillLevel;
-      });
-
       const payload = {
         firstName: formData.firstName,
         lastName: formData.lastName,
@@ -105,16 +92,10 @@ const EditIntern = () => {
         )
       };
 
-      // Check if the intern already has skill values assigned
       const hasExistingSkills = Object.values(formData.skills).some(skillLevel => skillLevel > 0);
-      console.log("Checking existing skills:", hasExistingSkills);
-
-      console.log("Submitting skills:", payload);
-      console.log("Using endpoint:", hasExistingSkills ? "PUT /updateIntern" : "POST /addSkills");
 
       let response;
       if (hasExistingSkills) {
-        // Update existing skills (PUT request)
         response = await fetch(`http://localhost:3360/updateIntern/${internID}`, {
           method: "PUT",
           headers: {
@@ -123,7 +104,6 @@ const EditIntern = () => {
           body: JSON.stringify(payload),
         });
       } else {
-        // First submission - Insert into `initialSkills` (POST request)
         response = await fetch(`http://localhost:3360/addSkills/${internID}`, {
           method: "POST",
           headers: {
@@ -148,114 +128,115 @@ const EditIntern = () => {
   const calculateAverageSkill = () => {
     const skillValues = Object.values(formData.skills);
     if (skillValues.length === 0) return 0;
-  
+
     const total = skillValues.reduce((acc, skill) => acc + skill, 0);
     return Math.round((total / skillValues.length) * 10) / 10;
   };
 
-  // Get the skill labels for the current department
   const departmentSkills = skillLabels[formData.departmentID] || [];
 
   const handleBack = () => {
     if (originalData) {
-      setFormData(originalData); // Restore original values
+      setFormData(originalData);
     }
-    navigate('/interns'); // Go back
+    navigate('/interns');
   };
 
   return (
-    <div className="editInternContainer">
-      <div className="formWrapper">
+    <div className="big-container">
+      <NavBar /> {/* Add NavBar at the top */}
+      <div className="editInternContainer">
+        <div className="formWrapper">
+          <div className="header-wrapper">
+            <button className="back-button" onClick={handleBack}>
+              <img src={returnArrow} alt="Back" />
+            </button>
 
-      <div className="header-wrapper">
-                {/* Back button on the left */}
-                <button className="back-button" onClick={() => navigate(`/Interns`)}>
-                    <img src={returnArrow} alt="Back" />
-                </button>
+            <button 
+              className="growth-button" 
+              onClick={(e) => { 
+                e.stopPropagation(); 
+                navigate(`/internGrowthPage/${internID}`); 
+              }}
+            >
+              <img src={growth} alt="growth" />
+              <span>Intern Growth</span>
+            </button>
+          </div>
 
-                {/* Intern Growth button on the right */}
-                <button 
-                    className="growth-button" 
-                    onClick={(e) => { 
-                        e.stopPropagation(); 
-                        navigate(`/internGrowthPage/${internID}`); 
-                    }}
-                >
-                    <img src={growth} alt="growth" />
-                    <span>Intern Growth</span>
-                </button>
+          <h2>Edit Intern</h2>
+          <form onSubmit={handleSubmit} className="editInternForm">
+            <div className="updateNameContainer">
+              <label>
+                <input
+                  type="text"
+                  name="firstName"
+                  value={formData.firstName}
+                  onChange={handleChange}
+                />
+              </label>
+              <label>
+                <input
+                  type="text"
+                  name="lastName"
+                  value={formData.lastName}
+                  onChange={handleChange}
+                />
+              </label>
             </div>
-        <h2>Edit Intern</h2>
-        <form onSubmit={handleSubmit} className="editInternForm">
-          <div className="updateNameContainer">
-            <label>
-              <input
-                type="text"
-                name="firstName"
-                value={formData.firstName}
-                onChange={handleChange}
-              />
-            </label>
-            <label>
-              <input
-                type="text"
-                name="lastName"
-                value={formData.lastName}
-                onChange={handleChange}
-              />
-            </label>
-          </div>
-          <div className="updateLocationDepartmentContainer">
-            <label>
-              <select name="location" value={formData.location} onChange={handleChange}>
-                <option value="">Select a location</option>
-                <option value="Salinas">Salinas</option>
-                <option value="Gilroy">Gilroy</option>
-                <option value="Watsonville">Watsonville</option>
-                <option value="Stockton">Stockton</option>
-                <option value="Modesto">Modesto</option>
-              </select>
-            </label>
-            <label>
-              <select name="departmentID" value={formData.departmentID} onChange={handleChange}>
-                <option value="">Select a department</option>
-                <option value="0">Web Development</option>
-                <option value="1">Design</option>
-                <option value="2">Film</option>
-              </select>
-            </label>
-          </div>
-          <div className="updateSkillLevelContainer">
-            <h3>Skill Levels</h3>
-            <div className="departmentSkillLevelsContainer">
-              {departmentSkills.map((label, index) => {
-                const toolID = Object.keys(skillLabels).find(
-                  (key) => skillLabels[key].includes(label)
-                ) * 3 + index; // Derive toolID dynamically
-                return (
-                  <label key={toolID} className="skillItem">
-                        {label} Skill:
-                        <input
-                          type="number"
-                          name={`skill_${toolID}`}
-                          value={formData.skills[toolID] || 0}
-                          onChange={handleChange}
-                        />
-                  </label>
-                );
-              })}
-              <div className="averageSkillBlock">
-                Overall: 
-                <div className="averageValue">{calculateAverageSkill()}</div>
+
+            <div className="updateLocationDepartmentContainer">
+              <label>
+                <select name="location" value={formData.location} onChange={handleChange}>
+                  <option value="">Select a location</option>
+                  <option value="Salinas">Salinas</option>
+                  <option value="Gilroy">Gilroy</option>
+                  <option value="Watsonville">Watsonville</option>
+                  <option value="Stockton">Stockton</option>
+                  <option value="Modesto">Modesto</option>
+                </select>
+              </label>
+              <label>
+                <select name="departmentID" value={formData.departmentID} onChange={handleChange}>
+                  <option value="">Select a department</option>
+                  <option value="0">Web Development</option>
+                  <option value="1">Design</option>
+                  <option value="2">Film</option>
+                </select>
+              </label>
+            </div>
+
+            <div className="updateSkillLevelContainer">
+              <h3>Skill Levels</h3>
+              <div className="departmentSkillLevelsContainer">
+                {departmentSkills.map((label, index) => {
+                  const toolID = Object.keys(skillLabels).find(
+                    (key) => skillLabels[key].includes(label)
+                  ) * 3 + index;
+                  return (
+                    <label key={toolID} className="skillItem">
+                      {label} Skill:
+                      <input
+                        type="number"
+                        name={`skill_${toolID}`}
+                        value={formData.skills[toolID] || 0}
+                        onChange={handleChange}
+                      />
+                    </label>
+                  );
+                })}
+                <div className="averageSkillBlock">
+                  Overall: <div className="averageValue">{calculateAverageSkill()}</div>
+                </div>
               </div>
-            </div>    
-          </div>
-          <div className="buttonsContainer">
+            </div>
+
+            <div className="buttonsContainer">
               <button type="submit">Update</button>
-          </div>
-        </form>
+            </div>
+          </form>
+        </div>
       </div>
-      
     </div>
   );
 };
