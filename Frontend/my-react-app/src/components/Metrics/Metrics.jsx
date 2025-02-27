@@ -2,6 +2,7 @@ import React from 'react';
 import './Metrics.css';
 import ProjectWorkloadsChart from './workloads/workloads';
 import MonthlyGrowth from './monthlyGrowth/monthlyGrowth';
+import OverallGrowth from './overallGrowth/overallGrowth';
 
 const Metrics = () => {
   return (
@@ -30,9 +31,10 @@ const Metrics = () => {
             <ProjectWorkloadsChart />
         </div>
         <div className="rectangle rectangle-third">
-          <div className="overall-growth">
+          
             {/* Overall growth graph */}
-          </div>
+            <OverallGrowth />
+
         </div>
       </div>
     </div>
