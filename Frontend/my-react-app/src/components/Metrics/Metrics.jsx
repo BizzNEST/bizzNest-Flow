@@ -1,5 +1,6 @@
 import React from 'react';
 import './Metrics.css';
+import ProjectWorkloadsChart from './workloads/workloads';
 
 const Metrics = () => {
   return (
@@ -23,9 +24,10 @@ const Metrics = () => {
           </div>
         </div>
         <div className="rectangle rectangle-third">
-          <div className="project-workloads">
-            {/* Project workloads graph */}
-          </div>
+          {/* <div className="project-workloads"> */}
+          
+            <ProjectWorkloadsChart />
+          
         </div>
         <div className="rectangle rectangle-third">
           <div className="overall-growth">
