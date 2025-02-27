@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from 'react-router-dom';
+import NavBar from "../components/Navbar/NavBar"; // ✅ Import NavBar
 import SkillGrowthChart from "../components/SkillGrowthChart/SkillGrowthChart";
 import MonthlyGrowthChart from "../components/MonthlyGrowthGraph/MonthlyGrowthGraph";
 import InitialSkills from "../components/InitialSkills/InitialSkills";
@@ -9,7 +10,7 @@ import "./InternGrowthPage.css";
 
 const InternGrowthPage = () => {
     const { internID } = useParams();
-    const navigate = useNavigate(); // ✅ Define navigate
+    const navigate = useNavigate();
 
     const [internName, setInternName] = useState("");
 
@@ -33,28 +34,30 @@ const InternGrowthPage = () => {
     }, [internID]);
 
     return (
-        <div className="intern-growth-page">
-            {/* ✅ Flex container for proper alignment */}
-            <div className="header-container">
-                <button className="returnToProjects" onClick={() => navigate(`/editIntern/${internID}`)}>
-                    <img className="returnArrow" src={returnArrow} alt="Return to Projects" />
-                </button>
-                <h1 className="intern-growth-title">
-                    {internName ? `${internName}'s Growth` : "Intern Growth"}
-                </h1>
-            </div>
-    
-            <div className="growth-container">
-                {/* Top Row: Graphs Side by Side */}
-                <div className="graphs-container">
-                    <SkillGrowthChart internID={internID} />
-                    <MonthlyGrowthChart internID={internID} />
+        <div className="big-container">
+            <NavBar /> {/* ✅ Add NavBar at the top */}
+            <div className="intern-growth-page">
+                <div className="header-container">
+                    <button className="returnToProjects" onClick={() => navigate(`/editIntern/${internID}`)}>
+                        <img className="returnArrow" src={returnArrow} alt="Return to Projects" />
+                    </button>
+                    <h1 className="intern-growth-title">
+                        {internName ? `${internName}'s Growth` : "Intern Growth"}
+                    </h1>
                 </div>
-    
-                {/* Bottom Row: Skill Containers Side by Side */}
-                <div className="skills-container">
-                    <InitialSkills internID={internID} />
-                    <FinalSkills internID={internID} />
+
+                <div className="growth-container">
+                    {/* Top Row: Graphs Side by Side */}
+                    <div className="graphs-container">
+                        <SkillGrowthChart internID={internID} />
+                        <MonthlyGrowthChart internID={internID} />
+                    </div>
+
+                    {/* Bottom Row: Skill Containers Side by Side */}
+                    <div className="skills-container">
+                        <InitialSkills internID={internID} />
+                        <FinalSkills internID={internID} />
+                    </div>
                 </div>
             </div>
         </div>
