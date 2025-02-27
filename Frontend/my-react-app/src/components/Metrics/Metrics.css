@@ -36,6 +36,11 @@
 .rectangle-large {
   flex: 2;
   max-width: calc(66.666% - 10px);
+  /* height: 235px; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; /* Prevents any content overflow */
 }
 
 /* Bottom row */
@@ -48,22 +53,8 @@
   max-width: calc(33.333% - 13.333px);
 }
 
-/* .project-workloads-chart {
-  
-  border-radius: 8px;
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
-  padding: 17px;
-  margin-right: 10px;
-  text-align: center;
-} */
+/* Ensure the large container for the graph is properly constrained */
 
-.chart-title {
-  font-size: 16px;
-  margin: 2px;
-  font-weight: bold;
-  color: black;
-  margin-bottom: 10px;
-}
 
 /* Tablet breakpoint - maintain the same layout but scaled down */
 @media (max-width: 1024px) {
