@@ -10,7 +10,7 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import ProtectedRoute from './components/ProtectedRoutes/ProtectedRoutes';
 import LoginSignup from './pages/LoginSignup';
 import Thankyou from './pages/Thankyou';
-import EditIntern from './pages/editIntern';
+import EditIntern from './pages/EditIntern'
 import InternGrowthPage from './pages/InternGrowthPage';
 import CompletedProjects from './pages/CompletedProjects';
 
