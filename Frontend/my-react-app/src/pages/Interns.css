@@ -1,11 +1,7 @@
-
-
 /* Fullscreen background */
 .big-container {
   display: flex;
   flex-direction: column;
-  height: 100vh; /* Full viewport height */
-  overflow: hidden; /* Prevent scrolling */
   background: #191919;
 }
 
@@ -17,7 +13,6 @@
   padding: 70px 20px 20px; /* Added 40px padding at the top */
   height: 100vh; /* Full screen height */
   background-color: #191919;
-  overflow: hidden; /* Prevent scrolling */
 }
 
 /* The content should fill the space without overflowing */
@@ -30,7 +25,6 @@
   width: 90%;
   max-width: 1200px;
   flex-grow: 1;
-  overflow: hidden; /* Prevent scrolling */
   padding-top: 20px; /* Push content slightly downward */
 }
 
@@ -71,7 +65,7 @@
 
 /* Interns list title */
 .interns-wrapper h2 {
-  margin-bottom: 10px;
+  margin-top: 50px;
   color: white;
   font-size: 28px;
   text-align: center;
@@ -150,8 +144,7 @@
   font-weight: bold;
   margin: 10px 0; /* Consistent spacing */
   width: 90%; /* Makes each list item take 90% of its container */
-  max-width: 600px; /* Optional: Prevents it from stretching too much */
-  height: 60px; /* Adjusted height */
+  height: 25px !important;
   border-radius: 25px;
   padding: 15px;
   background: linear-gradient(to right, #ef2bd2, #f679b5, #c333fd);
@@ -211,23 +204,44 @@
   object-fit: cover;
 }
 
+@media (max-width: 976px) and (min-width: 768px) {
+ 
+  .interns-wrapper h2 {
+      margin-top: 100px;
+  }
+  .select-buttons {
+      display: flex;
+      flex-direction: column; /* Stack buttons vertically */
+      align-items: center; /* Center buttons */
+      gap: 10px; /* Add spacing between buttons */
+  }
+
+  .select-left, .delete-right {
+      width: 100%; /* Make them take full width */
+      display: flex;
+      justify-content: center; /* Center buttons */
+  }
+
+  .select-btn, .deselect-btn, .delete-selected-btn {
+      width: 80%; /* Adjust button width */
+      text-align: center;
+  }
+}
 /* Responsive Design */
 @media (max-width: 768px) {
   .content {
-      flex-direction: column; /* Stack filtering and interns list vertically */
+      flex-direction: column; 
       align-items: center;
   }
 
-  .filtering-wrapper {
-      max-width: 100%;
-      margin-bottom: 20px; /* Add spacing below filtering box */
-  }
-
+  .filtering-wrapper,
   .interns-wrapper {
-      max-width: 100%;
+    justify-content: center ;
+      width: 90%; 
+      max-width: none; 
   }
 
   .interns-wrapper ul li {
-      width: 95%; /* Make list items wider for smaller screens */
+      width: 95%; 
   }
 }

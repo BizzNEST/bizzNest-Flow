@@ -1,30 +1,44 @@
 .skill-growth-container {
     width: 100%;
-    background: linear-gradient(to bottom right, #2b2b2b, #1e1e1e);
+    background: linear-gradient(to bottom right, #2b2b2b, #1e1e1e); /* Dark Background */
     padding: 40px;
     border-radius: 15px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
     text-align: center;
     color: white;
-    height: 400px; /* Matches Monthly Growth */
+    height: 430px; /* Matches Monthly Growth */
+    transition: transform 0.3s ease;
 }
 
-/* Hover effect */
+/* ✅ Hover Effect (No Shadow) */
 .skill-growth-container:hover {
     transform: scale(1.02);
 }
 
-/* Chart title */
+/* ✅ Chart Title with Gradient Text & Matching Underline */
 .skill-growth-container h2 {
-    font-size: 24px;
+    font-size: 30px;
     font-weight: bold;
     margin-bottom: 15px;
-    background: linear-gradient(to right, #ffffff, #f5c2da, #d20e70);
+    background: linear-gradient(to right, #c896f9, #a63df1);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    position: relative;
+    display: inline-block; /* Ensures it doesn't take full width */
 }
 
-/* Custom tooltip styling */
+/* ✅ Underline that perfectly matches the text gradient */
+.skill-growth-container h2::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 3px; /* Thickness of the underline */
+    background: linear-gradient(to right, #c896f9, #a63df1); /* Same as text */
+    position: absolute;
+    bottom: -5px; /* Adjust spacing */
+    left: 0;
+}
+
+/* ✅ Custom Tooltip Styling */
 .recharts-tooltip-wrapper {
     background: rgba(255, 255, 255, 0.9);
     padding: 10px;
@@ -32,31 +46,29 @@
     color: black;
 }
 
-/* Bar Graph Styling */
-.recharts-bar-rectangle {
-    fill: url(#barGradient);
+/* ✅ Dark Purple Gradient for Bars */
+.recharts-bar {
+    fill: url(#barGradient) !important;
 }
 
-/* Custom tooltip styling */
+/* ✅ Tooltip Styling */
 .custom-tooltip {
-    background: none; /* ✅ Removes background */
-    padding: 5px;
+    background: rgba(20, 20, 20, 0.9); /* Dark tooltip for contrast */
+    padding: 10px;
     border-radius: 5px;
-    color: rgb(10, 9, 9); /* ✅ Matches text color */
+    color: white;
     font-size: 14px;
     font-weight: bold;
     text-align: center;
-    box-shadow: none; /* ✅ Removes shadow */
 }
 
-/* Tooltip value styling */
+/* ✅ Tooltip Value Styling */
 .tooltip-value {
     margin: 0;
     padding: 5px;
 }
 
-
-/* Responsive adjustments */
+/* ✅ Responsive Adjustments */
 @media (max-width: 768px) {
     .skill-growth-container {
         width: 100%;

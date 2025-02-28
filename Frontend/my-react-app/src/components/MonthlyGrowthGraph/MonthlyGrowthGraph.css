@@ -6,7 +6,7 @@
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
     text-align: center;
     color: white;
-    height: 400px; /* Matches Skill Growth */
+    height: 430px; /* Matches Skill Growth */
 }
 
 /* Hover effect for monthly growth chart */
@@ -15,15 +15,31 @@
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
 }
 
-/* Monthly growth chart title */
+/* ✅ Chart Title with Gradient Text & Matching Underline */
 .monthly-growth-container h2 {
-    font-size: 22px;
+    font-size: 30px;
     font-weight: bold;
     margin-bottom: 15px;
-    background: linear-gradient(to right, #ffffff, #f5c2da, #d20e70);
+    background: linear-gradient(to right, #ffffff, #00bcd4, #25ffc1);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    position: relative;
+    display: inline-block; /* Prevents full-width underline */
 }
+
+/* ✅ Underline that perfectly matches the text gradient */
+.monthly-growth-container h2::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 3px; /* Thickness of the underline */
+    background: linear-gradient(to right, #ffffff, #00bcd4, #25ffc1); /* Same gradient as text */
+    position: absolute;
+    bottom: -5px; /* Adjust spacing */
+    left: 0;
+}
+
+
 
 /* Custom tooltip styling */
 .recharts-tooltip-wrapper {
@@ -38,6 +54,7 @@
     stroke-width: 3;
     filter: drop-shadow(0px 0px 5px rgba(255, 115, 0, 0.8));
 }
+
 .custom-tooltip {
     background: rgba(0, 0, 0, 0.8);
     padding: 10px;
@@ -53,6 +70,7 @@
 .tooltip-value {
     margin-top: 5px;
 }
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .monthly-growth-container {

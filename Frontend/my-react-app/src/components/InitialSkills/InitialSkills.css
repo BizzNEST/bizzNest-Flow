@@ -1,16 +1,15 @@
 /* Container for Initial Skills */
 .initial-skills-container {
-    background: linear-gradient(to bottom right, #1e3c72, #2a5298);
+    background: linear-gradient(to bottom right, #ef2bd2, #c333fd); /* Pink to Purple */
     padding: 20px;
+    margin-bottom: 20px;
     border-radius: 15px;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
     text-align: center;
     color: white;
-    width: 100%;
-    height: 250px; 
+    min-height: 150px; /* Ensures consistency */
     display: flex;
     flex-direction: column;
-    justify-content: center;
 }
 
 /* Title */
@@ -24,6 +23,7 @@
 .initial-skills-container ul {
     list-style-type: none;
     padding: 0;
+    margin: 0; /* Removes extra space around the list */
 }
 
 /* Individual skill */
