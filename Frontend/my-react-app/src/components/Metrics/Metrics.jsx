@@ -4,15 +4,17 @@ import ProjectWorkloadsChart from './workloads/workloads';
 import MonthlyGrowth from './monthlyGrowth/monthlyGrowth';
 import OverallGrowth from './overallGrowth/overallGrowth';
 import DepartmentGrowth from './departmentGrowth/departmentGrowth';
+import ProjectSummaries from './projectSummaries/projectSummaries';
 
 const Metrics = () => {
   return (
     <div className="graph-container">
       <div className="row top-row">
         <div className="rectangle rectangle-small">
-          <div className="project-summaries">
+          
             {/* Project summaries graphic */}
-          </div>
+            <ProjectSummaries />
+
         </div>
         <div className="rectangle rectangle-large">
           {/* <div className="monthly-growth"> */}
