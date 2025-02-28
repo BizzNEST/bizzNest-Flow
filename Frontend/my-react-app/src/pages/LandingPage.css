@@ -1,0 +1,102 @@
+.landingPageWrapper {
+  background-color: white;
+  height: 94vh;
+  padding: 50px 50px 0;
+}
+
+.landingHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: start;
+}
+
+.logoLandingPageContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: start;
+}
+
+.logoLandingPageContainer p {
+  font-weight: 150;
+  font-size: 40px;
+  color: black;
+  margin: 0;
+}
+
+.landingHeader img {
+  width: 75px;
+  rotate: 180deg;
+}
+
+.landingHeader button {
+  background: linear-gradient(to right, #00bcd4, #25ffc1);
+  color: white;
+  width: 15vw;
+  height: 7vh;
+  border-radius: 10px;
+  border: none;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.6);
+  font-size: 22px;
+  font-weight: bold;
+
+  &:hover{
+    scale: 1.1;
+    cursor: pointer;
+  }
+}
+
+.landingPageHero {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-top: 50px;
+}
+
+.learnMoreLandingPage {
+  background: linear-gradient(to right, #00bcd4, #25ffc1);
+  text-align: center;
+  padding: 2% 5%;
+  margin-top: 3%;
+  width: 30%;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.6);
+}
+
+.learnMoreLandingPage h1 {
+  font-size: 48px;
+  font-weight: 400;
+  color: #ef2bd2;
+}
+
+.learnMoreLandingPage p {
+  font-size: 24px;
+  padding: 0 0 30px 0;
+  margin-top: 0;
+}
+
+.landingPageHero img {
+  width: 650px;
+}
+
+.landingPageHero button {
+  background: linear-gradient(90deg, #bc36c8, #e579d5);
+  border-radius: 15px;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  font-size: 23px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  width: 280px;
+  &:hover{
+    scale: 1.1;
+  }
+}

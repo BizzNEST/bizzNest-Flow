@@ -13,12 +13,14 @@ import Thankyou from './pages/Thankyou';
 import EditIntern from './pages/EditIntern'
 import InternGrowthPage from './pages/InternGrowthPage';
 import CompletedProjects from './pages/CompletedProjects';
+import LandingPage from './pages/LandingPage';
 
 function App() {
   return (
     <Router>
       <Routes>
         {/* Public Routes */}
+        <Route path='/landing-page' element={<LandingPage/>}/>
         <Route path="/loginsignup" element={<LoginSignup />} />
         <Route path="/login" element={<Navigate to="/loginsignup" />} />
         <Route path='/internsignup' element={<InternSignup />} />
