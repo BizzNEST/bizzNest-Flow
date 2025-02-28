@@ -4,9 +4,9 @@ import NavBar from "../components/Navbar/NavBar";
 import SkillGrowthChart from "../components/SkillGrowthChart/SkillGrowthChart";
 import MonthlyGrowthChart from "../components/MonthlyGrowthGraph/MonthlyGrowthGraph";
 import InitialSkills from "../components/InitialSkills/InitialSkills";
-import FinalSkills from "../components/FinalSkills/FinalSkills";
+import CurrentSkills from "../components/CurrentSkills/CurrentSkills";
 import returnArrow from '../assets/returnArrow.svg';
-import profile from '../assets/profile.svg'; // Default profile image
+import profile from '../assets/profile.svg'; 
 import "./InternGrowthPage.css";
 
 const InternGrowthPage = () => {
@@ -82,7 +82,7 @@ const InternGrowthPage = () => {
                     {/* Bottom Row: Skill Containers Side by Side */}
                     <div className="skills-container">
                         <InitialSkills internID={internID} />
-                        <FinalSkills internID={internID} />
+                        <CurrentSkills internID={internID} />
                     </div>
                 </div>
             </div>

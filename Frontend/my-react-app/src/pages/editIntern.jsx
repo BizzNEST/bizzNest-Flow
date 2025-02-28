@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import NavBar from "../components/Navbar/NavBar"; // Import the NavBar component
 import growth from "../assets/growth.svg";
 import returnArrow from "../assets/returnArrow.svg";
-import './EditInterns.css';
+import './EditIntern.css';
 
 const skillLabels = {
   0: ["Frontend", "Backend", "Wordpress"],

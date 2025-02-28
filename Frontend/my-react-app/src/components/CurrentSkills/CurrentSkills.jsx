@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./FinalSkills.css";
+import "./CurrentSkills.css";
 
 const toolMap = {
     0: "Frontend",
@@ -12,34 +12,34 @@ const toolMap = {
     7: "Camera Work"
 };
 
-const FinalSkills = ({ internID }) => {
-    const [finalSkills, setFinalSkills] = useState([]);
+const CurrentSkills = ({ internID }) => {
+    const [currentSkills, setCurrentSkills] = useState([]);
 
     useEffect(() => {
-        const fetchFinalSkills = async () => {
+        const fetchCurrentSkills = async () => {
             try {
                 const response = await fetch(`http://localhost:3360/internGrowth/${internID}`);
                 const data = await response.json();
 
                 if (data.success) {
-                    setFinalSkills(data.data.map(skill => ({
+                    setCurrentSkills(data.data.map(skill => ({
                         toolName: toolMap[skill.toolID] || `Tool ${skill.toolID}`,
                         currentSkillLevel: skill.currentSkillLevel.toFixed(2)
                     })));
                 }
             } catch (error) {
-                console.error("Error fetching final skills:", error);
+                console.error("Error fetching current skills:", error);
             }
         };
 
-        fetchFinalSkills();
+        fetchCurrentSkills();
     }, [internID]);
 
     return (
         <div className="final-skills-container">
-            <h2>Final Skills</h2>
+            <h2>Current Skills</h2>
             <ul>
-                {finalSkills.map(skill => (
+                {currentSkills.map(skill => (
                     <li key={skill.toolName}>
                         {skill.toolName}: <strong>{skill.currentSkillLevel}</strong>
                     </li>
@@ -49,4 +49,4 @@ const FinalSkills = ({ internID }) => {
     );
 };
 
-export default FinalSkills;
+export default CurrentSkills;
