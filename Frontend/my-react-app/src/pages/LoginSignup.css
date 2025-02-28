@@ -7,6 +7,8 @@
     justify-content: center;
     height: 100vh;
     overflow: hidden;
+    background-image: url(../assets/Login-Background1.jpeg);
+    background-size: contain;
 }
 
 .LoginSignup {
@@ -172,7 +174,7 @@
   transition: transform 0.5s ease-in-out;
 }
 
-.Waves.signup {
+/*.Waves.signup {
   background-image: url('../assets/LoginWave.png');
   bottom: 0%;
   right: 0%;
@@ -192,7 +194,7 @@
   background-size: 100% 100%;
   transition: all 0.5s ease-in-out;
   z-index: 10;
-}
+}*/
 
 /*This is a piece of code i dont think we need for now*/
 /*.Circle {
