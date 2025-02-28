@@ -174,10 +174,10 @@ const Recommendations = () => {
   };
 
   const getBackgroundGradient = (percentIncrease) => {
-    if (percentIncrease >= 20) {
+    if (percentIncrease >= 5) {
       return 'linear-gradient(to bottom, #356086, #25FFC1)'; // Green gradient
     }
-    if (percentIncrease > 0) {
+    if (percentIncrease >= 0) {
       return 'linear-gradient(to bottom,rgb(206, 91, 42),rgb(251, 179, 45))'; // Yellow gradient
     }
     return 'linear-gradient(to bottom,rgb(174, 40, 40), #EF2BD2)'; // Red gradient
@@ -187,7 +187,7 @@ const Recommendations = () => {
     if (percentIncrease <= 0) {
       return 'linear-gradient(to bottom, #356086, #25FFC1)'; // Green gradient
     }
-    if (percentIncrease < 20 && percentIncrease > 0) {
+    if (percentIncrease < 5 && percentIncrease > 0) {
       return 'linear-gradient(to bottom,rgb(206, 91, 42),rgb(251, 179, 45))'; // Yellow gradient
     }
     return 'linear-gradient(to bottom,rgb(174, 40, 40), #EF2BD2)'; // Red gradient
