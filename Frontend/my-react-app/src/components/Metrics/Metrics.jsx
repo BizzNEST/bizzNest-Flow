@@ -3,6 +3,7 @@ import './Metrics.css';
 import ProjectWorkloadsChart from './workloads/workloads';
 import MonthlyGrowth from './monthlyGrowth/monthlyGrowth';
 import OverallGrowth from './overallGrowth/overallGrowth';
+import DepartmentGrowth from './departmentGrowth/departmentGrowth';
 
 const Metrics = () => {
   return (
@@ -22,9 +23,9 @@ const Metrics = () => {
       </div>
       <div className="row bottom-row">
         <div className="rectangle rectangle-third">
-          <div className="department-growth">
-            {/* Department growth graph */}
-          </div>
+
+            <DepartmentGrowth />
+
         </div>
         <div className="rectangle rectangle-third">
           {/* <div className="project-workloads"> */}
