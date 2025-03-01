@@ -48,6 +48,14 @@ const SkillGrowthChart = ({ internID }) => {
                         margin={{ top: 20, right: 30, left: 20, bottom: 80 }}
                         barCategoryGap={20} /* ✅ Adds spacing between bars */
                     >
+                        {/* ✅ Brighter Purple Gradient for Bars */}
+                        <defs>
+                            <linearGradient id="barGradient" x1="0" x2="0" y1="1" y2="0">
+                                <stop offset="0%" stopColor="#c333fd" />  {/* Vibrant Purple */}
+                                <stop offset="100%" stopColor="#7b1fa2" /> {/* Lighter Purple */}
+                            </linearGradient>
+                        </defs>
+
                         <XAxis 
                             dataKey="toolName" 
                             angle={0} 
@@ -59,7 +67,7 @@ const SkillGrowthChart = ({ internID }) => {
                         <Legend />
                         <Bar 
                             dataKey="growthPercentage" 
-                            fill="#8884d8" 
+                            fill="url(#barGradient)" 
                             name="Growth %" 
                             barSize={50} 
                             fillOpacity={1} /* ✅ Ensures bars do not change color on hover */
