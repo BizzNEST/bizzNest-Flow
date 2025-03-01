@@ -1,28 +1,41 @@
-.compProjectDiv{
-    background: linear-gradient(to right, #43c6a1, #00bcd4, #25ffc1);
+.completedProjectsWrapper h1{
     text-align: center;
-    padding: 20px;
-    height: 15vh;
+    font-weight: 400;
+}
+
+.compProjectDiv{
+    background: #2b2b2b;
+    height: auto;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;   
-    border-radius: 25px;
+    flex-direction: column; 
+    border-radius: 10px;
+    padding: 0px 20px 20px 20px;
 }
 
 .completedProjectContainer{
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px; /* Space between grid items */
+    grid-template-columns: repeat(3, 23%);
+    gap: 50px; /* Space between grid items */
     padding: 10px;
+    justify-content: center;
+}
+
+.completedProjectDescription h2{
+    font-weight: 500;;
+}
+
+.completedProjectDescription{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .Reactivate{
-    background: linear-gradient(to right, #ef2bd2, #f679b5, #c333fd);
+    background: linear-gradient(to bottom right, #43c6a1, #00bcd4, #25ffc1);
     border: none;
     padding: 4%;
-    border-radius: 50px;
-    width: 10vw;
+    border-radius: 8px;
+    width: 100%;
     color: white;
     font-weight: bold;
 }

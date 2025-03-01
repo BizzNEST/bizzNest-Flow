@@ -3,7 +3,19 @@ import promisePool from "../config/database.js";
 const getCompletedProjectsCtrl = {
     getCompletedProjects: async (req, res) => {
         try {
-            const query = `SELECT * FROM bizznestflow2.projects WHERE status = 'Completed'`;
+            const query = `
+                SELECT 
+                    p.projectID, 
+                    p.projectTitle, 
+                    p.projectDescription, 
+                    p.departmentID, 
+                    d.departmentName
+
+                FROM bizznestflow2.projects p
+                LEFT JOIN bizznestflow2.departments d ON p.departmentID = d.departmentID 
+                WHERE p.status = 'Completed';
+            `;
+            
             const [completedProjects] = await promisePool.execute(query);
             res.status(200).json(completedProjects);
         } catch (error) {
@@ -26,6 +38,7 @@ const getCompletedProjectsCtrl = {
                     p.projectTitle, 
                     p.projectDescription, 
                     p.departmentID, 
+                    d.departmentName, 
 
                     -- Group tools separately
                     COALESCE(
@@ -35,7 +48,8 @@ const getCompletedProjectsCtrl = {
                         FROM bizznestflow2.projectTools pt 
                         WHERE pt.projectID = p.projectID), '[]') AS tools
 
-                FROM bizznestflow2.projects p,
+                FROM bizznestflow2.projects p
+                LEFT JOIN bizznestflow2.departments d ON p.departmentID = d.departmentID
                 WHERE p.projectID = ?;
             `;
 
@@ -46,10 +60,9 @@ const getCompletedProjectsCtrl = {
             }
 
             const project = result[0];
-            project.tools = typeof project.tools === "string" ? JSON.parse(project.tools) : []; // Ensure proper parsing
+            project.tools = typeof project.tools === "string" ? JSON.parse(project.tools) : [];
 
             res.status(200).json(project);
-
         } catch (error) {
             console.error('Error getting project:', error.message);
             res.status(500).json({ message: 'Error getting project' });
