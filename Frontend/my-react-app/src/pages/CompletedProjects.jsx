@@ -50,9 +50,13 @@ const CompletedProjects = () => {
                 <div className="completedProjectContainer">
                     {projects.map((project) => (
                         <div className='compProjectDiv' key={project.projectID}>
-                            <h2>{project.projectTitle}</h2>
+                            <div className="completedProjectDescription">
+                                <h2>{project.projectTitle}</h2>
+                                <p>{project.departmentName || "No Departments"}</p>
+                            </div>
+                                <p>{project.projectDescription}</p>
                             <button className='Reactivate' onClick={() => handleReactivate(project.projectID)}>
-                                Reactivate
+                                Restore Project
                             </button>
                         </div>
                     ))}
