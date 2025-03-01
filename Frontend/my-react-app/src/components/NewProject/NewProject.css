@@ -44,8 +44,22 @@ input[type="number"] {
     animation: easeIn 1.5s ease-out forwards;
 }
 
-
-
+.new-project-container {
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: center; 
+  height: 100vh; 
+  width: 100%; 
+  text-align: center;
+}
+.department-dropdown {
+  width: 100%; /* Make it take the full width of the parent */
+  max-width: 300px; /* Optional: Set a max width */
+  padding: 10px;
+  margin: 10px auto; /* Center horizontally */
+  display: block; /* Ensure it's treated as a block element */
+}
 
 .submit-btn-div {
   display: flex;
