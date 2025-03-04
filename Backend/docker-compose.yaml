@@ -1,24 +1,52 @@
-version: '3.8'
+version: "3.8"
+
 services:
   app:
     build:
       context: .
       dockerfile: Dockerfile
-    ports:
-      - "3000:3000"
+    image: bizznest/bizznest-flow
     depends_on:
-      - db
+      - mysql
+    networks:
+      - backend
     environment:
-      DB_HOST: db
-      DB_USER: user123
-      DB_PASSWORD: password123
-      DB_NAME: db123
-
-  db:
-    image: postgres:latest
-    environment:
-      POSTGRES_USER: user123
-      POSTGRES_PASSWORD: password123
-      POSTGRES_DB: db123
+      - DB_HOST=bizz-mysql-app  # ✅ Correct MySQL container name
+      - DB_USER=root
+      - DB_PASSWORD=yoyo2002
+      - DB_NAME=bizznestflow2
+      - DB_PORT=3360
+    volumes:
+      - ./:/var/www/html/
     ports:
-      - "5432:5432"
+      - "30001:3000"
+    container_name: bizz-app
+
+  mysql:
+    image: mysql:latest
+    restart: always
+    networks:
+      - backend
+    environment:
+      - MYSQL_ROOT_PASSWORD=yoyo2002  # ✅ Root password
+      - MYSQL_DATABASE=bizznestflow2  # ✅ Your database name
+    ports:
+      - "3360:3306"  # ✅ Map MySQL 3306 to host port 3360
+    container_name: bizz-mysql-app
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    platform: linux/amd64  # ✅ Needed for Apple M1/M2 (ARM-based Macs)
+    depends_on:
+      - mysql
+    networks:
+      - backend
+    ports:
+      - "30002:80"
+    environment:
+      - PMA_HOST=bizz-mysql-app  # ✅ Must match MySQL container name
+      - PMA_PORT=3306
+    container_name: bizz-phpmyadmin-app
+
+networks:
+  backend:
