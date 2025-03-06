@@ -18,7 +18,7 @@ const InternGrowthPage = () => {
     useEffect(() => {
         const fetchInternData = async () => {
             try {
-                const response = await fetch(`http://localhost:3360/getIntern/${internID}`);
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/getIntern/${internID}`);
                 const data = await response.json();
 
                 console.log("Fetched Intern Data:", data);
@@ -28,7 +28,7 @@ const InternGrowthPage = () => {
                     let profilePic = profile; // Default
                     if (data.profilePic) {
                         const decodedPath = atob(data.profilePic); // Decode Base64
-                        profilePic = `http://localhost:3360${decodedPath}`;
+                        profilePic = `${process.env.REACT_APP_API_URL}${decodedPath}`;
                     }
 
                     setIntern({ ...data, profilePic });

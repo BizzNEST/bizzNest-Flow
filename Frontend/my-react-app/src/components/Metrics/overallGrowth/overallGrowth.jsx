@@ -8,7 +8,7 @@ const OverallGrowth = () => {
     useEffect(() => {
         const fetchOverallGrowth = async () => {
             try {
-                const response = await fetch("http://localhost:3360/overallGrowth");
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/overallGrowth`);
                 const data = await response.json();
 
                 if (data?.overallSkills?.percent_increase !== undefined) {

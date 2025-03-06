@@ -31,7 +31,7 @@ const Recommendations = () => {
     const fetchRecommendations = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3360/recommendations?projectID=${projectID}&departmentID=${departmentID}`
+          `${process.env.REACT_APP_API_URL}/recommendations?projectID=${projectID}&departmentID=${departmentID}`
         );
         const result = await response.json();
 
@@ -138,7 +138,7 @@ const Recommendations = () => {
 
       console.log("Submitting Interns & Leaders:", payload);
 
-      const response = await fetch("http://localhost:3360/assignIntern", {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/assignIntern`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

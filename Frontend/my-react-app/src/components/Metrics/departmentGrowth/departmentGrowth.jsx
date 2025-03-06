@@ -14,7 +14,7 @@ const DepartmentGrowth = () => {
     useEffect(() => {
         const fetchDepartmentGrowth = async () => {
             try {
-                const response = await fetch("http://localhost:3360/departmentGrowth");
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/departmentGrowth`);
                 const data = await response.json();
 
                 if (data?.departmentMetrics) {

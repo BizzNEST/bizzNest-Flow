@@ -12,7 +12,7 @@ const ProjectInfoPage = () => {
   useEffect(() => {
     const fetchProject = async () => {
       try {
-        const response = await fetch(`http://localhost:3360/getProject/${projectID}`);
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/getProject/${projectID}`);
         if (response.ok) {
           const data = await response.json();
           setProject(data);
@@ -28,7 +28,7 @@ const ProjectInfoPage = () => {
 
   const deleteProject = async () => {
     try {
-        const response = await fetch(`http://localhost:3360/deleteProject/${projectID}`, {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/deleteProject/${projectID}`, {
             method: 'DELETE',
         });
         if (response.ok) {
@@ -45,7 +45,7 @@ const ProjectInfoPage = () => {
 
   const completeProject = async () => {
     try{
-      const response = await fetch(`http://localhost:3360/completeProject/${projectID}`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/completeProject/${projectID}`, {
         method: 'PUT',
       });
       if(response.ok){

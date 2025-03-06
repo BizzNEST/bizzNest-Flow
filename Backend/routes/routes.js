@@ -6,7 +6,7 @@ import recommendationsCtrl from '../controllers/recommendationsCtrl.js';
 import deleteProjectCtrl from '../controllers/deleteProjectCtrl.js';
 import internSignUpCtrl from '../controllers/internSignUpCtrl.js';
 import getInternsCtrl from '../controllers/getInternsCtrl.js';
-import loginCtrl from '../controllers/LogInCtrl.js';
+import loginCtrl from '../controllers/loginCtrl.js';
 import updateInternCtrl from '../controllers/updateInternCtrl.js';
 import addSkillsCtrl from '../controllers/addSkillsCtrl.js';
 import deleteInternCtrl from '../controllers/deleteInternCtrl.js';

@@ -1,5 +1,5 @@
 # Node.js dependencies
-node_modules/
+node_modules
 
 # Logs
 logs/
@@ -42,3 +42,4 @@ coverage/
 
 package-lock.json
 package.json
+secrets/

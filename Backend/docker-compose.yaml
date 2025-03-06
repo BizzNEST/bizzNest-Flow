@@ -1,24 +1,58 @@
-version: '3.8'
+version: "3.8"
+
 services:
   app:
     build:
       context: .
       dockerfile: Dockerfile
-    ports:
-      - "3000:3000"
+    image: bizznest/bizznest-flow
     depends_on:
-      - db
-    environment:
-      DB_HOST: db
-      DB_USER: user123
-      DB_PASSWORD: password123
-      DB_NAME: db123
-
-  db:
-    image: postgres:latest
-    environment:
-      POSTGRES_USER: user123
-      POSTGRES_PASSWORD: password123
-      POSTGRES_DB: db123
+      - mysql
+    networks:
+      - backend
+    env_file:
+      - .env
+    volumes:
+      - .:/var/www/html/  # ✅ Sync local files with container
+      - /var/www/html/node_modules  # ✅ Prevent overwriting node_modules
     ports:
-      - "5432:5432"
+      - "30001:3000"
+    container_name: bizz-app
+    restart: unless-stopped  # ✅ Ensures container restarts if it crashes
+
+  mysql:
+    image: mysql:latest
+    restart: always
+    networks:
+      - backend
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}  # ✅ Required for root user
+      - MYSQL_DATABASE=${DB_NAME}  # ✅ Creates a database
+    volumes:
+      - mysql_data:/var/lib/mysql  # ✅ Persist database data
+    ports:
+      - "3360:3306"
+    container_name: bizz-mysql-app
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    platform: linux/amd64
+    depends_on:
+      - mysql
+    networks:
+      - backend
+    env_file:
+      - .env
+    environment:
+      - PMA_HOST=bizz-mysql-app  # ✅ Connect phpMyAdmin to MySQL container
+      - PMA_PORT=3306
+    ports:
+      - "30002:80"
+    container_name: bizz-phpmyadmin-app
+    restart: unless-stopped  # ✅ Ensures phpMyAdmin restarts if needed
+
+networks:
+  backend:
+
+volumes:
+  mysql_data:  # ✅ Persistent MySQL storage to avoid losing data

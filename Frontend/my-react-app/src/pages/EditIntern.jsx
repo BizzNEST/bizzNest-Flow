@@ -28,7 +28,7 @@ const EditIntern = () => {
   useEffect(() => {
     const fetchInternData = async () => {
       try {
-        const response = await fetch(`http://localhost:3360/getIntern/${internID}`);
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/getIntern/${internID}`);
         if (response.ok) {
           const data = await response.json();
 
@@ -96,7 +96,7 @@ const EditIntern = () => {
 
       let response;
       if (hasExistingSkills) {
-        response = await fetch(`http://localhost:3360/updateIntern/${internID}`, {
+        response = await fetch(`${process.env.REACT_APP_API_URL}/updateIntern/${internID}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -104,7 +104,7 @@ const EditIntern = () => {
           body: JSON.stringify(payload),
         });
       } else {
-        response = await fetch(`http://localhost:3360/addSkills/${internID}`, {
+        response = await fetch(`${process.env.REACT_APP_API_URL}/addSkills/${internID}`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

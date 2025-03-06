@@ -63,7 +63,7 @@ const InternSignup = () => {
       formDataToSend.append("location", formData.location);
       formDataToSend.append("profilePic", formData.profilePic);
 
-      const response = await axios.post("http://localhost:3360/internSignUp", formDataToSend, {
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/internSignUp`, formDataToSend, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
