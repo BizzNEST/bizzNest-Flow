@@ -184,3 +184,58 @@ select{
     transform: scale(1.05);
     transition: transform .15s linear;
 }
+
+@media (max-width: 480px) {
+    .container{
+        padding: 0 20px;
+    }
+
+    .filtering-wrapper{
+        height: auto;
+        padding: 0px 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .search-bar-wrapper {
+        margin-bottom: 20px;
+    }
+
+    .filtering label{
+        display: none;
+    }
+
+    .select-buttons{
+        position: inherit;
+        flex-wrap: wrap;
+        gap: 20px;
+        padding-top: 20px;
+        justify-content: center;
+    }
+
+    .filtering select{
+        margin-bottom: 20px;
+    }
+
+    .big-container{
+        height: 183vh;
+    }
+
+    .interns-wrapper{
+        width: 100%;
+        padding: 10px 25px;
+    }
+
+    .interns-wrapper h2{
+        padding-top: 0;
+    }
+
+    .interns-wrapper ul li {
+        width: 90%;
+    }
+
+    .intern-container{
+        max-height: 90vh;
+    }
+}

@@ -162,3 +162,56 @@ overflow: hidden;
       background-position: 0% 50%;
     }
   }
+
+@media (max-width: 480px) {
+  .homepage-container{
+    height: 160vh;
+  }
+
+  .top-section{
+    flex-direction: column;
+  }
+
+  .projects{
+    width: 95%;
+  }
+
+  .dynamic-component{
+    height: auto;
+  }
+
+  .rectangle, .rectangle-small{
+    height: auto;
+  }
+
+  .program-monthly-growth-container{
+    display: none;
+  }
+
+  .radial-charts {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    margin: 0;
+  }
+
+  .radial-chart{
+    width: 100px;
+  }
+
+  .recharts-wrapper{
+    height: auto;
+    width: 95%;
+  }
+
+  .recharts-responsive-container{
+    width: 95% !important;
+  }
+
+  .new-project-container{
+    height: auto;
+    padding: 20px 0;
+  }
+  
+}
