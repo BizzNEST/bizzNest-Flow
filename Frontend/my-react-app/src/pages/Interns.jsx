@@ -29,7 +29,7 @@ const Interns = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:3360/getInterns")
+    fetch(`${process.env.REACT_APP_API_URL}/getInterns`)
       .then((response) => response.json())
       .then((data) => {
         filterInterns.current = data;
@@ -97,7 +97,7 @@ const Interns = () => {
     try {
       if (deleteType === "single") {
         const response = await fetch(
-          `http://localhost:3360/deleteIntern/${deleteTarget}`,
+          `${process.env.REACT_APP_API_URL}/deleteIntern/${deleteTarget}`,
           { method: "DELETE" }
         );
         const data = await response.json();
@@ -117,7 +117,7 @@ const Interns = () => {
         }
       } else if (deleteType === "bulk") {
         const response = await fetch(
-          `http://localhost:3360/deleteSelectedInterns`,
+          `${process.env.REACT_APP_API_URL}/deleteSelectedInterns`,
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },

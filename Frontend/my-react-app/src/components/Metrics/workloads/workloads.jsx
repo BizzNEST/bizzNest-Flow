@@ -9,7 +9,7 @@ const ProjectWorkloadsChart = () => {
   useEffect(() => {
     const fetchWorkloads = async () => {
       try {
-        const response = await fetch('http://localhost:3360/internWorkloads');
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/internWorkloads`);
         const data = await response.json();
 
         if (data.internWorkloads) {

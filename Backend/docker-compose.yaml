@@ -10,17 +10,15 @@ services:
       - mysql
     networks:
       - backend
-    environment:
-      - DB_HOST=bizz-mysql-app  # ✅ Correct MySQL container name
-      - DB_USER=root
-      - DB_PASSWORD=yoyo2002
-      - DB_NAME=bizznestflow2
-      - DB_PORT=3360
+    env_file:
+      - .env
     volumes:
-      - ./:/var/www/html/
+      - .:/var/www/html/  # ✅ Sync local files with container
+      - /var/www/html/node_modules  # ✅ Prevent overwriting node_modules
     ports:
       - "30001:3000"
     container_name: bizz-app
+    restart: unless-stopped  # ✅ Ensures container restarts if it crashes
 
   mysql:
     image: mysql:latest
@@ -28,25 +26,33 @@ services:
     networks:
       - backend
     environment:
-      - MYSQL_ROOT_PASSWORD=yoyo2002  # ✅ Root password
-      - MYSQL_DATABASE=bizznestflow2  # ✅ Your database name
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}  # ✅ Required for root user
+      - MYSQL_DATABASE=${DB_NAME}  # ✅ Creates a database
+    volumes:
+      - mysql_data:/var/lib/mysql  # ✅ Persist database data
     ports:
-      - "3360:3306"  # ✅ Map MySQL 3306 to host port 3360
+      - "3360:3306"
     container_name: bizz-mysql-app
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
-    platform: linux/amd64  # ✅ Needed for Apple M1/M2 (ARM-based Macs)
+    platform: linux/amd64
     depends_on:
       - mysql
     networks:
       - backend
+    env_file:
+      - .env
+    environment:
+      - PMA_HOST=bizz-mysql-app  # ✅ Connect phpMyAdmin to MySQL container
+      - PMA_PORT=3306
     ports:
       - "30002:80"
-    environment:
-      - PMA_HOST=bizz-mysql-app  # ✅ Must match MySQL container name
-      - PMA_PORT=3306
     container_name: bizz-phpmyadmin-app
+    restart: unless-stopped  # ✅ Ensures phpMyAdmin restarts if needed
 
 networks:
   backend:
+
+volumes:
+  mysql_data:  # ✅ Persistent MySQL storage to avoid losing data
