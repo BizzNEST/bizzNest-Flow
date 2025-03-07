@@ -26,6 +26,7 @@ services:
     networks:
       - backend
     environment:
+      - MYSQL_ROOT_USER=${DB_USER}
       - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}  # ✅ Required for root user
       - MYSQL_DATABASE=${DB_NAME}  # ✅ Creates a database
     volumes:
