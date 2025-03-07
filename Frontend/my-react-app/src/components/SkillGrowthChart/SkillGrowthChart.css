@@ -20,6 +20,7 @@
     font-weight: bold;
     margin-bottom: 15px;
     background: linear-gradient(to right, #c896f9, #a63df1);
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     position: relative;
