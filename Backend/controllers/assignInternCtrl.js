@@ -27,24 +27,31 @@ const assignInternCtrl = {
       const projectID = interns[0].projectID; // Assuming all interns belong to the same project
 
       const fetchCalculationsQuery = `
-        SELECT 
-          i.InternID,
-          s.toolID,
-          (pt.difficulty - s.skillLevel) AS difference,
-          ((pt.difficulty - s.skillLevel) * EXP(-POWER(pt.difficulty - s.skillLevel, 2))) AS absoluteGrowth,
-          (((pt.difficulty - s.skillLevel) * EXP(-POWER(pt.difficulty - s.skillLevel, 2))) / s.skillLevel) * 100 AS percentGrowth
-        FROM 
-          bizznestflow2.internProjects ip
-        JOIN 
-          bizznestflow2.interns i ON ip.InternID = i.InternID
-        JOIN 
-          bizznestflow2.skills s ON i.InternID = s.InternID
-        JOIN 
-          bizznestflow2.projectTools pt ON s.toolID = pt.toolID AND ip.projectID = pt.projectID
-        WHERE 
-          ip.projectID = ? AND i.InternID IN (${internIDs.map(() => "?").join(", ")})
-          AND ip.status = 'In-Progress';
-      `;
+    SELECT 
+      i.InternID,
+      s.toolID,
+      (pt.difficulty - s.skillLevel) AS difference,
+      
+      (10 / (s.skillLevel + EXP(-s.skillLevel))) AS dynamicCoefficient,
+      
+      ((pt.difficulty - s.skillLevel) * EXP(-POWER(pt.difficulty - s.skillLevel, 2)) * 
+       (10 / (s.skillLevel + EXP(-s.skillLevel)))) AS absoluteGrowth,
+
+      ((((pt.difficulty - s.skillLevel) * EXP(-POWER(pt.difficulty - s.skillLevel, 2)) * 
+        (10 / (s.skillLevel + EXP(-s.skillLevel)))) / s.skillLevel) * 100) AS percentGrowth
+
+    FROM 
+      bizznestflow2.internProjects ip
+    JOIN 
+      bizznestflow2.interns i ON ip.InternID = i.InternID
+    JOIN 
+      bizznestflow2.skills s ON i.InternID = s.InternID
+    JOIN 
+      bizznestflow2.projectTools pt ON s.toolID = pt.toolID AND ip.projectID = pt.projectID
+    WHERE 
+      ip.projectID = ? AND i.InternID IN (${internIDs.map(() => "?").join(", ")})
+      AND ip.status = 'In-Progress';
+`;
 
       const [calculations] = await promisePool.execute(fetchCalculationsQuery, [projectID, ...internIDs]);
 

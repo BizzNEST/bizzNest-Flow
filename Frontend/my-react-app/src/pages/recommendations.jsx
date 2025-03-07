@@ -62,21 +62,29 @@ const Recommendations = () => {
           internID: intern.InternID,
           name: `${intern.firstName} ${intern.lastName}`,
           percentIncrease: calc.percentIncrease,
+          eligibleForLeadership: calc.eligibleForLeadership,  // Include leadership eligibility flag
         });
       });
     });
 
-    // Sort each group
-    Object.keys(grouped).forEach(toolID => {
-      grouped[toolID].sort((a, b) =>
-        ascending
-          ? a.percentIncrease - b.percentIncrease
-          : b.percentIncrease - a.percentIncrease
-      );
+  // Sort each group
+  Object.keys(grouped).forEach(toolID => {
+    grouped[toolID].sort((a, b) => {
+      if (ascending) {
+        // Leadership sorting: True cases come first, then ascending percentIncrease
+        if (a.eligibleForLeadership !== b.eligibleForLeadership) {
+          return b.eligibleForLeadership - a.eligibleForLeadership; // True first
+        }
+        return a.percentIncrease - b.percentIncrease; // Sort remaining by percentIncrease
+      } else {
+        // Optimized learning sorting (descending percentIncrease)
+        return b.percentIncrease - a.percentIncrease;
+      }
     });
+  });
 
-    setGroupedInterns(grouped);
-  };
+  setGroupedInterns(grouped);
+};
 
   const toggleSelectIntern = (internID) => {
     if (selectedInterns.includes(internID)) {
@@ -183,14 +191,12 @@ const Recommendations = () => {
     return 'linear-gradient(to bottom,rgb(174, 40, 40), #EF2BD2)'; // Red gradient
   };
 
-  const getBackgroundGradientForLeaders = (percentIncrease) => {
-    if (percentIncrease <= 0) {
-      return 'linear-gradient(to bottom, #356086, #25FFC1)'; // Green gradient
+  const getBackgroundGradientForLeaders = (percentIncrease, isEligibleForLeadership) => {
+    if (!isEligibleForLeadership) {
+      return 'linear-gradient(to bottom,rgb(174, 40, 40), #EF2BD2)'; // Red gradient for ineligible leaders
     }
-    if (percentIncrease < 5 && percentIncrease > 0) {
-      return 'linear-gradient(to bottom,rgb(206, 91, 42),rgb(251, 179, 45))'; // Yellow gradient
-    }
-    return 'linear-gradient(to bottom,rgb(174, 40, 40), #EF2BD2)'; // Red gradient
+    
+    return 'linear-gradient(to bottom, #356086, #25FFC1)'; // Green gradient for eligible leaders
   };
 
   if (error) return <p>{error}</p>;
@@ -248,7 +254,7 @@ const Recommendations = () => {
       }`}
                       style={{
                         background: isAscending
-                          ? getBackgroundGradientForLeaders(intern.percentIncrease)
+                          ? getBackgroundGradientForLeaders(intern.percentIncrease, intern.eligibleForLeadership)
                           : getBackgroundGradient(intern.percentIncrease),
                       }}
                   >
@@ -262,9 +268,12 @@ const Recommendations = () => {
                       <button className="assign-button" onClick={() => toggleSelectIntern(intern.internID)}>
                         {selectedInterns.includes(intern.internID) ? "Intern ✔" : "Assign"}
                       </button>
+
+                      {intern.eligibleForLeadership && (
                       <button className="leader-button" onClick={() => toggleLeader(intern.internID)}>
                         {selectedLeaders.includes(intern.internID) ? "Leader ⭐" : "Make Leader"}
                       </button>
+                      )}
                   </div>
                 ))}
               </div>
