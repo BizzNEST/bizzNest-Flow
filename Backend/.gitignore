@@ -40,6 +40,3 @@ coverage/
 .env.test.local
 .env.production.local
 
-package-lock.json
-package.json
-secrets/
