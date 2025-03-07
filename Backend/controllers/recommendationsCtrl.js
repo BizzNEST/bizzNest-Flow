@@ -104,7 +104,7 @@ const recommendationsCtrl = {
 
       // Calculations HERE: START
 
-      // Map interns t project tool difficulty
+      // Map interns to project tool difficulty
       const skillDifferences = internSkills.map(intern => {
         const differences = intern.tools.map(internTool => {
           const matchingProjectTool = projects[0]?.tools.find(
@@ -115,11 +115,16 @@ const recommendationsCtrl = {
             const s = internTool.skillLevel; //intern skill level
             const x = parseFloat((d - s).toFixed(2)); // difference (d - s)
 
+            const dynamicCoefficient = 10 / (s + Math.exp(-s));
+
             // Calculate f(x) = xe^(-x^2)
-            const absoluteIncrease = parseFloat((x * Math.exp(-Math.pow(x, 2))).toFixed(4));
+            const absoluteIncrease = parseFloat((x * Math.exp(-Math.pow(x, 2))).toFixed(4)) * dynamicCoefficient;
 
             // Calculate (abs increase / skillLevel)
             const percentIncrease = parseFloat(((absoluteIncrease / s) * 100).toFixed(1))
+
+            // Leadership eligibility check
+            const eligibleForLeadership = x <= 0; // only consider those than with x ≤ 0 as potential leaders
 
             return {
               toolID: internTool.toolID,
@@ -127,7 +132,8 @@ const recommendationsCtrl = {
               skillLevel: s,
               difference: x,
               absoluteIncrease,
-              percentIncrease
+              percentIncrease,
+              eligibleForLeadership
             };
           }
           return null;
