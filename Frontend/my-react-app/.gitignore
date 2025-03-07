@@ -19,7 +19,7 @@
 .env.production.local
 
 #environment variable
-./.env
+.env
 
 npm-debug.log*
 yarn-debug.log*
