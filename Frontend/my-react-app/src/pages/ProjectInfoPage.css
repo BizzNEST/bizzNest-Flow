@@ -79,7 +79,7 @@
 }
 
 .skillName {
-  font-size: 14px;
+  font-size: 18px;
   margin-bottom: 5px;
 }
 
@@ -202,6 +202,14 @@
     padding: 0;
   }
 
+  .projectTitle{
+    font-size: 22px;
+  }
+
+  .skillName, .skillValue{
+    font-size: 16px;
+  }
+
   .projectHeader{
     display: flex;
     flex-direction: column;
@@ -229,4 +237,40 @@
     text-align: center;
   }
 
+  .skillsContainer{
+    width: 100%;
+  }
+
+}
+
+
+/*Misc*/
+@media (min-width: 769px) and (max-width: 950px){
+  .projectHeader {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 30px;
+  }
+
+  .projectTitleCard{
+    width: 100%;
+  }
+
+  .assignedTitle{
+    text-align: center;
+  }
+
+  .skillsContainer{
+    width: 100%;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 695px){
+  .skillsContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
 }
