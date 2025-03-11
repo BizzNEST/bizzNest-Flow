@@ -10,8 +10,7 @@ A full-stack web application with a MySQL database backend, a Node.js/Express se
 - [Usage](#usage)
 - [Features](#features)
 - [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
+
 
 ## Installation
 
@@ -105,15 +104,6 @@ Contributions are welcome! To contribute:
     ```
 5. Open a pull request.
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Contact
-
-For questions or support, contact:
-- 📧 Email: your-email@example.com
-- 🔗 GitHub: [your-username](https://github.com/your-username)
 
 ---
 
