@@ -109,7 +109,7 @@
 }
 
 .delete-selected-btn {
-  background: linear-gradient(to right, rgb(174, 40, 40), #d35555, rgb(174, 40, 40));
+  background: #FF4C4C;
   color: white;
   font-size: 16px;
   font-weight: bold;
@@ -121,6 +121,7 @@
 }
 
 .delete-selected-btn:hover {
+  background: #B22222;
   transform: scale(1.05);
 }
 
