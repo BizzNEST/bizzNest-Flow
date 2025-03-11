@@ -5,9 +5,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: bizznest/bizznest-flow
     depends_on:
-      - mysql
+      mysql:
+        condition: service_healthy
     networks:
       - backend
     env_file:
@@ -29,14 +29,17 @@ services:
       - MYSQL_ROOT_USER=${DB_USER}
       - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}  # ✅ Required for root user
       - MYSQL_DATABASE=${DB_NAME}  # ✅ Creates a database
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
     volumes:
       - mysql_data:/var/lib/mysql  # ✅ Persist database data
-    ports:
-      - "3360:3306"
     container_name: bizz-mysql-app
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
+    container_name: bizz-phpmyadmin-app
     platform: linux/amd64
     depends_on:
       - mysql
@@ -45,15 +48,16 @@ services:
     env_file:
       - .env
     environment:
-      - PMA_HOST=bizz-mysql-app  # ✅ Connect phpMyAdmin to MySQL container
+      - PMA_HOST=mysql  # ✅ Connect phpMyAdmin to MySQL container
       - PMA_PORT=3306
     ports:
       - "30002:80"
-    container_name: bizz-phpmyadmin-app
     restart: unless-stopped  # ✅ Ensures phpMyAdmin restarts if needed
 
 networks:
   backend:
+     driver: bridge
+
 
 volumes:
   mysql_data:  # ✅ Persistent MySQL storage to avoid losing data
