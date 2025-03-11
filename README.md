@@ -76,7 +76,7 @@ Instructions and examples for using the project.
 
 - The backend runs on `http://localhost:3000`
 - The frontend runs on `http://localhost:30001`
-- Access phpMyAdmin at: `http://localhost:8080`
+- Access phpMyAdmin at: `http://localhost:30002`
 
 ## Features
 
