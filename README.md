@@ -107,7 +107,6 @@ Contributions are welcome! To contribute:
 
 ---
 
-This **README** is now fully structured for GitHub with a **Table of Contents** and clear **Installation & Usage Instructions**. 🚀 Let me know if you need any modifications! 🎉
 
 
 
