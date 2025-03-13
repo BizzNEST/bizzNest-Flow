@@ -16,10 +16,9 @@
 
 .radial-charts {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
     width: 100%;
-    /* max-width: 350px; */
-    max-width: 100%;
     gap: 10px;
 }
 
@@ -27,6 +26,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 30%;  /* Allow flexibility */
+    min-width: 100px;  /* Prevent shrinking too much */
+    max-width: 200px;  /* Prevent expanding too much */
+    height: auto;  /* Allow height to be dynamic */
 }
 
 .growth-text {
