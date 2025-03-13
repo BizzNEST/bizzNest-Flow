@@ -34,6 +34,7 @@ const OverallGrowth = () => {
                     data={data}
                     startAngle={90}
                     endAngle={-180} // Converts % to circular angle
+                    clockWise={false}
                 >
                     {/* Gradient for smooth stroke effect */}
                     <defs>
@@ -49,7 +50,7 @@ const OverallGrowth = () => {
                         clockWise
                         dataKey="value"
                         cornerRadius={10} 
-                        animationBegin={0} 
+                        animationBegin={0}
                         animationDuration={1200} 
                     />
 

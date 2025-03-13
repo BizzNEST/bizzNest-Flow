@@ -3,9 +3,9 @@ import { RadialBarChart, RadialBar, ResponsiveContainer } from "recharts";
 import "./departmentGrowth.css";
 
 const departmentMap = {
-    0: { name: "Web Dev", color: ["#28a745", "#6bcf80"] }, // Green
-    1: { name: "Design", color: ["#FFA500", "#FFC04D"] }, // Orange
-    2: { name: "Film", color: ["#DC143C", "#FF6F61"] }, // Red
+    0: { name: "Web Dev", color: ["rgb(0, 117, 37)", "#25FFC1"] }, // Green
+    1: { name: "Design", color: ["rgb(206, 91, 42)", "rgb(251, 210, 45)"] }, // Orange
+    2: { name: "Film", color: ["rgb(174, 40, 40)", "#EF2BD2"] }, // Red
 };
 
 const DepartmentGrowth = () => {

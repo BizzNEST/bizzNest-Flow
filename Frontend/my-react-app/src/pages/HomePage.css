@@ -131,7 +131,7 @@ height: 60vh; /* Allows it to grow dynamically */
 max-width: 100%;
 border-radius: 10px;
 overflow: hidden;
-
+padding: 5px;
   }
   
   .create-project-button {

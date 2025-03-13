@@ -16,10 +16,10 @@
 
 .radial-charts {
     display: flex;
-    margin-right: 25px;
     justify-content: space-around;
     width: 100%;
-    max-width: 350px;
+    /* max-width: 350px; */
+    max-width: 100%;
     gap: 10px;
 }
 
