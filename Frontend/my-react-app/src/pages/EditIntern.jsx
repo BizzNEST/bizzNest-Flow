@@ -11,6 +11,12 @@ const skillLabels = {
   2: ["Premiere Pro", "Camera Work"],
 };
 
+const randomColors = [
+  "linear-gradient(to right, #9a1d5e, #6d30b1)",//pink to purple
+  "linear-gradient(to right, #1d4fd8, #3b3cc4)",//blue to indigo
+  "linear-gradient(to right, #0d766e, #16863d)" //teal to green
+];
+
 const EditIntern = () => {
   const { internID } = useParams();
   const navigate = useNavigate();
@@ -147,11 +153,10 @@ const EditIntern = () => {
       <NavBar /> {/* Add NavBar at the top */}
       <div className="editInternContainer">
         <div className="formWrapper">
-          <div className="header-wrapper">
+          <div className="editInternHeaderWrapper">
             <button className="back-button" onClick={handleBack}>
               <img src={returnArrow} alt="Back" />
             </button>
-
             <button 
               className="growth-button" 
               onClick={(e) => { 
@@ -163,22 +168,26 @@ const EditIntern = () => {
               <span>Intern Growth</span>
             </button>
           </div>
+          <h2 className="editInternHeader">Edit Intern</h2>
 
-          <h2>Edit Intern</h2>
           <form onSubmit={handleSubmit} className="editInternForm">
             <div className="updateNameContainer">
               <label>
+                <h3>First Name</h3>
                 <input
                   type="text"
                   name="firstName"
+                  className="editInternInput"
                   value={formData.firstName}
                   onChange={handleChange}
                 />
               </label>
               <label>
+                <h3>Last Name</h3>
                 <input
                   type="text"
                   name="lastName"
+                  className="editInternInput"
                   value={formData.lastName}
                   onChange={handleChange}
                 />
@@ -187,7 +196,8 @@ const EditIntern = () => {
 
             <div className="updateLocationDepartmentContainer">
               <label>
-                <select name="location" value={formData.location} onChange={handleChange}>
+                <h3>Location</h3>
+                <select className="editInternSelector" name="location" value={formData.location} onChange={handleChange}>
                   <option value="">Select a location</option>
                   <option value="Salinas">Salinas</option>
                   <option value="Gilroy">Gilroy</option>
@@ -197,7 +207,8 @@ const EditIntern = () => {
                 </select>
               </label>
               <label>
-                <select name="departmentID" value={formData.departmentID} onChange={handleChange}>
+                <h3>Department</h3>
+                <select className="editInternSelector" name="departmentID" value={formData.departmentID} onChange={handleChange}>
                   <option value="">Select a department</option>
                   <option value="0">Web Development</option>
                   <option value="1">Design</option>
@@ -218,9 +229,11 @@ const EditIntern = () => {
                       {label} Skill:
                       <input
                         type="number"
+                        className="editInternSkillInput"
                         name={`skill_${toolID}`}
                         value={formData.skills[toolID] || 0}
                         onChange={handleChange}
+                        style={{ background: randomColors[index] }}
                       />
                     </label>
                   );
@@ -232,7 +245,7 @@ const EditIntern = () => {
             </div>
 
             <div className="buttonsContainer">
-              <button type="submit">Update</button>
+              <button className="updateInternButton" type="submit">Update</button>
             </div>
           </form>
         </div>
