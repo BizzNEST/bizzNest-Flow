@@ -7,6 +7,7 @@
   margin: 0 auto;
   padding: 20px;
   box-sizing: border-box;
+  min-height: auto; /* Ensure it adapts dynamically */
 }
 
 .row {
@@ -38,14 +39,15 @@
 }
 
 .rectangle-small {
-  flex: 1;
-  max-width: calc(33.333% - 10px);
+  flex: 1 30%;
+  /* max-width: calc(33.333% - 10px); */
+  max-width: none;
 }
 
 .rectangle-large {
-  flex: 2;
-  max-width: calc(66.666% - 10px);
-  /* height: 235px; */
+  flex: 2 1 60%;
+  /* max-width: calc(66.666% - 10px); */
+  max-width: none;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -59,7 +61,7 @@
 
 .rectangle-third {
   flex: 1;
-  max-width: calc(33.333% - 13.333px);
+  max-width: none;
 }
 
 /* Ensure the large container for the graph is properly constrained */
