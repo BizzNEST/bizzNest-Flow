@@ -3,10 +3,16 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import ProfilePictureUpload from "../components/ProfileUpload/ProfileUpload";
 import Logo from "../assets/Logo.png";
+import Mail from "../assets/mail.svg";
+import Visibility_Off from "../assets/visibility_off.svg";
+import Visibility from "../assets/visibility.svg";
+import Lock from "../assets/lock.svg";
+import Title from "../assets/bizzNESTFlowLogoArial.svg"
 import "./InternSignup.css";
 
 const InternSignup = () => {
-  const [step, setStep] = useState(1); // Track form step
+  const [step, setStep] = useState(1);
+  const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -15,7 +21,7 @@ const InternSignup = () => {
     confirmPassword: "",
     DepartmentID: "",
     location: "",
-    profilePic: null, // Holds the uploaded file
+    profilePic: null,
   });
 
   const navigate = useNavigate();
@@ -24,7 +30,6 @@ const InternSignup = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Function to receive file from child component
   const handleProfilePicSelect = (file) => {
     setFormData({ ...formData, profilePic: file });
   };
@@ -43,7 +48,7 @@ const InternSignup = () => {
       return;
     }
 
-    setStep(2); // Move to next step
+    setStep(2);
   };
 
   const handleSubmit = async (e) => {
@@ -75,6 +80,10 @@ const InternSignup = () => {
     }
   };
 
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <div className="internSignupWrapper">
       <div className="internWaves" />
@@ -91,11 +100,42 @@ const InternSignup = () => {
               <input type="text" placeholder="First name" name="firstName" value={formData.firstName} onChange={handleChange} />
               <input type="text" placeholder="Last name" name="lastName" value={formData.lastName} onChange={handleChange} />
             </div>
-            <input type="email" placeholder="Email" name="email" value={formData.email} onChange={handleChange} />
-            <div className="internPasswordContainer">
-              <input type="password" placeholder="Password" name="password" value={formData.password} onChange={handleChange} />
-              <input type="password" placeholder="Confirm Password" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} />
+
+            <div className="internInputContainer">
+              <img src={Mail} alt="Email" className="internInputIcon" />
+              <input type="email" placeholder="Email" name="email" value={formData.email} onChange={handleChange} />
             </div>
+
+            <div className="internPasswordContainer">
+              <div className="internInputContainer">
+                <img src={Lock} alt="Password" className="internInputIcon" />
+                <input
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                />
+              </div>
+
+              <div className="internInputContainer">
+                <img src={Lock} alt="Confirm Password" className="internInputIcon" />
+                <input
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Confirm Password"
+                  name="confirmPassword"
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
+                />
+                <img
+                  src={showPassword ? Visibility_Off : Visibility}
+                  alt="Toggle Visibility"
+                  className="internVisibilityIcon"
+                  onClick={togglePasswordVisibility}
+                />
+              </div>
+            </div>
+
             <select name="DepartmentID" value={formData.DepartmentID} onChange={handleChange}>
               <option value="">Select a department</option>
               <option value="0">Web Development</option>
@@ -119,7 +159,6 @@ const InternSignup = () => {
           </>
         )}
       </form>
-      {/*<div className="internCircle" />*/}
     </div>
   );
 };

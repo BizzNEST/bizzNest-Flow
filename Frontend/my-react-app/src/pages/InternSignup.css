@@ -1,4 +1,4 @@
-.internSignupWrapper{
+.internSignupWrapper {
   margin: 0;
   font-family: 'Arial', sans-serif;
   display: flex;
@@ -10,127 +10,155 @@
   background-image: url(../assets/Login-Background1.jpeg);
   background-size: cover;
   background-repeat: no-repeat;
+
 }
 
-.internSignupLogo{
-    width: 100px;
-    rotate: 170deg;
+.internSignupLogo {
+  width: 100px;
+  rotate: 170deg;
 }
-
-.internLogoSignUp{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #a732e6;
+.internLogoSignUp h1 {
+  color: white;
+  text-align: center;
+  font-weight: 300; 
+}
+.internSignupTitle {
+  color: white;
+  text-align: center;
+  margin-top: -8px;
+  font-weight: 400; /* Adjusted for less bold text */
+}
+.internLogoSignUp {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  
 }
 
 .Intern-signup-form {
-    margin: 0 auto;
-    padding: 30px 40px;
-    width: 495px;
-    background-color: #D9D9D9;
-    border-radius: 10px;
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
-    gap: 5px;
-    z-index: 10;
-  }
-  
-  .Intern-signup-form input, .Intern-signup-form select {
-    width: 100%;
-    padding: 12px 15px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 1.5vw;
-    font-size: 16px;
-  }
+  margin: 0 auto;
+  padding: 30px 40px;
+  width: 495px;
+  background-color: rgba(217, 217, 217, 0.2);
+  border-radius: 10px;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+  gap: 5px;
+  z-index: 10;
+}
 
-  .internSignupWrapper{
-    margin: 0;
-    font-family: 'Arial', sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    overflow: hidden;
-  }
+.Intern-signup-form input,
+.Intern-signup-form select {
+  width: 100%;
+  /* padding: 12px 45px; Space for icons */
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 1.5vw;
+  font-size: 16px;
+  box-sizing: border-box;
+}
 
-  .internSignupTitle{
-    color: #a732e6;
-    text-align: center;
-    margin-top: -8px;
-  }
+.internSignupTitle {
+  color: white;
+  text-align: center;
+  margin-top: -8px;
+}
 
-  .internNameContainer, .internPasswordContainer{
-    display: flex;
-    gap: 15px;
-  }
+.internNameContainer,
+.internPasswordContainer {
+  display: flex;
+  gap: 15px;
+  width: 100%;
+}
 
-  .internFirstName, .internLastName{
-    width: 400px;
-  }
+.Intern-signup-form button {
+  background: linear-gradient(270deg, #a732e6, #bc36c8);
+  border-radius: 5vw;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  font-size: 23px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+}
 
-  .internEmail, .internPassword, .internConfirmPassword {
-    width: 95% !important;
-  }
-  
-  .Intern-signup-form button {
-    background: linear-gradient(270deg, #a732e6, #bc36c8);
-    border-radius: 5vw;
-    color: white;
-    border: none;
-    padding: 12px 20px;
-    font-size: 23px;
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    width: 40%;
-    display: flex;
-    justify-content: center;
-    align-self: center;
-  }
+.profile-upload-container img {
+  height: 200px;
+}
 
-  .profile-upload-container img{
-    height: 200px;
-  }
+/* Background elements */
+.internCircle {
+  background-image: url('../assets/signupCircle.png');
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  bottom: 0;
+  left: 0;
+}
 
-  /*.internWaves{
-    background-image: url('../assets/waves.png');
-    width: 100%;
-    height: 50vh; 
-    position: absolute;
-    top: 0;
-    background-size: 100% 100%;
-    background-repeat: no-repeat; 
-    background-position: center;
-  }*/
+/* === INPUT FIELD STYLING WITH ICONS === */
+.internInputContainer {
+  position: relative;
+  width: 100%;
+}
 
-  .internCircle{
-    background-image: url('../assets/signupCircle.png');
-    position: absolute;
-    width: 50%; 
-    height: 50%; 
-    background-repeat: no-repeat;
-    background-size: contain;
-    bottom: 0;
-    left: 0;
-  }
+/* Align the input text properly with the icon */
+.internInputContainer input {
+  width: 100%;
+  padding: 12px 45px; /* Space for left icon */
+  padding-right: 50px; /* Space for right icon if needed */
+  border: 1px solid #ccc;
+  border-radius: 1.5vw;
+  font-size: 16px;
+  box-sizing: border-box;
+}
 
+/* Style the left-side icons */
+.internInputIcon {
+  position: absolute;
+  left: 15px;
+  top: 35%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  opacity: 0.7;
+  pointer-events: none; /* Prevent interaction */
+}
+
+/* Password visibility toggle icon (right-side) */
+.internVisibilityIcon {
+  position: absolute;
+  right: 15px;
+  top: 35%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+/* Media Query for Responsive Design */
 @media (max-width: 768px) {
-    .internSignupWrapper{
-      height: 90vh;
-    }
-
-    .Intern-signup-form {
-      width: 70%;
-      height: 70vh;
-    }
-
-    .Intern-signup-form input[type="email"]{
-      width: 90%;
-    }
-
-    .internSignupLogo{
-      width: 20vw;
-    }
+  .internSignupWrapper {
+    height: 90vh;
   }
-  
+
+  .Intern-signup-form {
+    width: 70%;
+    height: 70vh;
+  }
+
+  .Intern-signup-form input[type="email"] {
+    width: 90%;
+  }
+
+  .internSignupLogo {
+    width: 20vw;
+  }
+}
