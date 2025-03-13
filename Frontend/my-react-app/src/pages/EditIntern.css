@@ -1,241 +1,258 @@
-.formWrapper{
-    text-align: center;
-    padding: 25px 35px;
-    background-color: #222;
-    border-radius: 25px;
-}
-
-
-.header-wrapper {
+/* Main Container */
+.editInternContainer {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    width: 100%;
-    max-width: 800px; 
+    justify-content: center;
+    min-height: 100%;
+    padding: 5%;
 }
 
+/* Wrapper */
+.formWrapper {
+  width: 100%;
+  max-width: 600px;
+  background: rgba(31, 41, 55, 0.6); /* gray-800/60 */
+  backdrop-filter: blur(10px);
+  border: 1px solid #374151; /* gray-700 */
+  border-radius: 16px;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  padding: 25px 35px;
+  text-align: center;
+}
+
+.editInternForm{
+  gap: 15px;
+}
+
+/* Header */
+.editInternHeaderWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 20px;
+}
+
+.editInternHeader{
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    background: #25ffc1;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    border-bottom: 1px solid #374151;
+    margin: 0;
+    padding-bottom: 10px;
+}
+
+/* Back Button */
 .back-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    border-color: transparent;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
 }
 
 .back-button img {
-    width: 40px;
-    height: auto;
-}
-.back-button img:hover {
-    transform: scale(1.05);
+  width: 25px;
+  height: auto;
+    &:hover{
+      scale: 1.2;
+    }
 }
 
+/* Growth Button */
 .growth-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    background: linear-gradient(to right, #00d2ff, #3a7bd5);
-    border: none; /* ✅ Removes border */
-    outline: none; /* ✅ Removes outline */
-    border-radius: 25px;
-    padding: 5px 15px;
-    cursor: pointer;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    transition: transform 0.15s linear, background 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(to right, #3b82f6, #2dd4bf);
+  border: none;
+  border-radius: 25px;
+  padding: 8px 16px;
+  cursor: pointer;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+    &:hover{
+      scale: 1.05;
+    }
 }
 
-.growth-button:hover {
-    transform: scale(1.05);
-}
-
-.growth-button:focus {
-    outline: none; /* ✅ Prevents focus outline */
-}
-
-.growth-button img {
-    width: 24px;
-    height: 24px;
-    filter: invert(1);
-}
-
-
-
-.editInternContainer{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background-color: #000;
+.growth-button img{
+  filter: invert(1);
 }
 
 .updateNameContainer, .updateLocationDepartmentContainer{
-    display: flex;
-    gap: 20px;
+  display: flex;
+  justify-content: space-between;
+  gap: 15px; /* 🔹 Adjust spacing for better alignment */
+  width: 100%;
 }
 
-.updateNameContainer input{
-    width: 20vw;
+.updateNameContainer label, .updateLocationDepartmentContainer label {
+  flex: 1; /* 🔹 Ensures equal width for inputs and selects */
+  display: flex;
+  flex-direction: column;
 }
 
-select{
-    width: 20vw;
+.updateNameContainer h3, .updateLocationDepartmentContainer h3{
+  text-align: start;
+  margin-bottom: 3%;
 }
 
-.updateSkillLevelContainer{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    text-align: center;
+.updateNameContainer input, .updateLocationDepartmentContainer select {
+  width: 100%; /* 🔹 Ensures full width within label */
 }
 
-.departmentSkillLevelsContainer {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    gap: 15px;
-  }
-  
-  .skillItem {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-  
-  .skillItem input {
-    margin-top: 5px;
-    text-align: center; 
-  }
-
-  .averageSkillBlock{
-    display: inherit;
-    gap: 5px;
-    flex-direction: column;
-  }
-
- .averageValue{
-    background-color: white;
-    color: black;
-    height: 2.8em;
-    width: 5em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 5px;
- }
-
-.updateSkillWrapper{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+/* Input Fields */
+.input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
-.updateFirstSkill label, .updateSecondSkill label, .updateThirdSkill label{
-    display: flex;
-    flex-direction: column;
+.input-container label {
+  font-size: 14px;
+  color: #d1d5db; /* gray-300 */
 }
 
-.input[type="number"]{
-    font-size: 16px;
+.editInternInput, .editInternSelector, .editInternSkillInput {
+  background: rgba(55, 65, 81, 0.5); /* gray-700/50 */
+  border: 1px solid #4b5563; /* gray-600 */
+  padding: 10px;
+  border-radius: 5px;
+  color: white;
+  font-size: 14px;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box; /* 🔹 Make sure padding doesn’t affect width */
+  height: 40px; /* 🔹 Set a uniform height */
 }
 
-.overallScoreContainer p{
-    font-size: 16px;
-    margin: 0;
+.editinternSkillInput::before{
+  background: inherit;
+  z-index: -1;
+  opacity: 0.1;
 }
 
-.overallScoreBox{
-    width: 5em;
-    height: 3em;
-    background-color: white;
-    color: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 5px;
-    font-size: 16px;
+.editInternSelector {
+  -webkit-appearance: none; /* 🔹 Removes default select styles in Webkit browsers */
+  -moz-appearance: none;
+  appearance: none;
+  padding-right: 30px; /* 🔹 Adds space for dropdown arrow */
+}
+
+.editInternSelector:focus {
+  border-color: #2dd4bf;
+  box-shadow: 0px 0px 5px rgba(45, 212, 191, 0.5);
+}
+
+.editInternInput:focus, .editInternSelector:focus {
+  border-color: #2dd4bf;
+  box-shadow: 0px 0px 5px rgba(45, 212, 191, 0.5);
+}
+
+.updateSkillLevelContainer h3{
+  text-align: start;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #374151;
+  color: #25ffc1;
+}
+
+.departmentSkillLevelsContainer{
+  display: flex;
+  justify-content: space-around;
+}
+
+.departmentSkillLevelsContainer input{
+  width: 75%;
+  height: 100%;
+  text-align: start;
+}
+
+.skillItem{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: start;
+}
+
+/* Skill Levels */
+.skill-container {
+  margin-top: 20px;
+}
+
+.skill-container h2 {
+  font-size: 18px;
+  font-weight: bold;
+  color: #2dd4bf;
+  border-bottom: 1px solid #374151;
+  padding-bottom: 8px;
+}
+
+.skill-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.skill-box {
+  text-align: center;
+  background: linear-gradient(to right, #ec4899, #a855f7);
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.skill-box:hover {
+  transform: scale(1.1);
+}
+
+.averageSkillBlock{
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: start;
+}
+
+.averageValue{
+  width: 75%;
+  height: 100%;
+  background-color: red;
+  align-items: center;
+  display: flex;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 14px;
+  background: linear-gradient(to bottom right, #0d9488, #2563eb);
 }
 
 .buttonsContainer{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+  padding-top: 15px;
 }
 
-.editInternForm button, .editInternForm .input[type="cancel"]{
-    background: linear-gradient(to right, #ef2bd2, #f679b5, #c333fd);
-    border-radius: 5vw;
-    color: white;
-    border: none;
-    padding: 12px 20px;
-    font-size: 23px;
-    cursor: pointer;
-    width: 40%;
-    display: flex;
-    justify-content: center;
-    align-self: center;
+/* Submit Button */
+.submit-button {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
 }
 
-.editInternForm button:hover{
-    transform: scale(1.05);
-    transition: transform .15s linear;
-}
-
-@media (max-width: 480px) {
-    .container{
-        padding: 0 20px;
-    }
-
-    .filtering-wrapper{
-        height: auto;
-        padding: 0px 40px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-
-    .search-bar-wrapper {
-        margin-bottom: 20px;
-    }
-
-    .filtering label{
-        display: none;
-    }
-
-    .select-buttons{
-        position: inherit;
-        flex-wrap: wrap;
-        gap: 20px;
-        padding-top: 20px;
-        justify-content: center;
-    }
-
-    .filtering select{
-        margin-bottom: 20px;
-    }
-
-    .big-container{
-        height: 183vh;
-    }
-
-    .interns-wrapper{
-        width: 100%;
-        padding: 10px 25px;
-    }
-
-    .interns-wrapper h2{
-        padding-top: 0;
-    }
-
-    .interns-wrapper ul li {
-        width: 90%;
-    }
-
-    .intern-container{
-        max-height: 90vh;
-    }
+.updateInternButton {
+  background: linear-gradient(to right, #9333ea, #ec4899);
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
+  width: 30%;
+  &:hover{
+    scale: 1.05;
+  }
 }
