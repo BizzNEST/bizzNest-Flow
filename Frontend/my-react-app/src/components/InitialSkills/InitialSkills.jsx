@@ -41,7 +41,7 @@ const InitialSkills = ({ internID }) => {
             <ul>
                 {initialSkills.map(skill => (
                     <li key={skill.toolName}>
-                        {skill.toolName}: <strong>{skill.initialSkillLevel}</strong>
+                        {skill.toolName}: {skill.initialSkillLevel}
                     </li>
                 ))}
             </ul>

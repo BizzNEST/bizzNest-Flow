@@ -18,9 +18,9 @@
 /* ✅ Chart Title with Gradient Text & Matching Underline */
 .monthly-growth-container h2 {
     font-size: 30px;
-    font-weight: bold;
+    font-weight: 300;
     margin-bottom: 15px;
-    background: linear-gradient(to right, #ffffff, #00bcd4, #25ffc1);
+    background: linear-gradient(to right,#2dd4bf, #2dd4bf);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     position: relative;
@@ -33,7 +33,7 @@
     display: block;
     width: 100%;
     height: 3px; /* Thickness of the underline */
-    background: linear-gradient(to right, #ffffff, #00bcd4, #25ffc1); /* Same gradient as text */
+    background: linear-gradient(to right,#2dd4bf, #2dd4bf);
     position: absolute;
     bottom: -5px; /* Adjust spacing */
     left: 0;

@@ -51,8 +51,8 @@ const SkillGrowthChart = ({ internID }) => {
                         {/* ✅ Brighter Purple Gradient for Bars */}
                         <defs>
                             <linearGradient id="barGradient" x1="0" x2="0" y1="1" y2="0">
-                                <stop offset="0%" stopColor="#c333fd" />  {/* Vibrant Purple */}
-                                <stop offset="100%" stopColor="#7b1fa2" /> {/* Lighter Purple */}
+                                <stop offset="0%" stopColor="#ec4899" />  {/* Vibrant Purple */}
+                                <stop offset="100%" stopColor=" #a655f1" /> {/* Lighter Purple */}
                             </linearGradient>
                         </defs>
 
