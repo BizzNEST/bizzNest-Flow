@@ -19,7 +19,7 @@
     padding: 25px;
     width: 400px;
     max-width: 90%;
-    border-radius: 8px;
+    border-radius: 20px;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     animation: fadeIn 0.3s ease-in-out;
@@ -36,6 +36,7 @@
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
+    border-radius: 50%;
 }
 
 /* Confirm Button */
@@ -43,8 +44,11 @@
     background: #035a1d;
     color: white;
     border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
+    height: 50px;
+    width: 50px;
+    margin-left: 40px;
+    padding: 10px 10px;
+    border-radius: 50%;
     font-size: 16px;
     cursor: pointer;
     transition: 0.2s;
@@ -60,8 +64,11 @@
     background: #710202;
     color: white;
     border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
+    height: 50px;
+    width: 50px;
+    margin-right: 40px;
+    padding: 10px 10px;
+    border-radius: 50%;
     font-size: 16px;
     cursor: pointer;
     transition: 0.2s;
@@ -71,6 +78,11 @@
     background: #e71414;
     transform: scale(1.05);
 }
+.popup-icon{
+    padding-top: 4px;
+    filter: brightness(0) invert(1); /* Makes the image white */
+}
+
 
 /* Fade-in Animation */
 @keyframes fadeIn {
