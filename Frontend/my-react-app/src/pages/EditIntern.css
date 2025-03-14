@@ -11,9 +11,8 @@
 .formWrapper {
   width: 100%;
   max-width: 600px;
-  background: rgba(31, 41, 55, 0.6); /* gray-800/60 */
+  background: #2b2b2b;
   backdrop-filter: blur(10px);
-  border: 1px solid #374151; /* gray-700 */
   border-radius: 16px;
   box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
   overflow: hidden;
@@ -30,17 +29,16 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 20px;
 }
 
 .editInternHeader{
-    font-size: 24px;
-    font-weight: bold;
+    font-size: 30px;
+    font-weight: 300;
     text-align: center;
     background: #25ffc1;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    border-bottom: 1px solid #374151;
+    border-bottom: 1px solid white;
     margin: 0;
     padding-bottom: 10px;
 }
@@ -54,7 +52,7 @@
 }
 
 .back-button img {
-  width: 25px;
+  width: 35px;
   height: auto;
     &:hover{
       scale: 1.2;
@@ -66,7 +64,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  background: linear-gradient(to right, #3b82f6, #2dd4bf);
+  background: linear-gradient(to right, #2dd4bf, #3b82f6);
   border: none;
   border-radius: 25px;
   padding: 8px 16px;
@@ -83,6 +81,8 @@
   filter: invert(1);
 }
 
+
+
 .updateNameContainer, .updateLocationDepartmentContainer{
   display: flex;
   justify-content: space-between;
@@ -94,11 +94,13 @@
   flex: 1; /* 🔹 Ensures equal width for inputs and selects */
   display: flex;
   flex-direction: column;
+  
 }
 
 .updateNameContainer h3, .updateLocationDepartmentContainer h3{
   text-align: start;
   margin-bottom: 3%;
+  font-weight: 400;
 }
 
 .updateNameContainer input, .updateLocationDepartmentContainer select {
@@ -118,8 +120,7 @@
 }
 
 .editInternInput, .editInternSelector, .editInternSkillInput {
-  background: rgba(55, 65, 81, 0.5); /* gray-700/50 */
-  border: 1px solid #4b5563; /* gray-600 */
+  background: #191919; /* gray-700/50 */
   padding: 10px;
   border-radius: 5px;
   color: white;
@@ -156,8 +157,9 @@
 .updateSkillLevelContainer h3{
   text-align: start;
   padding-bottom: 15px;
-  border-bottom: 1px solid #374151;
+  border-bottom: 1px solid white;
   color: #25ffc1;
+  font-weight: 400;
 }
 
 .departmentSkillLevelsContainer{
@@ -228,7 +230,7 @@
   border-radius: 5px;
   padding: 10px;
   font-size: 14px;
-  background: linear-gradient(to bottom right, #0d9488, #2563eb);
+  background: #191919;
 }
 
 .buttonsContainer{
@@ -243,10 +245,10 @@
 }
 
 .updateInternButton {
-  background: linear-gradient(to right, #9333ea, #ec4899);
+  background: linear-gradient(to right, #ec4899, #9333ea);
   border: none;
   padding: 12px 20px;
-  border-radius: 8px;
+  border-radius: 25px;
   font-size: 16px;
   font-weight: bold;
   color: white;

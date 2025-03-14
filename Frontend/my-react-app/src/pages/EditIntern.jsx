@@ -12,9 +12,7 @@ const skillLabels = {
 };
 
 const randomColors = [
-  "linear-gradient(to right, #9a1d5e, #6d30b1)",//pink to purple
-  "linear-gradient(to right, #1d4fd8, #3b3cc4)",//blue to indigo
-  "linear-gradient(to right, #0d766e, #16863d)" //teal to green
+  "background: #191919"
 ];
 
 const EditIntern = () => {
@@ -231,9 +229,9 @@ const EditIntern = () => {
                         type="number"
                         className="editInternSkillInput"
                         name={`skill_${toolID}`}
-                        value={formData.skills[toolID] || 0}
+                        value={(formData.skills[toolID] || 0).toFixed(1)}
                         onChange={handleChange}
-                        style={{ background: randomColors[index] }}
+                        style={{ background: randomColors }}
                       />
                     </label>
                   );
