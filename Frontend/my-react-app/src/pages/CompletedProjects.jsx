@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import './CompletedProjects.css';
+import filmImg from "../assets/film-svgrepo-com.svg";
+import designImg from "../assets/brush-svgrepo-com.svg";
+import codingImg from "../assets/code-svgrepo-com.svg";
+import resetImg from "../assets/restart-svgrepo-com.svg"
 import NavBar from '../components/Navbar/NavBar';
 
 const CompletedProjects = () => {
@@ -40,6 +44,18 @@ const CompletedProjects = () => {
         }
     };
 
+    const departmentIcons = {
+        "Film": filmImg,
+        "Design": designImg,
+        "Web Development": codingImg,
+    };
+
+    const departmentBackgroundColors = {
+        "Film" : "linear-gradient(to right,#ec4899,  #a655f1)",
+        "Design": "linear-gradient(to right, #f59e0b, #f97316)",
+        "Web Development" : "linear-gradient(to right,#2dd4bf, #3b82f6)"
+    };
+
     return (
         <div className="nav-container">
             {/* ✅ Navbar added at the top */}
@@ -52,10 +68,20 @@ const CompletedProjects = () => {
                         <div className='compProjectDiv' key={project.projectID}>
                             <div className="completedProjectDescription">
                                 <h2>{project.projectTitle}</h2>
-                                <p>{project.departmentName || "No Departments"}</p>
+                                <div className="department" style={{ background: departmentBackgroundColors[project.departmentName]}}>
+                                    {project.departmentName === "Web Development" ? "Web Dev" : project.departmentName || "No Departments"}
+                                    {departmentIcons[project.departmentName] && (
+                                        <img
+                                            src={departmentIcons[project.departmentName]}
+                                            alt={`${project.departmentName} icon`}
+                                            className="departmentIcon"
+                                        />
+                                    )}
+                                </div>
                             </div>
-                                <p>{project.projectDescription}</p>
+                            <p>{project.projectDescription}</p>
                             <button className='Reactivate' onClick={() => handleReactivate(project.projectID)}>
+                                <img src={resetImg} alt='reactivate' />
                                 Restore Project
                             </button>
                         </div>
