@@ -1,6 +1,6 @@
 /* Container for Initial Skills */
 .initial-skills-container {
-    background: linear-gradient(to bottom right, #ef2bd2, #c333fd); /* Pink to Purple */
+    background: linear-gradient(to bottom right,#ec4899,  #a655f1);
     padding: 20px;
     margin-bottom: 20px;
     border-radius: 15px;
@@ -15,7 +15,7 @@
 /* Title */
 .initial-skills-container h2 {
     font-size: 22px;
-    font-weight: bold;
+    font-weight: 300;
     margin-bottom: 15px;
 }
 
@@ -30,5 +30,5 @@
 .initial-skills-container li {
     font-size: 18px;
     margin: 5px 0;
-    font-weight: bold;
+    font-weight: 300;
 }

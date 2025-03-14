@@ -41,7 +41,7 @@ const CurrentSkills = ({ internID }) => {
             <ul>
                 {currentSkills.map(skill => (
                     <li key={skill.toolName}>
-                        {skill.toolName}: <strong>{skill.currentSkillLevel}</strong>
+                        {skill.toolName}: {skill.currentSkillLevel}
                     </li>
                 ))}
             </ul>

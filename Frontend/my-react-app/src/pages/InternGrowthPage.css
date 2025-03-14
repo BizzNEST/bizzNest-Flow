@@ -41,7 +41,7 @@
     flex-grow: 1; /* Makes sure it takes the available space */
     text-align: center;
     font-size: 28px;
-    font-weight: bold;
+    font-weight: 400;
     color: white;
 }
 

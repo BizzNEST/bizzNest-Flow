@@ -1,6 +1,6 @@
 /* Container for Current Skills */
 .final-skills-container {
-    background: linear-gradient(to bottom right, #43c6a1, #00bcd4, #25ffc1); /* Blue to Turquoise */
+    background: linear-gradient(to bottom right,#2dd4bf, #3b82f6);
     padding: 20px;
     margin-bottom: 20px;
     border-radius: 15px;
@@ -15,7 +15,7 @@
 /* Title */
 .final-skills-container h2 {
     font-size: 22px;
-    font-weight: bold;
+    font-weight: 300;
     margin-bottom: 15px;
 }
 
@@ -30,5 +30,5 @@
 .final-skills-container li {
     font-size: 18px;
     margin: 5px 0;
-    font-weight: bold;
+    font-weight: 300;
 }
