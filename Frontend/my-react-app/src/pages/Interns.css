@@ -1,3 +1,7 @@
+
+::-webkit-scrollbar {
+  display: none;
+}
 /* Fullscreen background */
 .big-container {
   display: flex;
@@ -43,7 +47,11 @@
 .filtering-wrapper, .select-buttons {
   flex-shrink: 0;
 }
-
+.filter-header {
+  display: flex;
+  justify-content: flex-start;
+  font-weight: 350;
+}
 /* Styling for the filtering and search */
 .search-bar-wrapper {
   margin-bottom: 50px;
@@ -92,10 +100,10 @@
 }
 
 .select-btn, .deselect-btn {
-  background: linear-gradient(to right, #ef2bd2, #f679b5, #c333fd);
+  background: linear-gradient(to right,#ec4899, #a655f1);
   color: white;
   font-size: 16px;
-  font-weight: bold;
+  font-weight: 300;
   padding: 8px 15px;
   border: none;
   border-radius: 5px;
@@ -105,31 +113,50 @@
 
 .select-btn:hover, .deselect-btn:hover {
   transform: scale(1.05);
-  background: linear-gradient(to right, #43c6a1, #00bcd4, #25ffc1);
-}
+  background: linear-gradient(to right,#2dd4bf, #3b82f6);}
 
 .delete-selected-btn {
   background: #FF4C4C;
   color: white;
   font-size: 16px;
-  font-weight: bold;
+  font-weight: 300;
   padding: 8px 15px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   transition: background 0.3s ease, transform 0.2s ease;
 }
-
-.delete-selected-btn:hover {
+.delete-selected-btn:not(:disabled):hover {
   background: #B22222;
   transform: scale(1.05);
 }
 
-/* List of interns */
+.delete-selected-btn:disabled {
+  background-color: #720707;
+  cursor: not-allowed;
+  opacity: 0.6;
+  transform: none !important; 
+  transition: none; 
+}
+.delete-selected-btn:hover {
+  background: #B22222;
+  transform: scale(1.05);
+}
+.delete-selected-btn:disabled {
+  background-color: #720707; 
+  cursor: not-allowed; 
+  opacity: 0.6; 
+}
+.interns-header{
+  font-weight: 350;
+}
+.intern-container{
+
+}
 .interns-wrapper ul {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centers list items */
+  align-items: center; 
   width: 100%;
   list-style-type: none;
   padding: 0;
@@ -142,13 +169,13 @@
   align-items: center;
   justify-content: space-between;
   font-size: 25px;
-  font-weight: bold;
-  margin: 10px 0; /* Consistent spacing */
-  width: 90%; /* Makes each list item take 90% of its container */
+  font-weight: 300;
+  margin: 10px 0; 
+  width: 90%; 
   height: 25px !important;
   border-radius: 25px;
   padding: 15px;
-  background: linear-gradient(to right, #ef2bd2, #f679b5, #c333fd);
+  background: linear-gradient(to right,#ec4899, #a655f1);
   color: white;
   transition: background 0.5s ease, transform 0.3s ease;
   cursor: pointer;
@@ -156,17 +183,23 @@
 
 .interns-wrapper ul li:hover {
   transform: scale(1.03);
-  background: linear-gradient(to right, #43c6a1, #00bcd4, #25ffc1);
+  background: linear-gradient(to right,#2dd4bf, #3b82f6);
 }
 
 .interns-wrapper ul li.selected {
-  background: linear-gradient(to right, #43c6a1, #00bcd4, #25ffc1);
+  background: linear-gradient(to right,#2dd4bf, #3b82f6);
+  border: 2px solid white;
   transform: scale(1.03);
 }
 
 /* Prevent hover effect on already selected interns */
 .interns-wrapper ul li.selected:hover {
-  background: linear-gradient(to right, #43c6a1, #00bcd4, #25ffc1);
+  background: linear-gradient(to right,#2dd4bf, #3b82f6);
+}
+
+.interns-wrapper ul li img{
+  filter: brightness(0) invert(1); /* Makes the image white */
+
 }
 
 /* Profile images */
@@ -234,7 +267,10 @@
       flex-direction: column; 
       align-items: center;
   }
-
+  .search-bar-wrapper{
+  display: flex;
+  justify-content: center;    
+  }
   .filtering-wrapper,
   .interns-wrapper {
     justify-content: center ;

@@ -152,7 +152,7 @@ const Interns = () => {
       <div className="container">
         <div className="content">
           <div className="filtering-wrapper">
-            <h3>Filter Interns</h3>
+            <h3 className="filter-header">Filter Interns</h3>
             <div className="search-bar-wrapper">
               <SearchBar onSearch={handleSearch} />
             </div>
@@ -179,13 +179,14 @@ const Interns = () => {
                 <button
                   className="delete-selected-btn"
                   onClick={() => confirmDelete(null, "bulk")}
+                  disabled={selectedInterns.length === 0} 
                 >
                   Delete Selected
-                </button>
-              </div>
+              </button>
+            </div>
             </div>
 
-            <h2>Interns:</h2>
+            <h2 className="interns-header">Interns</h2>
             <div className="intern-container">
               <ul>
                 {filteredInterns.map((intern) => (

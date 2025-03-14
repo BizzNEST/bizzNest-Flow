@@ -7,7 +7,6 @@ import Mail from "../assets/mail.svg";
 import Visibility_Off from "../assets/visibility_off.svg";
 import Visibility from "../assets/visibility.svg";
 import Lock from "../assets/lock.svg";
-import Title from "../assets/bizzNESTFlowLogoArial.svg"
 import "./InternSignup.css";
 
 const InternSignup = () => {
