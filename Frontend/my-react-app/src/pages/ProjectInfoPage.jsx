@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import './ProjectInfoPage.css';
 import NavBar from '../components/Navbar/NavBar';
-import returnArrow from '../assets/returnArrow.svg';
 
 const ProjectInfoPage = () => {
   const { projectID } = useParams(); // Extract projectID from the URL
@@ -84,84 +83,88 @@ const ProjectInfoPage = () => {
   };
 
   return (
-    <div className="containerDisplayCompleteInfo">
-        <NavBar />
-      
-      <div className="project-info">
-        <div className="projectInfoWrapper">
-        <button className='returnToProjects' onClick={() => navigate('/')}>
-          <img className='returnArrow' src={returnArrow} alt='returnToProjects'/>
-        </button>
-        <div className='projectDisplayContainer'>
-          <h1>{project.projectTitle}</h1>
-          <div className="toolContainer">
-            {project.tools.length > 0 ? (
-              project.tools.map((tool, index) => (
-                <div key={index}>
-                  <h4 className='toolName'>{toolNames[tool.toolID] || `Tool ${tool.toolID}`}</h4>
-                  <p className='toolBox'>{tool.difficulty !== null ? tool.difficulty.toFixed(1) : "N/A"}</p>
-                </div>
-              ))
-            ) : (
-              <p>No skills assigned to this project.</p>
-            )}
-          </div>
-          <div className="toolAverageContainer">
-          <h4>Average</h4>
-          <p className='averageBox'>{calculateAverageDifficulty()}</p>
+    <main className="projectContainer">
+      <NavBar />
+      <div className='projectWrapper'>
+
+      {/* Project Header Card */}
+      <div className="projectHeader">
+        <div className="projectTitleCard">
+          <h2 className="projectTitle">{project.projectTitle}</h2>
         </div>
-        </div>
-        <div className="projectDescriptionContainer">
-          <h4>Project Description:</h4>
-          <p className='projectDescritionDetails'>{project.projectDescription ? project.projectDescription : "No description available."}</p>
-        </div>
-        <div className="assignedWrapper">
-          <div className="assignedInternContainer">
-            <h2>Assigned Interns</h2>
-            <div className="assignedInternNames">
-              {project.assignedInterns && project.assignedInterns.length > 0 ? (
-                project.assignedInterns
-                  .filter(intern => intern.role === "Intern")
-                  .map((intern, index) => (
-                    <div key={index} className="assignedIntern">
-                      <p>{`${intern.firstName} ${intern.lastName}`}</p>
-                    </div>
-                  ))
-              ) : (
-                <p>No interns assigned to this project.</p>
-              )}
+
+        {/* Skill Cards */}
+        <div className="skillsContainer">
+        {project.tools.length > 0 ? (
+          project.tools.map((tool, index) => (
+            <div key={index} className="skillCard">
+              <h4 className="skillName">{toolNames[tool.toolID] || `Tool ${tool.toolID}`}</h4>
+              <p className="skillValue">{tool.difficulty !== null ? tool.difficulty.toFixed(1) : "N/A"}</p>
             </div>
+          ))
+        ) : (
+            <p className="noSkills">No skills assigned to this project.</p>
+          )}
+          <div className="skillCard highlighted">
+            <h4 className="skillName">Average</h4>
+            <p className="skillValue">{calculateAverageDifficulty()}</p>
           </div>
-          <div className="assignedLeaderContainer">
-          <h2>Assigned Leaders</h2>
-            <div className="assignedLeaderNames">
-              {project.assignedInterns && project.assignedInterns.length > 0 ? (
-                project.assignedInterns
-                  .filter(intern => intern.role === "Leader") // Filter only leaders
-                  .map((leader, index) => (
-                    <div key={index} className="assignedLeader">
-                      <p>{`${leader.firstName} ${leader.lastName}`}</p>
-                    </div>
-                  ))
-              ) : (
-                <p>No leaders assigned to this project.</p>
-              )}
-            </div>
-          </div>
-        </div>
-        <div className="projectInfoButtonContainer">
-          <button onClick={deleteProject} className="delete-project">
-            Delete Project
-          </button>
-          <button onClick={completeProject} className='completeProject'>
-            Mark Complete
-          </button>
         </div>
       </div>
-    </div>
-    
+
+      {/* Project Description */}
+      <div className="projectDescription">
+        <h3 className="descriptionTitle">Project Description:</h3>
+        <p className="descriptionText">{project.projectDescription || "No description available."}</p>
+      </div>
+
+      {/* Assigned People */}
+      <div className="assignedContainer">
+        {/* Interns */}
+        <div className="assignedGroup">
+          <h3 className="assignedTitle">Assigned Interns</h3>
+          <div className="assignedList">
+            {project.assignedInterns.length > 0 ? (
+              project.assignedInterns
+                .filter(person => person.role === "Intern")
+                .map((intern, index) => (
+                  <div key={index} className="assignedPerson">{`${intern.firstName} ${intern.lastName}`}</div>
+                ))
+            ) : (
+              <p className="noAssigned">No interns assigned.</p>
+            )}
+          </div>
         </div>
-        
+
+        {/* Leaders */}
+        <div className="assignedGroup">
+          <h3 className="assignedTitle">Assigned Leaders</h3>
+          <div className="assignedList">
+            {project.assignedInterns.length > 0 ? (
+              project.assignedInterns
+                .filter(person => person.role === "Leader")
+                .map((leader, index) => (
+                  <div key={index} className="assignedLeader">{`${leader.firstName} ${leader.lastName}`}</div>
+                ))
+            ) : (
+              <p className="noAssigned">No leaders assigned.</p>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Action Buttons */}
+      <div className="buttonContainer">
+        <button className="deleteButton" onClick={deleteProject}>
+          Delete Project
+        </button>
+        <button className="completeButton" onClick={completeProject}>
+          Mark Complete
+        </button>
+      </div>
+      </div>
+      
+    </main>
   );
 };
 
