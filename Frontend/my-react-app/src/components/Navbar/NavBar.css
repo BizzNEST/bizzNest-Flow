@@ -12,11 +12,15 @@
   border-bottom: 1px solid white;
 }
 
-#logo h1 {
-  font-weight: 150;
-  font-size: 40px;
-  margin: 10px;
-  padding: 10px;
+#logo {
+  display: flex;
+  align-items: center;
+  padding: 20px 0 20px 55px;
+}
+
+.navbar-logo {
+  height: 45px; /* Adjust size as needed */
+  width: auto;
 }
 
 

@@ -1,12 +1,28 @@
 /* ===== Login/Signup Page Styles ===== */
 .LoginSignupPage .LoginSignupWrapper {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  position: relative;
   background-image: url(../assets/Login-Background1.jpeg);
   background-size: cover;
   background-repeat: no-repeat;
+}
+
+
+/* Position logo at the top */
+.logo {
+  position: absolute;
+  top: 20px; /* Adjust spacing from the top */
+  left: 50%;
+  transform: translateX(-50%); /* Center horizontally */
+}
+
+.logo img {
+  height: 80px; /* Adjust logo size as needed */
+  width: auto;
 }
 
 .LoginSignupPage .LoginSignup {
@@ -264,3 +280,5 @@
     width: 60%;
   }
 }
+
+

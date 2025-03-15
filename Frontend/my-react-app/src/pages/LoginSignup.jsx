@@ -5,7 +5,8 @@ import Mail from "../assets/mail.svg";
 import Lock from "../assets/lock.svg";
 import Visibility_Off from "../assets/visibility_off.svg";
 import Visibility from "../assets/visibility.svg";
-import "./LoginSignup.css";
+import './LoginSignup.css';
+import logo from './logo.svg';
 
 const LoginSignup = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -70,6 +71,9 @@ const LoginSignup = () => {
   return (
     <div className="LoginSignupPage">
       <div className="LoginSignupWrapper">
+      <div class="logo">
+              <img src={logo} alt="bizzNest Flow Logo" className="navbar-logo" />
+            </div>
         <div className="LoginSignup">
           <div className="LoginSignup-container">
             <div className="tabs">
@@ -233,9 +237,13 @@ const LoginSignup = () => {
                 </span>
               </form>
             )}
+
           </div>
+          
         </div>
+        
       </div>
+      
     </div>
   );
 };

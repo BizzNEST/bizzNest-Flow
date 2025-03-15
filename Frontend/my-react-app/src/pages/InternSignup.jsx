@@ -8,6 +8,7 @@ import Visibility_Off from "../assets/visibility_off.svg";
 import Visibility from "../assets/visibility.svg";
 import Lock from "../assets/lock.svg";
 import "./InternSignup.css";
+import logo from './logo.svg';
 
 const InternSignup = () => {
   const [step, setStep] = useState(1);
@@ -87,10 +88,9 @@ const InternSignup = () => {
     <div className="internSignupWrapper">
       <div className="internWaves" />
       <form className="Intern-signup-form">
-        <div className="internLogoSignUp">
-          <h1>Bizznest Flow</h1>
-          <img src={Logo} alt="Logo" className="internSignupLogo" />
-        </div>
+        <div class="logo">
+                      <img src={logo} alt="bizzNest Flow Logo" className="navbar-logo" />
+                    </div>
         <h2 className="internSignupTitle">Intern Signup</h2>
 
         {step === 1 ? (
