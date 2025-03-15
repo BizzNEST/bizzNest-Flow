@@ -6,6 +6,7 @@ import Lock from "../assets/lock.svg";
 import Visibility_Off from "../assets/visibility_off.svg";
 import Visibility from "../assets/visibility.svg";
 import './LoginSignup.css';
+import logo from './logo.svg';
 
 const LoginSignup = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -54,6 +55,9 @@ const LoginSignup = () => {
   return (
     <div className="LoginSignupPage">
       <div className="LoginSignupWrapper">
+      <div class="logo">
+              <img src={logo} alt="bizzNest Flow Logo" className="navbar-logo" />
+            </div>
         <div className={`Waves ${isLogin ? 'signup' : 'login'}`} />
         <div className="LoginSignup">
           <div className="LoginSignup-container">
@@ -116,9 +120,13 @@ const LoginSignup = () => {
                 <span className="internSignup" onClick={() => navigate('/internSignUp')}>Are you an Intern?</span>
               </form>
             )}
+
           </div>
+          
         </div>
+        
       </div>
+      
     </div>
   );
 };

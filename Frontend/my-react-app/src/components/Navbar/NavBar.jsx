@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import './NavBar.css';
 import hamburgerIcon from '../../assets/hamburger.png';
+import logo from './logo.svg'
 
 
 // hooks explained:
@@ -53,7 +54,7 @@ const NavBar = () => {
   return (
     <nav className="navbar">
       <div id="logo">
-        <h1>bizzNest Flow</h1>
+      <img src={logo} alt="bizzNest Flow Logo" className="navbar-logo" />
       </div>
       
       <div className="navbar-container">
