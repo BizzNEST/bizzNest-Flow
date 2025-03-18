@@ -39,7 +39,7 @@ const LoginSignup = () => {
       );
       localStorage.setItem("token", response.data.token);
       alert("Login successful!");
-      navigate("/");
+      navigate("/home");
     } catch (error) {
       console.error("Error logging in:", error);
       alert("Failed to log in. Please check your credentials.");
