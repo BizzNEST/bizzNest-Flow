@@ -20,11 +20,11 @@ const NewProject = () => {
 
   // Handlers for form fields
   const handleProjectTitleChange = (event) => {
-    setProjectTitle(event.target.value.trim());
+    setProjectTitle(event.target.value);
   };
 
   const handleProjectInfoChange = (event) => {
-    setProjectInfo(event.target.value.trim());
+    setProjectInfo(event.target.value);
   };
 
   const handleDepartmentChange = (event) => {
@@ -96,7 +96,7 @@ const NewProject = () => {
       if (response.ok) {
         const result = await response.json();
         setStatusMessage('Project added successfully!');
-        navigate(`recommendations?projectID=${result.projectID}&departmentID=${result.departmentID}`);
+        navigate(`/recommendations?projectID=${result.projectID}&departmentID=${result.departmentID}`);
       } else {
         const errorData = await response.json();
         setStatusMessage(`Error: ${errorData.message}`);
