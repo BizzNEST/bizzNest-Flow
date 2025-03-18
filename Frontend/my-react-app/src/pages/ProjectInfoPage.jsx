@@ -32,7 +32,7 @@ const ProjectInfoPage = () => {
         });
         if (response.ok) {
             alert('Project deleted successfully');
-            navigate('/'); // Redirect to homepage
+            navigate('/home'); // Redirect to homepage
         } else {
             alert('Failed to delete project');
         }

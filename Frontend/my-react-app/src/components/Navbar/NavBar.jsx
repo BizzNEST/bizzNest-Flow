@@ -61,7 +61,7 @@ const NavBar = () => {
         {/* Show Links Directly on Desktop, Show Hamburger on Mobile */}
         {!isMobile ? (
           <ul className="menu-items">
-            <li><Link to="/" className="nav-link">Home</Link></li>
+            <li><Link to="/home" className="nav-link">Home</Link></li>
             <li><Link to="/interns" className="nav-link">Interns</Link></li>
             <li><Link to="/CompletedProjects" className="nav-link">Projects</Link></li>
           </ul>
