@@ -158,7 +158,7 @@ const Recommendations = () => {
         alert("Interns assigned successfully!");
         setSelectedInterns([]); // Clear selected interns after submitting
         setSelectedLeaders([]); // Clear selected leaders after submitting
-        navigate("/");
+        navigate("/home");
       } else {
         const errorText = await response.text();
         console.error("Failed to assign interns/leaders:", errorText);

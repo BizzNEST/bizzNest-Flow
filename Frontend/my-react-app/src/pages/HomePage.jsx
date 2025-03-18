@@ -9,7 +9,6 @@ import './HomePage.css';
 const HomePage = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [showNewProject, setShowNewProject] = useState(false); // state to toggle components
-  // const navigate = useNavigate();
 
   useEffect(() => {
     // Add/remove 'no-scroll' class to body based on menu state
