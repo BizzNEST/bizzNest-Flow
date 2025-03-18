@@ -22,7 +22,7 @@ function App() {
         {/* Public Routes */}
         <Route path='/' element={<LandingPage/>}/>
         <Route path="/loginsignup" element={<LoginSignup />} />
-        <Route path="/landing" element={<Navigate to="/" />} />
+        <Route path="/login" element={<Navigate to="/" />} />
         <Route path='/internsignup' element={<InternSignup />} />
         <Route path='/thankyou' element={<Thankyou />} />
 
