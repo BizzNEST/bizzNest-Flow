@@ -1,5 +1,4 @@
-// src/components/NewProject/NewProject.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './NewProject.css';
 
@@ -9,48 +8,74 @@ const NewProject = () => {
   const [department, setDepartment] = useState('');
   const [toolInputs, setToolInputs] = useState({});
   const [statusMessage, setStatusMessage] = useState(''); // for displaying success or error messages
+  const [isFormValid, setIsFormValid] = useState(false);
 
   const departmentTools = {
     "Web Development": ["Frontend", "Backend", "Wordpress"],
     "Design": ["Photoshop", "Illustrator", "Figma"],
     "Film": ["Premiere Pro", "Camera Work"]
   };
-  // handlers for form fields
-  const handleProjectTitleChange = (event) => setProjectTitle(event.target.value);
-  const handleProjectInfoChange = (event) => setProjectInfo(event.target.value);
+
+  const navigate = useNavigate();
+
+  // Handlers for form fields
+  const handleProjectTitleChange = (event) => {
+    setProjectTitle(event.target.value.trim());
+  };
+
+  const handleProjectInfoChange = (event) => {
+    setProjectInfo(event.target.value.trim());
+  };
+
   const handleDepartmentChange = (event) => {
-    setDepartment(event.target.value);
+    const selectedDepartment = event.target.value;
+    setDepartment(selectedDepartment);
+
     // Reset tool inputs when department changes
-    const selectedTools = departmentTools[event.target.value] || [];
+    const selectedTools = departmentTools[selectedDepartment] || [];
     setToolInputs(
       selectedTools.reduce((acc, tool) => {
-        acc[tool] = ''; // Initialize all tools with empty difficulty values
+        acc[tool] = ''; // Initialize with empty difficulty values
         return acc;
       }, {})
     );
   };
 
-const handleToolInputChange = (tool, value) => {
+  const handleToolInputChange = (tool, value) => {
     setToolInputs((prevInputs) => ({
-        ...prevInputs,
-        [tool]: value,
+      ...prevInputs,
+      [tool]: value !== '' ? parseFloat(value) || 0 : '',
     }));
-};
-  
-  const navigate = useNavigate();
+  };
+
+  // Ensure form is valid before enabling the submit button
+  useEffect(() => {
+    const areAllFieldsFilled =
+      projectTitle.trim().length > 0 &&
+      projectInfo.trim().length > 0 &&
+      department !== '';
+
+    const areAllToolsFilled =
+      Object.keys(toolInputs).length > 0 &&
+      Object.values(toolInputs).every(value => value !== '' && !isNaN(value));
+
+    setIsFormValid(areAllFieldsFilled && areAllToolsFilled);
+  }, [projectTitle, projectInfo, department, toolInputs]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-  const tools = Object.entries(toolInputs).map(([toolName, difficulty]) => {
-    const toolID = Object.keys(departmentTools)
-      .flatMap((key) => departmentTools[key])
-      .indexOf(toolName);
-    return {
-      toolID: toolID >= 0 ? toolID : null, // Map toolName to its ID (based on order)
-      difficulty: parseFloat(difficulty),
-    };
-  });
+    if (!isFormValid) return; // Prevent submission if form is invalid
+
+    const tools = Object.entries(toolInputs).map(([toolName, difficulty]) => {
+      const toolID = Object.keys(departmentTools)
+        .flatMap((key) => departmentTools[key])
+        .indexOf(toolName);
+      return {
+        toolID: toolID >= 0 ? toolID : null, // Map toolName to its ID (based on order)
+        difficulty: parseFloat(difficulty),
+      };
+    });
 
     const projectData = {
       projectTitle,
@@ -65,14 +90,12 @@ const handleToolInputChange = (tool, value) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(projectData)
+        body: JSON.stringify(projectData),
       });
 
       if (response.ok) {
         const result = await response.json();
         setStatusMessage('Project added successfully!');
-        console.log('Navigating to recommendations with:', result.projectID, result.departmentID);
-        // Note: This can cause cashing issues, not a huge deal, but investigation is needed if app becomes large enough in scale.
         navigate(`recommendations?projectID=${result.projectID}&departmentID=${result.departmentID}`);
       } else {
         const errorData = await response.json();
@@ -80,55 +103,50 @@ const handleToolInputChange = (tool, value) => {
       }
     } catch (error) {
       console.error('Error adding project: ', error);
-      setStatusMessage('An Error occured while adding project');
+      setStatusMessage('An error occurred while adding the project');
     }
   };
-
-    //check if all previous fields are filled before displaying skill input
-    const areFieldsFilled = projectTitle && projectInfo && department;
 
   return (
     <div className="new-project-container">
       <form onSubmit={handleSubmit}>
         {/* Add fields for project details */}
         <input 
-            type="text" 
-            placeholder="Project Title" 
-            value={projectTitle}
-            onChange={handleProjectTitleChange}
+          type="text" 
+          placeholder="Project Title" 
+          value={projectTitle}
+          onChange={handleProjectTitleChange}
         />
 
         <input 
-            type="text" 
-            placeholder="Project Info" 
-            value={projectInfo}
-            onChange={handleProjectInfoChange}
+          type="text" 
+          placeholder="Project Info" 
+          value={projectInfo}
+          onChange={handleProjectInfoChange}
         />
 
         {/* Dropdown menu here */}
         <select 
-            name="department" 
-            className="department-dropdown"
-            value={department}
-            onChange={handleDepartmentChange}
+          name="department" 
+          className="department-dropdown"
+          value={department}
+          onChange={handleDepartmentChange}
         >
-          <option value="" disabled>
-            Department
-          </option>
+          <option value="" disabled>Department</option>
           <option value="Web Development">Web Development</option>
           <option value="Design">Design</option>
           <option value="Film">Film</option>
         </select>
 
         {/* Conditionally render tool input fields */}
-        {areFieldsFilled && (
+        {department && (
           <div className="tool-input-container">
             {Object.keys(toolInputs).map((tool) => (
               <div key={tool}>
                 <h4>{tool}</h4>
                 <input
                   type="number"
-                  placeholder="Diff"
+                  placeholder="Difficulty (0-10)"
                   step="any"
                   min="0"
                   max="10"
@@ -141,11 +159,15 @@ const handleToolInputChange = (tool, value) => {
         )}
 
         <div className="submit-btn-div">
-          <button type="submit" className="submit-btn">
+          {/* Button will be disabled if form is not valid */}
+          <button type="submit" className="submit-btn" disabled={!isFormValid} style={{ 
+            backgroundColor: isFormValid ? '#00CFFF' : '#045c68 ', 
+            cursor: isFormValid ? 'pointer' : 'not-allowed' 
+          }}>
             Submit
           </button>
         </div>
-        {/* Display success or error messages */}
+
         {statusMessage && <p className="status-message">{statusMessage}</p>}
       </form>
     </div>
