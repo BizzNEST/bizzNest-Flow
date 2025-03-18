@@ -20,14 +20,14 @@ function App() {
     <Router>
       <Routes>
         {/* Public Routes */}
-        <Route path='/landing-page' element={<LandingPage/>}/>
+        <Route path='/' element={<LandingPage/>}/>
         <Route path="/loginsignup" element={<LoginSignup />} />
-        <Route path="/login" element={<Navigate to="/loginsignup" />} />
+        <Route path="/landing" element={<Navigate to="/" />} />
         <Route path='/internsignup' element={<InternSignup />} />
         <Route path='/thankyou' element={<Thankyou />} />
 
         {/* Protected Routes */}
-        <Route path="/" element={ <ProtectedRoute> <HomePage /> </ProtectedRoute> } />
+        <Route path="/home" element={ <ProtectedRoute> <HomePage /> </ProtectedRoute> } />
         <Route path="/new-project" element={ <ProtectedRoute> <NewProject /> </ProtectedRoute> }/>
         <Route path="/recommendations" element={ <ProtectedRoute> <Recommendations /> </ProtectedRoute> }/>
         <Route path="/interns" element={ <ProtectedRoute> <Interns /> </ProtectedRoute> }/>
@@ -35,7 +35,7 @@ function App() {
         <Route path="/intern-signup" element={ <ProtectedRoute> <InternSignup /> </ProtectedRoute> }/>
         <Route path="/editIntern/:internID" element={ <ProtectedRoute><EditIntern/></ProtectedRoute>}/>
         <Route path="/internGrowthPage/:internID" element={ <ProtectedRoute><InternGrowthPage/></ProtectedRoute>}/>
-        <Route path="/CompletedProjects" element={ <ProtectedRoute><CompletedProjects/></ProtectedRoute>}/>
+        <Route path="/completedProjects" element={ <ProtectedRoute><CompletedProjects/></ProtectedRoute>}/>
       </Routes>
     </Router>
   );
