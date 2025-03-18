@@ -17,6 +17,7 @@ const departmentMap = {
 
 const Interns = () => {
   const [interns, setInterns] = useState([]);
+  const [internsWithProfilePics, setInternsWithProfilePics] = useState([]); // New state for interns with profile pics
   const [filteredInterns, setFilteredInterns] = useState([]);
   const [selectedDepartment, setSelectedDepartment] = useState("");
   const [selectedLocation, setSelectedLocation] = useState("");
@@ -28,16 +29,55 @@ const Interns = () => {
   const filterInterns = useRef([]);
   const navigate = useNavigate();
 
+  // Fetch all interns
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/getInterns`)
       .then((response) => response.json())
       .then((data) => {
         filterInterns.current = data;
-        setInterns(data);
-        setFilteredInterns(data);
+        setInterns(data); // Set the initial interns data
       })
       .catch((error) => console.error("Error fetching interns:", error));
   }, []);
+
+  // Fetch profile pictures for each intern
+  useEffect(() => {
+    if (interns.length === 0) return; // Don't run if there are no interns
+
+    const fetchProfilePictures = async () => {
+      const updatedInterns = await Promise.all(
+        interns.map(async (intern) => {
+          try {
+            const response = await fetch(
+              `${process.env.REACT_APP_API_URL}/getIntern/${intern.InternID}`
+            );
+            const data = await response.json();
+
+            if (data) {
+              let profilePic = profile; // Default
+              if (data.profilePic) {
+                const decodedPath = atob(data.profilePic); // Decode Base64
+                profilePic = `${process.env.REACT_APP_API_URL}${decodedPath}`;
+              }
+
+              return { ...intern, profilePic }; // Return intern with updated profilePic
+            } else {
+              console.error("Failed to fetch intern data for:", intern.InternID);
+              return intern; // Return original intern data if fetch fails
+            }
+          } catch (error) {
+            console.error("Error fetching intern details:", error);
+            return intern; // Return original intern data if fetch fails
+          }
+        })
+      );
+
+      setInternsWithProfilePics(updatedInterns); // Update interns with profile pictures
+      setFilteredInterns(updatedInterns); // Update filtered interns
+    };
+
+    fetchProfilePictures();
+  }, [interns]); // Only run when `interns` changes
 
   // Select or Deselect an Intern
   const handleSelectIntern = (internID) => {
@@ -179,11 +219,11 @@ const Interns = () => {
                 <button
                   className="delete-selected-btn"
                   onClick={() => confirmDelete(null, "bulk")}
-                  disabled={selectedInterns.length === 0} 
+                  disabled={selectedInterns.length === 0}
                 >
                   Delete Selected
-              </button>
-            </div>
+                </button>
+              </div>
             </div>
 
             <h2 className="interns-header">Interns</h2>
@@ -200,12 +240,12 @@ const Interns = () => {
                     }
                   >
                     <img
-                      src={intern.profilePic ? intern.profilePic : profile}
+                      src={intern.profilePic}
                       alt="Profile"
                       className="profile-pic"
                       onError={(e) => {
                         e.target.onerror = null;
-                        e.target.src = profile; //targets default profile pic
+                        e.target.src = profile; // Fallback to default profile pic
                       }}
                     />
                     <span className="name">

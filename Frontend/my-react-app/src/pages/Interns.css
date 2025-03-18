@@ -195,10 +195,7 @@
   background: linear-gradient(to right,#2dd4bf, #3b82f6);
 }
 
-.interns-wrapper ul li img{
-  filter: brightness(0) invert(1); /* Makes the image white */
 
-}
 
 /* Profile images */
 .interns-wrapper ul li img.profile {
