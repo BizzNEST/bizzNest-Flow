@@ -86,3 +86,14 @@
         margin-bottom: 18vh;
     }
 }
+
+@media(max-width: 1000px){
+    .completedProjectContainer {
+        display: grid;
+        grid-template-columns: repeat(2, 45%);
+        gap: 50px;
+        padding: 10px;
+        justify-content: center;
+        padding-bottom: 50px;
+    }
+}
