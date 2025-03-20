@@ -249,6 +249,12 @@
   left: 0;
 }
 
+.errorMessage{
+  color: red;
+  font-size: 14px;
+  text-align: center;
+}
+
 @media (max-width: 768px) {
   .LoginSignupPage .LoginSignup {
     width: 85%;
