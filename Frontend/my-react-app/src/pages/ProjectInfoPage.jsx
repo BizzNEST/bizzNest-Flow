@@ -49,7 +49,7 @@ const ProjectInfoPage = () => {
       });
       if(response.ok){
         alert('Project marked as complete');
-        navigate('/');
+        navigate('/home');
     }else{
       alert('Failed to mark project as complete');
     }
