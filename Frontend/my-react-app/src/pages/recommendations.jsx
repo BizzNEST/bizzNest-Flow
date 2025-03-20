@@ -294,7 +294,7 @@ const Recommendations = () => {
           </label>
           <p>Toggle to Potential Leaders</p>
         </div>
-        <div className="submit-button">
+        <div className="recommendationSubmitButton">
           <button className="submit" onClick={submitInterns}>Submit</button>
         </div>
       </div>
