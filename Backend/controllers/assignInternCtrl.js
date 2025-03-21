@@ -3,7 +3,7 @@ import promisePool from '../config/database.js';
 const assignInternCtrl = {
   assignInternToProject: async (req, res) => {
     try {
-      console.log("Received request:", req.body); // Debug log
+      // console.log("Received request:", req.body); // Debug log
 
       const interns = req.body;
 

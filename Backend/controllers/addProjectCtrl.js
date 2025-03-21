@@ -43,7 +43,7 @@ const addProjectCtrl = {
           await promisePool.execute(projectToolQuery, [projectID, toolID, difficulty]);
         }
   
-        console.log('Returning Response:', { projectID, departmentID });
+        // console.log('Returning Response:', { projectID, departmentID });
         // Success response
         res.status(201).json({
           message: 'Project and tools added successfully!',

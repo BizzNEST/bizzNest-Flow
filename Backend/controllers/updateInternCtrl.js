@@ -14,8 +14,8 @@ const updateInternCtrl = {
                 filmSkills = {}
             } = req.body;
 
-            console.log('📥 Received InternID:', internID);
-            console.log('📥 Received Data:', req.body);
+            // console.log('📥 Received InternID:', internID);
+            // console.log('📥 Received Data:', req.body);
 
             // Validate required fields
             if (!internID || !firstName || !lastName || !location || departmentID === undefined) {
@@ -48,13 +48,13 @@ const updateInternCtrl = {
                 );
 
                 if (existingSkill[0].count > 0) {
-                    console.log(`🔄 Updating skill: InternID=${internID}, toolID=${toolID}, skillLevel=${skillLevel}`);
+                    // console.log(`🔄 Updating skill: InternID=${internID}, toolID=${toolID}, skillLevel=${skillLevel}`);
                     await promisePool.execute(
                         `UPDATE bizznestflow2.skills SET skillLevel = ? WHERE InternID = ? AND toolID = ?`,
                         [skillLevel, internID, toolID]
                     );
                 } else {
-                    console.log(`⚡ Inserting new skill: InternID=${internID}, toolID=${toolID}, skillLevel=${skillLevel}`);
+                    // console.log(`⚡ Inserting new skill: InternID=${internID}, toolID=${toolID}, skillLevel=${skillLevel}`);
                     await promisePool.execute(
                         `INSERT INTO bizznestflow2.skills (InternID, toolID, skillLevel) VALUES (?, ?, ?)`,
                         [internID, toolID, skillLevel]
@@ -66,7 +66,7 @@ const updateInternCtrl = {
                 );
             
                 if (existingInitialSkill[0].count === 0) {
-                    console.log(`⚡ Inserting into initialSkills: InternID=${internID}, toolID=${toolID}, initialSkillLevel=${skillLevel}`);
+                    // console.log(`⚡ Inserting into initialSkills: InternID=${internID}, toolID=${toolID}, initialSkillLevel=${skillLevel}`);
                     await promisePool.execute(
                         `INSERT INTO bizznestflow2.initialSkills (InternID, toolID, initialSkillLevel) VALUES (?, ?, ?)`,
                         [internID, toolID, skillLevel]
