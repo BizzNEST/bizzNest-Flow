@@ -113,8 +113,31 @@ const LoginSignup = () => {
                   <input type={showConfirmPassword ? "text" : "password"} name="confirmPassword" placeholder="Confirm Password" value={signupData.confirmPassword} onChange={handleSignupChange} />
                   <img src={showConfirmPassword ? Visibility_Off : Visibility} alt="Toggle Visibility" className="internVisibilityIcon" onClick={() => setShowConfirmPassword(!showConfirmPassword)} />
                 </div>
+                <div className="internInputContainer">
+                  <img src={Lock} alt="Admin Key" className="internInputIcon" />
+                  <input
+                    type={showAdminKey ? "text" : "password"}
+                    name="adminKey"
+                    placeholder="Admin Key?"
+                    className="adminKeyInput"
+                    value={signupData.adminKey}
+                    onChange={handleSignupChange}
+                  />
+                  <img
+                    src={showAdminKey ? Visibility_Off : Visibility}
+                    alt="Toggle Visibility"
+                    className="internVisibilityIcon"
+                    onClick={() => setShowAdminKey(!showAdminKey)}
+                  />
+                </div>
                 {signupError && <p className="errorMessage">{signupError}</p>}
                 <button type="submit">Sign up</button>
+                <span
+                  className="internSignup"
+                  onClick={() => navigate("/internSignUp")}
+                >
+                  Are you an Intern?
+                </span>
               </form>
             )}
           </div>
