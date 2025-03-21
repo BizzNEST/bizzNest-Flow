@@ -40,7 +40,7 @@ const LandingPage = () => {
             identifies future leaders.
           </p>
           <div className="heroButtons">
-            <button className="heroBttn">Start Optimizing Today</button>
+            <button className="heroBttn" onClick={() => navigate("/loginsignup")}>Start Optimizing Today</button>
           </div>
         </div>
         <div className="heroImage">
@@ -59,7 +59,6 @@ const LandingPage = () => {
             interns are placed in roles that maximize their learning while
             identifying ideal candidates for leadership opportunities.
           </p>
-          <button>LEARN MORE</button>
         </div>
         <img className="hero2" src={hero2} alt="graph" />
       </div>
