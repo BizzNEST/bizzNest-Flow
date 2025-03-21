@@ -142,7 +142,7 @@ const Interns = () => {
         );
         const data = await response.json();
         if (response.ok) {
-          alert("Intern deleted successfully");
+          // alert("Intern deleted successfully");
           setInterns((prev) =>
             prev.filter((intern) => intern.InternID !== deleteTarget)
           );
@@ -166,7 +166,7 @@ const Interns = () => {
         );
         const data = await response.json();
         if (response.ok) {
-          alert("Selected interns deleted successfully");
+          // alert("Selected interns deleted successfully");
           setInterns((prev) =>
             prev.filter((intern) => !selectedInterns.includes(intern.InternID))
           );
@@ -180,7 +180,7 @@ const Interns = () => {
       }
     } catch (error) {
       console.error("Error deleting interns:", error);
-      alert("Failed to delete intern(s)");
+      // alert("Failed to delete intern(s)");
     } finally {
       setShowPopup(false);
     }

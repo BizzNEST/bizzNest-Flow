@@ -16,7 +16,7 @@ const internGrowthCtrl = {
                 WHERE InternID = ?
             `;
             const [initialSkills] = await promisePool.execute(initialSkillsQuery, [internID]);
-            console.log("Initial Skills Data:", initialSkills); // Log to see if data is returned
+            // console.log("Initial Skills Data:", initialSkills); // Log to see if data is returned
 
             // Query to get current skills for the intern
             const currentSkillsQuery = `
@@ -25,7 +25,7 @@ const internGrowthCtrl = {
                 WHERE InternID = ?
             `;
             const [currentSkills] = await promisePool.execute(currentSkillsQuery, [internID]);
-            console.log("Current Skills Data:", currentSkills); // Log to see if data is returned
+            // console.log("Current Skills Data:", currentSkills); // Log to see if data is returned
 
             // Check if initial or current skills are empty
             if (initialSkills.length === 0 || currentSkills.length === 0) {
@@ -58,7 +58,7 @@ const internGrowthCtrl = {
                 };
             });
 
-            console.log("Final Growth Data:", growthData); // Log final data to check before sending to frontend
+            // console.log("Final Growth Data:", growthData); // Log final data to check before sending to frontend
 
             res.json({ success: true, data: growthData });
         } catch (error) {

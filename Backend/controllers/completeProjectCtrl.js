@@ -5,7 +5,7 @@ const completeProjectCtrl = {
         try {
             const { projectID } = req.params;
 
-            console.log("Received ProjectID:", projectID); // Debugging log
+            // console.log("Received ProjectID:", projectID); // Debugging log
 
             // Validate projectID
             if (!projectID) {
@@ -21,7 +21,7 @@ const completeProjectCtrl = {
             const [projectExists] = await connection.execute(checkProjectQuery, [projectID]);
 
             if (projectExists.length === 0) {
-                console.log("Project not found in database."); // Debug log
+                // console.log("Project not found in database."); // Debug log
                 await connection.rollback();
                 connection.release();
                 return res.status(404).json({ message: "Project not found" });
@@ -35,7 +35,7 @@ const completeProjectCtrl = {
             `;
             const [projectResult] = await connection.execute(updateProjectQuery, [projectID]);
 
-            console.log("Project Update Result:", projectResult); // Debugging log
+            // console.log("Project Update Result:", projectResult); // Debugging log
 
             // Update the intern_projects table to mark all associated interns as 'Completed'
             const updateInternsQuery = `
@@ -45,7 +45,7 @@ const completeProjectCtrl = {
             `;
             const [internsResult] = await connection.execute(updateInternsQuery, [projectID]);
 
-            console.log("Intern Projects Update Result:", internsResult); // Debugging log
+            // console.log("Intern Projects Update Result:", internsResult); // Debugging log
 
             const checkMatchQuery = `
                 SELECT s.skillID, s.InternID, s.toolID, s.skillLevel, pg.absoluteGrowth 
@@ -77,7 +77,7 @@ const completeProjectCtrl = {
 
             res.status(200).json({ message: "Project and associated interns marked as completed" });
         } catch (error) {
-            console.error("Error completing project:", error); // Logs full error details
+            // console.error("Error completing project:", error); // Logs full error details
             res.status(500).json({ message: "Error completing project", error: error.message });
         }
     },

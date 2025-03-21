@@ -8,7 +8,7 @@ const recommendationsCtrl = {
       const { projectID, departmentID } = req.query;
 
       // Log the received query parameters
-      console.log('Query Parameters:', { projectID, departmentID });
+      // console.log('Query Parameters:', { projectID, departmentID });
 
       if (!projectID || !departmentID) {
         return res.status(400).json({ message: 'Missing projectID or departmentID' });
@@ -100,7 +100,7 @@ const recommendationsCtrl = {
       
         return acc;
       }, []);
-      console.log('Aggregated Intern Skills:', JSON.stringify(internSkills, null, 2));
+      // console.log('Aggregated Intern Skills:', JSON.stringify(internSkills, null, 2));
 
       // Calculations HERE: START
 

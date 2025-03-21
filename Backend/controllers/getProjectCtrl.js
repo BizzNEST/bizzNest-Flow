@@ -84,7 +84,7 @@ const getProjectCtrl = {
         WHERE p.projectID = ?;
       `;
 
-      console.log("Executing SQL Query:", query, "with projectID:", projectID);
+      // console.log("Executing SQL Query:", query, "with projectID:", projectID);
 
       const [result] = await promisePool.execute(query, [projectID]);
 
@@ -105,7 +105,7 @@ const getProjectCtrl = {
 
       res.status(200).json(project);
     } catch (error) {
-      console.log('Error getting project:', error.message);
+      // console.log('Error getting project:', error.message);
       res.status(500).json({ message: 'Error getting project' });
     }
   }

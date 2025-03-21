@@ -11,10 +11,6 @@ const skillLabels = {
   2: ["Premiere Pro", "Camera Work"],
 };
 
-const randomColors = [
-  "background: #191919"
-];
-
 const EditIntern = () => {
   const { internID } = useParams();
   const navigate = useNavigate();
@@ -28,6 +24,8 @@ const EditIntern = () => {
   });
 
   const [originalData, setOriginalData] = useState(null);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [isUpdated, setIsUpdated] = useState(false); // Track if anything was updated
 
   useEffect(() => {
     const fetchInternData = async () => {
@@ -75,6 +73,7 @@ const EditIntern = () => {
     } else {
       setFormData({ ...formData, [name]: value });
     }
+    setIsUpdated(true); // Enable the button when something changes
   };
 
   const handleSubmit = async (e) => {
@@ -118,8 +117,9 @@ const EditIntern = () => {
       }
 
       if (response.ok) {
-        alert(hasExistingSkills ? "Skills updated successfully!" : "Skills added successfully!");
-        navigate("/interns");
+        setSuccessMessage("Intern updated successfully!");
+        setTimeout(() => setSuccessMessage(""), 3000); // Clear message after 3 seconds
+        setIsUpdated(false); // Disable the button after successful update
       } else {
         alert("Failed to update or add skills");
       }
@@ -167,6 +167,12 @@ const EditIntern = () => {
             </button>
           </div>
           <h2 className="editInternHeader">Edit Intern</h2>
+
+          {successMessage && (
+            <div className="successPopup">
+              {successMessage}
+            </div>
+          )}
 
           <form onSubmit={handleSubmit} className="editInternForm">
             <div className="updateNameContainer">
@@ -231,7 +237,6 @@ const EditIntern = () => {
                         name={`skill_${toolID}`}
                         value={(formData.skills[toolID] || 0).toFixed(1)}
                         onChange={handleChange}
-                        style={{ background: randomColors }}
                       />
                     </label>
                   );
@@ -243,7 +248,9 @@ const EditIntern = () => {
             </div>
 
             <div className="buttonsContainer">
-              <button className="updateInternButton" type="submit">Update</button>
+              <button className="updateInternButton" type="submit" disabled={!isUpdated}>
+                Update
+              </button>
             </div>
           </form>
         </div>

@@ -4,7 +4,7 @@ const restoreProjectCtrl = {
     restoreProject : async (req, res) => {
         try{
             const { projectID } = req.params;
-            console.log("Received ProjectID:", projectID); // Debugging log
+            // console.log("Received ProjectID:", projectID); // Debugging log
 
             if(!projectID){
                 return res.status(400).json({message: "Project ID is required"});
@@ -17,7 +17,7 @@ const restoreProjectCtrl = {
             const [projectExists] = await connection.execute(checkProjectQuery, [projectID]);
 
             if(projectExists.length === 0){
-                console.log("Project not found in database.");
+                // console.log("Project not found in database.");
                 await connection.rollback();
                 connection.release();
                 return res.status(404).json({message: "Project not found"});
@@ -30,7 +30,7 @@ const restoreProjectCtrl = {
             `;
             const [projectResult] = await connection.execute(updateProjectQuery, [projectID]);
 
-            console.log("Project Update Result:", projectResult);
+            // console.log("Project Update Result:", projectResult);
 
 
             const updateInternsQuery = `
@@ -40,7 +40,7 @@ const restoreProjectCtrl = {
             `;
             const [internsResult] = await connection.execute(updateInternsQuery, [projectID]);
 
-            console.log("Intern Projects Update Result:", internsResult);
+            // console.log("Intern Projects Update Result:", internsResult);
 
             await connection.commit();
             connection.release();

@@ -6,8 +6,8 @@ const addSkillsCtrl = {
             const internID = Number(req.params.internID); // Convert internID to a number
             const { webDevSkills = {}, designSkills = {}, filmSkills = {} } = req.body;
 
-            console.log('📥 Received InternID:', internID);
-            console.log('📥 Received Skills Data:', req.body);
+            // console.log('📥 Received InternID:', internID);
+            // console.log('📥 Received Skills Data:', req.body);
 
             // Validate required fields
             if (!internID) {
@@ -42,13 +42,13 @@ const addSkillsCtrl = {
                 );
 
                 if (existingSkill[0].count === 0) {
-                    console.log(`⚡ Inserting skill: InternID=${internID}, toolID=${toolID}, skillLevel=${skillLevel}`);
+                    // console.log(`⚡ Inserting skill: InternID=${internID}, toolID=${toolID}, skillLevel=${skillLevel}`);
                     await promisePool.execute(
                         `INSERT INTO bizznestflow2.skills (InternID, toolID, skillLevel) VALUES (?, ?, ?)`,
                         [internID, toolID, skillLevel]
                     );
                 } else {
-                    console.log(`⚡ Skill already exists: InternID=${internID}, toolID=${toolID}. Skipping insert.`);
+                    // console.log(`⚡ Skill already exists: InternID=${internID}, toolID=${toolID}. Skipping insert.`);
                 }
 
                 // Check if skill exists in initialSkills
@@ -56,16 +56,16 @@ const addSkillsCtrl = {
                     `SELECT COUNT(*) as count FROM bizznestflow2.initialSkills WHERE InternID = ? AND toolID = ?`,
                     [internID, toolID]
                 );
-                console.log(`🔍 Checking initialSkills: InternID=${internID}, toolID=${toolID}, Count=${existingInitialSkill[0].count}`);
+                // console.log(`🔍 Checking initialSkills: InternID=${internID}, toolID=${toolID}, Count=${existingInitialSkill[0].count}`);
 
                 if (existingInitialSkill[0].count === 0) {
-                    console.log(`⚡ Inserting into initialSkills: InternID=${internID}, toolID=${toolID}, initialSkillLevel=${skillLevel}`);
+                    // console.log(`⚡ Inserting into initialSkills: InternID=${internID}, toolID=${toolID}, initialSkillLevel=${skillLevel}`);
                     await promisePool.execute(
                         `INSERT INTO bizznestflow2.initialSkills (InternID, toolID, initialSkillLevel) VALUES (?, ?, ?)`,
                         [internID, toolID, skillLevel]
                     );
                 } else {
-                    console.log(`✅ Skill already exists in initialSkills, skipping insert.`);
+                    // console.log(`✅ Skill already exists in initialSkills, skipping insert.`);
                 }
             }
 

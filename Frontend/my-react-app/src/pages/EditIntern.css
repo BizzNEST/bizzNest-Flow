@@ -258,3 +258,33 @@
     scale: 1.05;
   }
 }
+/* Success Popup */
+.successPopup {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #2dd4bf;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* Disabled Button */
+.updateInternButton:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  &:hover {
+    scale: 1;
+  }
+}
