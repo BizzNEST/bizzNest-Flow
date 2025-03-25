@@ -155,7 +155,7 @@ const Recommendations = () => {
       });
 
       if (response.ok) {
-        alert("Interns assigned successfully!");
+        // alert("Interns assigned successfully!");
         setSelectedInterns([]); // Clear selected interns after submitting
         setSelectedLeaders([]); // Clear selected leaders after submitting
         navigate("/home");
