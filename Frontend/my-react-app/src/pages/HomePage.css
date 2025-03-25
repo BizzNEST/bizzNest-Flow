@@ -88,6 +88,10 @@ html, body {
     transition: transform 0.3s, background-color 0.3s;
   }
 
+  .project-card h3 {
+    font-weight: 400;
+  }
+
 .project-card:hover {
   transform: scale(1.05);
   background: linear-gradient(to right, #ef2bd2, #f679b5, #c333fd);
@@ -137,7 +141,7 @@ padding: 5px;
     background:linear-gradient(to bottom, #ef2bd2, #c333fd);
     color: white;
     font-size: 1.5rem;
-    font-weight: bold;
+    font-weight: 300;
     max-height: fit-content;
     padding: 25px 35px 25px 35px;
     border: none;
