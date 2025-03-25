@@ -9,6 +9,9 @@ import del from "../assets/delete.svg";
 import profile from "../assets/profile.svg";
 import "./Interns.css";
 
+// Cache expiration time (1 hour)
+const CACHE_EXPIRY_TIME = 60 * 60 * 1000; // 1 hour in milliseconds
+
 const departmentMap = {
   0: "Web Development",
   1: "Design",
@@ -17,7 +20,7 @@ const departmentMap = {
 
 const Interns = () => {
   const [interns, setInterns] = useState([]);
-  const [internsWithProfilePics, setInternsWithProfilePics] = useState([]); // New state for interns with profile pics
+  const [internsWithProfilePics, setInternsWithProfilePics] = useState([]);
   const [filteredInterns, setFilteredInterns] = useState([]);
   const [selectedDepartment, setSelectedDepartment] = useState("");
   const [selectedLocation, setSelectedLocation] = useState("");
@@ -25,59 +28,106 @@ const Interns = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [deleteTarget, setDeleteTarget] = useState(null);
   const [deleteType, setDeleteType] = useState(""); // "single" or "bulk"
+  const [error, setError] = useState(null);
 
   const filterInterns = useRef([]);
   const navigate = useNavigate();
 
-  // Fetch all interns
+  // Check if cache is expired
+  const isCacheValid = (cacheTimestamp) => {
+    return cacheTimestamp && Date.now() - cacheTimestamp < CACHE_EXPIRY_TIME;
+  };
+
+  // Fetch all interns (with caching)
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}/getInterns`)
-      .then((response) => response.json())
-      .then((data) => {
-        filterInterns.current = data;
-        setInterns(data); // Set the initial interns data
-      })
-      .catch((error) => console.error("Error fetching interns:", error));
+    const fetchInterns = async () => {
+      try {
+        const cachedData = localStorage.getItem("cachedInterns");
+        const cacheTimestamp = localStorage.getItem("cacheTimestamp");
+
+        if (cachedData && isCacheValid(Number(cacheTimestamp))) {
+          // Use cached data if valid
+          const parsedData = JSON.parse(cachedData);
+          filterInterns.current = parsedData;
+          setInterns(parsedData);
+        } else {
+          // Fetch fresh data if cache is invalid/expired
+          const response = await fetch(`${process.env.REACT_APP_API_URL}/getInterns`);
+          if (!response.ok) throw new Error("Failed to fetch interns");
+
+          const data = await response.json();
+          localStorage.setItem("cachedInterns", JSON.stringify(data));
+          localStorage.setItem("cacheTimestamp", Date.now()); // Update timestamp
+
+          filterInterns.current = data;
+          setInterns(data);
+        }
+      } catch (err) {
+        setError("Failed to load interns. Using cached data if available.");
+        console.error("Error fetching interns:", err);
+
+        // Fallback to cache even if expired
+        const cachedData = localStorage.getItem("cachedInterns");
+        if (cachedData) {
+          const parsedData = JSON.parse(cachedData);
+          filterInterns.current = parsedData;
+          setInterns(parsedData);
+        }
+      }
+    };
+
+    fetchInterns();
   }, []);
 
-  // Fetch profile pictures for each intern
+  // Fetch & cache profile pictures (only if missing or expired)
   useEffect(() => {
-    if (interns.length === 0) return; // Don't run if there are no interns
+    if (interns.length === 0) return;
 
     const fetchProfilePictures = async () => {
       const updatedInterns = await Promise.all(
         interns.map(async (intern) => {
+          const cacheKey = `profilePic_${intern.InternID}`;
+          const cachedPic = localStorage.getItem(cacheKey);
+          const cacheTimestamp = localStorage.getItem(`${cacheKey}_timestamp`);
+
+          // Use cached profile pic if valid
+          if (cachedPic && isCacheValid(Number(cacheTimestamp))) {
+            return { ...intern, profilePic: cachedPic };
+          }
+
           try {
             const response = await fetch(
               `${process.env.REACT_APP_API_URL}/getIntern/${intern.InternID}`
             );
+            if (!response.ok) throw new Error("Failed to fetch profile picture");
+
             const data = await response.json();
+            let profilePic = profile; // Default
 
-            if (data) {
-              let profilePic = profile; // Default
-              if (data.profilePic) {
-                const decodedPath = atob(data.profilePic); // Decode Base64
-                profilePic = `${process.env.REACT_APP_API_URL}${decodedPath}`;
-              }
-
-              return { ...intern, profilePic }; // Return intern with updated profilePic
-            } else {
-              console.error("Failed to fetch intern data for:", intern.InternID);
-              return intern; // Return original intern data if fetch fails
+            if (data.profilePic) {
+              const decodedPath = atob(data.profilePic);
+              profilePic = `${process.env.REACT_APP_API_URL}${decodedPath}`;
             }
-          } catch (error) {
-            console.error("Error fetching intern details:", error);
-            return intern; // Return original intern data if fetch fails
+
+            // Cache the profile picture
+            localStorage.setItem(cacheKey, profilePic);
+            localStorage.setItem(`${cacheKey}_timestamp`, Date.now());
+
+            return { ...intern, profilePic };
+          } catch (err) {
+            console.error("Error fetching profile picture:", err);
+            return { ...intern, profilePic: cachedPic || profile }; // Fallback
           }
         })
       );
 
-      setInternsWithProfilePics(updatedInterns); // Update interns with profile pictures
-      setFilteredInterns(updatedInterns); // Update filtered interns
+      filterInterns.current = updatedInterns;
+      setInternsWithProfilePics(updatedInterns);
+      setFilteredInterns(updatedInterns);
     };
 
     fetchProfilePictures();
-  }, [interns]); // Only run when `interns` changes
+  }, [interns]);
 
   // Select or Deselect an Intern
   const handleSelectIntern = (internID) => {
@@ -142,13 +192,15 @@ const Interns = () => {
         );
         const data = await response.json();
         if (response.ok) {
-          // alert("Intern deleted successfully");
-          setInterns((prev) =>
-            prev.filter((intern) => intern.InternID !== deleteTarget)
+          // Update cache after deletion
+          const updatedInterns = interns.filter(
+            (intern) => intern.InternID !== deleteTarget
           );
-          setFilteredInterns((prev) =>
-            prev.filter((intern) => intern.InternID !== deleteTarget)
-          );
+          localStorage.setItem("cachedInterns", JSON.stringify(updatedInterns));
+          localStorage.setItem("cacheTimestamp", Date.now());
+
+          setInterns(updatedInterns);
+          setFilteredInterns(updatedInterns);
           setSelectedInterns((prev) =>
             prev.filter((id) => id !== deleteTarget)
           );
@@ -166,13 +218,15 @@ const Interns = () => {
         );
         const data = await response.json();
         if (response.ok) {
-          // alert("Selected interns deleted successfully");
-          setInterns((prev) =>
-            prev.filter((intern) => !selectedInterns.includes(intern.InternID))
+          // Update cache after bulk deletion
+          const updatedInterns = interns.filter(
+            (intern) => !selectedInterns.includes(intern.InternID)
           );
-          setFilteredInterns((prev) =>
-            prev.filter((intern) => !selectedInterns.includes(intern.InternID))
-          );
+          localStorage.setItem("cachedInterns", JSON.stringify(updatedInterns));
+          localStorage.setItem("cacheTimestamp", Date.now());
+
+          setInterns(updatedInterns);
+          setFilteredInterns(updatedInterns);
           setSelectedInterns([]);
         } else {
           alert(data.message);
@@ -180,7 +234,7 @@ const Interns = () => {
       }
     } catch (error) {
       console.error("Error deleting interns:", error);
-      // alert("Failed to delete intern(s)");
+      setError("Failed to delete intern(s). Please try again.");
     } finally {
       setShowPopup(false);
     }
@@ -189,6 +243,7 @@ const Interns = () => {
   return (
     <div className="big-container">
       <NavBar />
+      {error && <div className="error-message">{error}</div>}
       <div className="container">
         <div className="content">
           <div className="filtering-wrapper">

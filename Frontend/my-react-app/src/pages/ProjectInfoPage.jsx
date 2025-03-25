@@ -31,7 +31,7 @@ const ProjectInfoPage = () => {
             method: 'DELETE',
         });
         if (response.ok) {
-            alert('Project deleted successfully');
+            // alert('Project deleted successfully');
             navigate('/home'); // Redirect to homepage
         } else {
             alert('Failed to delete project');
@@ -48,7 +48,7 @@ const ProjectInfoPage = () => {
         method: 'PUT',
       });
       if(response.ok){
-        alert('Project marked as complete');
+        // alert('Project marked as complete');
         navigate('/home');
     }else{
       alert('Failed to mark project as complete');
