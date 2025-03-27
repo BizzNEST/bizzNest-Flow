@@ -42,7 +42,6 @@ jobs:
       run: |
         echo "Attempting To Update Configs"
         scp -i ~/.ssh/bizznest $GITHUB_WORKSPACE/server_configs/docker-compose-staging.yml ubuntu@$DEVELOPMENT_IP:/home/ubuntu/configs/docker-compose.yml
-        EOF
       env:
         DEVELOPMENT_IP: ${{ secrets.DEVELOPMENT_SERVER_ADDRESS }}
         
