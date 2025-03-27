@@ -18,7 +18,7 @@ services:
       retries: 10
     container_name: bizz-app
     restart: unless-stopped  # ✅ Ensures container restarts if it crashes
-  
+   
   mysql:
     image: mysql:latest
     restart: always
