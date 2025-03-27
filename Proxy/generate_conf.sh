@@ -2,7 +2,9 @@
 cat <<EOF > nginx.conf
 user  nginx;
 worker_processes  auto;
-
+events {
+    worker_connections  1024;
+    }
 http {
     server {
         listen 80;
