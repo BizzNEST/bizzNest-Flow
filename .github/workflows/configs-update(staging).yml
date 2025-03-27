@@ -37,48 +37,9 @@ jobs:
       run: |
         echo "Attempting To Update Configs"
         scp -i ~/.ssh/bizznest.pem $GITHUB_WORKSPACE/server_configs/docker-compose(staging).yml ubuntu@$DEVELOPMENT_IP:/home/ubuntu/configs/docker-compose.yml
-
-        # -- Attempts to connect to the ec2 instance, sending all variables that start with ENV_
-        # -- Pulls the latest changes made to the development branch
-        # -- Updates the development container
-        
-        echo "Attempting to connect to EC2!"
-        ssh -vvv -o ConnectTimeout=30 -o SendEnv=ENV_* -i ~/.ssh/bizznest.pem "ubuntu@$DEVELOPMENT_IP" <<'EOF'
-        echo "Successfully connected to EC2!"
-
-        echo "Going into build directory"
-        cd /home/ubuntu/proxy/career-harvest
-
-        echo "Calling latest changes"
-        git pull
-        
-        echo "Going into build directory"
-        cd /home/ubuntu/development/career-harvest
-
-        echo "Calling latest changes"
-        git pull
-        
-        # GO TO DIRECTORY CONTAINING DOCKER COMPOSE FILE AND BUILD
-        cd /home/ubuntu/configs
-        docker rm -f $(docker ps -aq)
-        docker system prune -a -f
-        docker volume prune -f
-        docker network prune -f
-        docker-compose up --build -d
-        exit
         EOF
       env:
         DEVELOPMENT_IP: ${{ secrets.DEVELOPMENT_SERVER_ADDRESS }}
-        ENV_ALLOW_ALL_ORIGINS: true
-        ENV_SCRAPE_SCHEDULE: "${{ secrets.SCRAPE_SCHEDULE }}"
-        ENV_CORS_ORIGIN: ${{ secrets.CORS_ORIGIN }}
-        ENV_MAILGUN_API_KEY: ${{ secrets.MAILGUN_API_KEY }}
-        ENV_MAILGUN_DOMAIN: ${{ secrets.MAILGUN_DOMAIN }}
-        ENV_FROM_EMAIL: ${{ secrets.FROM_EMAIL }}
-        ENV_REPORT_EMAIL: ${{ secrets.REPORT_EMAIL }}
-        ENV_ENVIRONMENT_TYPE: ${{ secrets.DEVELOPMENT_ENVIRONMENT_TYPE }}
-        ENV_DOMAIN_NAME: ${{ secrets.DEVELOPMENT_DOMAIN_NAME }}
-        
         
 
     - name: Remove Secrets
