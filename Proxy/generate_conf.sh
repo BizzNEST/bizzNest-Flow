@@ -2,8 +2,6 @@
 cat <<EOF > nginx.conf
 user  nginx;
 worker_processes  auto;
-pid /var/run/nginx.pid;
-include /etc/nginx/modules-enabled/*.conf;
 
 server {
     listen 80;
@@ -16,5 +14,4 @@ server {
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     }
 }
-
 EOF
