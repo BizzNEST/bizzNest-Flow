@@ -1,9 +1,7 @@
-version: "3.8"
-
 services:
   backend-development:
     build:
-      context: .
+      context: ../development/bizzNest-Flow/Backend/
       dockerfile: Dockerfile
     depends_on:
       mysql:
@@ -12,6 +10,10 @@ services:
       - backend
     env_file:
       - .env
+    healthcheck:
+      test: ["CMD", "curl" , "-h", "localhost:3000/basepage"]
+      timeout: 10s
+      retries: 10
     container_name: bizz-app
     restart: unless-stopped  # ✅ Ensures container restarts if it crashes
 
@@ -27,14 +29,14 @@ services:
     healthcheck:
       test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
       timeout: 5s
-      retries: 20
+      retries: 10
     volumes:
-      - mysql_data:/var/lib/mysql  # ✅ Persist database data
+      - /home/ubuntu/mounts/mysql:/var/lib/mysql  # ✅ Persist database data
     container_name: bizz-mysql-app
 
   nginx:
     build:
-      context: ../proxy/career-harvest/proxy
+      context: ../proxy/bizzNest-Flow/Proxy/
       dockerfile: Dockerfile
       args:
         DOMAIN_NAME: ${DOMAIN_NAME}
@@ -46,15 +48,16 @@ services:
       - "80:80"
       - "443:443"
     networks:
-      - my_network
+      - backend
     volumes:
       - /etc/letsencrypt:/etc/letsencrypt
       - /var/www/html:/var/www/html
     depends_on:
-      - backend-development
+      backend-development:
+        condition: service_healthy
     restart: always
 
 
 networks:
-  my_network:
+  backend:
     driver: bridge
