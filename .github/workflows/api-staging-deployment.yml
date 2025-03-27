@@ -19,14 +19,19 @@ jobs:
     - name: Creating PEM Key And Adding Host To Known Host
       run: |
         mkdir -p ~/.ssh
-        echo "$SSH_KEY" > ~/.ssh/bizznest.pem
-        chmod 600 ~/.ssh/bizznest.pem
+        echo "$SSH_KEY" > ~/.ssh/bizznest
+        echo "SSH_PUB_KEY" > ~/.ssh/bizznest.pub
+        chmod 600 ~/.ssh/bizznest
+        eval "$(ssh-agent -s)"
+        ssh-add ~/.ssh/bizznest
+
 
         # Add the EC2 instance to known_hosts
         ssh-keyscan "$DEVELOPMENT_IP" >> ~/.ssh/known_hosts
         chmod 644 ~/.ssh/known_hosts        
       env:
         SSH_KEY: ${{ secrets.SERVER_PRIVATE_KEY }}
+        SSH_PUB_KEY:  ${{ secrets.SERVER_PUBLIC_KEY }}
         DEVELOPMENT_IP: ${{ secrets.DEVELOPMENT_SERVER_ADDRESS }}
         
     - name: Connecting to EC2 and executing build commands
