@@ -51,7 +51,7 @@ services:
       - /etc/letsencrypt:/etc/letsencrypt
       - /var/www/html:/var/www/html
     depends_on:
-      - development-backend
+      - backend-development
     restart: always
 
 
