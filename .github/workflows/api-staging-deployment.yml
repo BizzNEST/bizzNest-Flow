@@ -83,22 +83,16 @@ jobs:
         
         # GO TO DIRECTORY CONTAINING DOCKER COMPOSE FILE AND BUILD
         cd /home/ubuntu/configs
-        docker rm -f $(docker ps -aq)
-        docker system prune -a -f
-        docker volume prune -f
-        docker network prune -f
-        docker-compose up --build -d
+        sudo docker image prune -f
+        sudo docker image prune -a -f
+        sudo docker-compose up --build -d
         exit
         EOF
       env:
         DEVELOPMENT_IP: ${{ secrets.DEVELOPMENT_SERVER_ADDRESS }}
-        ENV_ALLOW_ALL_ORIGINS: true
-        ENV_SCRAPE_SCHEDULE: "${{ secrets.SCRAPE_SCHEDULE }}"
-        ENV_CORS_ORIGIN: ${{ secrets.CORS_ORIGIN }}
-        ENV_MAILGUN_API_KEY: ${{ secrets.MAILGUN_API_KEY }}
-        ENV_MAILGUN_DOMAIN: ${{ secrets.MAILGUN_DOMAIN }}
-        ENV_FROM_EMAIL: ${{ secrets.FROM_EMAIL }}
-        ENV_REPORT_EMAIL: ${{ secrets.REPORT_EMAIL }}
+        ENV_DB_HOST:  ${{ secrets.DB_HOST }}
+        ENV_DB_PORT: ${{ secrets.DB_PORT }}
+        ENV_DB_NAME: ${{ secrets.DB_NAME }}
         ENV_ENVIRONMENT_TYPE: ${{ secrets.DEVELOPMENT_ENVIRONMENT_TYPE }}
         ENV_DOMAIN_NAME: ${{ secrets.DEVELOPMENT_DOMAIN_NAME }}
         
