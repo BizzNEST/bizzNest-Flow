@@ -20,6 +20,7 @@ jobs:
       run: |
         mkdir -p ~/.ssh
         echo "$SSH_KEY" > ~/.ssh/bizznest.pem
+        echo "SSH_PUB_KEY" > ~/.ssh/bizznest.pub
         chmod 600 ~/.ssh/bizznest.pem
 
         # Add the EC2 instance to known_hosts
@@ -27,6 +28,7 @@ jobs:
         chmod 644 ~/.ssh/known_hosts        
       env:
         SSH_KEY: ${{ secrets.SERVER_PRIVATE_KEY }}
+        SSH_PUB_KEY:  ${{ secrets.SERVER_PUBLIC_KEY }}
         DEVELOPMENT_IP: ${{ secrets.DEVELOPMENT_SERVER_ADDRESS }}
 
   
