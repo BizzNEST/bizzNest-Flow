@@ -1,4 +1,4 @@
-name: Development EC2 Instance Deployment
+name: Updating Development Configs 
 run-name: ${{ github.actor }} Changes Have Been Deployed!
 
 on:
