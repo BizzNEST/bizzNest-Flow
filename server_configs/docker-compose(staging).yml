@@ -1,0 +1,40 @@
+version: "3.8"
+
+services:
+  development-backend:
+    extends:
+      file: ../development/career-harvest/backend/docker-compose.yml
+      service: puppeteer-app
+    volumes:
+      - ../development/data_vault:/home/pptruser/app/sql/data_vault:rw
+    env_file:
+      - .env
+    networks:
+      - my_network
+
+  nginx:
+    build:
+      context: ../proxy/career-harvest/proxy
+      dockerfile: Dockerfile
+      args:
+        DOMAIN_NAME: ${DOMAIN_NAME}
+        ENVIRONMENT_TYPE: ${ENVIRONMENT_TYPE}
+    container_name: nginx-proxy
+    env_file:
+      - .env
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - my_network
+    volumes:
+      - /etc/letsencrypt:/etc/letsencrypt
+      - /var/www/html:/var/www/html
+    depends_on:
+      - development-backend
+    restart: always
+
+
+networks:
+  my_network:
+    driver: bridge
