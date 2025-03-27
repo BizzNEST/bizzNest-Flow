@@ -19,9 +19,12 @@ jobs:
     - name: Creating PEM Key And Adding Host To Known Host
       run: |
         mkdir -p ~/.ssh
-        echo "$SSH_KEY" > ~/.ssh/bizznest.pem
+        echo "$SSH_KEY" > ~/.ssh/bizznest
         echo "SSH_PUB_KEY" > ~/.ssh/bizznest.pub
-        chmod 600 ~/.ssh/bizznest.pem
+        chmod 600 ~/.ssh/bizznest
+        eval "$(ssh-agent -s)"
+        ssh-add ~/.ssh/bizznest
+
 
         # Add the EC2 instance to known_hosts
         ssh-keyscan "$DEVELOPMENT_IP" >> ~/.ssh/known_hosts
@@ -38,7 +41,7 @@ jobs:
     - name: Connecting to EC2 and executing build commands
       run: |
         echo "Attempting To Update Configs"
-        scp -i -vvv ~/.ssh/bizznest.pem $GITHUB_WORKSPACE/server_configs/docker-compose-staging.yml ubuntu@$DEVELOPMENT_IP:/home/ubuntu/configs/docker-compose.yml
+        scp -i ~/.ssh/bizznest $GITHUB_WORKSPACE/server_configs/docker-compose-staging.yml ubuntu@$DEVELOPMENT_IP:/home/ubuntu/configs/docker-compose.yml
         EOF
       env:
         DEVELOPMENT_IP: ${{ secrets.DEVELOPMENT_SERVER_ADDRESS }}
