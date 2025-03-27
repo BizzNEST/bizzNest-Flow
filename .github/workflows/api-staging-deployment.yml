@@ -91,6 +91,7 @@ jobs:
       env:
         DEVELOPMENT_IP: ${{ secrets.DEVELOPMENT_SERVER_ADDRESS }}
         ENV_DB_HOST:  ${{ secrets.DB_HOST }}
+        ENV_DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
         ENV_DB_PORT: ${{ secrets.DB_PORT }}
         ENV_DB_NAME: ${{ secrets.DB_NAME }}
         ENV_ENVIRONMENT_TYPE: ${{ secrets.DEVELOPMENT_ENVIRONMENT_TYPE }}
