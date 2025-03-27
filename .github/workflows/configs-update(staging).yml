@@ -6,7 +6,7 @@ on:
     branches:
       - ab-cicd-test-branch
     paths:
-      - 'backend/**'  # Trigger if any file in the 'backend' directory changes
+      - 'server_configs/**'  # Trigger if any file in the 'backend' directory changes
 
 concurrency:
   group: "my-unique-group-name"
@@ -15,75 +15,12 @@ concurrency:
 jobs:
   Deploy-To-EC2:
     runs-on: ubuntu-latest
-    steps:
-    - name: Creating PEM Key And Adding Host To Known Host
-      run: |
-        mkdir -p ~/.ssh
-        echo "$SSH_KEY" > ~/.ssh/bizznest.pem
-        chmod 600 ~/.ssh/bizznest.pem
-
-        # Add the EC2 instance to known_hosts
-        ssh-keyscan "$DEVELOPMENT_IP" >> ~/.ssh/known_hosts
-        chmod 644 ~/.ssh/known_hosts        
-      env:
-        SSH_KEY: ${{ secrets.SERVER_PRIVATE_KEY }}
-        DEVELOPMENT_IP: ${{ secrets.DEVELOPMENT_SERVER_ADDRESS }}
-        
+    steps:   
     - name: Connecting to EC2 and executing build commands
       run: |
-        echo "Constructing Env Template"
-        # -- This is a script that creates a template.txt file for the docker container to use on build time.
-        # -- Format of template.txt:
-              # VAR1=${ENV_VAR1}
-              # VAR2=${ENV_VAR2}
-              
-        output_file="template.txt"
-        # Clear the file (or create it if it doesn't exist)
-        > "$output_file"
-        
-        # Iterate over each environment variable using 'env'
-        while IFS='=' read -r name value; do
-            # Check if the variable name starts with "ENV_"
-            if [[ "$name" == ENV_* ]]; then
-                # Remove the "ENV_" prefix
-                new_name="${name#ENV_}"
-                # Format the output as: NEWVAR=${ENV_NEWVAR}
-                echo "${new_name}=\${${name}}" >> "$output_file"
-            fi
-        done < <(env)
-
-        # -- This updates the env template used for the docker containers, leverages interpolation
-        echo "Attempting To Update Env Template"
+        # -- This updates the Configs yml file used for the docker containers, leverages interpolation
+        echo "Attempting To Update Configs Template"
         scp -i ~/.ssh/bizznest.pem template.txt ubuntu@$DEVELOPMENT_IP:/home/ubuntu/configs/.env
-
-        # -- Attempts to connect to the ec2 instance, sending all variables that start with ENV_
-        # -- Pulls the latest changes made to the development branch
-        # -- Updates the development container
-        
-        echo "Attempting to connect to EC2!"
-        ssh -vvv -o ConnectTimeout=30 -o SendEnv=ENV_* -i ~/.ssh/bizznest.pem "ubuntu@$DEVELOPMENT_IP" <<'EOF'
-        echo "Successfully connected to EC2!"
-
-        echo "Going into build directory"
-        cd /home/ubuntu/proxy/career-harvest
-
-        echo "Calling latest changes"
-        git pull
-        
-        echo "Going into build directory"
-        cd /home/ubuntu/development/career-harvest
-
-        echo "Calling latest changes"
-        git pull
-        
-        # GO TO DIRECTORY CONTAINING DOCKER COMPOSE FILE AND BUILD
-        cd /home/ubuntu/configs
-        docker rm -f $(docker ps -aq)
-        docker system prune -a -f
-        docker volume prune -f
-        docker network prune -f
-        docker-compose up --build -d
-        exit
         EOF
       env:
         DEVELOPMENT_IP: ${{ secrets.DEVELOPMENT_SERVER_ADDRESS }}
