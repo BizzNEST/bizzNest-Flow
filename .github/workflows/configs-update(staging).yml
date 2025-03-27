@@ -35,30 +35,8 @@ jobs:
       
     - name: Connecting to EC2 and executing build commands
       run: |
-        echo "Constructing Env Template"
-        # -- This is a script that creates a template.txt file for the docker container to use on build time.
-        # -- Format of template.txt:
-              # VAR1=${ENV_VAR1}
-              # VAR2=${ENV_VAR2}
-              
-        output_file="template.txt"
-        # Clear the file (or create it if it doesn't exist)
-        > "$output_file"
-        
-        # Iterate over each environment variable using 'env'
-        while IFS='=' read -r name value; do
-            # Check if the variable name starts with "ENV_"
-            if [[ "$name" == ENV_* ]]; then
-                # Remove the "ENV_" prefix
-                new_name="${name#ENV_}"
-                # Format the output as: NEWVAR=${ENV_NEWVAR}
-                echo "${new_name}=\${${name}}" >> "$output_file"
-            fi
-        done < <(env)
-
-        # -- This updates the env template used for the docker containers, leverages interpolation
-        echo "Attempting To Update Env Template"
-        scp -i ~/.ssh/bizznest.pem template.txt ubuntu@$DEVELOPMENT_IP:/home/ubuntu/configs/.env
+        echo "Attempting To Update Configs"
+        scp -i ~/.ssh/bizznest.pem $GITHUB_WORKSPACE/server_configs/docker-compose(staging).yml ubuntu@$DEVELOPMENT_IP:/home/ubuntu/configs/docker-compose.yml
 
         # -- Attempts to connect to the ec2 instance, sending all variables that start with ENV_
         # -- Pulls the latest changes made to the development branch
