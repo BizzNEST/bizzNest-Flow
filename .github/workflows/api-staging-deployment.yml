@@ -59,7 +59,7 @@ jobs:
 
         # -- This updates the env template used for the docker containers, leverages interpolation
         echo "Attempting To Update Env Template"
-        scp -i ~/.ssh/bizznest.pem template.txt ubuntu@$DEVELOPMENT_IP:/home/ubuntu/configs/.env
+        scp -i ~/.ssh/bizznest template.txt ubuntu@$DEVELOPMENT_IP:/home/ubuntu/configs/.env
 
         # -- Attempts to connect to the ec2 instance, sending all variables that start with ENV_
         # -- Pulls the latest changes made to the development branch
