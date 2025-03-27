@@ -6,7 +6,7 @@ on:
     branches:
       - ab-cicd-test-branch
     paths:
-      - 'backend/**'  # Trigger if any file in the 'backend' directory changes
+      - 'Backend/**'  # Trigger if any file in the 'backend' directory changes
 
 concurrency:
   group: "my-unique-group-name"
