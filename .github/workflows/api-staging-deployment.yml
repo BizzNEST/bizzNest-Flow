@@ -107,7 +107,7 @@ jobs:
         ENV_DB_PORT: ${{ secrets.DB_PORT }}
         ENV_DB_NAME: ${{ secrets.DB_NAME }}
         ENV_DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-        ENV_PORT: ${{ secrets.DB_PORT }}
+        ENV_PORT: ${{ secrets.PORT }}
         ENV_ENVIRONMENT_TYPE: ${{ secrets.DEVELOPMENT_ENVIRONMENT_TYPE }}
         ENV_DOMAIN_NAME: ${{ secrets.DEVELOPMENT_DOMAIN_NAME }}
         
