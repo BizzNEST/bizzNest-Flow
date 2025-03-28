@@ -25,7 +25,7 @@ services:
     networks:
       - backend
     environment:
-      - MYSQL_ROOT_USER=${ENV_DB_USER}
+      - MYSQL_ROOT_USER=test1234
       - MYSQL_ROOT_PASSWORD=${ENV_DB_PASSWORD}  # ✅ Required for root user
       - MYSQL_DATABASE=${ENV_DB_NAME}  # ✅ Creates a database
     healthcheck:
