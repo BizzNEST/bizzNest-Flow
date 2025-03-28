@@ -1,6 +1,6 @@
 version: "3.8"
 # Comment Teting 123 bizznest flow
-services:
+services: 
   backend-development:
     build:
       context: ../development/bizzNest-Flow/Backend/
