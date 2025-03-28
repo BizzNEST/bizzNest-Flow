@@ -1,6 +1,4 @@
 #!/bin/bash
-
-
 set -e  # Exit immediately on error
 
 # Test configuration first (with explicit output)
