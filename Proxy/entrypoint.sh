@@ -2,7 +2,7 @@
 DOMAIN=${DOMAIN_NAME}
 EMAIL="buenrostroalan93@gmail.com"
 
-certbot certonly --webroot --webroot-path=/var/www/html --email buenrostroalan93@gmail.com --agree-tos --no-eff-email --staging -d climguards.com -d www.climguards.com
+certbot certonly --webroot --webroot-path=/var/www/html --email buenrostroalan93@gmail.com --agree-tos --no-eff-email --staging -d flow-api-stg.bizznest.org -d www.flow-api-stg.bizznest.org
 
 mkdir 
 certbot certonly --nginx --non-interactive --agree-tos \
