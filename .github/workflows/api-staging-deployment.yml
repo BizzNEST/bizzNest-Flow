@@ -95,11 +95,6 @@ jobs:
             fi
         done < <(env)
 
-
-        
-        export DB_PASSWORD=$ENV_DB_PASSWORD
-        export DB_NAME=$ENV_DB_NAME
-        export DB_USER=$ENV_DB_USER
         echo $DB_NAME
         sudo docker image prune -f
         sudo docker image prune -a -f
