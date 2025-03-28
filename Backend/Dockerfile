@@ -17,7 +17,7 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*  # Clean up to reduce image size
      
 # Set the working directory inside the container 
-WORKDIR /app 
+WORKDIR /app  
   
 # Copy package.json and package-lock.json first (to cache dependencies)
 COPY package*.json ./
