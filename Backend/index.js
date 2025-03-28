@@ -5,7 +5,7 @@ dotenv.config();
 const PORT = process.env.PORT || 3000;  
 const HOST = '0.0.0.0';
 const server = app.listen(process.env.PORT, () => {
-  console.log(`Server live at http://${HOST}:${PORT}/basePage`)
+  console.log(`Server live at http://${HOST}:${PORT}/basePage`) 
 })
     
 export default server;
