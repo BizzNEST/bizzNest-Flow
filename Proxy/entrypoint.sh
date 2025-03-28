@@ -2,7 +2,7 @@
 DOMAIN=${DOMAIN_NAME}
 EMAIL="buenrostroalan93@gmail.com"
 
-certbot certonly --non-interactive --agree-tos \
+certbot certonly --nginx --non-interactive --agree-tos \
   --email "$EMAIL" \
   -d "$DOMAIN_NAME" \
   -d "www.$DOMAIN_NAME" \
