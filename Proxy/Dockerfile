@@ -2,8 +2,7 @@
 FROM nginx:latest
 
 # Install Certbot and necessary dependencies
-RUN sudo snap install --classic certbot
-RUN sudo ln -s /snap/bin/certbot /usr/bin/certbot
+RUN apt-get update && apt-get install -y certbot python3-certbot-nginx && rm -rf /var/lib/apt/lists/*
 
 # Arguments for creating custom Nginx configuration on build.
 ARG DOMAIN_NAME
