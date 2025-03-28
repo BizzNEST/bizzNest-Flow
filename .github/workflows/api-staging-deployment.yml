@@ -99,7 +99,8 @@ jobs:
         ENV_ENVIRONMENT_TYPE: ${{ secrets.DEVELOPMENT_ENVIRONMENT_TYPE }}
         ENV_DOMAIN_NAME: ${{ secrets.DEVELOPMENT_DOMAIN_NAME }}
         ENV_MYSQL_ROOT_PASSWORD: ${{ secrets.DB_PASSWORD }}
-        
+        ENV_MYSQL_ROOT_USER: ${{ secrets.DB_USER }}
+        ENV_MYSQL_DATABASE:  ${{ secrets.DB_NAME }}
         
 
     - name: Remove Secrets
