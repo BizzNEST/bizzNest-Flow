@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 const PORT = process.env.PORT || 3000;  
 const HOST = '0.0.0.0';
-const server = app.listen(process.env.PORT, () => {
+const server = app.listen(process.env.PORT,process.env.HOST,() => {
   console.log(`Server live at http://${HOST}:${PORT}/basePage`)
 })
    
