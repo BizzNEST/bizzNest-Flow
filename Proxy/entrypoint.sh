@@ -6,7 +6,7 @@ nginx &
 until curl --silent --fail http://localhost/.well-known/acme-challenge/; do
   echo "Waiting for Nginx to be up..."
   sleep 1
-#done
+done
 
 Obtain SSL certificate using Certbot
 
