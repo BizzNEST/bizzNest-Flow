@@ -10,7 +10,7 @@ done
 
 Obtain SSL certificate using Certbot
 
-echo "Obtaining SSL certificate for $DOMAIN_NAME."
+echo "Obtaining SSL certificate for $DOMAIN_NAME. Domain"
 certbot --nginx --non-interactive --agree-tos -d $DOMAIN_NAME --redirect || { echo "Certbot failed"; tail -n 50 /var/log/letsencrypt/letsencrypt.log; exit 1; }
 
 Set up automatic renewal (ensure cron is running or use another approach)
