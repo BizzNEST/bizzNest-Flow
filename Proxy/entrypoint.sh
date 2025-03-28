@@ -4,16 +4,16 @@ EMAIL="buenrostroalan93@gmail.com"
 
 certbot certonly --webroot --webroot-path=/var/www/html --email buenrostroalan93@gmail.com --agree-tos --no-eff-email --staging -d flow-api-stg.bizznest.org -d www.flow-api-stg.bizznest.org
 
-mkdir 
-certbot certonly --nginx --non-interactive --agree-tos \
-  --email "$EMAIL" \
-  -d "$DOMAIN_NAME" \
-  -d "www.$DOMAIN_NAME" \
-  --cert-name "$DOMAIN_NAME" || {
-  echo "Certificate generation failed"
-  tail -n 50 /var/log/letsencrypt/letsencrypt.log
-  exit 1
-}
+#mkdir 
+#certbot certonly --nginx --non-interactive --agree-tos \
+ # --email "$EMAIL" \
+  #-d "$DOMAIN_NAME" \
+  #-d "www.$DOMAIN_NAME" \
+  #--cert-name "$DOMAIN_NAME" || {
+  #echo "Certificate generation failed"
+  #tail -n 50 /var/log/letsencrypt/letsencrypt.log
+  #exit 1
+#}
 
 Keep the container running
 tail -f /var/log/nginx/access.log
