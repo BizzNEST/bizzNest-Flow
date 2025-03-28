@@ -27,7 +27,7 @@ RUN npm install --build-from-source bcrypt
 
 # Copy everything from your project directory into the container
 COPY . .  
- 
+  
 # Expose port 3000
 EXPOSE 3000
 
