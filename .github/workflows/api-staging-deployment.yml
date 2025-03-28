@@ -95,11 +95,11 @@ jobs:
             fi
         done < <(env)
 
-        echo $DB_NAME
-        sudo docker image prune -f
-        sudo docker image prune -a -f
-        sudo docker-compose down
-        sudo docker-compose up --build -d
+        echo -E $DB_NAME
+        sudo -E docker image prune -f
+        sudo -E docker image prune -a -f
+        sudo -E docker-compose down
+        sudo -E docker-compose up --build -d
 
         
         exit
