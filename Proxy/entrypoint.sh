@@ -3,10 +3,6 @@
 nginx &
 
 # Wait for Nginx to be fully up
-until curl --silent --fail http://localhost; do
-  echo "Waiting for Nginx to be up..."
-  sleep 1
-done
 
 # Obtain SSL certificate using Certbot
 
