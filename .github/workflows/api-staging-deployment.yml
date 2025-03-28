@@ -103,4 +103,6 @@ jobs:
     - name: Remove Secrets
       run: |
         echo "Removing Secrets"
-        rm -f ~/.ssh/bizznest.pem
+        rm -f ~/.ssh/bizznest
+        rm -f ~/.ssh/bizznes.pub
+
