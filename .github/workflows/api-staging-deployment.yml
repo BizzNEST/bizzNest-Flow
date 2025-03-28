@@ -91,7 +91,7 @@ jobs:
                 # Remove the "ENV_" prefix
                 new_name="${name#ENV_}"
                 # Format the output as: NEWVAR=${ENV_NEWVAR}
-                export "${new_name}=${name}"
+                export "${new_name}=${value}"
             fi
         done < <(env)
 
