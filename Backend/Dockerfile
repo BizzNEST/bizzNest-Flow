@@ -18,7 +18,7 @@ RUN apt-get update && apt-get install -y \
      
 # Set the working directory inside the container 
 WORKDIR /app  
-  
+   
 # Copy package.json and package-lock.json first (to cache dependencies)
 COPY package*.json ./
 
