@@ -83,10 +83,17 @@ jobs:
         
         # GO TO DIRECTORY CONTAINING DOCKER COMPOSE FILE AND BUILD
         cd /home/ubuntu/configs
+        # Export for build time environment Variables
+        export DB_PASSWORD=ENV_DB_PASSWORD
+        export DB_NAME=ENV_DB_NAME
+        export DB_USER=ENV_DB_USER
+        echo DB_NAME
         sudo docker image prune -f
         sudo docker image prune -a -f
         sudo docker-compose down
         sudo docker-compose up --build -d
+
+        
         exit
         EOF
       env:
