@@ -26,6 +26,9 @@ services:
       - backend
     env_file:
       - .env
+
+    environment:
+      MYSQL_ROOT_PASSWORD: "TEST12345"
     healthcheck:
       test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
       timeout: 5s
