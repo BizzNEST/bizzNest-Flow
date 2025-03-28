@@ -98,8 +98,6 @@ jobs:
         echo -E $DB_NAME
         docker-compose down
         docker-compose up --build -d
-
-        
         exit
         EOF
       env:
