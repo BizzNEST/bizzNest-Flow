@@ -25,9 +25,9 @@ services:
     networks:
       - backend
     environment:
-      - MYSQL_ROOT_USER=${DB_USER}
-      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}  # ✅ Required for root user
-      - MYSQL_DATABASE=${DB_NAME}  # ✅ Creates a database
+      - MYSQL_ROOT_USER=${ENV_DB_USER}
+      - MYSQL_ROOT_PASSWORD=${ENV_DB_PASSWORD}  # ✅ Required for root user
+      - MYSQL_DATABASE=${ENV_DB_NAME}  # ✅ Creates a database
     healthcheck:
       test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
       timeout: 5s
