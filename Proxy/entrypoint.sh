@@ -1,19 +1,20 @@
 #!/bin/bash
-DOMAIN=${DOMAIN_NAME}
-EMAIL="buenrostroalan93@gmail.com"
+# Ensure Nginx is started
+nginx &
 
-certbot certonly --email Bnaccounts@digitalnest.org --agree-tos --no-eff-email --staging -d ${DOMAIN_NAME} 
+# Wait for Nginx to be fully up
+until curl --silent --fail http://localhost; do
+  echo "Waiting for Nginx to be up..."
+  sleep 1
+done
 
-#mkdir 
-#certbot certonly --nginx --non-interactive --agree-tos \
- # --email "$EMAIL" \
-  #-d "$DOMAIN_NAME" \
-  #-d "www.$DOMAIN_NAME" \
-  #--cert-name "$DOMAIN_NAME" || {
-  #echo "Certificate generation failed"
-  #tail -n 50 /var/log/letsencrypt/letsencrypt.log
-  #exit 1
-#}
+# Obtain SSL certificate using Certbot
 
-Keep the container running
+echo "Obtaining SSL certificate for $DOMAIN_NAME."
+certbot --nginx --non-interactive --agree-tos -d $DOMAIN_NAME --redirect || { echo "Certbot failed"; tail -n 50 /var/log/letsencrypt/letsencrypt.log; exit 1; }
+
+# Set up automatic renewal (ensure cron is running or use another approach)
+echo "0 12 * * * root certbot renew --quiet && nginx -s reload" >> /etc/crontab
+
+# Keep the container running
 tail -f /var/log/nginx/access.log
