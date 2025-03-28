@@ -96,10 +96,10 @@ jobs:
         done < <(env)
 
         echo -E $DB_NAME
-        sudo -E docker image prune -f
-        sudo -E docker image prune -a -f
-        sudo -E docker-compose down
-        sudo -E docker-compose up --build -d
+        docker image prune -f
+        docker image prune -a -f
+        docker-compose down
+        docker-compose up --build -d
 
         
         exit
