@@ -3,7 +3,7 @@
 nginx &
 
 # Wait for Nginx to be fully up
-until curl --silent --fail http://localhost; do
+until curl --silent --fail http://backend-development:3000; do
   echo "Waiting for Nginx to be up..."
   sleep 1
 done
