@@ -41,7 +41,17 @@ http {
             return 301 https://\$host\$request_uri;
         }
     }
-
+    
+    server {
+        listen 5555;
+        server_name localhost;
+    
+        location /health {
+            add_header Content-Type text/plain;
+            return 200 'OK';
+        }
+    }
+    
     server {
         listen 443 ssl;
         server_name $1 www.$1;
