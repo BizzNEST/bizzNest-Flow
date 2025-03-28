@@ -12,9 +12,6 @@ services:
       - backend
     env_file:
       - .env
-    ports:
-      - "80:3000"
-      - "443:443"
     healthcheck:
       test: ["CMD", "curl" , "-h", "localhost:3000/basepage"]
       timeout: 10s
@@ -49,9 +46,9 @@ services:
         DOMAIN_NAME: ${DOMAIN_NAME}
         ENVIRONMENT_TYPE: ${ENVIRONMENT_TYPE}
     container_name: nginx-proxy
-   # ports:
-      #- "80:80"
-      #- "443:443"
+    ports:
+      - "80:80"
+      - "443:443"
     networks:
       - backend
     volumes:
