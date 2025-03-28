@@ -96,8 +96,6 @@ jobs:
         done < <(env)
 
         echo -E $DB_NAME
-        docker image prune -f
-        docker image prune -a -f
         docker-compose down
         docker-compose up --build -d
 
