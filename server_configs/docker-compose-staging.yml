@@ -46,8 +46,6 @@ services:
         DOMAIN_NAME: ${DOMAIN_NAME}
         ENVIRONMENT_TYPE: ${ENVIRONMENT_TYPE}
     container_name: nginx-proxy
-    env_file:
-      - .env
     ports:
       - "80:80"
       - "443:443"
