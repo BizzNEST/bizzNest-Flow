@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -y \
     g++ \
     cpp \
     libkrb5-dev \
-    libc6-dev \
+    libc6-dev \ 
     man-db \
     autoconf \
     pkg-config \
