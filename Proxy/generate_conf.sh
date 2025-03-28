@@ -8,7 +8,6 @@ events {
 http {
     server {
         listen 80;
-        server_name localhost;
     
         location / {
             proxy_pass http://backend-development:3000;
