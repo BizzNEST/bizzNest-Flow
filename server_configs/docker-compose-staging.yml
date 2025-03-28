@@ -24,7 +24,6 @@ services:
     restart: always
     networks:
       - backend
-    environment:
     env_file:
       - .env
     healthcheck:
