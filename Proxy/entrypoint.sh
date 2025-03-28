@@ -1,12 +1,12 @@
 #!/bin/bash
-DOMAIN="example.com"
-EMAIL="admin@example.com"
+DOMAIN=${DOMAIN_NAME}
+EMAIL="buenrostroalan93@gmail.com"
 
 sudo certbot certonly --nginx --non-interactive --agree-tos \
   --email "$EMAIL" \
-  -d "$DOMAIN" \
-  -d "www.$DOMAIN" \
-  --cert-name "$DOMAIN" || {
+  -d "$DOMAIN_NAME" \
+  -d "www.$DOMAIN_NAME" \
+  --cert-name "$DOMAIN_NAME" || {
   echo "Certificate generation failed"
   tail -n 50 /var/log/letsencrypt/letsencrypt.log
   exit 1
