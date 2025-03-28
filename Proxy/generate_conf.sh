@@ -52,7 +52,7 @@ http {
         ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
 
         location / {
-            proxy_pass http://$2-backend:3000;  # Replace 5000 with the port your backend service uses
+            proxy_pass http://backend-$2:3000;  # Replace 3000 with the port your backend service uses
             proxy_set_header Host \$host;
             proxy_set_header X-Real-IP \$remote_addr;
             proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
