@@ -24,11 +24,10 @@ services:
     restart: always
     networks:
       - backend
-    env_file:
-      - .env
-
     environment:
-      MYSQL_ROOT_PASSWORD: "TEST12345"
+      - MYSQL_ROOT_USER=${DB_USER}
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}  # ✅ Required for root user
+      - MYSQL_DATABASE=${DB_NAME}  # ✅ Creates a database
     healthcheck:
       test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
       timeout: 5s
