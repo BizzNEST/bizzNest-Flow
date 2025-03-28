@@ -3,7 +3,7 @@
 nginx &
 
 # Wait for Nginx to be fully up
-until curl --silent --fail http://localhost:5555/health; do
+until curl --silent --fail http://localhost/.well-known/acme-challenge/; do
   echo "Waiting for Nginx to be up..."
   sleep 1
 #done
