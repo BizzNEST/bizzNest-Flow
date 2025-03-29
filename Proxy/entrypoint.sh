@@ -6,8 +6,8 @@ nginx &
 
 # Obtain SSL certificate using Certbot
 
-echo "Obtaining SSL certificate for $DOMAIN_NAME."
-certbot certonly --webroot --non-interactive --agree-tos -d $DOMAIN_NAME --redirect || { echo "Certbot failed"; tail -n 50 /var/log/letsencrypt/letsencrypt.log; exit 1; }
+#echo "Obtaining SSL certificate for $DOMAIN_NAME."
+#certbot certonly --webroot --non-interactive --agree-tos -d $DOMAIN_NAME --redirect || { echo "Certbot failed"; tail -n 50 /var/log/letsencrypt/letsencrypt.log; exit 1; }
 
 # Set up automatic renewal (ensure cron is running or use another approach)
 echo "0 12 * * * root certbot renew --quiet && nginx -s reload" >> /etc/crontab
