@@ -8,5 +8,5 @@ const server = app.listen(process.env.PORT, () => {
   console.log(`Server live at http://${HOST}:${PORT}/basePage`) 
 })
     
-export default server;
+export default server; 
   
