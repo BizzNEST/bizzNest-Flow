@@ -59,6 +59,7 @@ http {
 
         ssl_certificate /etc/letsencrypt/live/$1/fullchain.pem;
         ssl_certificate_key /etc/letsencrypt/live/$1/privkey.pem;
+        
         location / {
             proxy_pass http://backend-$2:3000;  # Replace 5000 with the port your backend service uses
             proxy_set_header Host \$host;
