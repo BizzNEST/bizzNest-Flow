@@ -1,43 +1,55 @@
 #!/bin/bash
-# Ensure Nginx is started
-set -e  # Exit immediately on error
+set -e  # Exit on error
 
-echo -e "\033[1;34m[INFO] Testing Nginx configuration...\033[0m"
-if ! nginx -t 2>&1 | tee /tmp/nginx-config-test.log; then
-  echo -e "\033[1;31m[ERROR] Configuration test failed:\033[0m"
-  cat /tmp/nginx-config-test.log
-  exit 1
-fi
+# Phase 1: Generate initial Nginx config without SSL
+cat <<EOF > nginx.conf
+user  nginx;
+worker_processes  auto;
 
-# Start Nginx with enhanced logging
-echo -e "\033[1;34m[INFO] Starting Nginx with verbose logging...\033[0m"
-{
-  nginx -g "daemon off; error_log /dev/stderr debug;" 2>&1 | 
-    awk '{print "\033[1;33m[NGINX] " $0 "\033[0m"}'
-} > >(tee -a /var/log/nginx/verbose.log) 2>&1 &
+events { worker_connections 1024; }
 
-# Store PID and setup cleanup
-NGINX_PID=$!
-trap "echo -e '\033[1;34m[INFO] Stopping Nginx...\033[0m'; kill $NGINX_PID" EXIT
+http {
+    server_tokens off;
+    include /etc/nginx/mime.types;
 
-# Monitor process
-echo -e "\033[1;32m[SUCCESS] Nginx started with PID $NGINX_PID\033[0m"
-echo -e "\033[1;34m[INFO] Monitoring process...\033[0m"
+    # HTTP server block for Certbot challenges
+    server {
+        listen 80;
+        server_name $1 www.$1;
 
-# Watch logs in real-time (optional)
-tail -f /var/log/nginx/verbose.log -n 20 | 
-  awk '{print "\033[1;36m[LOG] " $0 "\033[0m"}' &
+        location /.well-known/acme-challenge/ {
+            root /var/www/html;
+        }
 
-# Wait for process exit
-wait $NGINX_PID
+        location / {
+            return 301 https://\$host\$request_uri;
+        }
+    }
 
-# Wait for Nginx to be fully up
+    # Your other server blocks (e.g., health check)
+    server {
+        listen 5555;
+        server_name localhost;
+        location /health { return 200 'OK'; }
+    }
+}
+EOF
 
-# Obtain SSL certificate using Certbot
+# Start Nginx temporarily
+echo "Starting Nginx for Certbot..."
+nginx -c /nginx.conf
 
-echo "Obtaining SSL certificate for $DOMAIN_NAME."
-certbot --nginx --non-interactive --agree-tos -d $DOMAIN_NAME --redirect || { echo "Certbot failed"; tail -n 50 /var/log/letsencrypt/letsencrypt.log; exit 1; }
-# Set up automatic renewal (ensure cron is running or use another approach)
-echo "0 12 * * * root certbot renew --quiet && nginx -s reload" >> /etc/crontab
-# Keep the container running
-tail -f /var/log/nginx/access.log
+# Phase 2: Obtain SSL certificates using Certbot's Nginx plugin
+echo "Obtaining SSL certificate..."
+certbot --nginx --non-interactive --agree-tos -d $1 -d www.$1
+
+# Certbot will automatically:
+# 1. Modify your Nginx config to include SSL settings
+# 2. Reload Nginx
+
+# Phase 3: Update proxy settings (if needed)
+# Certbot adds a new SSL server block. Add your proxy configuration there:
+sed -i '/ssl_certificate_key/a \    location / {\n        proxy_pass http://backend-'"$2"':3000;\n        include proxy_params;\n    }' /etc/nginx/sites-enabled/default
+
+# Reload Nginx to apply proxy settings
+nginx -s reload
