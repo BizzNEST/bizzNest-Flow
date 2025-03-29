@@ -15,7 +15,7 @@ http {
     # HTTP server block for Certbot challenges
     server {
         listen 80;
-        server_name $1 www.$1;
+        server_name $DOMAIN_NAME;
 
         location /.well-known/acme-challenge/ {
             root /var/www/html;
