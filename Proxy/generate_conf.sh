@@ -9,7 +9,7 @@ events {
     worker_connections 1024;
 }
 
-https {
+http {
     server_tokens off;
 
     sendfile on;
