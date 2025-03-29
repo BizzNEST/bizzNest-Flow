@@ -41,7 +41,7 @@ nginx -c /nginx.conf
 
 # Phase 2: Obtain SSL certificates using Certbot's Nginx plugin
 echo "Obtaining SSL certificate..."
-certbot --nginx --non-interactive --agree-tos -d $1 -d www.$1
+certbot --nginx --non-interactive --agree-tos -d $DOMAIN_NAME
 
 # Certbot will automatically:
 # 1. Modify your Nginx config to include SSL settings
