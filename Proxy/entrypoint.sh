@@ -1,6 +1,6 @@
 #!/bin/bash
 # Ensure Nginx is started
-nginx &
+nginx 
 
 # Wait for Nginx to be fully up
 
