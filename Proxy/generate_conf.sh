@@ -54,9 +54,10 @@ http {
     
     server {
         listen 443 ssl;
-        server_name $1 www.$1;
+        server_name $1 
         
-
+        ssl_protocols       TLSv1.2 TLSv1.3;
+        ssl_ciphers         HIGH:!aNULL:!MD5;
         ssl_certificate /etc/letsencrypt/live/$1/fullchain.pem;
         ssl_certificate_key /etc/letsencrypt/live/$1/privkey.pem;
         
