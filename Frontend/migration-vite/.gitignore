@@ -26,3 +26,8 @@ Backend/node_modules
 Frontend/my-react-app/node_modules/
 .DS_Store
 .env
+
+# amplify
+.amplify
+amplify_outputs*
+amplifyconfiguration*
