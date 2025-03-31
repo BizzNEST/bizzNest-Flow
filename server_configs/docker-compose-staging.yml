@@ -10,6 +10,8 @@ services:
         condition: service_healthy
     networks:
       - backend
+    ports:
+    - "80:3000"
     env_file:
       - .env
     healthcheck:
@@ -37,28 +39,6 @@ services:
     volumes:
       - /home/ubuntu/mounts/mysql:/var/lib/mysql  # ✅ Persist database data
     container_name: bizz-mysql-app
- 
-  nginx:
-    build:
-      context: ../proxy/bizzNest-Flow/Proxy/
-      dockerfile: Dockerfile
-      args:
-        DOMAIN_NAME: ${DOMAIN_NAME}
-        ENVIRONMENT_TYPE: ${ENVIRONMENT_TYPE}
-    container_name: nginx-proxy
-    ports:
-      - "80:80"
-      - "443:443"
-    networks:
-      - backend
-    volumes:
-      - /etc/letsencrypt:/etc/letsencrypt
-      - /var/www/html:/var/www/html
-    depends_on:
-      backend-development:
-        condition: service_healthy
-    restart: always
-
 
 networks:
   backend:
