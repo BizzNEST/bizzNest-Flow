@@ -39,7 +39,7 @@ services:
     volumes:
       - /home/ubuntu/mounts/mysql:/var/lib/mysql  # ✅ Persist database data
     container_name: bizz-mysql-app
-
+ 
 networks:
   backend:
     driver: bridge
