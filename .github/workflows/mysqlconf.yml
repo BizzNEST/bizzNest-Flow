@@ -41,7 +41,7 @@ jobs:
     - name: Connecting to EC2 and executing build commands
       run: |
         echo "Attempting To Update Configs"
-        scp -i ~/.ssh/bizznest $GITHUB_WORKSPACE/server_configs/docker-compose-staging.yml ubuntu@$DEVELOPMENT_IP:/home/ubuntu/configs/docker-compose.yml
+        scp -i ~/.ssh/bizznest $GITHUB_WORKSPACE/server_configs/mysql.cnf ubuntu@$DEVELOPMENT_IP:/home/ubuntu/configs/mysql.cnf
       env:
         DEVELOPMENT_IP: ${{ secrets.DEVELOPMENT_SERVER_ADDRESS }}
         
