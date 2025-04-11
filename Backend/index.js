@@ -18,7 +18,7 @@ app.use(cors({
     }
   }
 }));
-
+ 
 const server = app.listen(process.env.PORT,process.env.HOST,() => {
   console.log(`Server live at http://${HOST}:${PORT}/basePage`)
 })
