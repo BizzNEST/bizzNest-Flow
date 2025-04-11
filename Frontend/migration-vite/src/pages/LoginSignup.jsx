@@ -34,7 +34,7 @@ const LoginSignup = () => {
     e.preventDefault();
     setErrorMessage("");
     try {
-      const response = await axios.post(`${process.env.REACT_APP_API_URL}/login`, loginData);
+      const response = await axios.post(`https://bfapi.bizznest.org/login`, loginData);
       localStorage.setItem("token", response.data.token);
       navigate("/home");
     } catch (error) {
@@ -57,7 +57,7 @@ const LoginSignup = () => {
     }
 
     try {
-      await axios.post(`${process.env.REACT_APP_API_URL}/signup`, signupData);
+      await axios.post(`https://bfapi.bizznest.org/signup`, signupData);
       setIsLogin(true);
     } catch (error) {
       setSignupError("Failed to register. Please try again.");
