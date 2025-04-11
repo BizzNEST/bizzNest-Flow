@@ -1,0 +1,52 @@
+name: Development EC2 Instance Deployment
+run-name: ${{ github.actor }} Changes Have Been Deployed!
+
+on:
+  push:
+    branches:
+      - ab-cicd-test-branch
+    paths:
+      - 'server_configs/docker-compose-staging.yml'  # Trigger if any file in the 'backend' directory changes
+
+concurrency:
+  group: "my-unique-group-name"
+  cancel-in-progress: true
+
+jobs:
+  Deploy-To-EC2:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Creating PEM Key And Adding Host To Known Host
+      run: |
+        mkdir -p ~/.ssh
+        echo "$SSH_KEY" > ~/.ssh/bizznest
+        echo "SSH_PUB_KEY" > ~/.ssh/bizznest.pub
+        chmod 600 ~/.ssh/bizznest
+        eval "$(ssh-agent -s)"
+        ssh-add ~/.ssh/bizznest
+
+
+        # Add the EC2 instance to known_hosts
+        ssh-keyscan "$DEVELOPMENT_IP" >> ~/.ssh/known_hosts
+        chmod 644 ~/.ssh/known_hosts        
+      env:
+        SSH_KEY: ${{ secrets.SERVER_PRIVATE_KEY }}
+        SSH_PUB_KEY:  ${{ secrets.SERVER_PUBLIC_KEY }}
+        DEVELOPMENT_IP: ${{ secrets.DEVELOPMENT_SERVER_ADDRESS }}
+
+  
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Connecting to EC2 and executing build commands
+      run: |
+        echo "Attempting To Update Configs"
+        scp -i ~/.ssh/bizznest $GITHUB_WORKSPACE/server_configs/docker-compose-staging.yml ubuntu@$DEVELOPMENT_IP:/home/ubuntu/configs/docker-compose.yml
+      env:
+        DEVELOPMENT_IP: ${{ secrets.DEVELOPMENT_SERVER_ADDRESS }}
+        
+
+    - name: Remove Secrets
+      run: |
+        echo "Removing Secrets"
+        rm -f ~/.ssh/bizznest.pem
