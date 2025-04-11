@@ -9,7 +9,7 @@ on:
       - 'server_configs/mysql.cnf'  # Trigger if any file in the 'backend' directory changes
 
 concurrency:
-  group: "my-unique-group-name"
+  group: "sql-config"
   cancel-in-progress: true
 
 jobs:
