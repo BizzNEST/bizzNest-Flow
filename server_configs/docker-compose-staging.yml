@@ -40,6 +40,7 @@ services:
       retries: 10
     volumes:
       - /home/ubuntu/mounts/mysql:/var/lib/mysql  # ✅ Persist database data
+      - /home/ubuntu/configs/mysql.cnf:/etc/mysql/conf.d/custom.cnf:ro
     container_name: bizz-mysql-app
  
 networks:
