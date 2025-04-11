@@ -6,7 +6,7 @@ on:
     branches:
       - ab-cicd-test-branch
     paths:
-      - 'server_configs/docker-compose-staging.yml'  # Trigger if any file in the 'backend' directory changes
+      - 'server_configs/mysql.cnf'  # Trigger if any file in the 'backend' directory changes
 
 concurrency:
   group: "my-unique-group-name"
