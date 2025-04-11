@@ -104,6 +104,7 @@ jobs:
         ENV_PORT: ${{ secrets.PORT }}
         ENV_ENVIRONMENT_TYPE: ${{ secrets.DEVELOPMENT_ENVIRONMENT_TYPE }}
         ENV_DOMAIN_NAME: ${{ secrets.DEVELOPMENT_DOMAIN_NAME }}
+        ENV_JWT_SECRET: ${{secrets.JWT_SECRET}}
         
 
     - name: Remove Secrets
