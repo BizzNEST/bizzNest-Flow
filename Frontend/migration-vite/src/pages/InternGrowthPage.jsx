@@ -18,7 +18,7 @@ const InternGrowthPage = () => {
     useEffect(() => {
         const fetchInternData = async () => {
             try {
-                const response = await fetch(`${process.env.REACT_APP_API_URL}/getIntern/${internID}`);
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/getIntern/${internID}`);
                 const data = await response.json();
 
                 console.log("Fetched Intern Data:", data);
@@ -28,7 +28,7 @@ const InternGrowthPage = () => {
                     let profilePic = profile; // Default
                     if (data.profilePic) {
                         const decodedPath = atob(data.profilePic); // Decode Base64
-                        profilePic = `${process.env.REACT_APP_API_URL}${decodedPath}`;
+                        profilePic = `${import.meta.env.VITE_API_URL}${decodedPath}`;
                     }
 
                     setIntern({ ...data, profilePic });

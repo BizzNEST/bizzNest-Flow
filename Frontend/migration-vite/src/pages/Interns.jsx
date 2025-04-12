@@ -52,7 +52,7 @@ const Interns = () => {
           setInterns(parsedData);
         } else {
           // Fetch fresh data if cache is invalid/expired
-          const response = await fetch(`${process.env.REACT_APP_API_URL}/getInterns`);
+          const response = await fetch(`${import.meta.env.VITE_API_URL}/getInterns`);
           if (!response.ok) throw new Error("Failed to fetch interns");
 
           const data = await response.json();
@@ -97,7 +97,7 @@ const Interns = () => {
 
           try {
             const response = await fetch(
-              `${process.env.REACT_APP_API_URL}/getIntern/${intern.InternID}`
+              `${import.meta.env.VITE_API_URL}/getIntern/${intern.InternID}`
             );
             if (!response.ok) throw new Error("Failed to fetch profile picture");
 
@@ -106,7 +106,7 @@ const Interns = () => {
 
             if (data.profilePic) {
               const decodedPath = atob(data.profilePic);
-              profilePic = `${process.env.REACT_APP_API_URL}${decodedPath}`;
+              profilePic = `${import.meta.env.VITE_API_URL}${decodedPath}`;
             }
 
             // Cache the profile picture
@@ -187,7 +187,7 @@ const Interns = () => {
     try {
       if (deleteType === "single") {
         const response = await fetch(
-          `${process.env.REACT_APP_API_URL}/deleteIntern/${deleteTarget}`,
+          `${import.meta.env.VITE_API_URL}/deleteIntern/${deleteTarget}`,
           { method: "DELETE" }
         );
         const data = await response.json();
@@ -209,7 +209,7 @@ const Interns = () => {
         }
       } else if (deleteType === "bulk") {
         const response = await fetch(
-          `${process.env.REACT_APP_API_URL}/deleteSelectedInterns`,
+          `${import.meta.env.VITE_API_URL}/deleteSelectedInterns`,
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },

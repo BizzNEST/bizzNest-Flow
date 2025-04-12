@@ -17,7 +17,7 @@ const MonthlyGrowthChart = ({ internID }) => {
     const fetchMonthlyGrowthData = async () => {
       try {
         const response = await fetch(
-          `${process.env.REACT_APP_API_URL}/getMonthlyGrowth/${internID}`
+          `${import.meta.env.VITE_API_URL}/getMonthlyGrowth/${internID}`
         );
         const data = await response.json();
 

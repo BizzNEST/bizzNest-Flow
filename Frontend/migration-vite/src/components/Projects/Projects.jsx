@@ -7,7 +7,7 @@ const Projects  = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await fetch(`${process.env.REACT_APP_API_URL}/getProjects`);
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/getProjects`);
         if (response.ok) {
           const data = await response.json();
           const animation = data.map((project) => ({

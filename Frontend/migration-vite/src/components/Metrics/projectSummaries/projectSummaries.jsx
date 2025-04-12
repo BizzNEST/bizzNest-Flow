@@ -18,7 +18,7 @@ const ProjectSummaries = () => {
     useEffect(() => {
         const fetchProjectSummaries = async () => {
             try {
-                const response = await fetch(`${process.env.REACT_APP_API_URL}/projectSummaries`);
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/projectSummaries`);
                 const data = await response.json();
 
                 if (data?.projectSummaries) {

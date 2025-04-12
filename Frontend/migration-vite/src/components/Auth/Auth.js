@@ -19,7 +19,7 @@ export const getProtectedData = async () => {
   const token = getToken();
   if (token) {
     try {
-      const response = await axios.get(`${process.env.REACT_APP_API_URL}/protected-route`, {
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/protected-route`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

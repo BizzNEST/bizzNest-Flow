@@ -13,7 +13,7 @@ const CompletedProjects = () => {
     useEffect(() => {
         const fetchProjects = async () => {
             try {
-                const response = await fetch(`${process.env.REACT_APP_API_URL}/getCompletedProjects`);
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/getCompletedProjects`);
                 if (response.ok) {
                     const data = await response.json();
                     setProjects(data);
@@ -30,7 +30,7 @@ const CompletedProjects = () => {
 
     const handleReactivate = async (projectID) => {
         try {
-            const response = await fetch(`${process.env.REACT_APP_API_URL}/restoreProject/${projectID}`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/restoreProject/${projectID}`, {
                 method: 'PUT',
             });
             if (response.ok) {

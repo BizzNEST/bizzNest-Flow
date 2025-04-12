@@ -85,7 +85,7 @@ const NewProject = () => {
     };
 
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/addProject`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/addProject`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
