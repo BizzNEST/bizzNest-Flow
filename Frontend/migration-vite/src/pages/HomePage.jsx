@@ -31,8 +31,7 @@ const HomePage = () => {
         {/* Projects Section - Top */}
         <Projects />
         <button>
-        onClick={() =>{console.log(`normal env:${process.env.VITE_API_URL
-          vite: ${import.meta.env.VITE_API_URL}`)}}
+        onClick={() =>{console.log(`normal env:${process.env.VITE_API_URL} vite: ${import.meta.env.VITE_API_URL}`)}}
         Test Button
         </button>
         <button
