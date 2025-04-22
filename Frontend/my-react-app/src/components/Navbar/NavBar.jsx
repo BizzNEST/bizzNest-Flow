@@ -1,35 +1,33 @@
 import React, { useState, useEffect, useRef } from 'react';
-
 import { Link } from 'react-router-dom';
 import './NavBar.css';
 import hamburgerIcon from '../../assets/hamburger.png';
-import logo from './logo.svg'
+import logo from './logo.svg';
 
-
-// hooks explained:
-
-// useEffect is a React hook that allows you to perform side effects in functional components
-// * adding event listeners
-// * Fetching data
-// * Interacting with the DOM
-// * Cleaning up resouces
-
-// useRef is a hook that creates a "reference" to a DOM element or value that persists across renders.
-// * Directly accessing DOM elements
-// * Storing mutable values that don't trigger a re-render when updated.
-
-
+/**
+ * NavBar Component
+ * A responsive navigation bar that shows links directly on desktop
+ * and collapses into a hamburger menu on mobile.
+ *
+ * Hooks Used:
+ * - useState: Tracks menu open/close state and screen size.
+ * - useEffect: Handles side effects like event listeners for resize and outside clicks.
+ * - useRef: References the menu for detecting clicks outside.
+ */
 const NavBar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-  const menuRef = useRef(null);
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // Menu toggle for mobile
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768); // Responsive breakpoint
+  const menuRef = useRef(null); // Ref to detect outside clicks on mobile menu
 
-  // Function to check screen size
+  /**
+   * useEffect - Handle window resize
+   * Updates mobile state and closes menu when switching to desktop view.
+   */
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
       if (window.innerWidth > 768) {
-        setIsMenuOpen(false); // Ensure menu is closed when switching to desktop
+        setIsMenuOpen(false); // Auto-close menu when resizing to desktop
       }
     };
 
@@ -37,7 +35,10 @@ const NavBar = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Close menu when clicking outside
+  /**
+   * useEffect - Close menu on outside click
+   * Listens for mouse clicks and closes the mobile menu if clicked outside.
+   */
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
@@ -53,12 +54,14 @@ const NavBar = () => {
 
   return (
     <nav className="navbar">
+      {/* Logo Section */}
       <div id="logo">
-      <img src={logo} alt="bizzNest Flow Logo" className="navbar-logo" />
+        <img src={logo} alt="bizzNest Flow Logo" className="navbar-logo" />
       </div>
-      
+
+      {/* Navigation Links / Hamburger */}
       <div className="navbar-container">
-        {/* Show Links Directly on Desktop, Show Hamburger on Mobile */}
+        {/* Desktop View: Show links inline */}
         {!isMobile ? (
           <ul className="menu-items">
             <li><Link to="/home" className="nav-link">Home</Link></li>
@@ -67,12 +70,14 @@ const NavBar = () => {
           </ul>
         ) : (
           <>
+            {/* Mobile View: Show hamburger icon */}
             <img
               src={hamburgerIcon}
               alt="Menu"
               className="hamburger-icon"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             />
+            {/* Conditionally rendered mobile menu */}
             {isMenuOpen && (
               <ul ref={menuRef} className="menu-items mobile-menu">
                 <li><Link to="/" className="nav-link" onClick={() => setIsMenuOpen(false)}>Home</Link></li>

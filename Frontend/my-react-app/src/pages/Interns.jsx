@@ -19,6 +19,7 @@ const departmentMap = {
 };
 
 const Interns = () => {
+  // State variables
   const [interns, setInterns] = useState([]);
   const [internsWithProfilePics, setInternsWithProfilePics] = useState([]);
   const [filteredInterns, setFilteredInterns] = useState([]);
@@ -33,12 +34,12 @@ const Interns = () => {
   const filterInterns = useRef([]);
   const navigate = useNavigate();
 
-  // Check if cache is expired
+  // Utility function to check if cache is still valid
   const isCacheValid = (cacheTimestamp) => {
     return cacheTimestamp && Date.now() - cacheTimestamp < CACHE_EXPIRY_TIME;
   };
 
-  // Fetch all interns (with caching)
+  // Fetch interns from API or cache
   useEffect(() => {
     const fetchInterns = async () => {
       try {
@@ -46,27 +47,22 @@ const Interns = () => {
         const cacheTimestamp = localStorage.getItem("cacheTimestamp");
 
         if (cachedData && isCacheValid(Number(cacheTimestamp))) {
-          // Use cached data if valid
           const parsedData = JSON.parse(cachedData);
           filterInterns.current = parsedData;
           setInterns(parsedData);
         } else {
-          // Fetch fresh data if cache is invalid/expired
           const response = await fetch(`${process.env.REACT_APP_API_URL}/getInterns`);
           if (!response.ok) throw new Error("Failed to fetch interns");
 
           const data = await response.json();
           localStorage.setItem("cachedInterns", JSON.stringify(data));
-          localStorage.setItem("cacheTimestamp", Date.now()); // Update timestamp
-
+          localStorage.setItem("cacheTimestamp", Date.now());
           filterInterns.current = data;
           setInterns(data);
         }
       } catch (err) {
         setError("Failed to load interns. Using cached data if available.");
         console.error("Error fetching interns:", err);
-
-        // Fallback to cache even if expired
         const cachedData = localStorage.getItem("cachedInterns");
         if (cachedData) {
           const parsedData = JSON.parse(cachedData);
@@ -79,7 +75,7 @@ const Interns = () => {
     fetchInterns();
   }, []);
 
-  // Fetch & cache profile pictures (only if missing or expired)
+  // Fetch profile pictures separately, with caching
   useEffect(() => {
     if (interns.length === 0) return;
 
@@ -90,33 +86,27 @@ const Interns = () => {
           const cachedPic = localStorage.getItem(cacheKey);
           const cacheTimestamp = localStorage.getItem(`${cacheKey}_timestamp`);
 
-          // Use cached profile pic if valid
           if (cachedPic && isCacheValid(Number(cacheTimestamp))) {
             return { ...intern, profilePic: cachedPic };
           }
 
           try {
-            const response = await fetch(
-              `${process.env.REACT_APP_API_URL}/getIntern/${intern.InternID}`
-            );
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/getIntern/${intern.InternID}`);
             if (!response.ok) throw new Error("Failed to fetch profile picture");
 
             const data = await response.json();
-            let profilePic = profile; // Default
-
+            let profilePic = profile;
             if (data.profilePic) {
               const decodedPath = atob(data.profilePic);
               profilePic = `${process.env.REACT_APP_API_URL}${decodedPath}`;
             }
 
-            // Cache the profile picture
             localStorage.setItem(cacheKey, profilePic);
             localStorage.setItem(`${cacheKey}_timestamp`, Date.now());
-
             return { ...intern, profilePic };
           } catch (err) {
             console.error("Error fetching profile picture:", err);
-            return { ...intern, profilePic: cachedPic || profile }; // Fallback
+            return { ...intern, profilePic: cachedPic || profile };
           }
         })
       );
@@ -129,15 +119,11 @@ const Interns = () => {
     fetchProfilePictures();
   }, [interns]);
 
-  // Select or Deselect an Intern
+  // Selection Handlers
   const handleSelectIntern = (internID) => {
-    setSelectedInterns((prevSelected) => {
-      if (prevSelected.includes(internID)) {
-        return prevSelected.filter((id) => id !== internID);
-      } else {
-        return [...prevSelected, internID];
-      }
-    });
+    setSelectedInterns((prev) =>
+      prev.includes(internID) ? prev.filter((id) => id !== internID) : [...prev, internID]
+    );
   };
 
   const handleSelectAll = () => {
@@ -148,6 +134,7 @@ const Interns = () => {
     setSelectedInterns([]);
   };
 
+  // Search bar handler
   const handleSearch = (query) => {
     const lowerQuery = query.toLowerCase().trim();
     const results = filterInterns.current.filter((intern) => {
@@ -157,6 +144,7 @@ const Interns = () => {
     setFilteredInterns(results);
   };
 
+  // Apply filters for department and location
   const handleFilterApply = () => {
     const results = filterInterns.current.filter((intern) => {
       const matchesDepartment = selectedDepartment
@@ -165,66 +153,47 @@ const Interns = () => {
       const matchesLocation = selectedLocation
         ? intern.location === selectedLocation
         : true;
-
       return matchesDepartment && matchesLocation;
     });
-
     setFilteredInterns(results);
   };
 
-  // Function to show the confirmation popup
+  // Confirm delete popup
   const confirmDelete = (id, type) => {
     setDeleteTarget(id);
     setDeleteType(type);
     setShowPopup(true);
   };
 
-  // Function to execute the confirmed delete
+  // Handle confirmed delete (single or bulk)
   const handleDeleteConfirmed = async () => {
-    if (!deleteTarget && deleteType === "bulk" && selectedInterns.length === 0)
-      return;
+    if (!deleteTarget && deleteType === "bulk" && selectedInterns.length === 0) return;
 
     try {
       if (deleteType === "single") {
-        const response = await fetch(
-          `${process.env.REACT_APP_API_URL}/deleteIntern/${deleteTarget}`,
-          { method: "DELETE" }
-        );
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/deleteIntern/${deleteTarget}`, { method: "DELETE" });
         const data = await response.json();
         if (response.ok) {
-          // Update cache after deletion
-          const updatedInterns = interns.filter(
-            (intern) => intern.InternID !== deleteTarget
-          );
+          const updatedInterns = interns.filter((intern) => intern.InternID !== deleteTarget);
           localStorage.setItem("cachedInterns", JSON.stringify(updatedInterns));
           localStorage.setItem("cacheTimestamp", Date.now());
-
           setInterns(updatedInterns);
           setFilteredInterns(updatedInterns);
-          setSelectedInterns((prev) =>
-            prev.filter((id) => id !== deleteTarget)
-          );
+          setSelectedInterns((prev) => prev.filter((id) => id !== deleteTarget));
         } else {
           alert(data.message);
         }
       } else if (deleteType === "bulk") {
-        const response = await fetch(
-          `${process.env.REACT_APP_API_URL}/deleteSelectedInterns`,
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ internIDs: selectedInterns }),
-          }
-        );
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/deleteSelectedInterns`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ internIDs: selectedInterns }),
+        });
         const data = await response.json();
         if (response.ok) {
-          // Update cache after bulk deletion
-          const updatedInterns = interns.filter(
-            (intern) => !selectedInterns.includes(intern.InternID)
-          );
+          const updatedInterns = interns.filter((intern) => !selectedInterns.includes(intern.InternID));
           localStorage.setItem("cachedInterns", JSON.stringify(updatedInterns));
           localStorage.setItem("cacheTimestamp", Date.now());
-
           setInterns(updatedInterns);
           setFilteredInterns(updatedInterns);
           setSelectedInterns([]);
@@ -240,12 +209,14 @@ const Interns = () => {
     }
   };
 
+  // Component Render
   return (
     <div className="big-container">
       <NavBar />
       {error && <div className="error-message">{error}</div>}
       <div className="container">
         <div className="content">
+          {/* Filters Section */}
           <div className="filtering-wrapper">
             <h3 className="filter-header">Filter Interns</h3>
             <div className="search-bar-wrapper">
@@ -260,15 +231,12 @@ const Interns = () => {
             />
           </div>
 
+          {/* Interns List */}
           <div className="interns-wrapper">
             <div className="select-buttons">
               <div className="select-left">
-                <button className="select-btn" onClick={handleSelectAll}>
-                  Select All
-                </button>
-                <button className="deselect-btn" onClick={handleDeselectAll}>
-                  Deselect All
-                </button>
+                <button className="select-btn" onClick={handleSelectAll}>Select All</button>
+                <button className="deselect-btn" onClick={handleDeselectAll}>Deselect All</button>
               </div>
               <div className="delete-right">
                 <button
@@ -288,11 +256,7 @@ const Interns = () => {
                   <li
                     key={intern.InternID}
                     onClick={() => handleSelectIntern(intern.InternID)}
-                    className={
-                      selectedInterns.includes(intern.InternID)
-                        ? "selected"
-                        : ""
-                    }
+                    className={selectedInterns.includes(intern.InternID) ? "selected" : ""}
                   >
                     <img
                       src={intern.profilePic}
@@ -300,12 +264,10 @@ const Interns = () => {
                       className="profile-pic"
                       onError={(e) => {
                         e.target.onerror = null;
-                        e.target.src = profile; // Fallback to default profile pic
+                        e.target.src = profile;
                       }}
                     />
-                    <span className="name">
-                      {intern.firstName} {intern.lastName}
-                    </span>
+                    <span className="name">{intern.firstName} {intern.lastName}</span>
                     <div className="icon-container">
                       <img
                         src={edit}
@@ -334,6 +296,7 @@ const Interns = () => {
         </div>
       </div>
 
+      {/* Confirmation Popup */}
       {showPopup && (
         <ConfirmPopup
           message="Are you sure you want to delete?"

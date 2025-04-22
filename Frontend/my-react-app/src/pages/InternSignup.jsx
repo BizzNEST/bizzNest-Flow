@@ -11,8 +11,10 @@ import "./InternSignup.css";
 import logo from './logo.svg';
 
 const InternSignup = () => {
-  const [step, setStep] = useState(1);
-  const [showPassword, setShowPassword] = useState(false);
+  const [step, setStep] = useState(1); // Step 1: Form | Step 2: Profile Pic Upload
+  const [showPassword, setShowPassword] = useState(false); // Toggle password visibility
+
+  // Form fields and state
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -26,14 +28,17 @@ const InternSignup = () => {
 
   const navigate = useNavigate();
 
+  // Handle input changes
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // Handle image upload from child component
   const handleProfilePicSelect = (file) => {
     setFormData({ ...formData, profilePic: file });
   };
 
+  // Form validation for Step 1
   const handleNext = (e) => {
     e.preventDefault();
     const { firstName, lastName, email, password, confirmPassword, DepartmentID, location } = formData;
@@ -48,11 +53,13 @@ const InternSignup = () => {
       return;
     }
 
-    setStep(2);
+    setStep(2); // Proceed to profile pic upload
   };
 
+  // Handle form submission to backend
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (!formData.profilePic) {
       alert("Please upload a profile picture.");
       return;
@@ -68,18 +75,21 @@ const InternSignup = () => {
       formDataToSend.append("location", formData.location);
       formDataToSend.append("profilePic", formData.profilePic);
 
-      const response = await axios.post(`${process.env.REACT_APP_API_URL}/internSignUp`, formDataToSend, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_URL}/internSignUp`,
+        formDataToSend,
+        { headers: { "Content-Type": "multipart/form-data" } }
+      );
 
       alert(response.data.message);
-      navigate("/thankyou");
+      navigate("/thankyou"); // Redirect after successful registration
     } catch (error) {
       console.error("Error submitting form:", error);
       alert("Failed to register");
     }
   };
 
+  // Toggle password visibility icon
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -87,24 +97,49 @@ const InternSignup = () => {
   return (
     <div className="internSignupWrapper">
       <div className="internWaves" />
+
       <form className="Intern-signup-form">
-        <div class="logo">
-                      <img src={logo} alt="bizzNest Flow Logo" className="navbar-logo" />
-                    </div>
+        {/* Branding Logo */}
+        <div className="logo">
+          <img src={logo} alt="bizzNest Flow Logo" className="navbar-logo" />
+        </div>
+
         <h2 className="internSignupTitle">Intern Signup</h2>
 
+        {/* Step 1: Basic Info Form */}
         {step === 1 ? (
           <>
+            {/* Name Fields */}
             <div className="internNameContainer">
-              <input type="text" placeholder="First name" name="firstName" value={formData.firstName} onChange={handleChange} />
-              <input type="text" placeholder="Last name" name="lastName" value={formData.lastName} onChange={handleChange} />
+              <input
+                type="text"
+                placeholder="First name"
+                name="firstName"
+                value={formData.firstName}
+                onChange={handleChange}
+              />
+              <input
+                type="text"
+                placeholder="Last name"
+                name="lastName"
+                value={formData.lastName}
+                onChange={handleChange}
+              />
             </div>
 
+            {/* Email Field */}
             <div className="internInputContainer">
               <img src={Mail} alt="Email" className="internInputIcon" />
-              <input type="email" placeholder="Email" name="email" value={formData.email} onChange={handleChange} />
+              <input
+                type="email"
+                placeholder="Email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+              />
             </div>
 
+            {/* Password + Confirm Password */}
             <div className="internPasswordContainer">
               <div className="internInputContainer">
                 <img src={Lock} alt="Password" className="internInputIcon" />
@@ -135,12 +170,15 @@ const InternSignup = () => {
               </div>
             </div>
 
+            {/* Department Dropdown */}
             <select name="DepartmentID" value={formData.DepartmentID} onChange={handleChange}>
               <option value="">Select a department</option>
               <option value="0">Web Development</option>
               <option value="1">Design</option>
               <option value="2">Video</option>
             </select>
+
+            {/* Location Dropdown */}
             <select name="location" value={formData.location} onChange={handleChange}>
               <option value="">Select a location</option>
               <option value="Salinas">Salinas</option>
@@ -149,12 +187,19 @@ const InternSignup = () => {
               <option value="Stockton">Stockton</option>
               <option value="Modesto">Modesto</option>
             </select>
-            <button className="internSignupBttn" onClick={handleNext}>Next</button>
+
+            {/* Step 1 Button */}
+            <button className="internSignupBttn" onClick={handleNext}>
+              Next
+            </button>
           </>
         ) : (
           <>
+            {/* Step 2: Profile Picture Upload */}
             <ProfilePictureUpload onFileSelect={handleProfilePicSelect} />
-            <button className="internSignupBttn" onClick={handleSubmit}>Submit</button>
+            <button className="internSignupBttn" onClick={handleSubmit}>
+              Submit
+            </button>
           </>
         )}
       </form>

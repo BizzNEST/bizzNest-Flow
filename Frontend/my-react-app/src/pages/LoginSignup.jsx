@@ -8,16 +8,33 @@ import Visibility from "../assets/visibility.svg";
 import './LoginSignup.css';
 import logo from './logo.svg';
 
+/**
+ * LoginSignup component
+ * Allows both Admins to sign up and log in.
+ * Supports password visibility toggles and form validation.
+ */
 const LoginSignup = () => {
+  // UI state for toggling between Login and Signup
   const [isLogin, setIsLogin] = useState(true);
+
+  // Toggles for showing/hiding passwords
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [showAdminKey, setShowAdminKey] = useState(false);
+
+  // Error states
   const [errorMessage, setErrorMessage] = useState("");
   const [signupError, setSignupError] = useState("");
+
   const navigate = useNavigate();
 
-  const [loginData, setLoginData] = useState({ email: "", password: "" });
+  // State for login form
+  const [loginData, setLoginData] = useState({
+    email: "",
+    password: "",
+  });
+
+  // State for signup form
   const [signupData, setSignupData] = useState({
     firstName: "",
     lastName: "",
@@ -27,9 +44,17 @@ const LoginSignup = () => {
     adminKey: "",
   });
 
-  const handleLoginChange = (e) => setLoginData({ ...loginData, [e.target.name]: e.target.value });
-  const handleSignupChange = (e) => setSignupData({ ...signupData, [e.target.name]: e.target.value });
+  // Handle login form input changes
+  const handleLoginChange = (e) => {
+    setLoginData({ ...loginData, [e.target.name]: e.target.value });
+  };
 
+  // Handle signup form input changes
+  const handleSignupChange = (e) => {
+    setSignupData({ ...signupData, [e.target.name]: e.target.value });
+  };
+
+  // Submit login form
   const handleLogin = async (e) => {
     e.preventDefault();
     setErrorMessage("");
@@ -42,23 +67,29 @@ const LoginSignup = () => {
     }
   };
 
+  // Submit signup form
   const handleSignup = async (e) => {
     e.preventDefault();
     setSignupError("");
 
+    // Validate passwords
     if (signupData.password !== signupData.confirmPassword) {
       return setSignupError("Passwords do not match.");
     }
+
+    // Validate email domain
     if (!signupData.email.includes("@digitalnest.org")) {
       return setSignupError("Use a @digitalnest.org email.");
     }
+
+    // Password length check
     if (signupData.password.length < 8) {
       return setSignupError("Password must be at least 8 characters.");
     }
 
     try {
       await axios.post(`${process.env.REACT_APP_API_URL}/signup`, signupData);
-      setIsLogin(true);
+      setIsLogin(true); // Switch back to login tab on success
     } catch (error) {
       setSignupError("Failed to register. Please try again.");
     }
@@ -67,17 +98,22 @@ const LoginSignup = () => {
   return (
     <div className="LoginSignupPage">
       <div className="LoginSignupWrapper">
+        {/* Logo */}
         <div className="logo">
           <img src={logo} alt="bizzNest Flow Logo" className="navbar-logo" />
         </div>
+
+        {/* Auth Box */}
         <div className="LoginSignup">
           <div className="LoginSignup-container">
+            {/* Tab Selector */}
             <div className="tabs">
               <button className={`tab ${isLogin ? "active" : ""}`} onClick={() => setIsLogin(true)}>Login</button>
               <button className={`tab ${!isLogin ? "active" : ""}`} onClick={() => setIsLogin(false)}>Sign up</button>
               <div className={`sliderTab ${isLogin ? "login" : "signup"}`}></div>
             </div>
 
+            {/* Login Form */}
             {isLogin ? (
               <form onSubmit={handleLogin} className="LoginSignup-form">
                 <div className="internInputContainer">
@@ -86,14 +122,26 @@ const LoginSignup = () => {
                 </div>
                 <div className="internInputContainer">
                   <img src={Lock} alt="Password" className="internInputIcon" />
-                  <input type={showPassword ? "text" : "password"} name="password" placeholder="Password" value={loginData.password} onChange={handleLoginChange} />
-                  <img src={showPassword ? Visibility_Off : Visibility} alt="Toggle Visibility" className="internVisibilityIcon" onClick={() => setShowPassword(!showPassword)} />
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    name="password"
+                    placeholder="Password"
+                    value={loginData.password}
+                    onChange={handleLoginChange}
+                  />
+                  <img
+                    src={showPassword ? Visibility_Off : Visibility}
+                    alt="Toggle Visibility"
+                    className="internVisibilityIcon"
+                    onClick={() => setShowPassword(!showPassword)}
+                  />
                 </div>
                 {errorMessage && <p className="errorMessage">{errorMessage}</p>}
                 <button type="submit">Log in</button>
                 <span className="ForgotPassword" onClick={() => navigate("/forgot-password")}>Forgot Password?</span>
               </form>
             ) : (
+              // Signup Form
               <form onSubmit={handleSignup} className="LoginSignup-form">
                 <div className="nameContainer">
                   <input type="text" name="firstName" placeholder="First Name" value={signupData.firstName} onChange={handleSignupChange} />
@@ -132,10 +180,7 @@ const LoginSignup = () => {
                 </div>
                 {signupError && <p className="errorMessage">{signupError}</p>}
                 <button type="submit">Sign up</button>
-                <span
-                  className="internSignup"
-                  onClick={() => navigate("/internSignUp")}
-                >
+                <span className="internSignup" onClick={() => navigate("/internSignUp")}>
                   Are you an Intern?
                 </span>
               </form>

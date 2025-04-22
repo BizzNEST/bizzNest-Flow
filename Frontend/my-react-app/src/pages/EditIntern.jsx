@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import NavBar from "../components/Navbar/NavBar"; // Import the NavBar component
+import NavBar from "../components/Navbar/NavBar";
 import growth from "../assets/growth.svg";
 import returnArrow from "../assets/returnArrow.svg";
 import './EditIntern.css';
 
+// Mapping of departmentID to skill labels
 const skillLabels = {
   0: ["Frontend", "Backend", "Wordpress"],
   1: ["Photoshop", "Illustrator", "Figma"],
@@ -12,21 +13,25 @@ const skillLabels = {
 };
 
 const EditIntern = () => {
-  const { internID } = useParams();
+  const { internID } = useParams(); // Extract internID from URL
   const navigate = useNavigate();
 
+  // Form state for intern data and form status
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     location: "",
     departmentID: "",
-    skills: {}, // Skills are dynamically rendered based on department
+    skills: {}, // Key: toolID, Value: skill level
   });
 
-  const [originalData, setOriginalData] = useState(null);
+  const [originalData, setOriginalData] = useState(null); // Used for canceling/reverting
   const [successMessage, setSuccessMessage] = useState("");
-  const [isUpdated, setIsUpdated] = useState(false); // Track if anything was updated
+  const [isUpdated, setIsUpdated] = useState(false); // Button enable/disable toggle
 
+  /**
+   * Fetch intern data from API on mount
+   */
   useEffect(() => {
     const fetchInternData = async () => {
       try {
@@ -34,9 +39,9 @@ const EditIntern = () => {
         if (response.ok) {
           const data = await response.json();
 
-          // Map skills from the fetched data
+          // Convert skill array into an object keyed by toolID
           const skillsMap = data.skills.reduce((acc, skill) => {
-            acc[skill.toolID] = skill.skillLevel || 0; // Default to 0 for missing values
+            acc[skill.toolID] = skill.skillLevel || 0;
             return acc;
           }, {});
 
@@ -48,7 +53,6 @@ const EditIntern = () => {
             skills: skillsMap,
           };
 
-          // Set the formData state with the fetched data
           setFormData(internData);
           setOriginalData(internData);
         } else {
@@ -62,8 +66,12 @@ const EditIntern = () => {
     fetchInternData();
   }, [internID]);
 
+  /**
+   * Handles changes to all form inputs (text, select, number)
+   */
   const handleChange = (e) => {
     const { name, value } = e.target;
+
     if (name.startsWith("skill_")) {
       const toolID = name.split("_")[1];
       setFormData({
@@ -73,53 +81,42 @@ const EditIntern = () => {
     } else {
       setFormData({ ...formData, [name]: value });
     }
-    setIsUpdated(true); // Enable the button when something changes
+
+    setIsUpdated(true); // Mark form as edited
   };
 
+  /**
+   * Submits updated intern data (PUT or POST based on existing skills)
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const payload = {
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      location: formData.location,
+      departmentID: formData.departmentID,
+      webDevSkills: Object.fromEntries(Object.entries(formData.skills).filter(([id]) => id >= 0 && id <= 2)),
+      designSkills: Object.fromEntries(Object.entries(formData.skills).filter(([id]) => id >= 3 && id <= 5)),
+      filmSkills: Object.fromEntries(Object.entries(formData.skills).filter(([id]) => id >= 6 && id <= 7)),
+    };
+
+    const hasExistingSkills = Object.values(formData.skills).some(skill => skill > 0);
+
     try {
-      const payload = {
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        location: formData.location,
-        departmentID: formData.departmentID,
-        webDevSkills: Object.fromEntries(
-          Object.entries(formData.skills).filter(([toolID]) => Number(toolID) >= 0 && Number(toolID) <= 2)
-        ),
-        designSkills: Object.fromEntries(
-          Object.entries(formData.skills).filter(([toolID]) => Number(toolID) >= 3 && Number(toolID) <= 5)
-        ),
-        filmSkills: Object.fromEntries(
-          Object.entries(formData.skills).filter(([toolID]) => Number(toolID) >= 6 && Number(toolID) <= 7)
-        )
-      };
-
-      const hasExistingSkills = Object.values(formData.skills).some(skillLevel => skillLevel > 0);
-
-      let response;
-      if (hasExistingSkills) {
-        response = await fetch(`${process.env.REACT_APP_API_URL}/updateIntern/${internID}`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/${hasExistingSkills ? 'updateIntern' : 'addSkills'}/${internID}`,
+        {
+          method: hasExistingSkills ? "PUT" : "POST",
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
-        });
-      } else {
-        response = await fetch(`${process.env.REACT_APP_API_URL}/addSkills/${internID}`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(payload),
-        });
-      }
+        }
+      );
 
       if (response.ok) {
         setSuccessMessage("Intern updated successfully!");
-        setTimeout(() => setSuccessMessage(""), 3000); // Clear message after 3 seconds
-        setIsUpdated(false); // Disable the button after successful update
+        setTimeout(() => setSuccessMessage(""), 3000);
+        setIsUpdated(false);
       } else {
         alert("Failed to update or add skills");
       }
@@ -129,52 +126,59 @@ const EditIntern = () => {
     }
   };
 
+  /**
+   * Calculates the average skill level for all inputs
+   */
   const calculateAverageSkill = () => {
     const skillValues = Object.values(formData.skills);
     if (skillValues.length === 0) return 0;
-
     const total = skillValues.reduce((acc, skill) => acc + skill, 0);
     return Math.round((total / skillValues.length) * 10) / 10;
   };
 
-  const departmentSkills = skillLabels[formData.departmentID] || [];
-
+  /**
+   * Navigates back to interns list and resets form state
+   */
   const handleBack = () => {
-    if (originalData) {
-      setFormData(originalData);
-    }
+    if (originalData) setFormData(originalData);
     navigate('/interns');
   };
 
+  // Get skill labels based on department
+  const departmentSkills = skillLabels[formData.departmentID] || [];
+
   return (
     <div className="big-container">
-      <NavBar /> {/* Add NavBar at the top */}
+      <NavBar />
+
       <div className="editInternContainer">
         <div className="formWrapper">
+          
+          {/* Header Section */}
           <div className="editInternHeaderWrapper">
             <button className="back-button" onClick={handleBack}>
               <img src={returnArrow} alt="Back" />
             </button>
-            <button 
-              className="growth-button" 
-              onClick={(e) => { 
-                e.stopPropagation(); 
-                navigate(`/internGrowthPage/${internID}`); 
+            <button
+              className="growth-button"
+              onClick={(e) => {
+                e.stopPropagation();
+                navigate(`/internGrowthPage/${internID}`);
               }}
             >
               <img src={growth} alt="growth" />
               <span>Intern Growth</span>
             </button>
           </div>
+
           <h2 className="editInternHeader">Edit Intern</h2>
 
-          {successMessage && (
-            <div className="successPopup">
-              {successMessage}
-            </div>
-          )}
+          {successMessage && <div className="successPopup">{successMessage}</div>}
 
+          {/* Intern Edit Form */}
           <form onSubmit={handleSubmit} className="editInternForm">
+
+            {/* Name Inputs */}
             <div className="updateNameContainer">
               <label>
                 <h3>First Name</h3>
@@ -198,6 +202,7 @@ const EditIntern = () => {
               </label>
             </div>
 
+            {/* Location and Department */}
             <div className="updateLocationDepartmentContainer">
               <label>
                 <h3>Location</h3>
@@ -221,13 +226,14 @@ const EditIntern = () => {
               </label>
             </div>
 
+            {/* Skill Inputs */}
             <div className="updateSkillLevelContainer">
               <h3>Skill Levels</h3>
               <div className="departmentSkillLevelsContainer">
                 {departmentSkills.map((label, index) => {
-                  const toolID = Object.keys(skillLabels).find(
-                    (key) => skillLabels[key].includes(label)
-                  ) * 3 + index;
+                  // Calculate toolID based on department and index
+                  const toolID = Object.keys(skillLabels).find((key) => skillLabels[key].includes(label)) * 3 + index;
+
                   return (
                     <label key={toolID} className="skillItem">
                       {label} Skill:
@@ -247,11 +253,13 @@ const EditIntern = () => {
               </div>
             </div>
 
+            {/* Submit Button */}
             <div className="buttonsContainer">
               <button className="updateInternButton" type="submit" disabled={!isUpdated}>
                 Update
               </button>
             </div>
+
           </form>
         </div>
       </div>

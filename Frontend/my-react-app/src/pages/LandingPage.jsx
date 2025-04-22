@@ -1,6 +1,8 @@
 import React from "react";
-import { data, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./LandingPage.css";
+
+// Assets
 import users from "../assets/users.svg";
 import Logo from "../assets/bizznestflowlow-black-logo.svg";
 import chartline from "../assets/chart-line.svg";
@@ -10,12 +12,16 @@ import piechart from "../assets/chart-pie.svg";
 import chartColumn from "../assets/chart-column.svg";
 import hero2 from "../assets/graphsHero.svg";
 
+/**
+ * LandingPage component for the marketing-facing homepage.
+ * Includes hero section, features, how-it-works steps, and navigation.
+ */
 const LandingPage = () => {
   const navigate = useNavigate();
 
   return (
     <div className="landingPageWrapper">
-      {/* Header*/}
+      {/* =================== Header =================== */}
       <header className="landingHeader">
         <div className="logoLandingPageContainer">
           <img src={Logo} alt="Logo" />
@@ -24,23 +30,25 @@ const LandingPage = () => {
           <a href="#features">Features</a>
           <a href="#how-it-works">How It Works</a>
         </nav>
-        <button className="landingPageGetStarted" onClick={() => navigate("/loginsignup")}>GET STARTED</button>
+        <button className="landingPageGetStarted" onClick={() => navigate("/loginsignup")}>
+          GET STARTED
+        </button>
       </header>
 
-      {/* Hero */}
+      {/* =================== Hero Section =================== */}
       <section className="hero">
         <div className="heroText">
           <h1>
-            Optimize Your <span className="highlight">Talent Growth</span>{" "}
-            Journey
+            Optimize Your <span className="highlight">Talent Growth</span> Journey
           </h1>
           <p>
-            Match the right interns with the right projects using our
-            intelligent data-driven platform that maximizes learning and
-            identifies future leaders.
+            Match the right interns with the right projects using our intelligent
+            data-driven platform that maximizes learning and identifies future leaders.
           </p>
           <div className="heroButtons">
-            <button className="heroBttn" onClick={() => navigate("/loginsignup")}>Start Optimizing Today</button>
+            <button className="heroBttn" onClick={() => navigate("/loginsignup")}>
+              Start Optimizing Today
+            </button>
           </div>
         </div>
         <div className="heroImage">
@@ -48,41 +56,42 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* info */}
+      {/* =================== What is bizzNest Flow =================== */}
       <div className="landingPageHero">
         <div className="learnMoreLandingPage">
           <h1>bizzNest Flow</h1>
           <p>
-            bizzNest Flow is an intelligent growth optimizer that helps admins
-            assign interns to projects based on their skill level and the
-            project's difficulty. Using a data-driven approach, it ensures
-            interns are placed in roles that maximize their learning while
-            identifying ideal candidates for leadership opportunities.
+            bizzNest Flow is an intelligent growth optimizer that helps admins assign interns
+            to projects based on their skill level and the project's difficulty. Using a
+            data-driven approach, it ensures interns are placed in roles that maximize their
+            learning while identifying ideal candidates for leadership opportunities.
           </p>
         </div>
         <img className="hero2" src={hero2} alt="graph" />
       </div>
 
-      {/* Features Section */}
+      {/* =================== Features =================== */}
       <section id="features" className="features">
         <h1 className="featuresHeader">Powerful Features</h1>
         <p className="sectionDescription">
-          Our platform offers a comprehensive suite of tools designed to
-          optimize your talent management process.
+          Our platform offers a comprehensive suite of tools designed to optimize your
+          talent management process.
         </p>
 
         <div className="featuresGrid">
+          {/* Skill Matching */}
           <div className="featureCard">
             <div className="iconContainerGreen">
               <img src={users} alt="users" className="usersIcon" />
             </div>
-
             <h3>Skill Matching</h3>
             <p>
               Automatically match interns with projects that align with their
               skill level and learning goals.
             </p>
           </div>
+
+          {/* Growth Analytics */}
           <div className="featureCard">
             <div className="iconContainerPink">
               <img src={chartline} alt="chartline" />
@@ -93,6 +102,8 @@ const LandingPage = () => {
               performance metrics.
             </p>
           </div>
+
+          {/* Data-Driven Insights */}
           <div className="featureCard">
             <div className="iconContainerGreen">
               <img src={database} alt="database" />
@@ -103,6 +114,8 @@ const LandingPage = () => {
               analytics.
             </p>
           </div>
+
+          {/* Leadership Identification */}
           <div className="featureCard">
             <div className="iconContainerPink">
               <img src={zap} alt="zap" />
@@ -113,6 +126,8 @@ const LandingPage = () => {
               performance metrics.
             </p>
           </div>
+
+          {/* Project Difficulty Assessment */}
           <div className="featureCard">
             <div className="iconContainerGreen">
               <img src={piechart} alt="piechart" />
@@ -123,6 +138,8 @@ const LandingPage = () => {
               and required skills.
             </p>
           </div>
+
+          {/* Performance Reporting */}
           <div className="featureCard">
             <div className="iconContainerPink">
               <img src={chartColumn} alt="chartColumn" />
@@ -136,7 +153,7 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* how it works */}
+      {/* =================== How It Works =================== */}
       <section id="how-it-works" className="howItWorks">
         <div className="howItWorksContainer">
           <div className="textCenter">
@@ -182,7 +199,7 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* footer */}
+      {/* =================== Footer =================== */}
       <footer className="footer">
         <p className="footerRights">
           © 2025 bizzNest Flow. All rights reserved.

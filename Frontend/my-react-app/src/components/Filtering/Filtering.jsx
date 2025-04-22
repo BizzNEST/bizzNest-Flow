@@ -1,17 +1,22 @@
 import React from 'react';
 import './Filtering.css';
 
+/**
+ * Filtering component
+ * Provides dropdowns for selecting department and location filters,
+ * and a button to apply those filters.
+ */
 const Filtering = ({
-                       selectedDepartment,
-                       setSelectedDepartment,
-                       selectedLocation,
-                       setSelectedLocation,
-                       onApplyFilters,
-                   }) => {
+    selectedDepartment,
+    setSelectedDepartment,
+    selectedLocation,
+    setSelectedLocation,
+    onApplyFilters,
+}) => {
     return (
         <div className="filtering">
 
-            {/* Dropdown for Department */}
+            {/* Dropdown for selecting a department */}
             <div>
                 <label htmlFor="department">Department</label>
                 <select
@@ -26,7 +31,7 @@ const Filtering = ({
                 </select>
             </div>
 
-            {/* Dropdown for Location */}
+            {/* Dropdown for selecting a location */}
             <div>
                 <label htmlFor="location">Location</label>
                 <select
@@ -43,6 +48,7 @@ const Filtering = ({
                 </select>
             </div>
 
+            {/* Button to apply the selected filters */}
             <button onClick={onApplyFilters}>Apply Filters</button>
         </div>
     );

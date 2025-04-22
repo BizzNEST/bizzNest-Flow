@@ -2,23 +2,32 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './NewProject.css';
 
+/**
+ * NewProject Component
+ * A form that allows users to create a new project by selecting a department,
+ * providing a title and description, and assigning tool difficulty levels.
+ */
 const NewProject = () => {
+  // Form input states
   const [projectTitle, setProjectTitle] = useState('');
   const [projectInfo, setProjectInfo] = useState('');
   const [department, setDepartment] = useState('');
   const [toolInputs, setToolInputs] = useState({});
-  const [statusMessage, setStatusMessage] = useState(''); // for displaying success or error messages
+
+  // UI feedback and form state
+  const [statusMessage, setStatusMessage] = useState('');
   const [isFormValid, setIsFormValid] = useState(false);
 
+  const navigate = useNavigate();
+
+  // Tool names grouped by department
   const departmentTools = {
     "Web Development": ["Frontend", "Backend", "Wordpress"],
     "Design": ["Photoshop", "Illustrator", "Figma"],
     "Film": ["Premiere Pro", "Camera Work"]
   };
 
-  const navigate = useNavigate();
-
-  // Handlers for form fields
+  // Input handlers for project title and description
   const handleProjectTitleChange = (event) => {
     setProjectTitle(event.target.value);
   };
@@ -27,20 +36,27 @@ const NewProject = () => {
     setProjectInfo(event.target.value);
   };
 
+  /**
+   * Handles department selection
+   * Resets the toolInputs object with empty values for tools in the selected department
+   */
   const handleDepartmentChange = (event) => {
     const selectedDepartment = event.target.value;
     setDepartment(selectedDepartment);
 
-    // Reset tool inputs when department changes
     const selectedTools = departmentTools[selectedDepartment] || [];
     setToolInputs(
       selectedTools.reduce((acc, tool) => {
-        acc[tool] = ''; // Initialize with empty difficulty values
+        acc[tool] = ''; // Initialize difficulty as an empty string
         return acc;
       }, {})
     );
   };
 
+  /**
+   * Handles updates to individual tool difficulty fields
+   * Parses values into floats, or sets as an empty string
+   */
   const handleToolInputChange = (tool, value) => {
     setToolInputs((prevInputs) => ({
       ...prevInputs,
@@ -48,7 +64,10 @@ const NewProject = () => {
     }));
   };
 
-  // Ensure form is valid before enabling the submit button
+  /**
+   * useEffect: Validates form
+   * Enables submit button only if all fields and tool inputs are valid
+   */
   useEffect(() => {
     const areAllFieldsFilled =
       projectTitle.trim().length > 0 &&
@@ -62,21 +81,27 @@ const NewProject = () => {
     setIsFormValid(areAllFieldsFilled && areAllToolsFilled);
   }, [projectTitle, projectInfo, department, toolInputs]);
 
+  /**
+   * Submits form data to the backend API
+   * Sends POST request to /addProject and redirects on success
+   */
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if (!isFormValid) return;
 
-    if (!isFormValid) return; // Prevent submission if form is invalid
-
+    // Convert tool input data to array of objects with toolID and difficulty
     const tools = Object.entries(toolInputs).map(([toolName, difficulty]) => {
       const toolID = Object.keys(departmentTools)
         .flatMap((key) => departmentTools[key])
         .indexOf(toolName);
+
       return {
-        toolID: toolID >= 0 ? toolID : null, // Map toolName to its ID (based on order)
+        toolID: toolID >= 0 ? toolID : null,
         difficulty: parseFloat(difficulty),
       };
     });
 
+    // Final payload to send
     const projectData = {
       projectTitle,
       projectDescription: projectInfo,
@@ -84,18 +109,18 @@ const NewProject = () => {
       tools,
     };
 
+    // POST request to backend
     try {
       const response = await fetch(`${process.env.REACT_APP_API_URL}/addProject`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(projectData),
       });
 
       if (response.ok) {
         const result = await response.json();
         setStatusMessage('Project added successfully!');
+        // Navigate to recommendation page with query params
         navigate(`/recommendations?projectID=${result.projectID}&departmentID=${result.departmentID}`);
       } else {
         const errorData = await response.json();
@@ -110,7 +135,7 @@ const NewProject = () => {
   return (
     <div className="new-project-container">
       <form onSubmit={handleSubmit}>
-        {/* Add fields for project details */}
+        {/* Project Title Input */}
         <input 
           type="text" 
           placeholder="Project Title" 
@@ -118,6 +143,7 @@ const NewProject = () => {
           onChange={handleProjectTitleChange}
         />
 
+        {/* Project Info Input */}
         <input 
           type="text" 
           placeholder="Project Info" 
@@ -125,7 +151,7 @@ const NewProject = () => {
           onChange={handleProjectInfoChange}
         />
 
-        {/* Dropdown menu here */}
+        {/* Department Selection Dropdown */}
         <select 
           name="department" 
           className="department-dropdown"
@@ -138,7 +164,7 @@ const NewProject = () => {
           <option value="Film">Film</option>
         </select>
 
-        {/* Conditionally render tool input fields */}
+        {/* Tool Difficulty Inputs */}
         {department && (
           <div className="tool-input-container">
             {Object.keys(toolInputs).map((tool) => (
@@ -158,16 +184,22 @@ const NewProject = () => {
           </div>
         )}
 
+        {/* Submit Button */}
         <div className="submit-btn-div">
-          {/* Button will be disabled if form is not valid */}
-          <button type="submit" className="submit-btn" disabled={!isFormValid} style={{ 
-            backgroundColor: isFormValid ? '#00CFFF' : '#045c68 ', 
-            cursor: isFormValid ? 'pointer' : 'not-allowed' 
-          }}>
+          <button
+            type="submit"
+            className="submit-btn"
+            disabled={!isFormValid}
+            style={{ 
+              backgroundColor: isFormValid ? '#00CFFF' : '#045c68',
+              cursor: isFormValid ? 'pointer' : 'not-allowed'
+            }}
+          >
             Submit
           </button>
         </div>
 
+        {/* Status Message (success or error) */}
         {statusMessage && <p className="status-message">{statusMessage}</p>}
       </form>
     </div>
