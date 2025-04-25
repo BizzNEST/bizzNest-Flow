@@ -33,6 +33,8 @@ const LoginSignup = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     setErrorMessage("");
+    console.log('API URL is:', import.meta.env.VITE_API_URL);
+
     try {
       const response = await axios.post(`${import.meta.env.VITE_API_URL}/login`, loginData);
       localStorage.setItem("token", response.data.token);
