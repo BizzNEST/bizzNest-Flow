@@ -1,0 +1,29 @@
+.overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,.45);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 9999;
+  }
+  
+  /* chat container */
+  .modal-box {
+    width: 90%; max-width: 480px; max-height: 90vh;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex; flex-direction: column;
+    position: relative;
+  }
+  
+  /* ✕ button */
+  .close-btn {
+    position: absolute;
+    top: 10px; right: 12px;
+    background: transparent;
+    border: none;
+    font-size: 1.4rem;
+    cursor: pointer;
+    color: #666;
+  }
+  .close-btn:hover { color: #000; }
+  
