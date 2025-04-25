@@ -18,8 +18,12 @@ import completeProjectCtrl from '../controllers/completeProjectCtrl.js';
 import getCompletedProjectsCtrl from '../controllers/getCompletedProjectsCtrl.js';
 import restoreProjectCtrl from '../controllers/restoreProjectCtrl.js';
 import internMonthlyGrowthCtrl from '../controllers/internMonthlyGrowthCtrl.js';
+import testRoute from "../routes/test.js"; // ✅ new correct path
+
 
 const routes = (app) => {
+    app.use("/api", testRoute);
+
     app.route('/basePage')
     .get(baseCtrl.basePage);
 
