@@ -1,5 +1,5 @@
 import './App.css';
-import React from 'react';
+import React, { useState } from 'react';
 import HomePage from './pages/HomePage';
 import NewProject from './components/NewProject/NewProject';
 import Recommendations from './pages/recommendations';
@@ -14,9 +14,12 @@ import EditIntern from './pages/EditIntern'
 import InternGrowthPage from './pages/InternGrowthPage';
 import CompletedProjects from './pages/CompletedProjects';
 import LandingPage from './pages/LandingPage';
-import Chatbot from './pages/Chatbot';
+import Chatbot from './components/Chatbot/Chatbot';
+import Modal from './components/Modal/ChatbotModal';
+import ChatbotImage from '../src/assets/bot-message-square.svg';
 
 function App() {
+  const [chatOpen, setChatOpen] = useState(false);
   return (
     <Router>
       <Routes>
@@ -37,8 +40,15 @@ function App() {
         <Route path="/editIntern/:internID" element={ <ProtectedRoute><EditIntern/></ProtectedRoute>}/>
         <Route path="/internGrowthPage/:internID" element={ <ProtectedRoute><InternGrowthPage/></ProtectedRoute>}/>
         <Route path="/completedProjects" element={ <ProtectedRoute><CompletedProjects/></ProtectedRoute>}/>
-        <Route path="/chatbot" element={ <ProtectedRoute><Chatbot/></ProtectedRoute>}/>
       </Routes>
+      <button className="fab" onClick={() => setChatOpen(true)} aria-label="Open chat">
+           <img src={ChatbotImage} alt='Chatbot'/>
+      </button>
+
+            {/* ── modal with chatbot ───────── */}
+            <Modal isOpen={chatOpen} onClose={() => setChatOpen(false)}>
+              <Chatbot />
+            </Modal>
     </Router>
   );
 }
