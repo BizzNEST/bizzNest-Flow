@@ -19,8 +19,12 @@ import getCompletedProjectsCtrl from '../controllers/getCompletedProjectsCtrl.js
 import restoreProjectCtrl from '../controllers/restoreProjectCtrl.js';
 import internMonthlyGrowthCtrl from '../controllers/internMonthlyGrowthCtrl.js';
 import updateInternsProjectsCtrl from '../controllers/updateInternsProjectCtrl.js';
+import chatbotCtrl from "../controllers/chatbotCtrl.js";
+
 
 const routes = (app) => {
+    app.post("/api/chat", chatbotCtrl.chat);
+
     app.route('/basePage')
     .get(baseCtrl.basePage);
 
