@@ -6,11 +6,11 @@ import Recommendations from './pages/recommendations';
 import Interns from './pages/Interns';
 import ProjectInfoPage from './pages/ProjectInfoPage';
 import InternSignup from './pages/InternSignup';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate, useLocation } from 'react-router-dom';
 import ProtectedRoute from './components/ProtectedRoutes/ProtectedRoutes';
 import LoginSignup from './pages/LoginSignup';
 import Thankyou from './pages/Thankyou';
-import EditIntern from './pages/EditIntern'
+import EditIntern from './pages/EditIntern';
 import InternGrowthPage from './pages/InternGrowthPage';
 import CompletedProjects from './pages/CompletedProjects';
 import LandingPage from './pages/LandingPage';
@@ -18,10 +18,29 @@ import Chatbot from './components/Chatbot/Chatbot';
 import Modal from './components/Modal/ChatbotModal';
 import ChatbotImage from '../src/assets/bot-message-square.svg';
 
-function App() {
+//component to handle Routes and Chatbot together
+function AppContent() {
+  const location = useLocation();
   const [chatOpen, setChatOpen] = useState(false);
+
+  // Path where chatbot can be accessed
+  const privatePaths = [
+    '/home', 
+    '/new-project',
+    '/recommendations',
+    '/interns',
+    '/CompletedProjects'
+  ];
+
+  // takes into account the dynamic pages(when checking projects or individual interns)
+  const isPrivateDynamicPath = location.pathname.startsWith('/project/')
+    || location.pathname.startsWith('/editIntern/')
+    || location.pathname.startsWith('/internGrowthPage/');
+
+  const shouldShowChatbot = privatePaths.includes(location.pathname) || isPrivateDynamicPath;
+
   return (
-    <Router>
+    <>
       <Routes>
         {/* Public Routes */}
         <Route path='/' element={<LandingPage/>}/>
@@ -41,14 +60,26 @@ function App() {
         <Route path="/internGrowthPage/:internID" element={ <ProtectedRoute><InternGrowthPage/></ProtectedRoute>}/>
         <Route path="/completedProjects" element={ <ProtectedRoute><CompletedProjects/></ProtectedRoute>}/>
       </Routes>
-      <button className="fab" onClick={() => setChatOpen(true)} aria-label="Open chat">
-           <img src={ChatbotImage} alt='Chatbot'/>
-      </button>
 
-            {/* ── modal with chatbot ───────── */}
-            <Modal isOpen={chatOpen} onClose={() => setChatOpen(false)}>
-              <Chatbot />
-            </Modal>
+      {shouldShowChatbot && (
+        <>
+          <button className="fab" onClick={() => setChatOpen(true)} aria-label="Open chat">
+            <img src={ChatbotImage} alt='Chatbot'/>
+          </button>
+
+          <Modal isOpen={chatOpen} onClose={() => setChatOpen(false)}>
+            <Chatbot />
+          </Modal>
+        </>
+      )}
+    </>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <AppContent />
     </Router>
   );
 }
