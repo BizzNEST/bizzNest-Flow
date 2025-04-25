@@ -14,6 +14,7 @@ import EditIntern from './pages/EditIntern'
 import InternGrowthPage from './pages/InternGrowthPage';
 import CompletedProjects from './pages/CompletedProjects';
 import LandingPage from './pages/LandingPage';
+import Chatbot from './pages/Chatbot';
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
         <Route path="/editIntern/:internID" element={ <ProtectedRoute><EditIntern/></ProtectedRoute>}/>
         <Route path="/internGrowthPage/:internID" element={ <ProtectedRoute><InternGrowthPage/></ProtectedRoute>}/>
         <Route path="/completedProjects" element={ <ProtectedRoute><CompletedProjects/></ProtectedRoute>}/>
+        <Route path="/chatbot" element={ <ProtectedRoute><Chatbot/></ProtectedRoute>}/>
       </Routes>
     </Router>
   );

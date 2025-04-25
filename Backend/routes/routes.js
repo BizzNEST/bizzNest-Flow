@@ -18,11 +18,11 @@ import completeProjectCtrl from '../controllers/completeProjectCtrl.js';
 import getCompletedProjectsCtrl from '../controllers/getCompletedProjectsCtrl.js';
 import restoreProjectCtrl from '../controllers/restoreProjectCtrl.js';
 import internMonthlyGrowthCtrl from '../controllers/internMonthlyGrowthCtrl.js';
-import testRoute from "../routes/test.js"; // ✅ new correct path
+import chatbotCtrl from "../controllers/chatbotCtrl.js";
 
 
 const routes = (app) => {
-    app.use("/api", testRoute);
+    app.post("/api/chat", chatbotCtrl.chat);
 
     app.route('/basePage')
     .get(baseCtrl.basePage);
