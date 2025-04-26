@@ -18,6 +18,7 @@ import completeProjectCtrl from '../controllers/completeProjectCtrl.js';
 import getCompletedProjectsCtrl from '../controllers/getCompletedProjectsCtrl.js';
 import restoreProjectCtrl from '../controllers/restoreProjectCtrl.js';
 import internMonthlyGrowthCtrl from '../controllers/internMonthlyGrowthCtrl.js';
+import getDataSummaryCtrl from '../controllers/getDataSummaryCtrl.js';
 
 const routes = (app) => {
     app.route('/basePage')
@@ -28,6 +29,12 @@ const routes = (app) => {
 
     app.route('/login')
      .post(loginCtrl.login);
+
+    app.route('/getInternDataSummary')
+     .get(getDataSummaryCtrl.getInternSummary);
+
+    app.route('/getProjectsDataSummary')
+     .get(getDataSummaryCtrl.getProjectsSummary);
 
     app.route('/getProjects') 
     .get(getProjectCtrl.getProjects)
