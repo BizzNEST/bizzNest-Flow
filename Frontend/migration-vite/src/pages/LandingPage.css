@@ -328,3 +328,113 @@
   max-width: 100vw;
   margin-top: auto;
 }
+
+.mobileMenuToggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.mobileMenuToggle img {
+  width: 32px;
+  height: 32px;
+}
+
+@media screen and (max-width: 480px) {
+  .landingHeader img {
+    height: 40px;
+    text-align: start;
+  }
+
+  .landingHeader {
+    flex-wrap: wrap;
+    padding: 20px;
+    height: auto;
+  }
+
+  .landingPageNav {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 10px;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .landingPageNav a{
+    font-size: 1.2em;
+    text-decoration: underline;
+  }
+
+  .landingPageNav.mobileOpen {
+    display: flex;
+  }
+
+  .landingPageGetStarted {
+    display: none;
+  }
+
+  .mobileMenuToggle {
+    display: block;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+
+  .heroText p{
+    font-size: 1em;
+  }
+
+  .heroButtons{
+    display: flex;
+    justify-content: center;
+  }
+
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    padding: 40px 20px;
+  }
+
+  .heroText, .heroImage{
+    max-width: 100%;
+  }
+
+  .heroImage img{
+    padding-top: 10%;
+    height: 40vh;
+    width: 100%;
+  }
+
+  .featuresGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .landingPageHero {
+    flex-direction: column;
+    padding: 30px 20px;
+  }
+
+  .learnMoreLandingPage {
+    width: 85%;
+    margin-bottom: 20px;
+    & p{
+      font-size: 1.1em;
+    }
+  }
+
+  .landingPageHero img {
+    width: 90%;
+    max-width: 400px;
+  }
+
+  .howItWorksSubtitle{
+    width: 80%;
+    font-size: 16px;
+  }
+
+  .stepArrow{
+    display: none;
+  }
+}
