@@ -70,7 +70,6 @@ const Chatbot = () => {
 
     return (
         <div className="chatbot-container">
-            <div className="header">BizzNest Assistant</div>
 
             <div className="messages" ref={messagesContainerRef}>
                 {messages.map((msg, idx) => (
@@ -87,13 +86,13 @@ const Chatbot = () => {
                 )}
             </div>
 
-            <div className="input-area">
+            <div className="ai-input-area">
                 <input 
                     type="text"
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                     onKeyPress={handleKeyPress}
-                    placeholder="Ask about intern/project matches..."
+                    placeholder="Hi I'm Harvery! How can I help you?"
                     disabled={isTyping}
                 />
                 <button onClick={sendMessage} disabled={!input.trim() || isTyping}>
