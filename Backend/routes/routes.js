@@ -34,10 +34,10 @@ const routes = (app) => {
     app.route('/login')
      .post(loginCtrl.login);
 
-    app.route('/getInternDataSummary')
+    app.route('/api/getInternDataSummary')
      .get(getDataSummaryCtrl.getInternSummary);
 
-    app.route('/getProjectsDataSummary')
+    app.route('/api/getProjectsDataSummary')
      .get(getDataSummaryCtrl.getProjectsSummary);
 
     app.route('/getProjects') 
