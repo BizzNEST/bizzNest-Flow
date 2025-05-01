@@ -33,11 +33,14 @@ const LoginSignup = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     setErrorMessage("");
+    console.log('API URL is:', import.meta.env.VITE_API_URL);
+
     try {
+      console.log("API URL is:", import.meta.env.VITE_API_URL);
       const response = await axios.post(`${import.meta.env.VITE_API_URL}/login`, loginData);
       localStorage.setItem("token", response.data.token);
       navigate("/home");
-    } catch (error) {
+    } catch {
       setErrorMessage("Incorrect email or password.");
     }
   };
@@ -59,7 +62,7 @@ const LoginSignup = () => {
     try {
       await axios.post(`${import.meta.env.VITE_API_URL}/signup`, signupData);
       setIsLogin(true);
-    } catch (error) {
+    } catch {
       setSignupError("Failed to register. Please try again.");
     }
   };
