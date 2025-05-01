@@ -21,7 +21,7 @@ const chatbotCtrl = {
       // const [projectInfo] = await pool.query("SELECT * FROM projects WHERE id = ?", [projectId]);
 
       const prompt = `
-You are BizzNestBot, a helpful assistant for matching interns to projects.
+You are Harvey, a helpful assistant for giving summaries to users.
 
 Project name: ${projectName || "Not specified"}
 Required skills: ${requiredSkills || "Not specified"}
