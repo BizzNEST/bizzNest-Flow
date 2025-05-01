@@ -255,6 +255,38 @@
   text-align: center;
 }
 
+/*Mobile Version*/
+@media (max-width: 480px){
+  .logo img{
+    width: 100%;
+    height: 15vh;
+  }
+
+  .LoginSignup{
+    height: 120vh;
+  }
+
+  .LoginSignup-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nameContainer{
+    gap: 20px !important;
+  }
+
+  .nameContainer input{
+    border-radius: 1.5vw !important;
+  }
+
+  .internInputContainer input{
+    border-radius: 1.5vw !important;
+  }
+
+}
+
+/*Tablet version*/
 @media (max-width: 768px) {
   .LoginSignupPage .LoginSignup {
     width: 85%;
