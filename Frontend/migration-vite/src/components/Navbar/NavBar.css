@@ -60,3 +60,19 @@
   flex-direction: column;
   
 }
+
+
+@media (max-width: 480px){
+  .navbar{
+    padding: 0 20px 0px 0px;
+  }
+
+  #logo{
+    padding: 20px 0 20px 20px;
+  }
+
+  .navbar-logo{
+    height: 4vh;
+  }
+
+}
