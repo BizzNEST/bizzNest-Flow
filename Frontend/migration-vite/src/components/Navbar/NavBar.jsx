@@ -75,7 +75,7 @@ const NavBar = () => {
             />
             {isMenuOpen && (
               <ul ref={menuRef} className="menu-items mobile-menu">
-                <li><Link to="/" className="nav-link" onClick={() => setIsMenuOpen(false)}>Home</Link></li>
+                <li><Link to="/home" className="nav-link" onClick={() => setIsMenuOpen(false)}>Home</Link></li>
                 <li><Link to="/interns" className="nav-link" onClick={() => setIsMenuOpen(false)}>Interns</Link></li>
                 <li><Link to="/CompletedProjects" className="nav-link" onClick={() => setIsMenuOpen(false)}>Projects</Link></li>
               </ul>
