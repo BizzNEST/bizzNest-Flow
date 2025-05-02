@@ -63,6 +63,17 @@
 
 
 @media (max-width: 480px){
+  @keyframes slideIn {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
   .navbar{
     padding: 0 20px 0px 0px;
   }
@@ -74,5 +85,58 @@
   .navbar-logo{
     height: 4vh;
   }
+  .sliding-drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 260px;
+    height: 100%;
+    /* background: linear-gradient(to left, rgb(45, 212, 191), rgb(59, 130, 246)); */
+    background: #222;
+    color: white;
+    padding: 20px;
+    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.2);
+    z-index: 1001;
+    animation: slideIn 0.4s ease-out forwards;
+  }
+  
+  .drawer-backdrop {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+  }
+  
+  .drawer-links {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    height: 100%;
+    align-items: center;
+    margin-top: 100%;
+  }
+  
+  .drawer-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.8rem;
+  }
+  
+  .drawer-links a:hover {
+    color: #e03997;
+  }
+  
+  .nav-close-btn {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin-left: auto;
+    display: block;
+  }
+  
 
 }
