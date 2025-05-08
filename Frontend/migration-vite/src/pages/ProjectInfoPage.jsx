@@ -185,7 +185,7 @@ const ProjectInfoPage = () => {
           <button className="completeButton" onClick={completeProject}>
             Mark Complete
           </button>
-          <button
+          {<button
             className="editInternsButton"
             onClick={() =>
               navigate(
@@ -194,7 +194,7 @@ const ProjectInfoPage = () => {
             }
           >
             Edit Interns
-          </button>
+          </button>}
         </div>
       </div>
     </main>

@@ -7,7 +7,6 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  /* Makes sure the page takes the full viewport height */
 }
 
 .landingHeader {
@@ -17,6 +16,7 @@
   align-items: center;
   height:100px;
   background: #eeeff0;
+  position: relative;
 }
 
 .logoLandingPageContainer {
@@ -45,7 +45,7 @@
 .landingPageGetStarted {
   background: linear-gradient(to right, #00bcd4, #25ffc1);
   color: white;
-  width: 15vw;
+  width: 175px;
   height: 7vh;
   border-radius: 10px;
   border: none;
@@ -75,16 +75,18 @@
   }
 }
 
-/******Hero******/
+/* --- Hero Section (Base - Flex Row) --- */
 .hero {
-  display: flex;
+  display: flex; /* Use flexbox */
+  flex-direction: row; /* Default side-by-side */
   justify-content: space-between;
   align-items: center;
   padding: 60px 40px;
 }
 
 .heroText {
-  max-width: 50%;
+  max-width: 50%; /* Limit width on desktop */
+  flex-shrink: 1; /* Allow text block to shrink */
 }
 
 .heroText h1 {
@@ -109,12 +111,20 @@
   gap: 15px;
 }
 
-.heroImage img {
-  height: 65vh;
-  max-width: 500px;
+.heroImage {
+   flex-shrink: 0; /* Prevent image container from shrinking */
+   max-width: 50%; /* Limit width */
 }
 
-/********Features*******/
+.heroImage img {
+  height: 65vh; /* Original height */
+  max-width: 500px; /* Original max width */
+  width: 100%; /* Scale within container */
+  object-fit: contain;
+  display: block;
+}
+
+/* --- Features Section --- */
 .features {
   text-align: center;
   color: black;
@@ -174,23 +184,27 @@
   filter: invert(1);
 }
 
-
+/* --- Landing Page Hero Section (Base - Flex Row) --- */
 .landingPageHero {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 50px;
-  padding-bottom: 50px;
-  background: #eeeff0;
-}
+  display: grid;                     /* Change to Grid */
+  /* Define 2 columns: Text flexible (1fr), Image auto-sized */
+  grid-template-columns: repeat(2, 50%);
+  gap: 40px;                         /* Add gap for spacing (adjust 40px as needed) */
+  align-items: center;               /* Keep vertical alignment */
+  padding: 50px 50px;              /* Keep padding */
+  background: #eeeff0;             /* Keep background */
 
+  /* Removed flex-direction: row; */
+  /* Removed justify-content: space-between; */
+}
 .learnMoreLandingPage {
   background: linear-gradient(to right, #00bcd4, #25ffc1);
   text-align: center;
   padding: 2% 5%;
-  margin-top: 3%;
-  width: 30%;
+  margin-top: 0; /* Removed top margin */
+  width: 100%; /* Adjusted base width */
+  max-width: 500px; /* Added max width */
+  flex-shrink: 1; /* Allow shrinking */
   border-radius: 30px;
   display: flex;
   flex-direction: column;
@@ -214,9 +228,17 @@
   margin-top: 0;
 }
 
+.landingPageHero .heroImageContainer { /* Optional container for image */
+   flex-shrink: 0;
+   max-width: 50%;
+}
+
 .landingPageHero img {
-  width: 650px;
+  width: 100%; /* Take width of container */
+  max-width: 650px; /* Original max width */
+  height: auto; /* Maintain aspect ratio */
   border-radius: 10px;
+  display: block;
 }
 
 .landingPageHero button {
@@ -238,7 +260,7 @@
   }
 }
 
-/*******HowItWorks******/
+/* --- HowItWorks Section --- */
 .howItWorks {
   width: 100%;
   max-width: 100%;
@@ -253,7 +275,6 @@
   margin: 0 auto;
 }
 
-/****** Section Titles ******/
 .howItWorksTitle {
   font-size: 2.2rem;
   font-weight: bold;
@@ -285,6 +306,7 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   border: 1px solid #e5e7eb;
   width: 280px;
+  height: 175px;
   text-align: start;
   transition: transform 0.3s ease-in-out;
   color: black;
@@ -294,10 +316,10 @@
 }
 
 .stepNumber {
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  font-size: 16px;
+  width: 45px !important;
+  height: 45px !important;
+  border-radius: 50% !important;
+  font-size: 16px !important;
   font-weight: bold;
   color: white;
   display: flex;
@@ -319,7 +341,7 @@
   font-weight: bold;
 }
 
-/******Footer******/
+/* --- Footer Section --- */
 .footer {
   background-color: black;
   text-align: center;
@@ -329,42 +351,71 @@
   margin-top: auto;
 }
 
+/* --- Mobile Menu Toggle --- */
 .mobileMenuToggle {
   display: none;
   background: none;
   border: none;
   cursor: pointer;
+  padding: 0;
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  z-index: 10;
 }
 
 .mobileMenuToggle img {
   width: 32px;
   height: 32px;
+  display: block;
 }
 
-@media screen and (max-width: 480px) {
+
+@media screen and (max-width: 1230px) {
+ 
+  .landingPageHero {
+    display: flex;
+    flex-direction: column-reverse;
+    text-align: center;
+  }
+  .learnMoreLandingPage {
+    width: 90%;
+    margin-bottom: 50px;
+  }
+
+  .landingPageHero img {
+    width: 100% ;
+    margin-bottom:75px;
+  }
+}
+@media screen and (max-width: 850px) {
   .landingHeader img {
     height: 40px;
-    text-align: start;
   }
 
   .landingHeader {
-    flex-wrap: wrap;
     padding: 20px;
     height: auto;
+    flex-wrap: wrap;
   }
 
   .landingPageNav {
     display: none;
     flex-direction: column;
     width: 100%;
+    order: 3;
     margin-top: 10px;
     gap: 10px;
     text-align: center;
+    background: #eeeff0;
+    padding-bottom: 10px;
   }
 
-  .landingPageNav a{
+  .landingPageNav a {
     font-size: 1.2em;
     text-decoration: underline;
+    padding: 5px 0;
   }
 
   .landingPageNav.mobileOpen {
@@ -377,47 +428,137 @@
 
   .mobileMenuToggle {
     display: block;
-    position: absolute;
-    top: 20px;
-    right: 20px;
+  }
+
+
+}
+
+/* Breakpoint for Hero sections stacking */
+@media screen and (max-width: 750px) {
+  .landingHeader, .hero, .landingPageHero, .features{
+     padding: 30px 20px 0; /* Adjust padding for smaller screens */
+  }
+
+  /* Hero Section Changes */
+  .hero {
+    flex-direction: column;
+    align-items: center; /* Center items horizontally */
+    text-align: center; /* Center text */
+    padding-top: 40px; /* Adjust padding */
+    padding-bottom: 40px;
+  }
+
+  .heroText {
+    max-width: 100%; /* Allow text block full width */
+    order: 1; /* Ensure text comes first */
+  }
+
+  .heroImage {
+     max-width: 100%; /* Ensure container takes width */
+     margin-top: 30px; /* Add space between text and image */
+     order: 2; /* Ensure image comes second */
+  }
+
+   .heroImage img {
+     height: auto; /* Adjust height automatically */
+     max-height: 45vh; /* Optional max height */
+     max-width: 400px; /* Limit image size on smaller screens */
+  }
+
+  .heroButtons {
+    justify-content: center; /* Center buttons */
+  }
+
+
+  /* LandingPageHero Section Changes */
+  .landingPageHero {
+    flex-direction: column-reverse;
+    align-items: center; /* Center items */
+    text-align: center; /* Center text */
+    padding-top: 30px; /* Adjust padding */
+    padding-bottom: 30px;
+  }
+
+  .learnMoreLandingPage {
+    width: 90%; /* Adjust width */
+    max-width: 400px; /* Limit width */
+    margin-bottom: 30px; /* Space below text block */
+    order: 1; /* Ensure text is first */
+  }
+
+  .landingPageHero .heroImageContainer { /* Adjust image container if used */
+     max-width: 100%;
+     order: 2;
+  }
+
+  .landingPageHero img {
+     max-width: 400px; /* Limit image size */
+     order: 2; /* Ensure image is second */
+  }
+
+  .featuresGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 40%);
+    justify-content: center;
+    gap: 30px;
+    padding: 25px 0;
+  }
+
+  .stepsContainer{
+    display: flex;
+    flex-direction: column;
+  }
+  .stepCard{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    width:75%;
+  }
+
+  .stepArrow{
+    display: none;
+  }
+}
+
+
+@media screen and (max-width: 480px) {
+
+  .landingHeader, .hero, .landingPageHero, .features{
+     padding: 20px 15px 0; 
+  }
+  .landingPageHero{
+    padding: 20px 10px; /* Adjust padding */
+  }
+
+  .heroText h1 {
+     font-size: 2.5rem; 
   }
 
   .heroText p{
     font-size: 1em;
   }
 
-  .heroButtons{
+  .landingPageHero {
     display: flex;
-    justify-content: center;
-  }
-
-  .hero {
-    flex-direction: column;
+    flex-direction: column-reverse;
     text-align: center;
-    padding: 40px 20px;
   }
-
-  .heroText, .heroImage{
-    max-width: 100%;
-  }
-
   .heroImage img{
     padding-top: 10%;
-    height: 40vh;
-    width: 100%;
+    max-height: 40vh; /* Further constrain height */
   }
 
   .featuresGrid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(1, 75%);
+    gap: 20px;
   }
 
-  .landingPageHero {
-    flex-direction: column;
-    padding: 30px 20px;
+  .learnMoreLandingPage h1 {
+      font-size: 2.5rem; /* Reduce heading size */
   }
 
   .learnMoreLandingPage {
-    width: 85%;
+    width: 90%; /* Adjust width slightly */
     margin-bottom: 20px;
     & p{
       font-size: 1.1em;
@@ -426,15 +567,28 @@
 
   .landingPageHero img {
     width: 90%;
-    max-width: 400px;
+    /* max-width: 400px; Inherited */
   }
 
   .howItWorksSubtitle{
-    width: 80%;
-    font-size: 16px;
+    width: 90%;
+    font-size: 1rem;
   }
 
   .stepArrow{
     display: none;
   }
+  .stepNumber {
+    width: 45px !important;  
+    height: 45px !important;
+    border-radius: 50% !important;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    display: flex;        
+    justify-content: center; 
+    align-items: center;   
+  }
+  
+
 }
