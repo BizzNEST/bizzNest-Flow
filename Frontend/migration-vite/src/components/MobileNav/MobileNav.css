@@ -1,24 +1,23 @@
 /* BottomNav.css */
 .bottom-nav {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 60px;
-    background: linear-gradient(to right, #2979ff, #2962ff);
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    z-index: 1000;
-    padding: 0 10px;
+  position: fixed;
+  bottom: 20%;
+  height: 60px;
+  background: #212121;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  align-content: center;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  width: 100%;
+  z-index: 1000;
   }
   
   .bottom-nav button {
     background: none;
     border: none;
-    color: white;
+    filter: invert(1);
     font-size: 14px;
     display: flex;
     flex-direction: column;

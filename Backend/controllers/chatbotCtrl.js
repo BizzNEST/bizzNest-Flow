@@ -17,9 +17,6 @@ const chatbotCtrl = {
         return res.status(400).json({ success: false, error: "Message is required" });
       }
 
-      // (Optional) Fetch related project data from DB if you want more context
-      // const [projectInfo] = await pool.query("SELECT * FROM projects WHERE id = ?", [projectId]);
-
       const prompt = `
 You are Harvey, a helpful assistant for giving summaries to users.
 
@@ -48,17 +45,31 @@ Instructions:
       const response = await result.response;
       const responseText = response.text();
 
-      // Optional: Save conversation
-      /*await pool.query(
+      // Optional: Save conversation to DB
+      /*
+      await pool.query(
         "INSERT INTO chatbot_conversations (message, response) VALUES (?, ?)",
         [message, responseText]
-      );*/
+      );
+      */
 
       return res.status(200).json({ success: true, response: responseText });
 
     } catch (error) {
       console.error("Chatbot Error:", error);
-      return res.status(500).json({ success: false, error: "Failed to generate response" });
+
+      // Handle Gemini quota/rate-limit errors (HTTP 429)
+      if (error.status === 429) {
+        return res.status(429).json({
+          success: false,
+          error: "You've hit the AI usage limit. Please wait a few minutes and try again."
+        });
+      }
+
+      return res.status(500).json({
+        success: false,
+        error: "Failed to generate AI response. Please try again later."
+      });
     }
   }
 };

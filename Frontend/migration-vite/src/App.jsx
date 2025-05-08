@@ -71,7 +71,7 @@ function AppContent() {
         <Route path="/completedProjects" element={ <ProtectedRoute><CompletedProjects/></ProtectedRoute>}/>
       </Routes>
 
-      {isMobile && shouldShowChatbot && <MobileNav />}
+      {isMobile && shouldShowChatbot && <MobileNav onChatClick={() => setChatOpen(true)} />}
 
       {shouldShowChatbot && (
         <>
