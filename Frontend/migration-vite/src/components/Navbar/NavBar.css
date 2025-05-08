@@ -123,6 +123,16 @@
     text-decoration: none;
     font-size: 1.8rem;
   }
+
+  .drawer-links li{
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid white;
+  }
+
+  .drawer-links a:active{
+    color: red;
+  }
   
   .drawer-links a:hover {
     color: #e03997;
