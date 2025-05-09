@@ -48,36 +48,19 @@ const Chatbot = () => {
 
     const sendMessage = async () => {
         if (!input.trim()) return;
-
+    
         const userMessage = { sender: "user", text: input };
         setMessages(prev => [...prev, userMessage]);
         setInput("");
         setError(null);
-
+    
         try {
             setIsTyping(true);
-
-            const fullPrompt = `
-DATABASE INFORMATION:
-
-Interns:
-${internData.length > 0 ? internData.map(i => 
-  `${i.firstName} ${i.lastName} | Department: ${i.departmentName} | Location: ${i.location}`
-).join('\n') : 'No intern data available.'}
-
-Projects:
-${projectData.length > 0 ? projectData.map(p => 
-  `${p.projectTitle} | Department: ${p.departmentName} | Status: ${p.status}`
-).join('\n') : 'No project data available.'}
-
-USER QUESTION:
-${input}
-`;
-
+    
             const response = await api.post("/api/chat", { 
-                message: fullPrompt
+                message: input // just the question now
             });
-
+    
             if (response.data.success) {
                 const botMessage = { sender: "bot", text: response.data.response };
                 setMessages(prev => [...prev, botMessage]);

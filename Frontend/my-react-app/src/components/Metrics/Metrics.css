@@ -1,0 +1,115 @@
+.graph-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+  min-height: auto; /* Ensure it adapts dynamically */
+}
+
+.row {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+}
+
+.rectangle {
+  background-color: #ffffffb4;
+  border-radius: 8px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+  height: auto;
+  min-height: 235px;
+  min-width: 0; /* Prevents flex items from overflowing */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease-in-out; /* Smooth transition */
+}
+
+.rectangle:hover {
+  transform: scale(1.03);
+}
+
+/* Top row */
+.top-row {
+  flex-wrap: nowrap;
+}
+
+.rectangle-small {
+  flex: 1 30%;
+  /* max-width: calc(33.333% - 10px); */
+  max-width: none;
+}
+
+.rectangle-large {
+  flex: 2 1 60%;
+  /* max-width: calc(66.666% - 10px); */
+  max-width: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; /* Prevents any content overflow */
+}
+
+/* Bottom row */
+.bottom-row {
+  flex-wrap: nowrap;
+}
+
+.rectangle-third {
+  flex: 1;
+  max-width: none;
+}
+
+/* Ensure the large container for the graph is properly constrained */
+
+
+/* Tablet breakpoint - maintain the same layout but scaled down */
+@media (max-width: 1024px) {
+  .graph-container {
+    padding: 15px;
+    gap: 15px;
+  }
+  
+  .row {
+    gap: 15px;
+  }
+  
+  .rectangle {
+    min-height: 180px;
+  }
+}
+
+/* Small tablet breakpoint - maintain the same layout but smaller */
+@media (max-width: 768px) {
+  .graph-container {
+    padding: 12px;
+    gap: 12px;
+  }
+  
+  .row {
+    gap: 12px;
+  }
+  
+  .rectangle {
+    min-height: 160px;
+  }
+}
+
+/* Mobile breakpoint - stack all items */
+@media (max-width: 480px) {
+  .row {
+    flex-wrap: wrap;
+  }
+
+  .rectangle-small,
+  .rectangle-large,
+  .rectangle-third {
+    flex: 1 1 100%;
+    max-width: 100%;
+    min-height: 140px;
+  }
+}

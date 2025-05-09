@@ -1,6 +1,6 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import dotenv from "dotenv";
-import pool from "../config/database.js";
+import axios from "axios";
 
 dotenv.config();
 
@@ -11,53 +11,85 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY, {
 const chatbotCtrl = {
   chat: async (req, res) => {
     try {
-      const { message, projectName, requiredSkills } = req.body;
-
+      const { message } = req.body;
       if (!message) {
         return res.status(400).json({ success: false, error: "Message is required" });
       }
 
-      // (Optional) Fetch related project data from DB if you want more context
-      // const [projectInfo] = await pool.query("SELECT * FROM projects WHERE id = ?", [projectId]);
+      // 👇 Fetch intern and project summaries from your own API
+      const [internRes, projectRes] = await Promise.all([
+        axios.get("http://host.docker.internal:30001/api/getInternDataSummary"),
+        axios.get("http://host.docker.internal:30001/api/getProjectsDataSummary"),
+      ]);
 
+      const interns = internRes.data;
+      const projects = projectRes.data;
+
+      // 👇 Build the prompt for Gemini
       const prompt = `
-You are Harvey, a helpful assistant for giving summaries to users.
+You are Harvey, an expert data analyst assistant.
 
-Project name: ${projectName || "Not specified"}
-Required skills: ${requiredSkills || "Not specified"}
+Below is real JSON data from an internship program, containing:
+- A list of interns, their skills, departments, and learning history
+- A list of projects, tools involved, and associated interns with projected skill growth
 
-User's message: "${message}"
+Use this data to answer the user's question.
 
-Instructions:
-- Suggest interns who would be a great match based on the required skills.
-- Keep the response short and to the point.
-- Suggest improvements if the skill match is not perfect.
+INTERN DATA (JSON):
+${JSON.stringify(interns, null, 2)}
+
+PROJECT DATA (JSON):
+${JSON.stringify(projects, null, 2)}
+
+USER QUESTION:
+"${message}"
+
+TASK:
+Analyze the data and provide a concise, useful answer to the user's question. Include reasoning or correlations if possible.
 `;
 
-      const model = genAI.getGenerativeModel({ model: "models/gemini-1.5-pro" });
+// Uncomment the line below when you need to test smaller prompts
+
+//       const prompt = `
+// You are Harvey, an expert data analyst assistant.
+
+// USER QUESTION:
+// "${message}"
+
+// TASK:
+// Provide a helpful response based only on the question. Ignore database context.
+// `;
+
+      const model = genAI.getGenerativeModel({ model: "models/gemini-1.5-flash" });
+
+      const tokenEstimate = prompt.length / 4;
+      console.log("🧠 Prompt length (characters):", prompt.length);
+      console.log("🔢 Estimated token count:", tokenEstimate);
 
       const result = await model.generateContent({
         contents: [{ role: "user", parts: [{ text: prompt }] }],
         generationConfig: {
           temperature: 0.5,
           topP: 0.9,
-          maxOutputTokens: 300,
+          maxOutputTokens: 600,
         }
       });
 
       const response = await result.response;
       const responseText = response.text();
 
-      // Optional: Save conversation
-      /*await pool.query(
-        "INSERT INTO chatbot_conversations (message, response) VALUES (?, ?)",
-        [message, responseText]
-      );*/
-
       return res.status(200).json({ success: true, response: responseText });
 
     } catch (error) {
-      console.error("Chatbot Error:", error);
+      console.error("Chatbot Error:");
+      console.error("Full error:", error);
+      if (error.response) {
+        console.error("Gemini response error:", error.response.data);
+      } else if (error.request) {
+        console.error("No response received. Request error:", error.request);
+      } else {
+        console.error("Other error:", error.message);
+      }
       return res.status(500).json({ success: false, error: "Failed to generate response" });
     }
   }
