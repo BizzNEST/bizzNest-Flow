@@ -34,4 +34,18 @@
     color: #666;
   }
   .close-btn:hover { color: #000; }
+
+
+
+
+  @media (max-width: 768px) {
+    .modal-box{
+      height: auto;
+      bottom: 20%;
+    }
+    
+     .messages{
+      padding-top: 40px;
+     }
+  }
   

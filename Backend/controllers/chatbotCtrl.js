@@ -26,6 +26,7 @@ const chatbotCtrl = {
       const projects = projectRes.data;
 
       // 👇 Build the prompt for Gemini
+
       const prompt = `
 You are Harvey, an expert data analyst assistant.
 
@@ -78,6 +79,7 @@ Analyze the data and provide a concise, useful answer to the user's question. In
       const response = await result.response;
       const responseText = response.text();
 
+
       return res.status(200).json({ success: true, response: responseText });
 
     } catch (error) {
@@ -91,6 +93,7 @@ Analyze the data and provide a concise, useful answer to the user's question. In
         console.error("Other error:", error.message);
       }
       return res.status(500).json({ success: false, error: "Failed to generate response" });
+
     }
   }
 };

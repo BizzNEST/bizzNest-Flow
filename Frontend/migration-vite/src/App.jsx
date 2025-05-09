@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import HomePage from './pages/HomePage';
 import NewProject from './components/NewProject/NewProject';
 import Recommendations from './pages/recommendations';
@@ -17,11 +17,21 @@ import LandingPage from './pages/LandingPage';
 import Chatbot from './components/Chatbot/Chatbot';
 import Modal from './components/Modal/ChatbotModal';
 import ChatbotImage from '../src/assets/bot-message-square.svg';
+import MobileNav from './components/MobileNav/MobileNav';
 
 //component to handle Routes and Chatbot together
 function AppContent() {
   const location = useLocation();
   const [chatOpen, setChatOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+  
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   // Path where chatbot can be accessed
   const privatePaths = [
@@ -60,6 +70,8 @@ function AppContent() {
         <Route path="/internGrowthPage/:internID" element={ <ProtectedRoute><InternGrowthPage/></ProtectedRoute>}/>
         <Route path="/completedProjects" element={ <ProtectedRoute><CompletedProjects/></ProtectedRoute>}/>
       </Routes>
+
+      {isMobile && shouldShowChatbot && <MobileNav onChatClick={() => setChatOpen(true)} />}
 
       {shouldShowChatbot && (
         <>
