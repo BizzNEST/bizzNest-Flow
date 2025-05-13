@@ -1,7 +1,7 @@
 /* BottomNav.css */
 .bottom-nav {
   position: fixed;
-  bottom: 20%;
+  bottom: 0;
   height: 60px;
   background: #212121;
   display: flex;

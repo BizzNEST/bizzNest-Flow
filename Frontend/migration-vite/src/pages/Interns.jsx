@@ -29,6 +29,8 @@ const Interns = () => {
   const [deleteTarget, setDeleteTarget] = useState(null);
   const [deleteType, setDeleteType] = useState(""); // "single" or "bulk"
   const [error, setError] = useState(null);
+  const [showMobileFilters, setShowMobileFilters] = useState(false);
+
 
   const filterInterns = useRef([]);
   const navigate = useNavigate();
@@ -246,7 +248,19 @@ const Interns = () => {
       {error && <div className="error-message">{error}</div>}
       <div className="container">
         <div className="content">
-          <div className="filtering-wrapper">
+        {window.innerWidth <= 768 && (
+          <div className="mobileFilterDiv">
+            <h1>Interns</h1>
+            <button
+              className="mobile-filter-toggle"
+              onClick={() => setShowMobileFilters(!showMobileFilters)}
+            >
+              {showMobileFilters ? "Hide Filters" : "Show Filters"}
+            </button>
+          </div>
+            
+          )}
+          <div className={`filtering-wrapper ${showMobileFilters ? "show" : ""}`}>
             <h3 className="filter-header">Filter Interns</h3>
             <div className="search-bar-wrapper">
               <SearchBar onSearch={handleSearch} />
@@ -262,14 +276,20 @@ const Interns = () => {
 
           <div className="interns-wrapper">
             <div className="select-buttons">
-              <div className="select-left">
-                <button className="select-btn" onClick={handleSelectAll}>
-                  Select All
-                </button>
-                <button className="deselect-btn" onClick={handleDeselectAll}>
-                  Deselect All
-                </button>
-              </div>
+            <div className="select-left">
+              <button
+                className="select-btn"
+                onClick={
+                  selectedInterns.length === filteredInterns.length
+                    ? handleDeselectAll
+                    : handleSelectAll
+                }
+              >
+                {selectedInterns.length === filteredInterns.length
+                  ? "Deselect All"
+                  : "Select All"}
+              </button>
+            </div>
               <div className="delete-right">
                 <button
                   className="delete-selected-btn"

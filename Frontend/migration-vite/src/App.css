@@ -64,3 +64,9 @@
   width: 5vh;
   filter: invert(1);
 }
+
+@media (max-width: 768px){
+  .fab{
+    display: none;
+  }
+}
