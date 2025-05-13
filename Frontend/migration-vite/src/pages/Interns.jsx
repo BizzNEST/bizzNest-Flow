@@ -5,8 +5,8 @@ import SearchBar from "../components/SearchBar/SearchBar";
 import Filtering from "../components/Filtering/Filtering";
 import ConfirmPopup from "../components/ConfirmPopup/ConfirmPopup";
 import edit from "../assets/edit.svg";
-import del from "../assets/delete.svg";
 import profile from "../assets/profile.svg";
+import growth from "../assets/growth.svg";
 import "./Interns.css";
 
 // Cache expiration time (1 hour)
@@ -336,15 +336,15 @@ const Interns = () => {
                           navigate(`/editIntern/${intern.InternID}`);
                         }}
                       />
-                      <img
-                        src={del}
-                        alt="delete"
-                        className="delete"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          confirmDelete(intern.InternID, "single");
+                      <button 
+                        className="growth-button" 
+                        onClick={(e) => { 
+                          e.stopPropagation(); 
+                          navigate(`/internGrowthPage/${intern.InternID}`); 
                         }}
-                      />
+                      >
+                        <img src={growth} alt="growth" />
+                      </button>
                     </div>
                   </li>
                 ))}

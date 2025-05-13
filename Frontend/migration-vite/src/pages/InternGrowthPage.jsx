@@ -49,7 +49,7 @@ const InternGrowthPage = () => {
             <div className="intern-growth-page">
                 <div className="header-container">
                     {/* Back Button */}
-                    <button className="returnToProjects" onClick={() => navigate(`/editIntern/${internID}`)}>
+                    <button className="returnToProjects" onClick={() => navigate(`/interns`)}>
                         <img className="returnArrow" src={returnArrow} alt="Return to Projects" />
                     </button>
 

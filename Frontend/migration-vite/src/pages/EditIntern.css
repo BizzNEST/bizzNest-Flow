@@ -59,30 +59,6 @@
     }
 }
 
-/* Growth Button */
-.growth-button {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: linear-gradient(to right, #2dd4bf, #3b82f6);
-  border: none;
-  border-radius: 25px;
-  padding: 8px 16px;
-  cursor: pointer;
-  color: white;
-  font-size: 14px;
-  font-weight: bold;
-    &:hover{
-      scale: 1.05;
-    }
-}
-
-.growth-button img{
-  filter: invert(1);
-}
-
-
-
 .updateNameContainer, .updateLocationDepartmentContainer{
   display: flex;
   justify-content: space-between;
