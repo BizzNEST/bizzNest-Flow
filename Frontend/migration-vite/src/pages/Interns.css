@@ -258,22 +258,105 @@
 }
 /* Responsive Design */
 @media (max-width: 768px) {
-  .content {
-      flex-direction: column; 
-      align-items: center;
+  .container{
+    padding: 0 20px 20px;
   }
-  .search-bar-wrapper{
-  display: flex;
-  justify-content: center;    
+
+  .content{
+    display: flex;
+    flex-direction: column;
+    gap: 0;
   }
-  .filtering-wrapper,
-  .interns-wrapper {
-    justify-content: center ;
-      width: 90%; 
-      max-width: none; 
+
+  .mobileFilterDiv{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .filtering-wrapper {
+    display: none;
+  }
+  
+  .filtering-wrapper h3, .filtering-wrapper label{
+    margin-bottom: 10px;
+  }
+
+  .filtering-wrapper.show {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .search-bar-wrapper, .filtering-wrapper select{
+    margin-bottom: 30px;
+  }
+
+  .mobile-filter-toggle {
+    background: linear-gradient(to right, #ec4899, #a655f1);
+    color: white;
+    padding: 15px 35px;
+    border: none;
+    border-radius: 30px;
+    font-size: 18px;
+    margin: 20px 0;
+    cursor: pointer;
+    font-weight: 700;
+  }
+
+  .filtering-wrapper h3{
+    font-size: 16px;
+  }
+
+  .mobileFilterDiv h1{
+    font-size: 2.4rem;
+  }
+
+  .mobile-filter-toggle:hover {
+    background: linear-gradient(to right, #2dd4bf, #3b82f6);
+  }
+
+  .select-buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .select-btn, .deselect-btn, .delete-selected-btn{
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 18px;
+    padding: 15px 20px;
+  }
+
+  .delete-selected-btn:disabled{
+    background-color: grey;
+    border-radius: 30px;
+    font-weight: 700;
+  }
+
+  .interns-wrapper{
+    padding-bottom: 80px;
+    background: transparent;
+    margin: 0;
+    padding-left: 0;
+    border: none;
+    padding-right: 0;
+    box-shadow: none;
+  }
+
+  .interns-wrapper h2{
+    display: none;
   }
 
   .interns-wrapper ul li {
-      width: 95%; 
+    border-radius: 10px;
+    padding: 20px;
+  }
+
+  .intern-container{
+    padding: 0% 10px;
+    margin-top: 18%;
   }
 }
