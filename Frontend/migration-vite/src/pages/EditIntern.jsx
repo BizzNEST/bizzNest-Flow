@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import NavBar from "../components/Navbar/NavBar"; // Import the NavBar component
-import growth from "../assets/growth.svg";
 import returnArrow from "../assets/returnArrow.svg";
 import './EditIntern.css';
 
@@ -154,16 +153,6 @@ const EditIntern = () => {
           <div className="editInternHeaderWrapper">
             <button className="back-button" onClick={handleBack}>
               <img src={returnArrow} alt="Back" />
-            </button>
-            <button 
-              className="growth-button" 
-              onClick={(e) => { 
-                e.stopPropagation(); 
-                navigate(`/internGrowthPage/${internID}`); 
-              }}
-            >
-              <img src={growth} alt="growth" />
-              <span>Intern Growth</span>
             </button>
           </div>
           <h2 className="editInternHeader">Edit Intern</h2>

@@ -43,6 +43,28 @@
   max-height: calc(100vh - 200px); /* Adjust based on layout */
 }
 
+/* Growth Button */
+.growth-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: 2px solid;
+  border-radius: 25px;
+  padding: 8px 16px;
+  cursor: pointer;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+    &:hover{
+      scale: 1.05;
+    }
+}
+
+.growth-button img{
+  filter: invert(1);
+}
+
 /* Prevents filtering and buttons from shrinking */
 .filtering-wrapper, .select-buttons {
   flex-shrink: 0;
@@ -216,6 +238,7 @@
 .interns-wrapper ul li .icon-container {
   display: flex;
   gap: 10px;
+  align-items: center;
 }
 
 .interns-wrapper ul li img.edit,
@@ -224,6 +247,9 @@
   width: 25px;
   cursor: pointer;
   filter: brightness(0) invert(1); /* Makes the image white */
+  &:hover{
+    scale: 1.15;
+  }
 }
 
 .profile-pic {
