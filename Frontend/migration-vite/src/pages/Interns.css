@@ -76,7 +76,7 @@
 }
 /* Styling for the filtering and search */
 .search-bar-wrapper {
-  margin-bottom: 50px;
+  margin-bottom: 20px;
 }
 
 /* Interns list wrapper */
@@ -306,7 +306,10 @@
   }
   
   .filtering-wrapper h3, .filtering-wrapper label{
-    margin-bottom: 10px;
+    display: block;
+    padding: 10px 0px;
+    font-weight: 400;
+    color: white;
   }
 
   .filtering-wrapper.show {
@@ -316,7 +319,21 @@
   }
 
   .search-bar-wrapper, .filtering-wrapper select{
-    margin-bottom: 30px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: white;
+    font-size: 1rem;
+    color: black;
+    transition: border-color 0.3s ease;
+  }
+
+  .filtering-wrapper select{
+    margin-bottom: 20px;
+  }
+
+  .filtering-wrapper label{
+    margin-bottom: 10px;
   }
 
   .mobile-filter-toggle {
@@ -333,6 +350,7 @@
 
   .filtering-wrapper h3{
     font-size: 16px;
+    margin-bottom: 10px;
   }
 
   .mobileFilterDiv h1{

@@ -30,6 +30,15 @@ const Interns = () => {
   const [deleteType, setDeleteType] = useState(""); // "single" or "bulk"
   const [error, setError] = useState(null);
   const [showMobileFilters, setShowMobileFilters] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
 
   const filterInterns = useRef([]);
@@ -248,7 +257,7 @@ const Interns = () => {
       {error && <div className="error-message">{error}</div>}
       <div className="container">
         <div className="content">
-        {window.innerWidth <= 768 && (
+        {isMobile && (
           <div className="mobileFilterDiv">
             <h1>Interns</h1>
             <button
