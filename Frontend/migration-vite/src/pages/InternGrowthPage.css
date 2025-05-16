@@ -1,100 +1,51 @@
-/* Main page container */
-.intern-growth-page {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    height: 100vh; /* Full viewport height */
-    overflow: hidden; /* Prevent entire page from scrolling */
-    padding-top: 40px;
-}
-
-/* Scrollable growth container */
-.growth-container {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 1200px;
-    gap: 30px;
-    overflow-y: auto; /* Enables scrolling */
-    flex-grow: 1; /* Allows it to take up available space */
-    padding-bottom: 20px; /* Prevents last item from being cut off */
-}
-
-/* ✅ Flexbox for header layout */
-.header-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between; /* Pushes elements apart */
-    width: 100%;
-    max-width: 1200px;
-    margin: auto;
-    padding: 10px 20px; /* Adds spacing */
-    position: sticky;
-    top: 0;
-    background-color: #1a1a1a; /* Adjust as needed */
-    z-index: 10; /* Keeps it above scrolling content */
-}
-
-/* ✅ Center the title */
-.intern-growth-title {
-    flex-grow: 1; /* Makes sure it takes the available space */
+.intern-growth-title{
     text-align: center;
-    font-size: 28px;
-    font-weight: 400;
-    color: white;
 }
 
-/* ✅ Style return button */
-.returnToProjects {
-    background: none;
-    margin-left: 0px;
-    cursor: pointer;
-}
-
-/* ✅ Ensure return arrow size is controlled */
-.returnArrow {
-    width: 40px;
-    height: auto;
-}
-
-/* Graphs Row: Two graphs side by side */
-.graphs-container {
+.newGrowthPageContainer{
     display: flex;
-    justify-content: space-between;
-    width: 100%;
-    gap: 30px;
+    flex-direction: row;
+    gap: 4%;
+    margin-top: 2%;
+    padding: 0 2%;
 }
 
-/* Skills Row: Two skill containers side by side */
-.skills-container {
+.newGrowthPageWrapper{
+    width: 30%;
+}
+
+.internGrowthPageInfo{
+    width: 100%;
+    background-color: #222;
+    padding: 3% 0;
+    border-radius: 20px;
+    border: 2px solid transparent;
+    background:
+      linear-gradient(#191919, #191919) padding-box, /* Background color */
+      linear-gradient(90deg, #c333fd, #00bcd4, #25ffc1) border-box; /* Gradient border */
+}
+
+.skillUpdates{
     display: flex;
-    justify-content: space-between;
-    width: 100%;
-    gap: 30px;
+    flex-direction: column;
+    padding: 0 3%;
 }
 
-/* Make sure both graphs are equal in size */
-.chart-container {
-    flex: 1;
-    height: 400px; /* Consistent height */
+.graphs-container1{
+    display: flex;
+    flex-direction: column;
 }
 
-/* Make sure both skill containers are equal in size */
-.skills-container > div {
-    flex: 1;
-    height: 150px; /* Consistent height */
+.topGrowthGraph, .bottomGrowthGraph{
+    padding-bottom: 2%;
+    border-radius: 15px;
+    transition: transform 0.4s ease;
 }
 
-/* Responsive Design */
-@media (max-width: 1024px) {
-    .graphs-container, .skills-container {
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-    }
+.topGrowthGraph:hover{
+    transform: scale(1.02);
+}
 
-    .chart-container, .skills-container > div {
-        width: 100%;
-    }
+.bottomGrowthGraph:hover{
+    transform: scale(1.02);
 }

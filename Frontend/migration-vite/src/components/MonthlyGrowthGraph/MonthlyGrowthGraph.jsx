@@ -60,7 +60,7 @@ const MonthlyGrowthChart = ({ internID }) => {
   return (
     <div className="monthly-growth-container">
       <h2>Monthly Growth Over Time</h2>
-      <ResponsiveContainer width="100%" height={450}>
+      <ResponsiveContainer width="100%" height={230}>
         <LineChart
           data={monthlyGrowthData}
           margin={{ top: 20, right: 30, left: 20, bottom: 80 }}

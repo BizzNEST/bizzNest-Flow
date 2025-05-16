@@ -42,7 +42,7 @@ const SkillGrowthChart = ({ internID }) => {
             {growthData.length === 0 ? (
                 <p>No growth data available.</p>
             ) : (
-                <ResponsiveContainer width="100%" height={450}>
+                <ResponsiveContainer width="100%" height={230}>
                     <BarChart 
                         data={growthData} 
                         margin={{ top: 20, right: 30, left: 20, bottom: 80 }}

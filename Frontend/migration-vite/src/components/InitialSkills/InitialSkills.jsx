@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import SkillBar from "../SkillBar/SkillBar";
 import "./InitialSkills.css";
 
 const toolMap = {
@@ -22,10 +23,12 @@ const InitialSkills = ({ internID }) => {
                 const data = await response.json();
 
                 if (data.success) {
-                    setInitialSkills(data.data.map(skill => ({
-                        toolName: toolMap[skill.toolID] || `Tool ${skill.toolID}`,
-                        initialSkillLevel: skill.initialSkillLevel.toFixed(2)
-                    })));
+                    setInitialSkills(
+                        data.data.map(skill => ({
+                            toolName: toolMap[skill.toolID] || `Tool ${skill.toolID}`,
+                            initialSkillLevel: parseFloat(skill.initialSkillLevel)
+                        }))
+                    );
                 }
             } catch (error) {
                 console.error("Error fetching initial skills:", error);
@@ -41,7 +44,7 @@ const InitialSkills = ({ internID }) => {
             <ul>
                 {initialSkills.map(skill => (
                     <li key={skill.toolName}>
-                        {skill.toolName}: {skill.initialSkillLevel}
+                        <SkillBar label={skill.toolName} value={skill.initialSkillLevel} />
                     </li>
                 ))}
             </ul>
