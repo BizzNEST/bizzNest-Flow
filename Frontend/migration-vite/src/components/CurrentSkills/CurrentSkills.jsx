@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import SkillBar from "../SkillBar/SkillBar";
 import "./CurrentSkills.css";
 
 const toolMap = {
@@ -22,10 +23,12 @@ const CurrentSkills = ({ internID }) => {
                 const data = await response.json();
 
                 if (data.success) {
-                    setCurrentSkills(data.data.map(skill => ({
-                        toolName: toolMap[skill.toolID] || `Tool ${skill.toolID}`,
-                        currentSkillLevel: skill.currentSkillLevel.toFixed(2)
-                    })));
+                    setCurrentSkills(
+                        data.data.map(skill => ({
+                            toolName: toolMap[skill.toolID] || `Tool ${skill.toolID}`,
+                            currentSkillLevel: parseFloat(skill.currentSkillLevel)
+                        }))
+                    );
                 }
             } catch (error) {
                 console.error("Error fetching current skills:", error);
@@ -41,7 +44,7 @@ const CurrentSkills = ({ internID }) => {
             <ul>
                 {currentSkills.map(skill => (
                     <li key={skill.toolName}>
-                        {skill.toolName}: {skill.currentSkillLevel}
+                        <SkillBar label={skill.toolName} value={skill.currentSkillLevel} />
                     </li>
                 ))}
             </ul>

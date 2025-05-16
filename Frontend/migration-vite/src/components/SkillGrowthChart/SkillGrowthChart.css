@@ -1,12 +1,17 @@
 .skill-growth-container {
-    width: 100%;
     background: linear-gradient(to bottom right, #2b2b2b, #1e1e1e); /* Dark Background */
     padding: 40px;
     border-radius: 15px;
     text-align: center;
     color: white;
-    height: 430px; /* Matches Monthly Growth */
+    /* height: 430px; Matches Monthly Growth */
+    height: 230px;
     transition: transform 0.3s ease;
+    width: 91%;
+    border: 2px solid transparent;
+    background:
+      linear-gradient(#191919, #191919) padding-box, /* Background color */
+      linear-gradient(90deg, #c333fd, #00bcd4, #25ffc1) border-box; /* Gradient border */
 }
 
 /* ✅ Hover Effect (No Shadow) */

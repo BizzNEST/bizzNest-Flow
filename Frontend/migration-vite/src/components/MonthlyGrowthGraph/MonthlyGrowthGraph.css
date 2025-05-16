@@ -1,12 +1,17 @@
 .monthly-growth-container {
-    width: 100%;
     background: linear-gradient(to bottom right, #2b2b2b, #1e1e1e);
     padding: 40px;
     border-radius: 15px;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
     text-align: center;
     color: white;
-    height: 430px; /* Matches Skill Growth */
+    /* height: 430px; Matches Skill Growth */
+    width: 91%;
+    height: 230px;
+    border: 2px solid transparent;
+    background:
+      linear-gradient(#191919, #191919) padding-box, /* Background color */
+      linear-gradient(90deg, #c333fd, #00bcd4, #25ffc1) border-box; /* Gradient border */
 }
 
 /* Hover effect for monthly growth chart */

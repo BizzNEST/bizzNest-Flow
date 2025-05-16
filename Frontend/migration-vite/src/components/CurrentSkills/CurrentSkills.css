@@ -1,6 +1,7 @@
 /* Container for Current Skills */
 .final-skills-container {
-    background: linear-gradient(to bottom right,#2dd4bf, #3b82f6);
+    /* background: linear-gradient(to bottom right,#2dd4bf, #3b82f6); */
+    
     padding: 20px;
     margin-bottom: 20px;
     border-radius: 15px;
