@@ -5,8 +5,10 @@ import SkillGrowthChart from "../components/SkillGrowthChart/SkillGrowthChart";
 import MonthlyGrowthChart from "../components/MonthlyGrowthGraph/MonthlyGrowthGraph";
 import InitialSkills from "../components/InitialSkills/InitialSkills";
 import CurrentSkills from "../components/CurrentSkills/CurrentSkills";
+import GrowthChartInfoModal from "../components/ChartGrowthInfoModal/ChartGrowthInfoModal";
 import returnArrow from "../assets/returnArrow.svg";
 import profile from "../assets/profile.svg";
+import chartInfo from "../assets/chartsInfo.svg";
 import "./InternGrowthPage.css";
 
 const InternGrowthPage = () => {
@@ -14,6 +16,7 @@ const InternGrowthPage = () => {
   const navigate = useNavigate();
 
   const [intern, setIntern] = useState(null);
+  const [showModalInfo, setShowModalInfo] = useState(false);
 
   useEffect(() => {
     const fetchInternData = async () => {
@@ -65,8 +68,14 @@ const InternGrowthPage = () => {
               {intern
                 ? `${intern.firstName} ${intern.lastName}'s Growth`
                 : "Intern Growth"}
+              <span
+                className="growthChartInfo"
+                onClick={() => setShowModalInfo(true)}
+              >
+                <img src={chartInfo} alt="Chart Info" />
+              </span>
             </h1>
-            {/* ✅ Correctly Display Profile Picture */}
+
             {intern && (
               <img
                 src={intern.profilePic}
@@ -94,6 +103,10 @@ const InternGrowthPage = () => {
           </div>
         </div>
       </div>
+
+      {showModalInfo && (
+        <GrowthChartInfoModal onClose={() => setShowModalInfo(false)} />
+      )}
     </div>
   );
 };
