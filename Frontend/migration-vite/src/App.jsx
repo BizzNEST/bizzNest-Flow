@@ -15,7 +15,7 @@ import InternGrowthPage from './pages/InternGrowthPage';
 import CompletedProjects from './pages/CompletedProjects';
 import LandingPage from './pages/LandingPage';
 import Chatbot from './components/Chatbot/Chatbot';
-import Modal from './components/Modal/ChatbotModal';
+import ChatbotModal from './components/ChatbotModal/ChatbotModal';
 import ChatbotImage from '../src/assets/bot-message-square.svg';
 import MobileNav from './components/MobileNav/MobileNav';
 
@@ -79,9 +79,9 @@ function AppContent() {
             <img src={ChatbotImage} alt='Chatbot'/>
           </button>
 
-          <Modal isOpen={chatOpen} onClose={() => setChatOpen(false)}>
+          <ChatbotModal isOpen={chatOpen} onClose={() => setChatOpen(false)}>
             <Chatbot />
-          </Modal>
+          </ChatbotModal>
         </>
       )}
     </>

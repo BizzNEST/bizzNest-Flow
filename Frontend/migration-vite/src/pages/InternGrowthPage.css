@@ -25,6 +25,16 @@
       linear-gradient(90deg, #c333fd, #00bcd4, #25ffc1) border-box; /* Gradient border */
 }
 
+.growthChartInfo img{
+    filter: invert(1);
+    padding-left: 5px;
+    height: 2.5dvh;
+}
+
+.growthChartInfo img:hover{
+    cursor: pointer;
+}
+
 .skillUpdates{
     display: flex;
     flex-direction: column;
