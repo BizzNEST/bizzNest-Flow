@@ -292,10 +292,6 @@
     width: 85%;
   }
 
-  .LoginSignupPage .LoginSignupWrapper {
-    height: 90vh;
-  }
-
   .LoginSignupPage .LoginSignup-container {
     width: 90%;
     min-height: 40vh;

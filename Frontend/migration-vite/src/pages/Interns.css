@@ -333,7 +333,7 @@
   }
 
   .filtering-wrapper label{
-    margin-bottom: 10px;
+    margin-bottom: 0px;
   }
 
   .mobile-filter-toggle {
@@ -350,7 +350,8 @@
 
   .filtering-wrapper h3{
     font-size: 16px;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
+    text-align: start;
   }
 
   .mobileFilterDiv h1{

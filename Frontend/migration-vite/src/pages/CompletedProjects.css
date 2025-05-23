@@ -76,19 +76,19 @@
     padding: 0 5px;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 768px) {
     .completedProjectContainer{
       display: grid;
-      grid-template-columns: repeat(1, 95%);
+      grid-template-columns: repeat(1, 90%);
     }
 
     .compProjectDiv:last-child {
         height: auto;
-        margin-bottom: 18vh;
+        margin-bottom: 5vh;
     }
 }
 
-@media(max-width: 1000px){
+@media(min-width: 769px) and ( max-width: 1070px){
     .completedProjectContainer {
         display: grid;
         grid-template-columns: repeat(2, 45%);

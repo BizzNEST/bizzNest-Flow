@@ -82,7 +82,7 @@ const CompletedProjects = () => {
                             <p>{project.projectDescription}</p>
                             <button className='Reactivate' onClick={() => handleReactivate(project.projectID)}>
                                 <img src={resetImg} alt='reactivate' />
-                                Restore Project
+                                Reactivate Project
                             </button>
                         </div>
                     ))}

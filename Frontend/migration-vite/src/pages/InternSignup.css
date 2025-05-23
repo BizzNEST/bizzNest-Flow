@@ -17,23 +17,27 @@
   width: 100px;
   rotate: 170deg;
 }
+
 .internLogoSignUp h1 {
   color: white;
   text-align: center;
-  font-weight: 300; 
+  font-weight: 300;
 }
+
 .internSignupTitle {
   color: white;
   text-align: center;
   margin-top: -8px;
-  font-weight: 400; /* Adjusted for less bold text */
+  font-weight: 400;
+  /* Adjusted for less bold text */
 }
+
 .internLogoSignUp {
   display: flex;
   justify-content: center;
   align-items: center;
   color: white;
-  
+
 }
 
 .Intern-signup-form {
@@ -111,8 +115,10 @@
 /* Align the input text properly with the icon */
 .internInputContainer input {
   width: 100%;
-  padding: 12px 45px; /* Space for left icon */
-  padding-right: 50px; /* Space for right icon if needed */
+  padding: 12px 45px;
+  /* Space for left icon */
+  padding-right: 50px;
+  /* Space for right icon if needed */
   border: 1px solid #ccc;
   border-radius: 1.5vw;
   font-size: 16px;
@@ -128,7 +134,8 @@
   width: 20px;
   height: 20px;
   opacity: 0.7;
-  pointer-events: none; /* Prevent interaction */
+  pointer-events: none;
+  /* Prevent interaction */
 }
 
 /* Password visibility toggle icon (right-side) */
@@ -145,20 +152,23 @@
 
 /* Media Query for Responsive Design */
 @media (max-width: 768px) {
-  .internSignupWrapper {
-    height: 90vh;
-  }
-
   .Intern-signup-form {
     width: 70%;
-    height: 70vh;
   }
 
   .Intern-signup-form input[type="email"] {
-    width: 90%;
+    width: 100%;
   }
 
   .internSignupLogo {
     width: 20vw;
+  }
+
+  .internNameContainer,
+  .internPasswordContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 0;
   }
 }
