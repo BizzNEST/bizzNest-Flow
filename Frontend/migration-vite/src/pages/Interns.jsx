@@ -255,7 +255,7 @@ const Interns = () => {
     <div className="big-container">
       <NavBar />
       {error && <div className="error-message">{error}</div>}
-      <div className="container">
+      <div className="internsPageContainer">
         <div className="content">
         {isMobile && (
           <div className="mobileFilterDiv">
@@ -270,7 +270,7 @@ const Interns = () => {
             
           )}
           <div className={`filtering-wrapper ${showMobileFilters ? "show" : ""}`}>
-            <h3 className="filter-header">Filter Interns</h3>
+            <h3 className="filter-header">Search Interns</h3>
             <div className="search-bar-wrapper">
               <SearchBar onSearch={handleSearch} />
             </div>

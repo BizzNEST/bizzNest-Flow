@@ -10,12 +10,11 @@
 }
 
 /* Add padding at the top to push everything downward */
-.container {
+.internsPageContainer {
   display: flex;
   align-items: center;
   flex-direction: column;
   padding: 70px 20px 20px; /* Added 40px padding at the top */
-  height: 100vh; /* Full screen height */
   background-color: #191919;
 }
 
@@ -63,6 +62,16 @@
 
 .growth-button img{
   filter: invert(1);
+}
+
+.filtering-wrapper{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.filtering-wrapper label{
+  margin-bottom: 10px;
 }
 
 /* Prevents filtering and buttons from shrinking */
@@ -284,7 +293,7 @@
 }
 /* Responsive Design */
 @media (max-width: 768px) {
-  .container{
+  .internsPageContainer{
     padding: 0 20px 20px;
   }
 
