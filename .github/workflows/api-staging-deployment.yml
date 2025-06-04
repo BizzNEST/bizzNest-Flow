@@ -70,7 +70,7 @@ jobs:
         echo "Successfully connected to EC2!"
 
         echo "Going into build directory"
-        cd /home/ubuntu/development/bizzNest-Flow
+        cd /home/ubuntu/production/bizzNest-Flow
 
         echo "Calling latest changes"
         git pull
