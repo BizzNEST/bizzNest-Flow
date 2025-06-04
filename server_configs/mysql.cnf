@@ -5,3 +5,4 @@ max_connections = 20
 table_open_cache = 64
 thread_cache_size = 2
 performance_schema = off
+ 
