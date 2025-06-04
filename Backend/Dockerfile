@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -y \
     pkg-config \
     default-mysql-client \  
     && rm -rf /var/lib/apt/lists/*  # Clean up to reduce image size
-                
+                 
 # Set the working directory inside the container 
 WORKDIR /app   
    
