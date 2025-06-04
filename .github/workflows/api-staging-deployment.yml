@@ -68,7 +68,8 @@ jobs:
         echo "Attempting to connect to EC2!"
         ssh -vvv -o ConnectTimeout=30 -o SendEnv=ENV_* -i ~/.ssh/bizznest "ubuntu@$DEVELOPMENT_IP" <<'EOF'
         echo "Successfully connected to EC2!"
-
+        eval "$(ssh-agent -s)"
+        ssh-add ~/.ssh/github_ssh/repo
         echo "Going into build directory"
         cd /home/ubuntu/production/bizzNest-Flow
 
