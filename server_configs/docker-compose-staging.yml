@@ -1,9 +1,9 @@
 version: "3.8"
 # Comment Teting 123 bizznest flow
 services: 
-  backend-development:
+  backend-production:
     build:
-      context: ../development/bizzNest-Flow/Backend/
+      context: ../production/bizzNest-Flow/Backend/
       dockerfile: Dockerfile
     depends_on:
       mysql:
