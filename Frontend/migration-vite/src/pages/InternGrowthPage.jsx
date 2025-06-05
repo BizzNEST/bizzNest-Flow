@@ -9,7 +9,7 @@ import GrowthChartInfoModal from "../components/ChartGrowthInfoModal/ChartGrowth
 import returnArrow from "../assets/returnArrow.svg";
 import profile from "../assets/profile.svg";
 import chartInfo from "../assets/chartsInfo.svg";
-import "./InternGrowthPage.css";
+import styles from "./InternGrowthPage.module.css";
 
 const InternGrowthPage = () => {
   const { internID } = useParams();
@@ -49,13 +49,13 @@ const InternGrowthPage = () => {
   }, [internID]);
 
   return (
-    <div className="big-container">
+    <div className={styles.bigContainer}>
       <NavBar />
-      <div className="newGrowthPageContainer">
-        <div className="newGrowthPageWrapper">
-          <div className="internGrowthPageInfo">
+      <div className={styles.newGrowthPageContainer}>
+        <div className={styles.newGrowthPageWrapper}>
+          <div className={styles.internGrowthPageInfo}>
             <button
-              className="returnToProjects"
+              className={styles.returnToProjects}
               onClick={() => navigate(`/interns`)}
             >
               <img
@@ -64,12 +64,12 @@ const InternGrowthPage = () => {
                 alt="Return to Projects"
               />
             </button>
-            <h1 className="intern-growth-title">
+            <h1 className={styles.internGrowthTitle}>
               {intern
                 ? `${intern.firstName} ${intern.lastName}'s Growth`
                 : "Intern Growth"}
               <span
-                className="growthChartInfo"
+                className={styles.growthChartInfo}
                 onClick={() => setShowModalInfo(true)}
               >
                 <img src={chartInfo} alt="Chart Info" />
@@ -87,18 +87,18 @@ const InternGrowthPage = () => {
                 }}
               />
             )}
-            <div className="skillUpdates">
+            <div className={styles.skillUpdates}>
               <InitialSkills internID={internID} />
               <CurrentSkills internID={internID} />
             </div>
           </div>
         </div>
 
-        <div className="graphs-container1">
-          <div className="topGrowthGraph">
+        <div className={styles.graphsContainer}>
+          <div className={styles.monthlyGrowthGraph}>
             <MonthlyGrowthChart internID={internID} />
           </div>
-          <div className="bottomGrowthGraph">
+          <div className={styles.skillGrowthGraph}>
             <SkillGrowthChart internID={internID} />
           </div>
         </div>
