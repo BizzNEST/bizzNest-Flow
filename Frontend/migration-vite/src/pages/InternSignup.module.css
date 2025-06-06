@@ -40,7 +40,7 @@
 
 }
 
-.Intern-signup-form {
+.internSignupForm {
   margin: 0 auto;
   padding: 30px 40px;
   width: 495px;
@@ -51,8 +51,8 @@
   z-index: 10;
 }
 
-.Intern-signup-form input,
-.Intern-signup-form select {
+.internSignupForm input,
+.internSignupForm select {
   width: 100%;
   /* padding: 12px 45px; Space for icons */
   margin-bottom: 20px;
@@ -75,7 +75,7 @@
   width: 100%;
 }
 
-.Intern-signup-form button {
+.internSignupForm button {
   background: linear-gradient(270deg, #a732e6, #bc36c8);
   border-radius: 5vw;
   color: white;
@@ -152,11 +152,11 @@
 
 /* Media Query for Responsive Design */
 @media (max-width: 768px) {
-  .Intern-signup-form {
+  .internSignupForm {
     width: 70%;
   }
 
-  .Intern-signup-form input[type="email"] {
+  .internSignupForm input[type="email"] {
     width: 100%;
   }
 

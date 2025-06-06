@@ -2,6 +2,7 @@
 import React, { useEffect, useState, useCallback, useRef } from "react"; // Added useRef
 import { useLocation, useNavigate } from "react-router-dom";
 import NavBar from "../components/Navbar/NavBar"; // Adjust path if needed
+import RecModal from "../components/RecModal/RecModal";
 import "./Recommendations.css"; // Ensure CSS file exists and path is correct
 
 
@@ -22,6 +23,8 @@ const Recommendations = () => {
  const [grouped, setGrouped] = useState({}); // Recommendations grouped by toolID: { toolID: [internRec] }
  const [isAscending, setIsAscending] = useState(false); // Sort order: false=Learning, true=Leadership
  const [animationKey, setAnimationKey] = useState(0); // For list animations
+ const [recModalOpen, setRecModalOpen] = useState(false);
+ const [recModalInternData, setRecModalInternData] = useState(null);
 
 
  // Selection state (using numeric IDs)
@@ -46,6 +49,10 @@ const Recommendations = () => {
    };
  }, [location.search]);
 
+// --- Modal open/close logic ---
+// isOpen: boolean to determine if the modal should be shown
+// onClose: function to call when closing the modal
+// children: the content to display inside the modal
 
  // --- Grouping and Sorting Logic (Memoized) ---
  // This function now purely derives state from recommendationData and isAscending
@@ -457,7 +464,13 @@ const submitChanges = useCallback(async () => {
    eligible ? "linear-gradient(to bottom,#356086,#25FFC1)"
             : "linear-gradient(to bottom,rgb(174,40,40),#EF2BD2)";
 
-
+const getTextColor = (rec, isAsc) => {
+  const gradient = isAsc ? leaderGrad(rec.eligible) : grad(rec.percent);
+  if (gradient.includes("#c333fd")) return "#c333fd"; // violet
+  if (gradient.includes("#00bcd4")) return "#00bcd4"; // cyan
+  if (gradient.includes("#ef2bd2")) return "#ef2bd2"; // pink
+  return "#ffffff"; // fallback
+};
 
 
  // --- Render Logic ---
@@ -519,9 +532,6 @@ const submitChanges = useCallback(async () => {
          Recommended for{" "}
          <span style={{ color: "#25FFC1" }}>{isAscending ? "Project Leadership" : "Optimized Learning"}</span>
        </h2>
-       <p className="recommendation-subtext">
-           {isAscending ? "Interns whose skills meet or exceed difficulty." : "Interns with highest potential skill gain."}
-       </p>
      </div>
 
 
@@ -553,10 +563,30 @@ const submitChanges = useCallback(async () => {
                                    // Use a stable key combination
                                    key={`${tool.toolID}-${internRec.internID}`}
                                    className={`tablet ${isSelectedAsIntern ? "selected" : isSelectedAsLeader ? "leader-selected" : ""}`}
-                                   style={{ background: isAscending ? leaderGrad(internRec.eligible) : grad(internRec.percent) }}
+                                   style={{
+                                            border: "2px solid transparent",
+                                            borderRadius: "12px",
+                                            backgroundImage: `linear-gradient(#191919, #191919), ${isAscending ? leaderGrad(internRec.eligible) : grad(internRec.percent)}`,
+                                            backgroundOrigin: "border-box",
+                                            backgroundClip: "padding-box, border-box",
+                                            // color: getTextColor(internRec, isAscending)
+                                  }}
+                                  
                                    // Add animation class if needed, based on animationKey
                                    // className={`tablet ... ${animationKey > 0 ? 'fade-in' : ''}`}
                                >
+                                <div 
+                                  className="tablet-info-button"
+                                  style={{ cursor: "pointer", position: "absolute", top: 8, right: 8 }}
+                                  onClick={() => {
+                                    setRecModalInternData(internRec); // store intern info
+                                    setRecModalOpen(true);
+                                  }}
+                                  title="View more info"
+                                  >
+                                    🔍    
+                                  </div>
+
                                    <div className="tablet-name">{internRec.name}</div>
                                    <div className="tablet-percent">
                                        {isAscending
@@ -624,6 +654,20 @@ const submitChanges = useCallback(async () => {
          </button>
        </div>
      </div>
+     <RecModal isOpen={recModalOpen} onClose={() => setRecModalOpen(false)}>
+      {recModalInternData && (
+        <div>
+          <h2 className="text-x1 font-bold mb-2">{recModalInternData.name}</h2>
+          <p>{isAscending ? "Leadership Candidate" : "Learning Opportunity"}</p>
+          <p>
+            {isAscending
+            ? recModalInternData.eligible ? "Eligable for leadership" : "Not eligible"
+            : `Potential Growth: ${recModalInternData.percent.toFixed(1)}%`}
+          </p>
+          {/* Add more data here when ready */}
+        </div>
+      )}
+     </RecModal>
    </div>
  );
 };
