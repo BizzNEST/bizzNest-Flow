@@ -1,4 +1,4 @@
-.overall-growth-container {
+.overallGrowthContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -7,14 +7,14 @@
     height: 100%;
 }
 
-.chart-title {
+.chartTitle {
     font-size: 16px;
     font-weight: bold;
     color: black;
     margin-bottom: 5px;
 }
 
-.growth-text {
+.growthText {
     font-size: 20px;
     font-weight: bold;
     fill: #c333fd; /* Matches the gradient */

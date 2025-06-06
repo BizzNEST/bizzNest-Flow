@@ -9,12 +9,12 @@ html, body {
     height: 100%;
   }
 
-  .nav-container {
+  .navContainer {
     width: 100%;
   }
 
 /* Base container styles */
-.homepage-container {
+.homepageContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -22,7 +22,7 @@ html, body {
   }
 
   /* Content container */
-  .content-container {
+  .contentContainer {
     display: flex;
     flex-direction: column;
     width: 90%;
@@ -30,7 +30,7 @@ html, body {
     gap: 20px;
   }
 
-  .top-section {
+  .topSection {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -72,7 +72,7 @@ html, body {
     scrollbar-gutter: stable; /* Keeps space for the scrollbar, preventing layout shifts */
   }
 
-.project-card {
+.projectCard {
     background: linear-gradient(to right, #43c6a1, #00bcd4, #25ffc1);
     background-size: 400% 400%;
     animation: waveEffect 4s ease infinite;
@@ -88,11 +88,11 @@ html, body {
     transition: transform 0.3s, background-color 0.3s;
   }
 
-  .project-card h3 {
+  .projectCard h3 {
     font-weight: 400;
   }
 
-.project-card:hover {
+.projectCard:hover {
   transform: scale(1.05);
   background: linear-gradient(to right, #ef2bd2, #f679b5, #c333fd);
   background-size: 400% 400%;
@@ -101,7 +101,7 @@ html, body {
 }
   
   /* Right Section */
-  .right-section {
+  .rightSection {
     flex: 2;
     display: flex;
     flex-direction: column;
@@ -117,7 +117,7 @@ html, body {
 
   }
 
-  .dynamic-component {
+  .dynamicComponent {
     background: linear-gradient(
     60deg,
   #222 8%,
@@ -137,7 +137,7 @@ overflow: hidden;
 padding: 5px;
   }
   
-  .create-project-button {
+  .createProjectButton {
     background:linear-gradient(to bottom, #ef2bd2, #c333fd);
     color: white;
     font-size: 1.5rem;
@@ -150,7 +150,7 @@ padding: 5px;
     transition: background-color 0.3s;
   }
   
-  .create-project-button:hover {
+  .createProjectButton:hover {
     transform: scale(1.05);
   }
 
@@ -167,11 +167,11 @@ padding: 5px;
   }
 
 @media (max-width: 480px) {
-  .homepage-container{
+  .homepageContainer{
     height: 140vh;
   }
 
-  .top-section{
+  .topSection{
     flex-direction: column;
   }
 
@@ -179,13 +179,13 @@ padding: 5px;
     width: 95%;
   }
 
-  .project-card{
+  .projectCard{
     min-width: 175px;
     height: 90px;
     font-size: 1rem;
   }
 
-  .create-project-button{
+  .createProjectButton{
     width: 100%;
     font-size: 1.1rem;
   }

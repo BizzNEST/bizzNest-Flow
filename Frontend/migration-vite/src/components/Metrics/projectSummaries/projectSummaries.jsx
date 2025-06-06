@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./projectSummaries.css";
+import styles from "./projectSummaries.module.css";
 
 const departmentMap = {
     0: "WebDev",
@@ -45,10 +45,10 @@ const ProjectSummaries = () => {
     }, []);
 
     return (
-        <div className="project-summaries-container">
-            <h3 className="table-title">Project Summaries</h3>
-            <div className="table-wrapper">
-                <table className="project-table">
+        <div className={styles.projectSummariesContainer}>
+            <h3 className={styles.tableTitle}>Project Summaries</h3>
+            <div className={styles.tableWrapper}>
+                <table className={styles.projectTable}>
                     <thead>
                         <tr>
                             <th>Project</th>
@@ -63,7 +63,7 @@ const ProjectSummaries = () => {
                                 <td>{title}</td>
                                 <td>{department}</td>
                                 <td>
-                                    <span className={`status-badge ${statusColor}`}>{status}</span>
+                                <span className={`${styles.statusBadge} ${styles[statusColor]}`}>{status}</span>
                                 </td>
                                 <td>{projectedGrowth}</td>
                             </tr>

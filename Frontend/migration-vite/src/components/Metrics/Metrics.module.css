@@ -1,4 +1,4 @@
-.graph-container {
+.graphContainer {
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -34,17 +34,17 @@
 }
 
 /* Top row */
-.top-row {
+.topRow {
   flex-wrap: nowrap;
 }
 
-.rectangle-small {
+.rectangleSmall {
   flex: 1 30%;
   /* max-width: calc(33.333% - 10px); */
   max-width: none;
 }
 
-.rectangle-large {
+.rectangleLarge {
   flex: 2 1 60%;
   /* max-width: calc(66.666% - 10px); */
   max-width: none;
@@ -55,11 +55,11 @@
 }
 
 /* Bottom row */
-.bottom-row {
+.bottomRow {
   flex-wrap: nowrap;
 }
 
-.rectangle-third {
+.rectangleThird {
   flex: 1;
   max-width: none;
 }
@@ -69,7 +69,7 @@
 
 /* Tablet breakpoint - maintain the same layout but scaled down */
 @media (max-width: 1024px) {
-  .graph-container {
+  .graphContainer {
     padding: 15px;
     gap: 15px;
   }
@@ -85,7 +85,7 @@
 
 /* Small tablet breakpoint - maintain the same layout but smaller */
 @media (max-width: 768px) {
-  .graph-container {
+  .graphContainer {
     padding: 12px;
     gap: 12px;
   }
@@ -105,9 +105,9 @@
     flex-wrap: wrap;
   }
 
-  .rectangle-small,
-  .rectangle-large,
-  .rectangle-third {
+  .rectangleSmall,
+  .rectangleLarge,
+  .rectangleThird {
     flex: 1 1 100%;
     max-width: 100%;
     min-height: 140px;

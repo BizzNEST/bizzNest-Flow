@@ -1,11 +1,12 @@
 /* Popup Overlay */
-.popup-overlay {
+.popUpOverlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    background: rgba(0, 0, 0, 0.5);
+    /* Semi-transparent background */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -13,7 +14,7 @@
 }
 
 /* Popup Box */
-.popup-box {
+.popUpBox {
     background: #1e1e1e;
     color: white;
     padding: 25px;
@@ -26,13 +27,13 @@
 }
 
 /* Popup Heading */
-.popup-box h3 {
+.popUpBox h3 {
     margin-bottom: 20px;
     font-size: 22px;
 }
 
 /* Buttons Container */
-.popup-buttons {
+.popUpButtons {
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
@@ -40,7 +41,7 @@
 }
 
 /* Confirm Button */
-.confirm-btn {
+.confirmBtn {
     background: #035a1d;
     color: white;
     border: none;
@@ -54,13 +55,13 @@
     transition: 0.2s;
 }
 
-.confirm-btn:hover {
+.confirmBtn:hover {
     background: #0ed64a;
     transform: scale(1.05);
 }
 
 /* Cancel Button */
-.cancel-btn {
+.cancelBtn {
     background: #710202;
     color: white;
     border: none;
@@ -74,13 +75,15 @@
     transition: 0.2s;
 }
 
-.cancel-btn:hover {
+.cancelBtn:hover {
     background: #e71414;
     transform: scale(1.05);
 }
-.popup-icon{
+
+.popUpIcon {
     padding-top: 4px;
-    filter: brightness(0) invert(1); /* Makes the image white */
+    filter: brightness(0) invert(1);
+    /* Makes the image white */
 }
 
 
@@ -90,6 +93,7 @@
         opacity: 0;
         transform: scale(0.95);
     }
+
     to {
         opacity: 1;
         transform: scale(1);

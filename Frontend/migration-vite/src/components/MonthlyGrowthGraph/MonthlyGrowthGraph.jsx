@@ -8,7 +8,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import "./MonthlyGrowthGraph.css";
+import styles from "./MonthlyGrowthGraph.module.css";
 
 const MonthlyGrowthChart = ({ internID }) => {
   const [monthlyGrowthData, setMonthlyGrowthData] = useState([]);
@@ -46,9 +46,9 @@ const MonthlyGrowthChart = ({ internID }) => {
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
       return (
-        <div className="custom-tooltip">
-          <p className="tooltip-label">{`Month: ${label}`}</p>
-          <p className="tooltip-value">
+        <div className={styles.customTooltip}>
+          <p className={styles.tooltipLabel}>{`Month: ${label}`}</p>
+          <p className={styles.tooltipValue}>
             Growth: <strong>{parseFloat(payload[0].value).toFixed(2)}%</strong>
           </p>
         </div>
@@ -58,7 +58,7 @@ const MonthlyGrowthChart = ({ internID }) => {
   };
 
   return (
-    <div className="monthly-growth-container">
+    <div className={styles.monthlyGrowthContainer}>
       <h2>Monthly Growth Over Time</h2>
       <ResponsiveContainer width="100%" height={230}>
         <LineChart

@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import styles from '../../pages/HomePage.module.css';
+
 const Projects  = () => {
   const [projects, setProjects] = useState([]); // State for holding projects
   const navigate = useNavigate();
@@ -24,11 +26,11 @@ const Projects  = () => {
   }, []);
 
   return (
-    <div className="projects">
+    <div className={styles.projects}>
       {projects.map((projects) => (
         <div 
           key={projects.projectID}
-          className="project-card"
+          className={styles.projectCard}
           style={{ animationDelay: projects.animationDelay }}
           onClick={() => navigate(`/project/${projects.projectID}`)} // Route to ProjectInfoPage
         >

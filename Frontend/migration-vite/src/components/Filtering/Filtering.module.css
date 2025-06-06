@@ -1,0 +1,66 @@
+.filteringWrapper {
+    flex: 1;
+    max-width: 300px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    /* Shadow for depth */
+    background-color: #1e1e1e;
+    /* Background color to differentiate the border */
+    height: 470px;
+    /* Fixed height for consistency */
+}
+
+.filteringWrapper h3 {
+    text-align: center;
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.filteringWrapper label {
+    display: block;
+    margin-bottom: 30px;
+    /* Space below the label */
+    font-weight: 400;
+    color: white;
+}
+
+.filteringWrapper select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: white;
+    font-size: 1rem;
+    margin-bottom: 40px;
+    color: black;
+    transition: border-color 0.3s ease;
+}
+
+.filteringWrapper select:focus {
+    border-color: black;
+    outline: none;
+}
+
+.filteringWrapper button {
+    width: 96%;
+    margin-left: 6px;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    /* Rounded corners */
+    background: linear-gradient(to right, #ec4899, #a655f1);
+    color: #fff;
+    /* White text */
+    transform: scale(1.05);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.5s ease, transform 0.3s ease;
+}
+
+.filteringWrapper button:hover {
+    transform: scale(1.08);
+    background: linear-gradient(to right, #00bcd4, #25ffc1);
+
+}

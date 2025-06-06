@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { LineChart, Line, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from "recharts";
-import './monthlyGrowth.css';
+import styles from './monthlyGrowth.module.css';
 
 const ProgramMonthlyGrowth = () => {
     const [monthlyGrowthData, setMonthlyGrowthData] = useState([]);
@@ -32,9 +32,9 @@ const ProgramMonthlyGrowth = () => {
     const CustomTooltip = ({ active, payload, label }) => {
         if (active && payload && payload.length) {
             return (
-                <div className="custom-tooltip">
-                    <p className="tooltip-label">{`Month: ${label}`}</p>
-                    <p className="tooltip-value">
+                <div className={styles.customToolTip}>
+                    <p className={styles.toolTipLable}>{`Month: ${label}`}</p>
+                    <p className={styles.toolTipValue}>
                         📊 Percentage Growth: <strong>{payload[0].value}%</strong>
                     </p>
                 </div>
@@ -44,8 +44,8 @@ const ProgramMonthlyGrowth = () => {
     };
 
     return (
-        <div className="program-monthly-growth-container">
-            <h3 className="chart-title">Monthly Growth</h3>
+        <div className={styles.programMonthlyGrowthContainer}>
+            <h3 className={styles.chartTitle}>Monthly Growth</h3>
             <ResponsiveContainer width={600} height={170}>
                 <LineChart 
                     data={monthlyGrowthData} 

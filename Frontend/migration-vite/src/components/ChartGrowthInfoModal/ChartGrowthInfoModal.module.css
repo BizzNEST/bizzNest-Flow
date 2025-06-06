@@ -1,4 +1,4 @@
-.modal-overlay {
+.modalOverlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -12,7 +12,7 @@
     border-radius: 20px;
   }
   
-  .modal-content {
+  .modalContent {
     background: #1e1e1e;
     color: white;
     padding: 2rem;
@@ -24,11 +24,11 @@
     overflow-y: auto;
   }
 
-  .modal-content p{
+  .modalContent p{
     font-weight: 600;
   }
 
-  .modal-content img{
+  .modalContent img{
     filter: invert(1);
     padding-right: 10px;
   }
