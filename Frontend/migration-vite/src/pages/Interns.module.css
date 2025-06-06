@@ -1,9 +1,9 @@
-
 ::-webkit-scrollbar {
   display: none;
 }
+
 /* Fullscreen background */
-.big-container {
+.bigContainer {
   display: flex;
   flex-direction: column;
   background: #191919;
@@ -14,7 +14,8 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding: 70px 20px 20px; /* Added 40px padding at the top */
+  padding: 70px 20px 20px;
+  /* Added 40px padding at the top */
   background-color: #191919;
 }
 
@@ -28,22 +29,26 @@
   width: 90%;
   max-width: 1200px;
   flex-grow: 1;
-  padding-top: 20px; /* Push content slightly downward */
+  padding-top: 20px;
+  /* Push content slightly downward */
 }
 
 /* Allow only the intern list to scroll */
-.intern-container {
+.internContainer {
   flex-grow: 1;
-  overflow-y: auto; /* Enables scrolling inside the intern list */
-  width: 100%; /* Ensure it spans full width */
+  overflow-y: auto;
+  /* Enables scrolling inside the intern list */
+  width: 100%;
+  /* Ensure it spans full width */
   display: flex;
   justify-content: center;
   padding: 0 10px;
-  max-height: calc(100vh - 200px); /* Adjust based on layout */
+  max-height: calc(100vh - 200px);
+  /* Adjust based on layout */
 }
 
 /* Growth Button */
-.growth-button {
+.growthButton {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -55,41 +60,45 @@
   color: white;
   font-size: 14px;
   font-weight: bold;
-    &:hover{
-      scale: 1.05;
-    }
+
+  &:hover {
+    scale: 1.05;
+  }
 }
 
-.growth-button img{
+.growthButton img {
   filter: invert(1);
 }
 
-.filtering-wrapper{
+.filteringWrapper {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-.filtering-wrapper label{
+.filteringWrapper label {
   margin-bottom: 10px;
 }
 
 /* Prevents filtering and buttons from shrinking */
-.filtering-wrapper, .select-buttons {
+.filteringWrapper,
+.selectButtons {
   flex-shrink: 0;
 }
-.filter-header {
+
+.filterHeader {
   display: flex;
   justify-content: flex-start;
   font-weight: 350;
 }
+
 /* Styling for the filtering and search */
-.search-bar-wrapper {
+.searchBarWrapper {
   margin-bottom: 20px;
 }
 
 /* Interns list wrapper */
-.interns-wrapper {
+.internsWrapper {
   flex: 2;
   padding: 20px;
   border-radius: 10px;
@@ -98,12 +107,13 @@
   height: 470px;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centers the ul */
+  align-items: center;
+  /* Centers the ul */
   position: relative;
 }
 
 /* Interns list title */
-.interns-wrapper h2 {
+.internsWrapper h2 {
   margin-top: 50px;
   color: white;
   font-size: 28px;
@@ -111,27 +121,29 @@
 }
 
 /* Select and delete buttons */
-.select-buttons {
+.selectButtons {
   position: absolute;
   top: 10px;
   left: 10px;
-  width: calc(100% - 20px); /* Ensures it stays inside the wrapper */
+  width: calc(100% - 20px);
+  /* Ensures it stays inside the wrapper */
   display: flex;
-  justify-content: space-between; 
+  justify-content: space-between;
   align-items: center;
 }
 
-.select-left {
+.selectLeft {
   display: flex;
   gap: 10px;
 }
 
-.delete-right {
+.deleteRight {
   display: flex;
 }
 
-.select-btn, .deselect-btn {
-  background: linear-gradient(to right,#ec4899, #a655f1);
+.selectBtn,
+.deselectBtn {
+  background: linear-gradient(to right, #ec4899, #a655f1);
   color: white;
   font-size: 16px;
   font-weight: 300;
@@ -142,11 +154,13 @@
   transition: background 0.3s ease, transform 0.2s ease;
 }
 
-.select-btn:hover, .deselect-btn:hover {
+.selectBtn:hover,
+.deselectBtn:hover {
   transform: scale(1.05);
-  background: linear-gradient(to right,#2dd4bf, #3b82f6);}
+  background: linear-gradient(to right, #2dd4bf, #3b82f6);
+}
 
-.delete-selected-btn {
+.deleteSelectedBtn {
   background: #FF4C4C;
   color: white;
   font-size: 16px;
@@ -157,35 +171,39 @@
   cursor: pointer;
   transition: background 0.3s ease, transform 0.2s ease;
 }
-.delete-selected-btn:not(:disabled):hover {
+
+.deleteSelectedBtn:not(:disabled):hover {
   background: #B22222;
   transform: scale(1.05);
 }
 
-.delete-selected-btn:disabled {
+.deleteSelectedBtn:disabled {
   background-color: #720707;
   cursor: not-allowed;
   opacity: 0.6;
-  transform: none !important; 
-  transition: none; 
+  transform: none !important;
+  transition: none;
 }
-.delete-selected-btn:hover {
+
+.deleteSelectedBtn:hover {
   background: #B22222;
   transform: scale(1.05);
 }
-.delete-selected-btn:disabled {
-  background-color: #720707; 
-  cursor: not-allowed; 
-  opacity: 0.6; 
+
+.deleteSelectedBtn:disabled {
+  background-color: #720707;
+  cursor: not-allowed;
+  opacity: 0.6;
 }
-.interns-header{
+
+.internsHeader {
   font-weight: 350;
 }
 
-.interns-wrapper ul {
+.internsWrapper ul {
   display: flex;
   flex-direction: column;
-  align-items: center; 
+  align-items: center;
   width: 100%;
   list-style-type: none;
   padding: 0;
@@ -193,75 +211,78 @@
 }
 
 /* Intern list items */
-.interns-wrapper ul li {
+.internsWrapper ul li {
   display: flex;
   align-items: center;
   justify-content: space-between;
   font-size: 25px;
   font-weight: 300;
-  margin: 10px 0; 
-  width: 90%; 
+  margin: 10px 0;
+  width: 90%;
   height: 25px !important;
   border-radius: 25px;
   padding: 15px;
-  background: linear-gradient(to right,#ec4899, #a655f1);
+  background: linear-gradient(to right, #ec4899, #a655f1);
   color: white;
   transition: background 0.5s ease, transform 0.3s ease;
   cursor: pointer;
 }
 
-.interns-wrapper ul li:hover {
+.internsWrapper ul li:hover {
   transform: scale(1.03);
-  background: linear-gradient(to right,#2dd4bf, #3b82f6);
+  background: linear-gradient(to right, #2dd4bf, #3b82f6);
 }
 
-.interns-wrapper ul li.selected {
-  background: linear-gradient(to right,#2dd4bf, #3b82f6);
+.selectedItem {
+  background: linear-gradient(to right, #2dd4bf, #3b82f6);
   border: 2px solid white;
   transform: scale(1.03);
 }
 
 /* Prevent hover effect on already selected interns */
-.interns-wrapper ul li.selected:hover {
-  background: linear-gradient(to right,#2dd4bf, #3b82f6);
+.internsWrapper ul .selectedItem {
+  background: linear-gradient(to right, #2dd4bf, #3b82f6);
 }
 
 
 
 /* Profile images */
-.interns-wrapper ul li img.profile {
+.internsWrapper ul li img.profile {
   height: 40px;
   width: 40px;
   border-radius: 50%;
-  filter: brightness(0) invert(1); /* Makes the image white */
+  filter: brightness(0) invert(1);
+  /* Makes the image white */
 }
 
 /* Intern name */
-.interns-wrapper ul li span.name {
+.internsWrapper ul li span.name {
   flex: 1;
   text-align: center;
   color: white;
 }
 
 /* Icons */
-.interns-wrapper ul li .icon-container {
+.internsWrapper ul li .iconContainer {
   display: flex;
   gap: 10px;
   align-items: center;
 }
 
-.interns-wrapper ul li img.edit,
-.interns-wrapper ul li img.delete {
+.internsWrapper ul li img.edit,
+.internsWrapper ul li img.delete {
   height: 25px;
   width: 25px;
   cursor: pointer;
-  filter: brightness(0) invert(1); /* Makes the image white */
-  &:hover{
+  filter: brightness(0) invert(1);
+
+  /* Makes the image white */
+  &:hover {
     scale: 1.15;
   }
 }
 
-.profile-pic {
+.profilePic {
   height: 40px;
   width: 40px;
   border-radius: 50%;
@@ -269,65 +290,78 @@
 }
 
 @media (max-width: 976px) and (min-width: 768px) {
- 
-  .interns-wrapper h2 {
-      margin-top: 100px;
-  }
-  .select-buttons {
-      display: flex;
-      flex-direction: column; /* Stack buttons vertically */
-      align-items: center; /* Center buttons */
-      gap: 10px; /* Add spacing between buttons */
+
+  .internsWrapper h2 {
+    margin-top: 100px;
   }
 
-  .select-left, .delete-right {
-      width: 100%; /* Make them take full width */
-      display: flex;
-      justify-content: center; /* Center buttons */
+  .selectButtons {
+    display: flex;
+    flex-direction: column;
+    /* Stack buttons vertically */
+    align-items: center;
+    /* Center buttons */
+    gap: 10px;
+    /* Add spacing between buttons */
   }
 
-  .select-btn, .deselect-btn, .delete-selected-btn {
-      width: 80%; /* Adjust button width */
-      text-align: center;
+  .selectLeft,
+  .deleteRight {
+    width: 100%;
+    /* Make them take full width */
+    display: flex;
+    justify-content: center;
+    /* Center buttons */
+  }
+
+  .selectBtn,
+  .deselectBtn,
+  .deleteSelectedBtn {
+    width: 80%;
+    /* Adjust button width */
+    text-align: center;
   }
 }
+
 /* Responsive Design */
 @media (max-width: 768px) {
-  .internsPageContainer{
+  .internsPageContainer {
     padding: 0 20px 20px;
   }
 
-  .content{
+  .content {
     display: flex;
     flex-direction: column;
     gap: 0;
   }
 
-  .mobileFilterDiv{
+  .mobileFilterDiv {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
   }
 
-  .filtering-wrapper {
+  .filteringWrapper {
     display: none;
   }
-  
-  .filtering-wrapper h3, .filtering-wrapper label{
+
+  .filteringWrapper h3,
+  .filteringWrapper label {
     display: block;
     padding: 10px 0px;
     font-weight: 400;
     color: white;
   }
 
-  .filtering-wrapper.show {
+  .filteringWrapper.show {
     display: block;
     width: 100%;
     margin-top: 10px;
   }
 
-  .search-bar-wrapper, .filtering-wrapper select{
+  .searchBarWrapper,
+  .filteringWrapper select {
     width: 100%;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -337,15 +371,15 @@
     transition: border-color 0.3s ease;
   }
 
-  .filtering-wrapper select{
+  .filteringWrapper select {
     margin-bottom: 20px;
   }
 
-  .filtering-wrapper label{
+  .filteringWrapper label {
     margin-bottom: 0px;
   }
 
-  .mobile-filter-toggle {
+  .mobileFilterToggle {
     background: linear-gradient(to right, #ec4899, #a655f1);
     color: white;
     padding: 15px 35px;
@@ -357,40 +391,42 @@
     font-weight: 700;
   }
 
-  .filtering-wrapper h3{
+  .filteringWrapper h3 {
     font-size: 16px;
     margin-bottom: 0px;
     text-align: start;
   }
 
-  .mobileFilterDiv h1{
+  .mobileFilterDiv h1 {
     font-size: 2.4rem;
   }
 
-  .mobile-filter-toggle:hover {
+  .mobileFilterToggle:hover {
     background: linear-gradient(to right, #2dd4bf, #3b82f6);
   }
 
-  .select-buttons{
+  .selectButtons {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
   }
 
-  .select-btn, .deselect-btn, .delete-selected-btn{
+  .selectBtn,
+  .deselectBtn,
+  .deleteSelectedBtn {
     border-radius: 30px;
     font-weight: 700;
     font-size: 18px;
     padding: 15px 20px;
   }
 
-  .delete-selected-btn:disabled{
+  .deleteSelectedBtn:disabled {
     background-color: grey;
     border-radius: 30px;
     font-weight: 700;
   }
 
-  .interns-wrapper{
+  .internsWrapper {
     padding-bottom: 80px;
     background: transparent;
     margin: 0;
@@ -400,16 +436,16 @@
     box-shadow: none;
   }
 
-  .interns-wrapper h2{
+  .internsWrapper h2 {
     display: none;
   }
 
-  .interns-wrapper ul li {
+  .internsWrapper ul li {
     border-radius: 10px;
     padding: 20px;
   }
 
-  .intern-container{
+  .internContainer {
     padding: 0% 10px;
     margin-top: 18%;
   }
