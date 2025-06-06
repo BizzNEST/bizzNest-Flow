@@ -1,5 +1,5 @@
 /* BottomNav.css */
-.bottom-nav {
+.bottomNav {
   position: fixed;
   bottom: 0;
   height: 60px;
@@ -14,7 +14,7 @@
   z-index: 1000;
   }
   
-  .bottom-nav button {
+  .bottomNav button {
     background: none;
     border: none;
     filter: invert(1);
@@ -24,7 +24,7 @@
     align-items: center;
   }
   
-  .bottom-nav button.active {
+  .bottomNav button.active {
     background-color: white;
     color: #2979ff;
     padding: 8px 12px;
@@ -34,14 +34,14 @@
     gap: 6px;
   }
   
-  .bottom-nav .label {
+  .bottomNav .label {
     font-weight: 600;
     font-size: 16px;
   }
   
   /* Hide on large screens */
   @media (min-width: 768px) {
-    .bottom-nav {
+    .bottomNav {
       display: none;
     }
   }

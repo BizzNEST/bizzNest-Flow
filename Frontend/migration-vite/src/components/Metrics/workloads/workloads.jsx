@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, Legend } from 'recharts';
-import './workloads.css';
+import styles from './workloads.module.css';
 
 const ProjectWorkloadsChart = () => {
   const [internWorkloads, setInternWorkloads] = useState([]);
@@ -35,8 +35,8 @@ const ProjectWorkloadsChart = () => {
   }, []);
 
   return (
-    <div className="project-workloads-chart">
-      <h3 className="chart-title">Project Workloads</h3>
+    <div className={styles.projectWorkloadsChart}>
+      <h3 className={styles.chartTitle}>Project Workloads</h3>
       <ResponsiveContainer width="100%" height={200}>
         <BarChart data={internWorkloads} barSize={50}>
           <CartesianGrid strokeDasharray="3 3" />
