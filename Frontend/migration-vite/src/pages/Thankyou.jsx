@@ -1,17 +1,17 @@
 import React from "react";
 import Logo from "../assets/Logo.png";
-import "./Thankyou.css";
+import styles from "./Thankyou.module.css";
 
 const Thankyou = () => {
 
     return (
-        <div className="addedWrapper">
+        <div className={styles.addedWrapper}>
             <h1>You've been added to</h1>
-            <div className="logoWrapper">
+            <div className={styles.logoWrapper}>
                 <h1>Bizznest Flow</h1>
                 <img src={Logo} alt="Logo" />
             </div>
-            <div className="thankyouForApplying">
+            <div className={styles.thankyouForApplying}>
                 <p>
                     Your admin now has access to cutting-edge tools designed to personalize your development journey.
                      From identifying the perfect projects to enhance your skills to strategically positioning you for

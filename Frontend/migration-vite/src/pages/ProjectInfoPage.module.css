@@ -140,7 +140,7 @@
   background:  rgb(53, 96, 134);
 }
 
-.deleteButton:hover, .completeButton:hover {
+.deleteButton:hover, .completeButton:hover, .editInternsButton:hover {
   transform: scale(1.05);
 }
 
