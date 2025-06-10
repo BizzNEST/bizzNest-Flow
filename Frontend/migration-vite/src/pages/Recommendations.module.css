@@ -14,7 +14,7 @@ body::-webkit-scrollbar-thumb:hover {
     margin: 0 20px 0 20px;
 } */
 
-  .project-stats {
+  .projectStats {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -28,26 +28,26 @@ body::-webkit-scrollbar-thumb:hover {
     margin-left: -3em;
   }
   
-  .tool-box {
+  .toolBox {
     text-align: center;
   }
   
-  .tool-box h4 {
+  .toolBox h4 {
     margin-bottom: 5px;
     font-size: 14px;
   }
   
-  .average-difficulty {
+  .averageDifficulty {
     text-align: center;
   }
 
-  .average-difficulty h4 {
+  .averageDifficulty h4 {
     text-align: center;
     font-size: 20px;
     margin-bottom: 5px;
   }
   
-  .title-box {
+  .titleBox {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -66,7 +66,7 @@ body::-webkit-scrollbar-thumb:hover {
     text-align: center;
   }
 
-.tool-boxes {
+.toolBoxes {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -83,7 +83,7 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 
-  .avg-box {
+  .avgBox {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -101,12 +101,12 @@ body::-webkit-scrollbar-thumb:hover {
       linear-gradient(90deg, #c333fd, #00bcd4, #ef2bd2) border-box; /* Gradient border */
   }
 
-  .recommendations-header {
+  .recommendationsHeader {
     font-size: 17px;
     margin: 0 20px;
   }
 
-  .suggestions-container {
+  .suggestionsContainer {
     background-color: #222;
     padding: 10px;
     border-radius: 10px;
@@ -117,7 +117,7 @@ body::-webkit-scrollbar-thumb:hover {
     margin: 0 20px;
   }
 
-  .tool-header {
+  .toolHeader {
     font-size: 1.5rem;
     font-weight: bold;
     margin: 20px 0 10px; /* Adds space around the header */
@@ -127,7 +127,7 @@ body::-webkit-scrollbar-thumb:hover {
 
 
 
-  .tablet-rows {
+  .tabletRows {
     margin-bottom: 20px; 
     display: flex;
     align-items: center;
@@ -141,7 +141,7 @@ body::-webkit-scrollbar-thumb:hover {
     overflow-y: hidden;
   }
 
-  .row-tablets {
+  .rowTablets {
     display: flex;
     gap: 20px;
     overflow-x: auto;
@@ -149,16 +149,16 @@ body::-webkit-scrollbar-thumb:hover {
     scroll-behavior: smooth;
   }
 
-  .row-tablets::-webkit-scrollbar {
+  .rowTablets::-webkit-scrollbar {
     height: 6px;
     background: #222;
   }
 
-  .row-tablets::-webkit-scrollbar-thumb {
+  .rowTablets::-webkit-scrollbar-thumb {
     background-color: black;
     border-radius: 2px;
   }
-  .row-tablets::-webkit-scrollbar-thumb:hover {
+  .rowTablets::-webkit-scrollbar-thumb:hover {
     background-color: #444;
   }
 
@@ -190,18 +190,18 @@ body::-webkit-scrollbar-thumb:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
   }
   
-  .tablet-name {
+  .tabletName {
     font-weight: bold;
     margin-bottom: 5px;
   }
   
-  .tablet-percent {
+  .tabletPercent {
     color: #fff;
     font-size: 16px;
     font-weight: bold;
   }
 
-  .assign-button, .leader-button {
+  .assignButton, .leaderButton {
     background-color: #444;
     color:  #ffffff;
     border: none;
@@ -213,20 +213,20 @@ body::-webkit-scrollbar-thumb:hover {
     font-weight: bold;
   }
   
-  .assign-button:hover {
+  .assignButton:hover {
     background-color: #ffffff;
     color:  #000000;
   }
 
 
-.buttons-container {
+.buttonsContainer {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
   margin: 25px 0 25px 0;
 }
-.switch-button, .recommendationSubmitButton {
+.switchButton, .recommendationSubmitButton {
   padding: 0 20px;
 } 
   /* The switch - the box around the slider */
@@ -341,3 +341,4 @@ input:checked + .slider:before {
 
 
   
+/* Modular class placeholders for Recommendations.jsx global-to-modular refactor */
