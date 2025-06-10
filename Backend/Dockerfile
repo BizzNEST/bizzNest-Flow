@@ -1,4 +1,4 @@
-FROM node:latest
+FROM node:20
 
 # Install system dependencies for bcrypt (Updated with apt-get update)
 RUN apt-get update && apt-get install -y \

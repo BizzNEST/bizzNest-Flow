@@ -1,0 +1,65 @@
+.project-summaries-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    color: black;
+}
+
+.table-title {
+    font-size: 16px;
+    font-weight: 500;
+    color: black;
+    margin-bottom: 10px;
+}
+
+/* Table wrapper for vertical scrolling */
+.table-wrapper {
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+/* Table styling */
+.project-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.project-table th, .project-table td {
+    padding: 8px;
+    text-align: left;
+    font-size: 14px;
+}
+
+.project-table th {
+    border-bottom: 2px solid #ddd;
+    font-weight: 300;
+}
+
+.project-table tbody tr {
+    border-bottom: 1px solid #ddd;
+}
+
+/* Status badges */
+.status-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-weight: 300;
+    text-align: center;
+    font-size: 12px;
+}
+
+/* Status colors */
+.yellow {
+    background-color: #FFC107;
+    color: black;
+}
+
+.green {
+    background-color: #28a745;
+    color: white;
+}

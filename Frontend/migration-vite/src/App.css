@@ -1,0 +1,72 @@
+@keyframes spin-icon {
+  to { transform: rotate(-360deg); }
+}
+@keyframes spin-ring {
+  to { transform: rotate(360deg); }
+}
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.fab {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  height: 70px;
+  width: 70px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;                /* keeps the ring inside the circle */
+
+  /* smooth grow / brighten */
+  transition: transform 0.6s ease, filter 0.6s ease;
+  transform: scale(1);
+}
+
+/* ✕ grow + brighten on hover */
+.fab:hover {
+  transform: scale(1.1);
+  filter: brightness(1.15);
+}
+
+/* -------- rotating gradient RING (pseudo-element) -------- */
+.fab::before {
+  content: "";
+  position: absolute;
+  inset: 0;                        /* full size */
+  border-radius: 50%;
+  z-index: -1;                     /* sits behind the icon */
+
+  background:
+    radial-gradient(at 15% 15%,  #c333fd 0%,  transparent 60%), /* TL  */
+    radial-gradient(at 85% 15%,  #ef2bd2 0%,  transparent 60%), /* TR  */
+    radial-gradient(at 85% 85%,  #00bcd4 0%,  transparent 60%), /* BR  */
+    radial-gradient(at 15% 85%,  #25ffc1 0%,  transparent 60%); /* BL  */
+  background-blend-mode: screen;
+
+  /* only the ring spins */
+  animation: spin-ring 8s linear infinite;
+}
+
+/* -------- icon stays visually still by counter-spinning -------- */
+.fab img,
+.fab svg {
+  width: 5vh;
+  filter: invert(1);
+}
+
+@media (max-width: 768px){
+  .fab{
+    display: none;
+  }
+}

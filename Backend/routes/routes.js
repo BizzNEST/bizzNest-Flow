@@ -18,8 +18,13 @@ import completeProjectCtrl from '../controllers/completeProjectCtrl.js';
 import getCompletedProjectsCtrl from '../controllers/getCompletedProjectsCtrl.js';
 import restoreProjectCtrl from '../controllers/restoreProjectCtrl.js';
 import internMonthlyGrowthCtrl from '../controllers/internMonthlyGrowthCtrl.js';
+import getDataSummaryCtrl from '../controllers/getDataSummaryCtrl.js';
+import updateInternsProjectsCtrl from '../controllers/updateInternsProjectCtrl.js';
+import chatbotCtrl from "../controllers/chatbotCtrl.js";
 
 const routes = (app) => {
+    app.post("/api/chat", chatbotCtrl.chat);
+
     app.route('/basePage')
     .get(baseCtrl.basePage);
 
@@ -28,6 +33,12 @@ const routes = (app) => {
 
     app.route('/login')
      .post(loginCtrl.login);
+
+    app.route('/api/getInternDataSummary')
+     .get(getDataSummaryCtrl.getInternSummary);
+
+    app.route('/api/getProjectsDataSummary')
+     .get(getDataSummaryCtrl.getProjectsSummary);
 
     app.route('/getProjects') 
     .get(getProjectCtrl.getProjects)
@@ -97,6 +108,9 @@ const routes = (app) => {
 
    app.route('/getMonthlyGrowth/:internID')
    .get(internMonthlyGrowthCtrl.getMonthlyGrowth);
+
+   app.route('/projects/interns')
+   .put(updateInternsProjectsCtrl.editInternsProject);
 };
 
 export default routes;

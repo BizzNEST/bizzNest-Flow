@@ -1,0 +1,416 @@
+
+::-webkit-scrollbar {
+  display: none;
+}
+/* Fullscreen background */
+.big-container {
+  display: flex;
+  flex-direction: column;
+  background: #191919;
+}
+
+/* Add padding at the top to push everything downward */
+.internsPageContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 70px 20px 20px; /* Added 40px padding at the top */
+  background-color: #191919;
+}
+
+/* The content should fill the space without overflowing */
+.content {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 30px;
+  width: 90%;
+  max-width: 1200px;
+  flex-grow: 1;
+  padding-top: 20px; /* Push content slightly downward */
+}
+
+/* Allow only the intern list to scroll */
+.intern-container {
+  flex-grow: 1;
+  overflow-y: auto; /* Enables scrolling inside the intern list */
+  width: 100%; /* Ensure it spans full width */
+  display: flex;
+  justify-content: center;
+  padding: 0 10px;
+  max-height: calc(100vh - 200px); /* Adjust based on layout */
+}
+
+/* Growth Button */
+.growth-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: 2px solid;
+  border-radius: 25px;
+  padding: 8px 16px;
+  cursor: pointer;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+    &:hover{
+      scale: 1.05;
+    }
+}
+
+.growth-button img{
+  filter: invert(1);
+}
+
+.filtering-wrapper{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.filtering-wrapper label{
+  margin-bottom: 10px;
+}
+
+/* Prevents filtering and buttons from shrinking */
+.filtering-wrapper, .select-buttons {
+  flex-shrink: 0;
+}
+.filter-header {
+  display: flex;
+  justify-content: flex-start;
+  font-weight: 350;
+}
+/* Styling for the filtering and search */
+.search-bar-wrapper {
+  margin-bottom: 20px;
+}
+
+/* Interns list wrapper */
+.interns-wrapper {
+  flex: 2;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #1e1e1e;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  height: 470px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers the ul */
+  position: relative;
+}
+
+/* Interns list title */
+.interns-wrapper h2 {
+  margin-top: 50px;
+  color: white;
+  font-size: 28px;
+  text-align: center;
+}
+
+/* Select and delete buttons */
+.select-buttons {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: calc(100% - 20px); /* Ensures it stays inside the wrapper */
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+}
+
+.select-left {
+  display: flex;
+  gap: 10px;
+}
+
+.delete-right {
+  display: flex;
+}
+
+.select-btn, .deselect-btn {
+  background: linear-gradient(to right,#ec4899, #a655f1);
+  color: white;
+  font-size: 16px;
+  font-weight: 300;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.select-btn:hover, .deselect-btn:hover {
+  transform: scale(1.05);
+  background: linear-gradient(to right,#2dd4bf, #3b82f6);}
+
+.delete-selected-btn {
+  background: #FF4C4C;
+  color: white;
+  font-size: 16px;
+  font-weight: 300;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+.delete-selected-btn:not(:disabled):hover {
+  background: #B22222;
+  transform: scale(1.05);
+}
+
+.delete-selected-btn:disabled {
+  background-color: #720707;
+  cursor: not-allowed;
+  opacity: 0.6;
+  transform: none !important; 
+  transition: none; 
+}
+.delete-selected-btn:hover {
+  background: #B22222;
+  transform: scale(1.05);
+}
+.delete-selected-btn:disabled {
+  background-color: #720707; 
+  cursor: not-allowed; 
+  opacity: 0.6; 
+}
+.interns-header{
+  font-weight: 350;
+}
+
+.interns-wrapper ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  width: 100%;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Intern list items */
+.interns-wrapper ul li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 25px;
+  font-weight: 300;
+  margin: 10px 0; 
+  width: 90%; 
+  height: 25px !important;
+  border-radius: 25px;
+  padding: 15px;
+  background: linear-gradient(to right,#ec4899, #a655f1);
+  color: white;
+  transition: background 0.5s ease, transform 0.3s ease;
+  cursor: pointer;
+}
+
+.interns-wrapper ul li:hover {
+  transform: scale(1.03);
+  background: linear-gradient(to right,#2dd4bf, #3b82f6);
+}
+
+.interns-wrapper ul li.selected {
+  background: linear-gradient(to right,#2dd4bf, #3b82f6);
+  border: 2px solid white;
+  transform: scale(1.03);
+}
+
+/* Prevent hover effect on already selected interns */
+.interns-wrapper ul li.selected:hover {
+  background: linear-gradient(to right,#2dd4bf, #3b82f6);
+}
+
+
+
+/* Profile images */
+.interns-wrapper ul li img.profile {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  filter: brightness(0) invert(1); /* Makes the image white */
+}
+
+/* Intern name */
+.interns-wrapper ul li span.name {
+  flex: 1;
+  text-align: center;
+  color: white;
+}
+
+/* Icons */
+.interns-wrapper ul li .icon-container {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.interns-wrapper ul li img.edit,
+.interns-wrapper ul li img.delete {
+  height: 25px;
+  width: 25px;
+  cursor: pointer;
+  filter: brightness(0) invert(1); /* Makes the image white */
+  &:hover{
+    scale: 1.15;
+  }
+}
+
+.profile-pic {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+@media (max-width: 976px) and (min-width: 768px) {
+ 
+  .interns-wrapper h2 {
+      margin-top: 100px;
+  }
+  .select-buttons {
+      display: flex;
+      flex-direction: column; /* Stack buttons vertically */
+      align-items: center; /* Center buttons */
+      gap: 10px; /* Add spacing between buttons */
+  }
+
+  .select-left, .delete-right {
+      width: 100%; /* Make them take full width */
+      display: flex;
+      justify-content: center; /* Center buttons */
+  }
+
+  .select-btn, .deselect-btn, .delete-selected-btn {
+      width: 80%; /* Adjust button width */
+      text-align: center;
+  }
+}
+/* Responsive Design */
+@media (max-width: 768px) {
+  .internsPageContainer{
+    padding: 0 20px 20px;
+  }
+
+  .content{
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .mobileFilterDiv{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .filtering-wrapper {
+    display: none;
+  }
+  
+  .filtering-wrapper h3, .filtering-wrapper label{
+    display: block;
+    padding: 10px 0px;
+    font-weight: 400;
+    color: white;
+  }
+
+  .filtering-wrapper.show {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .search-bar-wrapper, .filtering-wrapper select{
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: white;
+    font-size: 1rem;
+    color: black;
+    transition: border-color 0.3s ease;
+  }
+
+  .filtering-wrapper select{
+    margin-bottom: 20px;
+  }
+
+  .filtering-wrapper label{
+    margin-bottom: 0px;
+  }
+
+  .mobile-filter-toggle {
+    background: linear-gradient(to right, #ec4899, #a655f1);
+    color: white;
+    padding: 15px 35px;
+    border: none;
+    border-radius: 30px;
+    font-size: 18px;
+    margin: 20px 0;
+    cursor: pointer;
+    font-weight: 700;
+  }
+
+  .filtering-wrapper h3{
+    font-size: 16px;
+    margin-bottom: 0px;
+    text-align: start;
+  }
+
+  .mobileFilterDiv h1{
+    font-size: 2.4rem;
+  }
+
+  .mobile-filter-toggle:hover {
+    background: linear-gradient(to right, #2dd4bf, #3b82f6);
+  }
+
+  .select-buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .select-btn, .deselect-btn, .delete-selected-btn{
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 18px;
+    padding: 15px 20px;
+  }
+
+  .delete-selected-btn:disabled{
+    background-color: grey;
+    border-radius: 30px;
+    font-weight: 700;
+  }
+
+  .interns-wrapper{
+    padding-bottom: 80px;
+    background: transparent;
+    margin: 0;
+    padding-left: 0;
+    border: none;
+    padding-right: 0;
+    box-shadow: none;
+  }
+
+  .interns-wrapper h2{
+    display: none;
+  }
+
+  .interns-wrapper ul li {
+    border-radius: 10px;
+    padding: 20px;
+  }
+
+  .intern-container{
+    padding: 0% 10px;
+    margin-top: 18%;
+  }
+}

@@ -1,0 +1,69 @@
+/* Base navbar styles */
+
+/* * {
+  overflow: hidden;
+} */
+.navbar {
+  display: flex;
+  justify-content: space-between; /* Ensure logo is on the left, menu on the right */
+  align-items: center;
+  padding: 0 20px 0px 20px;
+  background-color: #191919;
+  border-bottom: 1px solid white;
+}
+
+#logo {
+  display: flex;
+  align-items: center;
+  padding: 20px 0 20px 55px;
+}
+
+.navbar-logo {
+  height: 45px; /* Adjust size as needed */
+  width: auto;
+}
+
+
+.menu-items {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  background-color: transparent;
+  padding: 0;
+}
+
+.menu-items.row {
+  display: flex; /* Show the items as a row */
+}
+
+.menu-items li {
+  margin: 0;
+  list-style: none;
+}
+
+.menu-items a {
+  text-decoration: none;
+  color: white;
+  font-size: 18px;
+  transition: color 0.3s;
+}
+
+.menu-items a:hover {
+  color: #00bcd4;
+}
+
+/* Hamburger icon */
+.hamburger-icon {
+  width: 2em;
+  height: auto;
+  cursor: pointer;
+  flex-direction: column;
+  
+}
+
+
+@media (max-width: 768px){
+  .navbar-container{
+    display: none;
+  }
+}

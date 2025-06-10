@@ -1,0 +1,48 @@
+/* BottomNav.css */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  height: 60px;
+  background: #212121;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  align-content: center;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  width: 100%;
+  z-index: 1000;
+  }
+  
+  .bottom-nav button {
+    background: none;
+    border: none;
+    filter: invert(1);
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .bottom-nav button.active {
+    background-color: white;
+    color: #2979ff;
+    padding: 8px 12px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  
+  .bottom-nav .label {
+    font-weight: 600;
+    font-size: 16px;
+  }
+  
+  /* Hide on large screens */
+  @media (min-width: 768px) {
+    .bottom-nav {
+      display: none;
+    }
+  }
+  
