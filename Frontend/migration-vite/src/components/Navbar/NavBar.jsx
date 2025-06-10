@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import './NavBar.css';
+import styles from './NavBar.module.css';
 import hamburgerIcon from '../../assets/hamburger.png';
 import logo from './logo.svg';
 import FocusLock from "react-focus-lock";
@@ -21,34 +21,34 @@ const NavBar = () => {
   }, []);
 
   return (
-    <nav className="navbar">
+    <nav className={styles.navBar}>
       <div id="logo">
-        <img src={logo} alt="bizzNest Flow Logo" className="navbar-logo" />
+        <img src={logo} alt="bizzNest Flow Logo" className={styles.navBarLogo} />
       </div>
 
-      <div className="navbar-container">
+      <div className={styles.navBarContainer}>
         {!isMobile ? (
-          <ul className="menu-items">
-            <li><Link to="/home" className="nav-link">Home</Link></li>
-            <li><Link to="/interns" className="nav-link">Interns</Link></li>
-            <li><Link to="/CompletedProjects" className="nav-link">Projects</Link></li>
+          <ul className={styles.menuItems}>
+            <li><Link to="/home" className={styles.navLink}>Home</Link></li>
+            <li><Link to="/interns" className={styles.navLink}>Interns</Link></li>
+            <li><Link to="/CompletedProjects" className={styles.navLink}>Projects</Link></li>
           </ul>
         ) : (
           <>
             <img
               src={hamburgerIcon}
               alt="Menu"
-              className="hamburger-icon"
+              className={styles.hamburgerIcon}
               onClick={() => setIsMenuOpen(true)}
             />
             {isMenuOpen && (
               <>
               <FocusLock returnFocus={true}>
                 <RemoveScroll>
-                  <div className="drawer-backdrop" onClick={() => setIsMenuOpen(false)}></div>
-                  <div className="sliding-drawer">
-                    <button className="nav-close-btn" onClick={() => setIsMenuOpen(false)}>✕</button>
-                    <ul className="drawer-links">
+                  <div className={styles.drawerBackDrop} onClick={() => setIsMenuOpen(false)}></div>
+                  <div className={styles.slidingDrawer}>
+                    <button className={styles.navCloseBtn} onClick={() => setIsMenuOpen(false)}>✕</button>
+                    <ul className={styles.drawerLinks}>
                       <li><Link to="/home" onClick={() => setIsMenuOpen(false)}>Home</Link></li>
                       <li><Link to="/interns" onClick={() => setIsMenuOpen(false)}>Interns</Link></li>
                       <li><Link to="/CompletedProjects" onClick={() => setIsMenuOpen(false)}>Projects</Link></li>

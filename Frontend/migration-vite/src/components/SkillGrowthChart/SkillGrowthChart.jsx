@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, LabelList } from "recharts";
-import "./SkillGrowthChart.css"; 
+import styles from "./SkillGrowthChart.module.css"; 
 
 const toolMap = {
     0: "Frontend",
@@ -37,7 +37,7 @@ const SkillGrowthChart = ({ internID }) => {
     }, [internID]);
 
     return (
-        <div className="skill-growth-container">
+        <div className={styles.skillGrowthContainer}>
             <h2>Skill Growth</h2>
             {growthData.length === 0 ? (
                 <p>No growth data available.</p>

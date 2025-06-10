@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './NewProject.css';
+import styles from './NewProject.module.css';
 
 const NewProject = () => {
   const [projectTitle, setProjectTitle] = useState('');
@@ -108,7 +108,7 @@ const NewProject = () => {
   };
 
   return (
-    <div className="new-project-container">
+    <div className={styles.newProjectContainer}>
       <form onSubmit={handleSubmit}>
         {/* Add fields for project details */}
         <input 
@@ -128,7 +128,7 @@ const NewProject = () => {
         {/* Dropdown menu here */}
         <select 
           name="department" 
-          className="department-dropdown"
+          className={styles.departmentDropDown}
           value={department}
           onChange={handleDepartmentChange}
         >
@@ -140,7 +140,7 @@ const NewProject = () => {
 
         {/* Conditionally render tool input fields */}
         {department && (
-          <div className="tool-input-container">
+          <div className={styles.toolInputContainer}>
             {Object.keys(toolInputs).map((tool) => (
               <div key={tool}>
                 <h4>{tool}</h4>
@@ -158,9 +158,9 @@ const NewProject = () => {
           </div>
         )}
 
-        <div className="submit-btn-div">
+        <div className={styles.submitBtnDiv}>
           {/* Button will be disabled if form is not valid */}
-          <button type="submit" className="submit-btn" disabled={!isFormValid} style={{ 
+          <button type="submit" className={styles.submitBtn} disabled={!isFormValid} style={{ 
             backgroundColor: isFormValid ? '#00CFFF' : '#045c68 ', 
             cursor: isFormValid ? 'pointer' : 'not-allowed' 
           }}>
@@ -168,7 +168,7 @@ const NewProject = () => {
           </button>
         </div>
 
-        {statusMessage && <p className="status-message">{statusMessage}</p>}
+        {statusMessage && <p className={styles.statusMessage}>{statusMessage}</p>}
       </form>
     </div>
   );

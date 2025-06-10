@@ -1,5 +1,5 @@
 /* components/SkillBar/SkillBar.css */
-.skill-bar {
+.skillBar {
     display: flex;
     align-items: center;
     margin-bottom: 15px;
@@ -8,11 +8,11 @@
     font-size: 16px;
   }
   
-  .skill-label {
+  .skillLabel {
     width: 100px;
   }
   
-  .bar-wrapper {
+  .barWrapper {
     flex-grow: 1;
     background: rgba(255, 255, 255, 0.3);
     border-radius: 8px;
@@ -21,14 +21,14 @@
     overflow: hidden;
   }
   
-  .bar-fill {
+  .barFill {
     height: 100%;
     border-radius: 8px;
     background: white;
     transition: width 0.3s ease;
   }
   
-  .skill-value {
+  .skillValue {
     width: 40px;
     text-align: right;
   }
