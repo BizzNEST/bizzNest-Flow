@@ -4,7 +4,7 @@ run-name: ${{ github.actor }} Changes Have Been Deployed!
 on:
   push:
     branches:
-      - ab-cicd-test-branch
+      - main
     paths:
       - 'server_configs/mysql.cnf'  # Trigger if any file in the 'backend' directory changes
 
