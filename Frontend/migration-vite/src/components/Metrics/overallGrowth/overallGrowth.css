@@ -11,7 +11,8 @@
     font-size: 16px;
     font-weight: bold;
     color: black;
-    margin-bottom: 5px;
+    position: relative;
+    bottom: 20px;
 }
 
 .growth-text {
