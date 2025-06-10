@@ -20,7 +20,7 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /app    
    
 # Copy package.json and package-lock.json first (to cache dependencies)
-COPY package*.json ./
+COPY package*.json ./  
 
 # Install dependencies, ensuring bcrypt is built from source
 RUN npm install --build-from-source bcrypt
