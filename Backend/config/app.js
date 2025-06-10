@@ -8,7 +8,7 @@ import path from 'path';
 import routes from '../routes/routes.js';
 
 const app = express();
-
+ 
 // ✅ Allow CORS for all routes (Including images)
 app.use(cors({
   origin: "*", // Allow any frontend to access static files

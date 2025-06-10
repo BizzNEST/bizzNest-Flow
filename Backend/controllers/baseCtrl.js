@@ -9,7 +9,7 @@ const baseCtrl = {
    * Serves the base HTML page.
    */
   basePage: (req, res) => {
-    res.status(200).json("Hello this is the backend")
+    res.status(200).json("Hello this is alan, Ian, Lisandro, Youssef")
   },
 };
 

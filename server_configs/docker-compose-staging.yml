@@ -1,0 +1,48 @@
+version: "3.8"
+# Comment Teting 123 bizznest flow
+services: 
+  backend-production:
+    build:
+      context: ../production/bizzNest-Flow/Backend/
+      dockerfile: Dockerfile
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - backend 
+    ports:
+    - "80:3000"
+    env_file:
+      - .env
+    healthcheck:
+      test: ["CMD", "curl" , "-h", "localhost:3000/basepage"]
+      timeout: 10s
+      retries: 10
+    container_name: bizz-app
+    restart: unless-stopped  # ✅ Ensures container restarts if it crashes
+          
+  mysql:
+    image: mysql:latest
+    restart: always
+    networks:
+      - backend
+    ports:
+    - "3306:3306"
+    environment:
+      - MYSQL_ROOT_USER=${DB_USER}
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}  # ✅ Required for root user
+      - MYSQL_DATABASE=${DB_NAME}  # ✅ Creates a database
+    env_file:
+      - .env
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 5s
+      retries: 10
+    volumes:
+      - /home/ubuntu/mounts/mysql:/var/lib/mysql  # ✅ Persist database data
+      - /home/ubuntu/configs/mysql.cnf:/etc/mysql/conf.d/custom.cnf:ro
+    container_name: bizz-mysql-app
+ 
+networks:
+  backend:
+    driver: bridge

@@ -10,7 +10,7 @@ const pool = mysql.createPool({
   port: process.env.DB_PORT,
   database: process.env.DB_NAME, // Add this line to specify the database
 
-});
+}); 
 
 const promisePool = pool.promise();
 
@@ -24,3 +24,4 @@ pool.getConnection((err, connection) => {
 });
 
 export default promisePool;
+ 
