@@ -1,0 +1,35 @@
+/* Container for Current Skills */
+.finalSkillsContainer {
+  /* background: linear-gradient(to bottom right,#2dd4bf, #3b82f6); */
+
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 15px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  color: white;
+  min-height: 150px; /* Ensures consistency */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Title */
+.finalSkillsContainer h2 {
+  font-size: 22px;
+  font-weight: 300;
+  margin-bottom: 15px;
+}
+
+/* Skills list */
+.finalSkillsContainer ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0; /* Removes extra space around the list */
+}
+
+/* Individual skill */
+.finalSkillsContainer li {
+  font-size: 18px;
+  margin: 5px 0;
+  font-weight: 300;
+}

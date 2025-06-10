@@ -1,4 +1,4 @@
-import './App.css';
+import styles from './App.module.css';
 import React, { useState, useEffect } from 'react';
 import HomePage from './pages/HomePage';
 import NewProject from './components/NewProject/NewProject';
@@ -75,7 +75,7 @@ function AppContent() {
 
       {shouldShowChatbot && (
         <>
-          <button className="fab" onClick={() => setChatOpen(true)} aria-label="Open chat">
+          <button className={styles.fab} onClick={() => setChatOpen(true)} aria-label="Open chat">
             <img src={ChatbotImage} alt='Chatbot'/>
           </button>
 

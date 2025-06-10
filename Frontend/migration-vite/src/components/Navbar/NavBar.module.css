@@ -3,7 +3,7 @@
 /* * {
   overflow: hidden;
 } */
-.navbar {
+.navBar {
   display: flex;
   justify-content: space-between; /* Ensure logo is on the left, menu on the right */
   align-items: center;
@@ -18,13 +18,13 @@
   padding: 20px 0 20px 55px;
 }
 
-.navbar-logo {
+.navBarLogo {
   height: 45px; /* Adjust size as needed */
   width: auto;
 }
 
 
-.menu-items {
+.menuItems {
   display: flex;
   flex-direction: row;
   gap: 20px;
@@ -32,28 +32,28 @@
   padding: 0;
 }
 
-.menu-items.row {
+.menuItems.row {
   display: flex; /* Show the items as a row */
 }
 
-.menu-items li {
+.menuItems li {
   margin: 0;
   list-style: none;
 }
 
-.menu-items a {
+.menuItems a {
   text-decoration: none;
   color: white;
   font-size: 18px;
   transition: color 0.3s;
 }
 
-.menu-items a:hover {
+.menuItems a:hover {
   color: #00bcd4;
 }
 
 /* Hamburger icon */
-.hamburger-icon {
+.hamburgerIcon {
   width: 2em;
   height: auto;
   cursor: pointer;
@@ -63,7 +63,7 @@
 
 
 @media (max-width: 768px){
-  .navbar-container{
+  .navBarContainer{
     display: none;
   }
 }

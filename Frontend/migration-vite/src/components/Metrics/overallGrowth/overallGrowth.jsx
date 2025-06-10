@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { RadialBarChart, RadialBar, ResponsiveContainer } from "recharts";
-import "./overallGrowth.css";
+import styles from "./overallGrowth.module.css";
 
 const OverallGrowth = () => {
     const [growthPercentage, setGrowthPercentage] = useState(0);
@@ -25,8 +25,8 @@ const OverallGrowth = () => {
     const data = [{ name: "Growth", value: growthPercentage, fill: "url(#colorGradient)" }];
 
     return (
-        <div className="overall-growth-container">
-            <h3 className="chart-title">Overall Growth</h3>
+        <div className={styles.overallGrowthContainer}>
+            <h3 className={styles.chartTitle}>Overall Growth</h3>
             <ResponsiveContainer width="100%" height={170}>
                 <RadialBarChart
                     innerRadius="80%"
@@ -55,7 +55,7 @@ const OverallGrowth = () => {
                     />
 
                     {/* Centered percentage text */}
-                    <text x="50%" y="50%" textAnchor="middle" dominantBaseline="middle" className="growth-text">
+                    <text x="50%" y="50%" textAnchor="middle" dominantBaseline="middle" className={styles.growthText}>
                         {growthPercentage}%
                     </text>
                 </RadialBarChart>

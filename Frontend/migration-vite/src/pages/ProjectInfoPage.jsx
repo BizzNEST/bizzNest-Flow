@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import "./ProjectInfoPage.css";
+import styles from "./ProjectInfoPage.module.css";
 import NavBar from "../components/Navbar/NavBar";
 
 const ProjectInfoPage = () => {
@@ -94,24 +94,24 @@ const ProjectInfoPage = () => {
   };
 
   return (
-    <main className="projectContainer">
+    <main className={styles.projectContainer}>
       <NavBar />
-      <div className="projectWrapper">
+      <div className={styles.projectWrapper}>
         {/* Project Header Card */}
-        <div className="projectHeader">
-          <div className="projectTitleCard">
-            <h2 className="projectTitle">{project.projectTitle}</h2>
+        <div className={styles.projectHeader}>
+          <div className={styles.projectTitleCard}>
+            <h2 className={styles.projectTitle}>{project.projectTitle}</h2>
           </div>
 
           {/* Skill Cards */}
-          <div className="skillsContainer">
+          <div className={styles.skillsContainer}>
             {project.tools.length > 0 ? (
               project.tools.map((tool, index) => (
-                <div key={index} className="skillCard">
-                  <h4 className="skillName">
+                <div key={index} className={styles.skillCard}>
+                  <h4 className={styles.skillName}>
                     {toolNames[tool.toolID] || `Tool ${tool.toolID}`}
                   </h4>
-                  <p className="skillValue">
+                  <p className={styles.skillValue}>
                     {tool.difficulty !== null
                       ? tool.difficulty.toFixed(1)
                       : "N/A"}
@@ -119,74 +119,74 @@ const ProjectInfoPage = () => {
                 </div>
               ))
             ) : (
-              <p className="noSkills">No skills assigned to this project.</p>
+              <p className={styles.noSkills}>No skills assigned to this project.</p>
             )}
-            <div className="skillCard highlighted">
-              <h4 className="skillName">Average</h4>
-              <p className="skillValue">{calculateAverageDifficulty()}</p>
+            <div className={`${styles.skillCard} ${styles.highlighted}`}>
+              <h4 className={styles.skillName}>Average</h4>
+              <p className={styles.skillValue}>{calculateAverageDifficulty()}</p>
             </div>
           </div>
         </div>
 
         {/* Project Description */}
-        <div className="projectDescription">
-          <h3 className="descriptionTitle">Project Description:</h3>
-          <p className="descriptionText">
+        <div className={styles.projectDescription}>
+          <h3 className={styles.descriptionTitle}>Project Description:</h3>
+          <p className={styles.descriptionText}>
             {project.projectDescription || "No description available."}
           </p>
         </div>
 
         {/* Assigned People */}
-        <div className="assignedContainer">
+        <div className={styles.assignedContainer}>
           {/* Interns */}
-          <div className="assignedGroup">
-            <h3 className="assignedTitle">Assigned Interns</h3>
-            <div className="assignedList">
+          <div className={styles.assignedGroup}>
+            <h3 className={styles.assignedTitle}>Assigned Interns</h3>
+            <div className={styles.assignedList}>
               {project.assignedInterns.length > 0 ? (
                 project.assignedInterns
                   .filter((person) => person.role === "Intern")
                   .map((intern, index) => (
                     <div
                       key={index}
-                      className="assignedPerson"
+                      className={styles.assignedPerson}
                     >{`${intern.firstName} ${intern.lastName}`}</div>
                   ))
               ) : (
-                <p className="noAssigned">No interns assigned.</p>
+                <p className={styles.noAssigned}>No interns assigned.</p>
               )}
             </div>
           </div>
 
           {/* Leaders */}
-          <div className="assignedGroup">
-            <h3 className="assignedTitle">Assigned Leaders</h3>
-            <div className="assignedList">
+          <div className={styles.assignedGroup}>
+            <h3 className={styles.assignedTitle}>Assigned Leaders</h3>
+            <div className={styles.assignedList}>
               {project.assignedInterns.length > 0 ? (
                 project.assignedInterns
                   .filter((person) => person.role === "Leader")
                   .map((leader, index) => (
                     <div
                       key={index}
-                      className="assignedLeader"
+                      className={styles.assignedLeader}
                     >{`${leader.firstName} ${leader.lastName}`}</div>
                   ))
               ) : (
-                <p className="noAssigned">No leaders assigned.</p>
+                <p className={styles.noAssigned}>No leaders assigned.</p>
               )}
             </div>
           </div>
         </div>
 
         {/* Action Buttons */}
-        <div className="buttonContainer">
-          <button className="deleteButton" onClick={deleteProject}>
+        <div className={styles.buttonContainer}>
+          <button className={styles.deleteButton} onClick={deleteProject}>
             Delete Project
           </button>
-          <button className="completeButton" onClick={completeProject}>
+          <button className={styles.completeButton} onClick={completeProject}>
             Mark Complete
           </button>
           {<button
-            className="editInternsButton"
+            className={styles.editInternsButton}
             onClick={() =>
               navigate(
                 `/recommendations?projectID=${project.projectID}&departmentID=${project.departmentID}`

@@ -7,7 +7,7 @@ import Mail from "../assets/mail.svg";
 import Visibility_Off from "../assets/visibility_off.svg";
 import Visibility from "../assets/visibility.svg";
 import Lock from "../assets/lock.svg";
-import "./InternSignup.css";
+import styles from "./InternSignup.module.css";
 import logo from './logo.svg';
 
 const InternSignup = () => {
@@ -85,29 +85,29 @@ const InternSignup = () => {
   };
 
   return (
-    <div className="internSignupWrapper">
-      <div className="internWaves" />
-      <form className="Intern-signup-form">
-        <div class="logo">
-                      <img src={logo} alt="bizzNest Flow Logo" className="navbar-logo" />
+    <div className={styles.internSignupWrapper}>
+      {/* <div className="internWaves" /> */}
+      <form className={styles.internSignupForm}>
+        <div class={styles.logo}>
+                      <img src={logo} alt="bizzNest Flow Logo" className="navbarLogo" />
                     </div>
-        <h2 className="internSignupTitle">Intern Signup</h2>
+        <h2 className={styles.internSignupTitle}>Intern Signup</h2>
 
         {step === 1 ? (
           <>
-            <div className="internNameContainer">
+            <div className={styles.internNameContainer}>
               <input type="text" placeholder="First name" name="firstName" value={formData.firstName} onChange={handleChange} />
               <input type="text" placeholder="Last name" name="lastName" value={formData.lastName} onChange={handleChange} />
             </div>
 
-            <div className="internInputContainer">
-              <img src={Mail} alt="Email" className="internInputIcon" />
+            <div className={styles.internInputContainer}>
+              <img src={Mail} alt="Email" className={styles.internInputIcon} />
               <input type="email" placeholder="Email" name="email" value={formData.email} onChange={handleChange} />
             </div>
 
-            <div className="internPasswordContainer">
-              <div className="internInputContainer">
-                <img src={Lock} alt="Password" className="internInputIcon" />
+            <div className={styles.internPasswordContainer}>
+              <div className={styles.internInputContainer}>
+                <img src={Lock} alt="Password" className={styles.internInputIcon} />
                 <input
                   type={showPassword ? "text" : "password"}
                   placeholder="Password"
@@ -117,8 +117,8 @@ const InternSignup = () => {
                 />
               </div>
 
-              <div className="internInputContainer">
-                <img src={Lock} alt="Confirm Password" className="internInputIcon" />
+              <div className={styles.internInputContainer}>
+                <img src={Lock} alt="Confirm Password" className={styles.internInputIcon} />
                 <input
                   type={showPassword ? "text" : "password"}
                   placeholder="Confirm Password"
@@ -129,7 +129,7 @@ const InternSignup = () => {
                 <img
                   src={showPassword ? Visibility_Off : Visibility}
                   alt="Toggle Visibility"
-                  className="internVisibilityIcon"
+                  className={styles.internVisibilityIcon}
                   onClick={togglePasswordVisibility}
                 />
               </div>
@@ -149,12 +149,12 @@ const InternSignup = () => {
               <option value="Stockton">Stockton</option>
               <option value="Modesto">Modesto</option>
             </select>
-            <button className="internSignupBttn" onClick={handleNext}>Next</button>
+            <button className={styles.internSignupBttn} onClick={handleNext}>Next</button>
           </>
         ) : (
           <>
             <ProfilePictureUpload onFileSelect={handleProfilePicSelect} />
-            <button className="internSignupBttn" onClick={handleSubmit}>Submit</button>
+            <button className={styles.internSignupBttn} onClick={handleSubmit}>Submit</button>
           </>
         )}
       </form>

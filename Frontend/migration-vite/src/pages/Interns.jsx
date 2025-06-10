@@ -7,7 +7,7 @@ import ConfirmPopup from "../components/ConfirmPopup/ConfirmPopup";
 import edit from "../assets/edit.svg";
 import profile from "../assets/profile.svg";
 import growth from "../assets/growth.svg";
-import "./Interns.css";
+import styles from "./Interns.module.css";
 
 // Cache expiration time (1 hour)
 const CACHE_EXPIRY_TIME = 60 * 60 * 1000; // 1 hour in milliseconds
@@ -40,7 +40,6 @@ const Interns = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-
   const filterInterns = useRef([]);
   const navigate = useNavigate();
 
@@ -63,7 +62,9 @@ const Interns = () => {
           setInterns(parsedData);
         } else {
           // Fetch fresh data if cache is invalid/expired
-          const response = await fetch(`${import.meta.env.VITE_API_URL}/getInterns`);
+          const response = await fetch(
+            `${import.meta.env.VITE_API_URL}/getInterns`
+          );
           if (!response.ok) throw new Error("Failed to fetch interns");
 
           const data = await response.json();
@@ -110,7 +111,8 @@ const Interns = () => {
             const response = await fetch(
               `${import.meta.env.VITE_API_URL}/getIntern/${intern.InternID}`
             );
-            if (!response.ok) throw new Error("Failed to fetch profile picture");
+            if (!response.ok)
+              throw new Error("Failed to fetch profile picture");
 
             const data = await response.json();
             let profilePic = profile; // Default
@@ -252,26 +254,27 @@ const Interns = () => {
   };
 
   return (
-    <div className="big-container">
+    <div className={styles.bigContainer}>
       <NavBar />
-      {error && <div className="error-message">{error}</div>}
-      <div className="internsPageContainer">
-        <div className="content">
-        {isMobile && (
-          <div className="mobileFilterDiv">
-            <h1>Interns</h1>
-            <button
-              className="mobile-filter-toggle"
-              onClick={() => setShowMobileFilters(!showMobileFilters)}
-            >
-              {showMobileFilters ? "Hide Filters" : "Show Filters"}
-            </button>
-          </div>
-            
+      {error && <div className={styles.errorMessage}>{error}</div>}
+      <div className={styles.internsPageContainer}>
+        <div className={styles.content}>
+          {isMobile && (
+            <div className={styles.mobileFilterDiv}>
+              <h1>Interns</h1>
+              <button
+                className={styles.mobileFilterToggle}
+                onClick={() => setShowMobileFilters(!showMobileFilters)}
+              >
+                {showMobileFilters ? "Hide Filters" : "Show Filters"}
+              </button>
+            </div>
           )}
-          <div className={`filtering-wrapper ${showMobileFilters ? "show" : ""}`}>
-            <h3 className="filter-header">Search Interns</h3>
-            <div className="search-bar-wrapper">
+          <div
+            className={`${styles.filteringWrapper} ${showMobileFilters ? styles.show : ""}`}
+          >
+            <h3 className={styles.filterHead}>Search Interns</h3>
+            <div className={styles.searchBarWrapper}>
               <SearchBar onSearch={handleSearch} />
             </div>
             <Filtering
@@ -283,25 +286,25 @@ const Interns = () => {
             />
           </div>
 
-          <div className="interns-wrapper">
-            <div className="select-buttons">
-            <div className="select-left">
-              <button
-                className="select-btn"
-                onClick={
-                  selectedInterns.length === filteredInterns.length
-                    ? handleDeselectAll
-                    : handleSelectAll
-                }
-              >
-                {selectedInterns.length === filteredInterns.length
-                  ? "Deselect All"
-                  : "Select All"}
-              </button>
-            </div>
-              <div className="delete-right">
+          <div className={styles.internsWrapper}>
+            <div className={styles.selectButtons}>
+              <div className={styles.selectLeft}>
                 <button
-                  className="delete-selected-btn"
+                  className={styles.selectBtn}
+                  onClick={
+                    selectedInterns.length === filteredInterns.length
+                      ? handleDeselectAll
+                      : handleSelectAll
+                  }
+                >
+                  {selectedInterns.length === filteredInterns.length
+                    ? "Deselect All"
+                    : "Select All"}
+                </button>
+              </div>
+              <div className={styles.deleteRight}>
+                <button
+                  className={styles.deleteSelectedBtn}
                   onClick={() => confirmDelete(null, "bulk")}
                   disabled={selectedInterns.length === 0}
                 >
@@ -310,46 +313,42 @@ const Interns = () => {
               </div>
             </div>
 
-            <h2 className="interns-header">Interns</h2>
-            <div className="intern-container">
+            <h2 className={styles.internsHeader}>Interns</h2>
+            <div className={styles.internContainer}>
               <ul>
                 {filteredInterns.map((intern) => (
                   <li
                     key={intern.InternID}
                     onClick={() => handleSelectIntern(intern.InternID)}
-                    className={
-                      selectedInterns.includes(intern.InternID)
-                        ? "selected"
-                        : ""
-                    }
+                    className={`${styles.internItem} ${selectedInterns.includes(intern.InternID) ? styles.selectedItem : ""}`}
                   >
                     <img
                       src={intern.profilePic}
                       alt="Profile"
-                      className="profile-pic"
+                      className={styles.profilePic}
                       onError={(e) => {
                         e.target.onerror = null;
                         e.target.src = profile; // Fallback to default profile pic
                       }}
                     />
-                    <span className="name">
+                    <span className={styles.name}>
                       {intern.firstName} {intern.lastName}
                     </span>
-                    <div className="icon-container">
+                    <div className={styles.iconContainer}>
                       <img
                         src={edit}
                         alt="edit"
-                        className="edit"
+                        className={styles.edit}
                         onClick={(e) => {
                           e.stopPropagation();
                           navigate(`/editIntern/${intern.InternID}`);
                         }}
                       />
-                      <button 
-                        className="growth-button" 
-                        onClick={(e) => { 
-                          e.stopPropagation(); 
-                          navigate(`/internGrowthPage/${intern.InternID}`); 
+                      <button
+                        className={styles.growthButton}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          navigate(`/internGrowthPage/${intern.InternID}`);
                         }}
                       >
                         <img src={growth} alt="growth" />

@@ -44,14 +44,14 @@
 }
 
 /* Back Button */
-.back-button {
+.backButton {
   background: none;
   border: none;
   cursor: pointer;
   padding: 5px;
 }
 
-.back-button img {
+.backButton img {
   width: 35px;
   height: auto;
     &:hover{

@@ -5,7 +5,7 @@ import Mail from "../assets/mail.svg";
 import Lock from "../assets/lock.svg";
 import Visibility_Off from "../assets/visibility_off.svg";
 import Visibility from "../assets/visibility.svg";
-import './LoginSignup.css';
+import styles from './LoginSignup.module.css';
 import logo from './logo.svg';
 
 const LoginSignup = () => {
@@ -68,75 +68,87 @@ const LoginSignup = () => {
   };
 
   return (
-    <div className="LoginSignupPage">
-      <div className="LoginSignupWrapper">
-        <div className="logo">
-          <img src={logo} alt="bizzNest Flow Logo" className="navbar-logo" />
+    <div className={styles.LoginSignupPage}>
+      <div className={styles.LoginSignupWrapper}>
+        <div className={styles.logo}>
+          <img src={logo} alt="bizzNest Flow Logo" className={styles.navbarLogo} />
         </div>
-        <div className="LoginSignup">
-          <div className="LoginSignup-container">
-            <div className="tabs">
-              <button className={`tab ${isLogin ? "active" : ""}`} onClick={() => setIsLogin(true)}>Login</button>
-              <button className={`tab ${!isLogin ? "active" : ""}`} onClick={() => setIsLogin(false)}>Sign up</button>
-              <div className={`sliderTab ${isLogin ? "login" : "signup"}`}></div>
+        <div className={styles.LoginSignup}>
+          <div className={styles.LoginSignupContainer}>
+            <div className={styles.tabs}>
+              
+              <button
+                  className={`${styles.tab} ${isLogin ? styles.active : ""}`}
+                  onClick={() => setIsLogin(true)}
+                >
+                  Login
+                </button>
+
+                <button
+                  className={`${styles.tab} ${!isLogin ? styles.active : ""}`}
+                  onClick={() => setIsLogin(false)}
+                >
+                  Sign up
+                </button>
+              <div className={`${styles.sliderTab} ${isLogin ? styles.login : styles.signup}`}></div>
             </div>
 
             {isLogin ? (
-              <form onSubmit={handleLogin} className="LoginSignup-form">
-                <div className="internInputContainer">
-                  <img src={Mail} alt="Email" className="internInputIcon" />
-                  <input type="email" name="email" placeholder="Email" value={loginData.email} onChange={handleLoginChange} />
+              <form onSubmit={handleLogin} className={styles.LoginSignupForm}>
+                <div className={styles.internInputContainer}>
+                  <img src={Mail} alt="Email" className={styles.internInputIcon} />
+                  <input className={styles.LoginEmail} type="email" name="email" placeholder="Email" value={loginData.email} onChange={handleLoginChange} />
                 </div>
-                <div className="internInputContainer">
-                  <img src={Lock} alt="Password" className="internInputIcon" />
-                  <input type={showPassword ? "text" : "password"} name="password" placeholder="Password" value={loginData.password} onChange={handleLoginChange} />
-                  <img src={showPassword ? Visibility_Off : Visibility} alt="Toggle Visibility" className="internVisibilityIcon" onClick={() => setShowPassword(!showPassword)} />
+                <div className={styles.internInputContainer}>
+                  <img src={Lock} alt="Password" className={styles.internInputIcon} />
+                  <input className={styles.signupPassword} type={showPassword ? "text" : "password"} name="password" placeholder="Password" value={loginData.password} onChange={handleLoginChange} />
+                  <img src={showPassword ? Visibility_Off : Visibility} alt="Toggle Visibility" className={styles.internVisibilityIcon} onClick={() => setShowPassword(!showPassword)} />
                 </div>
-                {errorMessage && <p className="errorMessage">{errorMessage}</p>}
+                {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>}
                 <button type="submit">Log in</button>
-                <span className="ForgotPassword" onClick={() => navigate("/forgot-password")}>Forgot Password?</span>
+                <span className={styles.ForgotPassword} onClick={() => navigate("/forgot-password")}>Forgot Password?</span>
               </form>
             ) : (
-              <form onSubmit={handleSignup} className="LoginSignup-form">
-                <div className="nameContainer">
+              <form onSubmit={handleSignup} className={styles.LoginSignupForm}>
+                <div className={styles.nameContainer}>
                   <input type="text" name="firstName" placeholder="First Name" value={signupData.firstName} onChange={handleSignupChange} />
                   <input type="text" name="lastName" placeholder="Last Name" value={signupData.lastName} onChange={handleSignupChange} />
                 </div>
-                <div className="internInputContainer">
-                  <img src={Mail} alt="Email" className="internInputIcon" />
-                  <input type="email" name="email" placeholder="Email" value={signupData.email} onChange={handleSignupChange} />
+                <div className={styles.internInputContainer}>
+                  <img src={Mail} alt="Email" className={styles.internInputIcon} />
+                  <input className={styles.LoginEmail} type="email" name="email" placeholder="Email" value={signupData.email} onChange={handleSignupChange} />
                 </div>
-                <div className="internInputContainer">
-                  <img src={Lock} alt="Password" className="internInputIcon" />
-                  <input type={showPassword ? "text" : "password"} name="password" placeholder="Password" value={signupData.password} onChange={handleSignupChange} />
-                  <img src={showPassword ? Visibility_Off : Visibility} alt="Toggle Visibility" className="internVisibilityIcon" onClick={() => setShowPassword(!showPassword)} />
+                <div className={styles.internInputContainer}>
+                  <img src={Lock} alt="Password" className={styles.internInputIcon} />
+                  <input className={styles.LoginPassword} type={showPassword ? "text" : "password"} name="password" placeholder="Password" value={signupData.password} onChange={handleSignupChange} />
+                  <img src={showPassword ? Visibility_Off : Visibility} alt="Toggle Visibility" className={styles.internVisibilityIcon} onClick={() => setShowPassword(!showPassword)} />
                 </div>
-                <div className="internInputContainer">
-                  <img src={Lock} alt="Confirm Password" className="internInputIcon" />
-                  <input type={showConfirmPassword ? "text" : "password"} name="confirmPassword" placeholder="Confirm Password" value={signupData.confirmPassword} onChange={handleSignupChange} />
-                  <img src={showConfirmPassword ? Visibility_Off : Visibility} alt="Toggle Visibility" className="internVisibilityIcon" onClick={() => setShowConfirmPassword(!showConfirmPassword)} />
+                <div className={styles.internInputContainer}>
+                  <img src={Lock} alt="Confirm Password" className={styles.internInputIcon} />
+                  <input className={styles.LoginPassword} type={showConfirmPassword ? "text" : "password"} name="confirmPassword" placeholder="Confirm Password" value={signupData.confirmPassword} onChange={handleSignupChange} />
+                  <img src={showConfirmPassword ? Visibility_Off : Visibility} alt="Toggle Visibility" className={styles.internVisibilityIcon} onClick={() => setShowConfirmPassword(!showConfirmPassword)} />
                 </div>
-                <div className="internInputContainer">
-                  <img src={Lock} alt="Admin Key" className="internInputIcon" />
+                <div className={styles.internInputContainer}>
+                  <img src={Lock} alt="Admin Key" className={styles.internInputIcon} />
                   <input
                     type={showAdminKey ? "text" : "password"}
                     name="adminKey"
                     placeholder="Admin Key?"
-                    className="adminKeyInput"
+                    className={styles.adminKeyInput}
                     value={signupData.adminKey}
                     onChange={handleSignupChange}
                   />
                   <img
                     src={showAdminKey ? Visibility_Off : Visibility}
                     alt="Toggle Visibility"
-                    className="internVisibilityIcon"
+                    className={styles.internVisibilityIcon}
                     onClick={() => setShowAdminKey(!showAdminKey)}
                   />
                 </div>
-                {signupError && <p className="errorMessage">{signupError}</p>}
+                {signupError && <p className={styles.errorMessage}>{signupError}</p>}
                 <button type="submit">Sign up</button>
                 <span
-                  className="internSignup"
+                  className={styles.internSignup}
                   onClick={() => navigate("/internSignUp")}
                 >
                   Are you an Intern?

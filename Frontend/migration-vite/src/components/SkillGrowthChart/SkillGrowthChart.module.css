@@ -1,4 +1,4 @@
-.skill-growth-container {
+.skillGrowthContainer {
     background: linear-gradient(to bottom right, #2b2b2b, #1e1e1e); /* Dark Background */
     padding: 40px;
     border-radius: 15px;
@@ -15,12 +15,12 @@
 }
 
 /* ✅ Hover Effect (No Shadow) */
-.skill-growth-container:hover {
+.skillGrowthContainer:hover {
     transform: scale(1.02);
 }
 
 /* ✅ Chart Title with Gradient Text & Matching Underline */
-.skill-growth-container h2 {
+.skillGrowthContainer h2 {
     font-size: 30px;
     font-weight: 300;
     margin-bottom: 15px;
@@ -34,7 +34,7 @@
 }
 
 /* ✅ Underline that perfectly matches the text gradient */
-.skill-growth-container h2::after {
+.skillGrowthContainer h2::after {
     content: "";
     display: block;
     width: 100%;
@@ -46,7 +46,7 @@
 }
 
 /* ✅ Custom Tooltip Styling */
-.recharts-tooltip-wrapper {
+.rechartsToolTipWrapper {
     background: rgba(255, 255, 255, 0.9);
     padding: 10px;
     border-radius: 8px;
@@ -54,12 +54,12 @@
 }
 
 /* ✅ Dark Purple Gradient for Bars */
-.recharts-bar {
+.rechartsBar {
     fill: url(#barGradient) !important;
 }
 
 /* ✅ Tooltip Styling */
-.custom-tooltip {
+.customToolTip {
     background: rgba(20, 20, 20, 0.9); /* Dark tooltip for contrast */
     padding: 10px;
     border-radius: 5px;
@@ -70,14 +70,14 @@
 }
 
 /* ✅ Tooltip Value Styling */
-.tooltip-value {
+.toolTipValue {
     margin: 0;
     padding: 5px;
 }
 
 /* ✅ Responsive Adjustments */
 @media (max-width: 768px) {
-    .skill-growth-container {
+    .skillGrowthContainer {
         width: 100%;
         padding: 20px;
     }
