@@ -124,7 +124,7 @@
 }
 
 @media (max-width: 450px) {
-  ._internGrowthTitle_1jrtf_52 {
-    font-size: 28px;
+  .internGrowthTitle {
+    font-size: 27px;
   }
 }
