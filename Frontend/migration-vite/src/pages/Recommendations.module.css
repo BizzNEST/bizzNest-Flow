@@ -1,0 +1,344 @@
+body::-webkit-scrollbar {
+  height: 6px;
+  background: #222;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #444;
+  border-radius: 3px;
+}
+body::-webkit-scrollbar-thumb:hover {
+  background-color: #4d4d4d;
+}  
+/* .project-stats-container {
+    margin: 0 20px 0 20px;
+} */
+
+  .projectStats {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+  }
+  
+  
+  .difficulty {
+    display: flex;
+    gap: 40px;
+    margin-left: -3em;
+  }
+  
+  .toolBox {
+    text-align: center;
+  }
+  
+  .toolBox h4 {
+    margin-bottom: 5px;
+    font-size: 14px;
+  }
+  
+  .averageDifficulty {
+    text-align: center;
+  }
+
+  .averageDifficulty h4 {
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 5px;
+  }
+  
+  .titleBox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 300px;
+    height: 120px;
+    
+    border: 2px solid transparent;
+    background:
+      linear-gradient(#191919, #191919) padding-box, /* Background color */
+      linear-gradient(90deg, #c333fd, #00bcd4, #25ffc1) border-box; /* Gradient border */
+    border-radius: 10px;
+    font-size: 28px;
+    font-weight: bold;
+    word-break: break-word;
+    text-align: center;
+  }
+
+.toolBoxes {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 50px;
+    border: none;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    border: 2px solid transparent;
+   background:
+      linear-gradient(#191919, #191919) padding-box, /* Background color */
+      linear-gradient(90deg, #c333fd, #00bcd4, #ef2bd2) border-box; /* Gradient border */
+}
+
+
+  .avgBox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 60px;
+    background: linear-gradient(to bottom right,#ef2bd2, #c333fd);
+    border: none;
+    border-radius: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    padding: 10px;
+    border: 2px solid transparent;
+    background:
+      linear-gradient(#191919, #191919) padding-box, /* Background color */
+      linear-gradient(90deg, #c333fd, #00bcd4, #ef2bd2) border-box; /* Gradient border */
+  }
+
+  .recommendationsHeader {
+    font-size: 17px;
+    margin: 0 20px;
+  }
+
+  .suggestionsContainer {
+    background-color: #222;
+    padding: 10px;
+    border-radius: 10px;
+    color: #888;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 20px;
+  }
+
+  .toolHeader {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 20px 0 10px; /* Adds space around the header */
+    text-align: center; /* Centers the header */
+    color: #fff;
+  }
+
+
+
+  .tabletRows {
+    margin-bottom: 20px; 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #191919;
+    margin: 15px 0;
+    width: 94vw;
+    border-radius: 10px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 5px 10px 5px 10px;
+    overflow-y: hidden;
+  }
+
+  .rowTablets {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+  }
+
+  .rowTablets::-webkit-scrollbar {
+    height: 6px;
+    background: #222;
+  }
+
+  .rowTablets::-webkit-scrollbar-thumb {
+    background-color: black;
+    border-radius: 2px;
+  }
+  .rowTablets::-webkit-scrollbar-thumb:hover {
+    background-color: #444;
+  }
+
+  .tablet {
+    color: white;
+    border-radius: 8px;
+    padding: 10px;
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 130px; /* Set a fixed width */
+    min-width: 130px;
+    height: 100px;
+    font-size: 14px;
+    text-align: center;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    transition: background 0.8s ease;
+    animation: fadeInSlideUp 0.6s ease-in-out;
+    animation-fill-mode: both; /* Ensures the final state is maintained */
+    opacity: 0; /* Default hidden */
+  }
+
+
+  .tablet:hover {
+    transform: scale(1.05); /* Slight zoom on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
+  }
+  
+  .tabletName {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .tabletPercent {
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  .assignButton, .leaderButton {
+    background-color: #444;
+    color:  #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin-top: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
+  .assignButton:hover {
+    background-color: #ffffff;
+    color:  #000000;
+  }
+
+
+.buttonsContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 25px 0 25px 0;
+}
+.switchButton, .recommendationSubmitButton {
+  padding: 0 20px;
+} 
+  /* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: #43c6a1;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #25FFC1;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #25FFC1;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.recommendationSubmitButton {
+  display: flex; /* Ensures the flex property is applied */
+  justify-content: flex-end; /* Aligns the button to the right */
+}
+
+.submit {
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+  background: linear-gradient(to bottom right, #ef2b8d, #b102f6, #55fff6);
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px 10px 20px;
+  cursor: pointer;
+  background-size: 400% 400%;
+  animation: waveEffect 3.3s ease infinite;
+  transition: transform 0.3s, background-color 0.3s;
+}
+
+.submit:hover {
+  transform: scale(1.05);
+}
+
+  @keyframes waveEffect {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+/* Fade and slide animation */
+@keyframes fadeInSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+  
+/* Modular class placeholders for Recommendations.jsx global-to-modular refactor */

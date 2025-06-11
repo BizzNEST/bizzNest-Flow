@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import NavBar from "../components/Navbar/NavBar"; // Import the NavBar component
 import returnArrow from "../assets/returnArrow.svg";
-import './EditIntern.css';
+import styles from './EditIntern.module.css';
 
 const skillLabels = {
   0: ["Frontend", "Backend", "Wordpress"],
@@ -146,31 +146,31 @@ const EditIntern = () => {
   };
 
   return (
-    <div className="big-container">
+    <div className={styles.navContainer}>
       <NavBar /> {/* Add NavBar at the top */}
-      <div className="editInternContainer">
-        <div className="formWrapper">
-          <div className="editInternHeaderWrapper">
-            <button className="back-button" onClick={handleBack}>
+      <div className={styles.editInternContainer}>
+        <div className={styles.formWrapper}>
+          <div className={styles.editInternHeaderWrapper}>
+            <button className={styles.backButton} onClick={handleBack}>
               <img src={returnArrow} alt="Back" />
             </button>
           </div>
-          <h2 className="editInternHeader">Edit Intern</h2>
+          <h2 className={styles.editInternHeader}>Edit Intern</h2>
 
           {successMessage && (
-            <div className="successPopup">
+            <div className={styles.successPopup}>
               {successMessage}
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="editInternForm">
-            <div className="updateNameContainer">
+          <form onSubmit={handleSubmit} className={styles.editInternForm}>
+            <div className={styles.updateNameContainer}>
               <label>
                 <h3>First Name</h3>
                 <input
                   type="text"
                   name="firstName"
-                  className="editInternInput"
+                  className={styles.editInternInput}
                   value={formData.firstName}
                   onChange={handleChange}
                 />
@@ -180,17 +180,17 @@ const EditIntern = () => {
                 <input
                   type="text"
                   name="lastName"
-                  className="editInternInput"
+                  className={styles.editInternInput}
                   value={formData.lastName}
                   onChange={handleChange}
                 />
               </label>
             </div>
 
-            <div className="updateLocationDepartmentContainer">
+            <div className={styles.updateLocationDepartmentContainer}>
               <label>
                 <h3>Location</h3>
-                <select className="editInternSelector" name="location" value={formData.location} onChange={handleChange}>
+                <select className={styles.editInternSelector} name="location" value={formData.location} onChange={handleChange}>
                   <option value="">Select a location</option>
                   <option value="Salinas">Salinas</option>
                   <option value="Gilroy">Gilroy</option>
@@ -201,7 +201,7 @@ const EditIntern = () => {
               </label>
               <label>
                 <h3>Department</h3>
-                <select className="editInternSelector" name="departmentID" value={formData.departmentID} onChange={handleChange}>
+                <select className={styles.editInternSelector} name="departmentID" value={formData.departmentID} onChange={handleChange}>
                   <option value="">Select a department</option>
                   <option value="0">Web Development</option>
                   <option value="1">Design</option>
@@ -210,19 +210,19 @@ const EditIntern = () => {
               </label>
             </div>
 
-            <div className="updateSkillLevelContainer">
+            <div className={styles.updateSkillLevelContainer}>
               <h3>Skill Levels</h3>
-              <div className="departmentSkillLevelsContainer">
+              <div className={styles.departmentSkillLevelsContainer}>
                 {departmentSkills.map((label, index) => {
                   const toolID = Object.keys(skillLabels).find(
                     (key) => skillLabels[key].includes(label)
                   ) * 3 + index;
                   return (
-                    <label key={toolID} className="skillItem">
+                    <label key={toolID} className={styles.skillItem}>
                       {label} Skill:
                       <input
                         type="number"
-                        className="editInternSkillInput"
+                        className={styles.editInternSkillInput}
                         name={`skill_${toolID}`}
                         value={(formData.skills[toolID] || 0).toFixed(1)}
                         onChange={handleChange}
@@ -230,14 +230,14 @@ const EditIntern = () => {
                     </label>
                   );
                 })}
-                <div className="averageSkillBlock">
-                  Overall: <div className="averageValue">{calculateAverageSkill()}</div>
+                <div className={styles.averageSkillBlock}>
+                  Overall: <div className={styles.averageValue}>{calculateAverageSkill()}</div>
                 </div>
               </div>
             </div>
 
-            <div className="buttonsContainer">
-              <button className="updateInternButton" type="submit" disabled={!isUpdated}>
+            <div className={styles.buttonsContainer}>
+              <button className={styles.updateInternButton} type="submit" disabled={!isUpdated}>
                 Update
               </button>
             </div>

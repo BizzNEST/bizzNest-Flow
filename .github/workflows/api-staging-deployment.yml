@@ -1,0 +1,116 @@
+name: Development EC2 Instance Deployment
+run-name: ${{ github.actor }} Changes Have Been Deployed!
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'Backend/**'  # Trigger if any file in the 'backend' directory changes
+
+concurrency:
+  group: "my-unique-group-name"
+  cancel-in-progress: true
+
+jobs:
+  Deploy-To-EC2:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Creating PEM Key And Adding Host To Known Host
+      run: |
+        mkdir -p ~/.ssh
+        echo "$SSH_KEY" > ~/.ssh/bizznest
+        echo "SSH_PUB_KEY" > ~/.ssh/bizznest.pub
+        chmod 600 ~/.ssh/bizznest
+        eval "$(ssh-agent -s)"
+        ssh-add ~/.ssh/bizznest
+
+
+        # Add the EC2 instance to known_hosts
+        ssh-keyscan "$DEVELOPMENT_IP" >> ~/.ssh/known_hosts
+        chmod 644 ~/.ssh/known_hosts        
+      env:
+        SSH_KEY: ${{ secrets.SERVER_PRIVATE_KEY }}
+        SSH_PUB_KEY:  ${{ secrets.SERVER_PUBLIC_KEY }}
+        DEVELOPMENT_IP: ${{ secrets.DEVELOPMENT_SERVER_ADDRESS }}
+        
+    - name: Connecting to EC2 and executing build commands
+      run: |
+        echo "Constructing Env Template"
+        # -- This is a script that creates a template.txt file for the docker container to use on build time.
+        # -- Format of template.txt:
+              # VAR1=${ENV_VAR1}
+              # VAR2=${ENV_VAR2}
+              
+        output_file="template.txt"
+        # Clear the file (or create it if it doesn't exist)
+        > "$output_file"
+        
+        # Iterate over each environment variable using 'env'
+        while IFS='=' read -r name value; do
+            # Check if the variable name starts with "ENV_"
+            if [[ "$name" == ENV_* ]]; then
+                # Remove the "ENV_" prefix
+                new_name="${name#ENV_}"
+                # Format the output as: NEWVAR=${ENV_NEWVAR}
+                echo "${new_name}=\${${name}}" >> "$output_file"
+            fi
+        done < <(env)
+
+        # -- This updates the env template used for the docker containers, leverages interpolation
+        echo "Attempting To Update Env Template"
+        scp -i ~/.ssh/bizznest template.txt ubuntu@$DEVELOPMENT_IP:/home/ubuntu/configs/.env
+
+        # -- Attempts to connect to the ec2 instance, sending all variables that start with ENV_
+        # -- Pulls the latest changes made to the development branch
+        # -- Updates the development container
+        
+        echo "Attempting to connect to EC2!"
+        ssh -vvv -o ConnectTimeout=30 -o SendEnv=ENV_* -i ~/.ssh/bizznest "ubuntu@$DEVELOPMENT_IP" <<'EOF'
+        echo "Successfully connected to EC2!"
+        eval "$(ssh-agent -s)"
+        ssh-add ~/.ssh/github_ssh/repo
+        echo "Going into build directory"
+        cd /home/ubuntu/production/bizzNest-Flow
+
+        echo "Calling latest changes"
+        git pull
+        
+        # GO TO DIRECTORY CONTAINING DOCKER COMPOSE FILE AND BUILD
+        cd /home/ubuntu/configs
+        # Export for build time environment Variables
+        
+        while IFS='=' read -r name value; do
+            # Check if the variable name starts with "ENV_"
+            if [[ "$name" == ENV_* ]]; then
+                # Remove the "ENV_" prefix
+                new_name="${name#ENV_}"
+                # Format the output as: NEWVAR=${ENV_NEWVAR}
+                export "${new_name}=${value}"
+            fi
+        done < <(env)
+
+        echo -E $DB_NAME
+        docker-compose down
+        docker-compose up --build -d
+        exit
+        EOF
+      env:
+        DEVELOPMENT_IP: ${{ secrets.DEVELOPMENT_SERVER_ADDRESS }}
+        ENV_DB_HOST:  ${{ secrets.DB_HOST }}
+        ENV_DB_USER:  ${{ secrets.DB_USER }}
+        ENV_DB_PORT: ${{ secrets.DB_PORT }}
+        ENV_DB_NAME: ${{ secrets.DB_NAME }}
+        ENV_DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+        ENV_PORT: ${{ secrets.PORT }}
+        ENV_ENVIRONMENT_TYPE: ${{ secrets.DEVELOPMENT_ENVIRONMENT_TYPE }}
+        ENV_DOMAIN_NAME: ${{ secrets.DEVELOPMENT_DOMAIN_NAME }}
+        ENV_JWT_SECRET: ${{secrets.JWT_SECRET}}
+        
+
+    - name: Remove Secrets
+      run: |
+        echo "Removing Secrets"
+        rm -f ~/.ssh/bizznest
+        rm -f ~/.ssh/bizznes.pub
+

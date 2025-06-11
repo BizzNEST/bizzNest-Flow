@@ -1,0 +1,105 @@
+@keyframes bounce {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(-6px);
+  }
+}
+
+.chatbotContainer {
+  width: 400px;
+  height: 500px;
+  background: white;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font-family: sans-serif;
+}
+
+.messages {
+  flex: 1;
+  padding: 16px;
+  overflow-y: auto;
+  background-color: #f9f9f9;
+  color: black;
+}
+
+.message {
+  max-width: 80%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.message.user {
+  background-color: #ede9fe;
+  margin-left: auto;
+}
+
+.message.bot {
+  background-color: #f3f4f6;
+  margin-right: auto;
+}
+
+.typingIndicator {
+  display: flex;
+  gap: 4px;
+}
+
+.typingIndicator div {
+  width: 8px;
+  height: 8px;
+  background-color: #9ca3af;
+  border-radius: 50%;
+  animation: bounce 0.6s infinite alternate;
+}
+
+.typingIndicator div:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typingIndicator div:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+/* input */
+.aiInputArea {
+  display: flex;
+  border-top: 1px solid #ddd;
+  padding: 12px;
+  background: #fff;
+}
+
+.aiInputArea input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+}
+
+.aiInputArea button {
+  background-color: #ef2bd2;
+  color: white;
+  border: none;
+  padding: 0 16px;
+  margin-left: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.aiInputArea button:hover {
+  background-color: #c333fd;
+}
+
+.errorMessage {
+  padding: 8px;
+  color: red;
+  font-size: 14px;
+  text-align: center;
+}

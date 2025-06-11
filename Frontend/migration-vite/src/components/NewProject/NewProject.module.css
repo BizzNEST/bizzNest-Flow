@@ -1,0 +1,142 @@
+
+/* NewProject.css */
+.newProjectContainer {
+    display: flex;
+    justify-content: center;
+    height:300px !important;
+  }
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+input[type="text"],
+select {
+    width: 600px;
+    box-sizing: border-box;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+select {
+    color: gray;
+}
+
+input[type="number"] {
+    border-radius: 5px;
+    border: none;
+    width: 4em;
+    height: 2em;
+    text-align: center;
+    padding: 10px;
+}
+
+
+.toolInputContainer {
+    display: flex;
+    gap: 10px; 
+    align-items: center; 
+    justify-content: center;
+    opacity: 0;
+    animation: easeIn 1.5s ease-out forwards;
+}
+
+.newProjectContainer {
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: center; 
+  height: 100vh; 
+  width: 100%; 
+  text-align: center;
+}
+.departmentDropdown {
+  width: 100%; /* Make it take the full width of the parent */
+  max-width: 300px; /* Optional: Set a max width */
+  padding: 10px;
+  margin: 10px auto; /* Center horizontally */
+  display: block; /* Ensure it's treated as a block element */
+}
+
+.submitBtnDiv {
+  display: flex;
+  justify-content: center;
+}
+
+
+.submitBtn {
+    background-color:#00bcd4;
+    width: 6em;
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    padding: 10px 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.submitBtn:hover {
+    transform: scale(1.05);
+}
+
+h4 {
+    font-size: small;
+    text-align: center;
+    margin-left: -5px;
+    color: #fff;
+}
+
+
+
+@keyframes waveEffect {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  @keyframes easeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+  /* TODO */
+  /* under 786px: the top 3 fields dont line up with submit button */
+/* submit button is also way too big at larger screen sizes */
+
+  @media(max-width: 1120px) {
+    input[type="text"],
+    select {
+        width: 400px;
+        box-sizing: border-box;
+    }
+  }
+
+  @media (max-width: 786px) {
+    input[type="text"],
+    select{
+        width: 200px;
+        box-sizing: border-box;
+    }
+    input[type="number"] {
+      box-sizing:border-box;
+    }
+    /* input[type="number"]::placeholder {
+      font-size: 8px;
+    } */
+  }

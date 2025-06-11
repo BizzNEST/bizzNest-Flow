@@ -1,0 +1,47 @@
+.departmentGrowthContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.chartTitle {
+    font-size: 16px;
+    font-weight: 500;
+    color: black;
+    margin-bottom: 10px;
+}
+
+.radialCharts {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    width: 100%;
+    gap: 10px;
+}
+
+.radialChart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 30%;  /* Allow flexibility */
+    min-width: 100px;  /* Prevent shrinking too much */
+    max-width: 200px;  /* Prevent expanding too much */
+    height: auto;  /* Allow height to be dynamic */
+}
+
+.growthText {
+    font-size: 18px;
+    font-weight: 300;
+    fill: black;
+}
+
+.departmentLabel {
+    font-size: 14px;
+    font-weight: 300;
+    margin-top: 5px;
+    color: black;
+    text-align: center;
+}

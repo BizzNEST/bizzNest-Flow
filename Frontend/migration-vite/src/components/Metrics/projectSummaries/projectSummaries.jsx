@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-// import "./projectSummaries.css";
-import styles from './projectSummaries.module.css';
+import styles from "./projectSummaries.module.css";
 
 const departmentMap = {
     0: "WebDev",
@@ -65,7 +64,10 @@ const ProjectSummaries = () => {
                                 <td>{department}</td>
                                 <td>
                                 <span className={`${styles.statusBadge} ${styles[statusColor]}`}>{status}</span>
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
                                 </td>
                                 <td>{projectedGrowth}</td>
                             </tr>

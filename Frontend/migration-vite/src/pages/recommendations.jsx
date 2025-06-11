@@ -2,7 +2,8 @@
 import React, { useEffect, useState, useCallback, useRef } from "react"; // Added useRef
 import { useLocation, useNavigate } from "react-router-dom";
 import NavBar from "../components/Navbar/NavBar"; // Adjust path if needed
-import "./Recommendations.css"; // Ensure CSS file exists and path is correct
+import RecModal from "../components/RecModal/RecModal";
+import styles from "./Recommendations.module.css"; // Ensure CSS file exists and path is correct
 
 
 // --- Constants ---
@@ -22,6 +23,8 @@ const Recommendations = () => {
  const [grouped, setGrouped] = useState({}); // Recommendations grouped by toolID: { toolID: [internRec] }
  const [isAscending, setIsAscending] = useState(false); // Sort order: false=Learning, true=Leadership
  const [animationKey, setAnimationKey] = useState(0); // For list animations
+ const [recModalOpen, setRecModalOpen] = useState(false);
+ const [recModalInternData, setRecModalInternData] = useState(null);
 
 
  // Selection state (using numeric IDs)
@@ -32,10 +35,8 @@ const Recommendations = () => {
  // Store initial assignments to check if changes were made before submitting
  const initialAssignmentsRef = useRef(new Map()); // Use ref to persist across re-renders without causing effect re-runs
 
-
  const location = useLocation();
  const navigate = useNavigate();
-
 
  // --- Helpers ---
  const getQueryParams = useCallback(() => {
@@ -46,6 +47,10 @@ const Recommendations = () => {
    };
  }, [location.search]);
 
+// --- Modal open/close logic ---
+// isOpen: boolean to determine if the modal should be shown
+// onClose: function to call when closing the modal
+// children: the content to display inside the modal
 
  // --- Grouping and Sorting Logic (Memoized) ---
  // This function now purely derives state from recommendationData and isAscending
@@ -457,25 +462,31 @@ const submitChanges = useCallback(async () => {
    eligible ? "linear-gradient(to bottom,#356086,#25FFC1)"
             : "linear-gradient(to bottom,rgb(174,40,40),#EF2BD2)";
 
-
+const getTextColor = (rec, isAsc) => {
+  const gradient = isAsc ? leaderGrad(rec.eligible) : grad(rec.percent);
+  if (gradient.includes("#c333fd")) return "#c333fd"; // violet
+  if (gradient.includes("#00bcd4")) return "#00bcd4"; // cyan
+  if (gradient.includes("#ef2bd2")) return "#ef2bd2"; // pink
+  return "#ffffff"; // fallback
+};
 
 
  // --- Render Logic ---
  // Initial loading state
  if (isLoading && !projectData && !error) {
-      return <div className="loading-container"><NavBar /><p className="loading-text">Loading Recommendations...</p></div>;
+      return <div className={styles.loadingContainer}><NavBar /><p className={styles.loadingText}>Loading Recommendations...</p></div>;
  }
 
 
  // Error display state
  if (error) {
-      return <div className="error-container"><NavBar /><p className="error-text">Error: {error}</p><button onClick={() => window.location.reload()}>Retry</button></div>;
+      return <div className={styles.errorContainer}><NavBar /><p className={styles.errorText}>Error: {error}</p><button onClick={() => window.location.reload()}>Retry</button></div>;
  }
 
 
  // Data loaded but projectData is missing (should be caught by error handling, but safeguard)
  if (!projectData) {
-      return <div className="error-container"><NavBar /><p className="error-text">Could not load project data. Please try again.</p><button onClick={() => window.location.reload()}>Retry</button></div>;
+      return <div className={styles.errorContainer}><NavBar /><p className={styles.errorText}>Could not load project data. Please try again.</p><button onClick={() => window.location.reload()}>Retry</button></div>;
  }
 
 
@@ -489,57 +500,54 @@ const submitChanges = useCallback(async () => {
 
  // --- Main Render ---
  return (
-   <div className="recommendations-container">
+   <div className={styles.recommendationsContainer}>
      <NavBar />
 
 
      {/* Project Stats Header (Unchanged) */}
-      <div className="project-stats">
-       <div className="project-title">
-         <div className="title-box">{projectData.projectTitle || "Unnamed Project"}</div>
+      <div className={styles.projectStats}>
+       <div className={styles.projectTitle}>
+         <div className={styles.titleBox}>{projectData.projectTitle || "Unnamed Project"}</div>
        </div>
-       <div className="difficulty">
+       <div className={styles.difficulty}>
          {projectTools.length > 0 ? projectTools.map((t) => (
-           <div key={`proj-tool-${t.toolID}`} className="tool-box">
+           <div key={`proj-tool-${t.toolID}`} className={styles.toolBox}>
              <h4>{toolNames[t.toolID] || `Tool ${t.toolID}`}</h4>
-             <div className="tool-boxes">{typeof t.difficulty === 'number' ? t.difficulty.toFixed(1) : 'N/A'}</div>
+             <div className={styles.toolBoxes}>{typeof t.difficulty === 'number' ? t.difficulty.toFixed(1) : 'N/A'}</div>
            </div>
-         )) : <p className="no-tools-msg">No tools assigned.</p>}
+         )) : <p className={styles.noToolsMsg}>No tools assigned.</p>}
        </div>
-       <div className="average-difficulty">
+       <div className={styles.averageDifficulty}>
          <h4>Average</h4>
-         <div className="avg-box">{avgDifficulty}</div>
+         <div className={styles.avgBox}>{avgDifficulty}</div>
        </div>
      </div>
 
 
      {/* Recommendations Section Header (Unchanged) */}
-      <div className="recommendations-header">
+      <div className={styles.recommendationsHeader}>
         <h2>
          Recommended for{" "}
          <span style={{ color: "#25FFC1" }}>{isAscending ? "Project Leadership" : "Optimized Learning"}</span>
        </h2>
-       <p className="recommendation-subtext">
-           {isAscending ? "Interns whose skills meet or exceed difficulty." : "Interns with highest potential skill gain."}
-       </p>
      </div>
 
 
 
 
      {/* Recommendations Grid - KEY RENDERING CHANGES HERE */}
-     <div className="suggestions-container">
+     <div className={styles.suggestionsContainer}>
        {projectTools.length === 0 ? (
-           <p className="no-recommendations-overall">No tools assigned to this project, cannot show recommendations.</p>
+           <p className={styles.noRecommendationsOverall}>No tools assigned to this project, cannot show recommendations.</p>
        ) : (
            projectTools.map((tool) => (
                <div key={`rec-tool-${tool.toolID}`} className={`tool-row-${tool.toolID}`}>
-               <h3 className="tool-header">{toolNames[tool.toolID] || `Tool ${tool.toolID}`}</h3>
-               <div className="tablet-rows">
-                   <div className="row-tablets">
+               <h3 className={styles.toolHeader}>{toolNames[tool.toolID] || `Tool ${tool.toolID}`}</h3>
+               <div className={styles.tabletRows}>
+                   <div className={styles.rowTablets}>
                    {/* Use optional chaining and check length */}
                    {!grouped?.[tool.toolID] || grouped[tool.toolID]?.length === 0 ? (
-                       <p className="no-recommendations">No interns recommended for this skill.</p>
+                       <p className={styles.noRecommendations}>No interns recommended for this skill.</p>
                    ) : (
                        // Use grouped data which is derived from recommendationData
                        grouped[tool.toolID].map((internRec, idx) => {
@@ -552,23 +560,43 @@ const submitChanges = useCallback(async () => {
                                <div
                                    // Use a stable key combination
                                    key={`${tool.toolID}-${internRec.internID}`}
-                                   className={`tablet ${isSelectedAsIntern ? "selected" : isSelectedAsLeader ? "leader-selected" : ""}`}
-                                   style={{ background: isAscending ? leaderGrad(internRec.eligible) : grad(internRec.percent) }}
+                                   className={`${styles.tablet} ${isSelectedAsIntern ? styles.selected : isSelectedAsLeader ? styles.leaderSelected : ""}`}
+                                   style={{
+                                            border: "2px solid transparent",
+                                            borderRadius: "12px",
+                                            backgroundImage: `linear-gradient(#191919, #191919), ${isAscending ? leaderGrad(internRec.eligible) : grad(internRec.percent)}`,
+                                            backgroundOrigin: "border-box",
+                                            backgroundClip: "padding-box, border-box",
+                                            // color: getTextColor(internRec, isAscending)
+                                  }}
+                                   
                                    // Add animation class if needed, based on animationKey
                                    // className={`tablet ... ${animationKey > 0 ? 'fade-in' : ''}`}
                                >
-                                   <div className="tablet-name">{internRec.name}</div>
-                                   <div className="tablet-percent">
+                                <div 
+                                  className={styles.tabletInfoButton}
+                                  style={{ cursor: "pointer", position: "absolute", top: 8, right: 8 }}
+                                  onClick={() => {
+                                    setRecModalInternData(internRec); // store intern info
+                                    setRecModalOpen(true);
+                                  }}
+                                  title="View more info"
+                                  >
+                                    🔍    
+                                  </div>
+
+                                   <div className={styles.tabletName}>{internRec.name}</div>
+                                   <div className={styles.tabletPercent}>
                                        {isAscending
                                        ? (internRec.eligible ? "Eligible ⭐" : "Needs Growth")
                                        : (internRec.percent >= 0 ? `+${internRec.percent.toFixed(1)}%` : `${internRec.percent.toFixed(1)}%`) + " Gain"
                                        }
                                    </div>
-                                   <div className="tablet-buttons">
+                                   <div className={styles.tabletButtons}>
                                        {/* Intern Button: Show if not selected as Leader */}
                                        {!isSelectedAsLeader && (
                                            <button
-                                               className={`assign-button ${isSelectedAsIntern ? "selected" : ""}`}
+                                               className={`${styles.assignButton} ${isSelectedAsIntern ? styles.selected : ""}`}
                                                onClick={() => toggleIntern(internRec.internID)}
                                                title={isSelectedAsIntern ? "Remove from Interns" : "Assign as Intern"}
                                                disabled={isLoading} // Disable during save
@@ -580,7 +608,7 @@ const submitChanges = useCallback(async () => {
                                        {/* Leader Button: Show if eligible AND not selected as Intern */}
                                        {internRec.eligible && !isSelectedAsIntern && (
                                            <button
-                                               className={`leader-button ${isSelectedAsLeader ? "selected" : ""}`}
+                                               className={`${styles.leaderButton} ${isSelectedAsLeader ? styles.selected : ""}`}
                                                onClick={() => toggleLeader(internRec.internID)}
                                                title={isSelectedAsLeader ? "Remove from Leaders" : "Make Leader"}
                                                disabled={isLoading} // Disable during save
@@ -591,7 +619,7 @@ const submitChanges = useCallback(async () => {
                                        )}
                                        {/* Indicator if not eligible for Leadership when in Leadership view */}
                                        {!internRec.eligible && !isSelectedAsIntern && !isSelectedAsLeader && isAscending && (
-                                           <span className="not-eligible-info">(Skill &lt; Difficulty)</span>
+                                           <span className={styles.notEligibleInfo}>(Skill &lt; Difficulty)</span>
                                        )}
                                    </div>
                                </div>
@@ -609,27 +637,38 @@ const submitChanges = useCallback(async () => {
 
 
      {/* Bottom Controls (Unchanged Structure, ensure disabled state works) */}
-     <div className="buttons-container">
-       <div className="switch-button">
-         <label className="switch">
+     <div className={styles.buttonsContainer}>
+       <div className={styles.switchButton}>
+         <label className={styles.switch}>
            <input type="checkbox" checked={isAscending} onChange={toggleOrder} disabled={isLoading} />
-           <span className="slider round"></span>
+           <span className={`${styles.slider} ${styles.round}`}></span>
          </label>
          <p>Toggle to Potential Leaders</p>
        </div>
-       <div className="recommendationSubmitButton">
-         <button className="submit" onClick={submitChanges} disabled={isLoading}>
+       <div className={styles.recommendationSubmitButton}>
+         <button className={styles.submit} onClick={submitChanges} disabled={isLoading}>
            {/* Show loading state text */}
            {isLoading ? "Saving..." : "Save Assignments"}
          </button>
        </div>
      </div>
+     {/* <RecModal isOpen={recModalOpen} onClose={() => setRecModalOpen(false)}>
+      {recModalInternData && (
+        <div>
+          <h2 className="text-x1 font-bold mb-2">{recModalInternData.name}</h2>
+          <p>{isAscending ? "Leadership Candidate" : "Learning Opportunity"}</p>
+          <p>
+            {isAscending
+            ? recModalInternData.eligible ? "Eligable for leadership" : "Not eligible"
+            : `Potential Growth: ${recModalInternData.percent.toFixed(1)}%`}
+          </p>
+          
+        </div>
+      )}
+     </RecModal> */}
    </div>
  );
 };
 
 
 export default Recommendations;
-
-
-

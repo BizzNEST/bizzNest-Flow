@@ -1,0 +1,101 @@
+/* Popup Overlay */
+.popUpOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    /* Semi-transparent background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+/* Popup Box */
+.popUpBox {
+    background: #1e1e1e;
+    color: white;
+    padding: 25px;
+    width: 400px;
+    max-width: 90%;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Popup Heading */
+.popUpBox h3 {
+    margin-bottom: 20px;
+    font-size: 22px;
+}
+
+/* Buttons Container */
+.popUpButtons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    border-radius: 50%;
+}
+
+/* Confirm Button */
+.confirmBtn {
+    background: #035a1d;
+    color: white;
+    border: none;
+    height: 50px;
+    width: 50px;
+    margin-left: 40px;
+    padding: 10px 10px;
+    border-radius: 50%;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.confirmBtn:hover {
+    background: #0ed64a;
+    transform: scale(1.05);
+}
+
+/* Cancel Button */
+.cancelBtn {
+    background: #710202;
+    color: white;
+    border: none;
+    height: 50px;
+    width: 50px;
+    margin-right: 40px;
+    padding: 10px 10px;
+    border-radius: 50%;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.cancelBtn:hover {
+    background: #e71414;
+    transform: scale(1.05);
+}
+
+.popUpIcon {
+    padding-top: 4px;
+    filter: brightness(0) invert(1);
+    /* Makes the image white */
+}
+
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}

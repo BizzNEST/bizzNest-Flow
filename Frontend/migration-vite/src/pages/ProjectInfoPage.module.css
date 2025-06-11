@@ -1,0 +1,267 @@
+.projectContainer {
+  margin: 0 auto;
+}
+
+.projectWrapper{
+  padding: 0% 5%;
+}
+
+.returnToProjects {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.projectHeader {
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+
+.projectTitleCard {
+  border-radius: 12px;
+  display: flex;
+  text-align: center;
+  color: #25ffc1;
+  font-size: 25px;
+}
+
+.projectTitleCard h2 {
+    font-weight: 300;
+}
+
+.skillsContainer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+}
+
+.skillName {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.skillValue {
+  font-size: 20px;
+}
+
+.highlighted {
+  background: linear-gradient(to right, #43c6a1, #00bcd4);
+}
+
+.projectDescription {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 0 20px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+}
+
+.descriptionTitle {
+  font-size: 18px;
+  font-weight:500;
+  color: #25ffc1;
+}
+
+.descriptionText {
+  color: white;
+}
+
+.assignedContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.assignedTitle {
+  font-size: 18px;
+  font-weight:500;
+  color: #25ffc1;
+}
+
+.assignedList {
+  margin-top: 10px;
+}
+
+.assignedPerson {
+  background: linear-gradient(to right, #db2777, #9333ea);;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  font-weight: bold;
+  text-align: center;
+  &:hover{
+    background: linear-gradient(to right, #ec4899, #a855f7);
+  }
+}
+
+.assignedLeader {
+  background: linear-gradient(to right, #4f46e5, #2563eb);
+  transition: background 0.3s ease-in-out;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  font-weight: bold;
+  text-align: center;
+  &:hover{
+    background: linear-gradient(to right, #6366f1, #3b82f6);
+  }
+}
+
+.noAssigned {
+  color: white;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.deleteButton, .completeButton, .editInternsButton{
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  color: white;
+  transition: transform 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.deleteButton {
+  background: linear-gradient(to right, rgb(174, 40, 40), rgb(239, 43, 210));
+}
+
+.completeButton {
+  background: linear-gradient(to right, rgb(53, 96, 134), rgb(37, 255, 193));
+}
+.editInternsButton {
+  background:  rgb(53, 96, 134);
+}
+
+.deleteButton:hover, .completeButton:hover, .editInternsButton:hover {
+  transform: scale(1.05);
+}
+
+.projectContainer {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+
+}
+
+.projectWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.skillCard {
+  background: linear-gradient(to right, #ec4899, #9333ea);
+  border-radius: 10px;
+  text-align:start;
+  font-weight: bold;
+  min-width: 120px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.skillCard h4 {
+  text-align: start;
+  margin: 10px;
+}
+
+.skillCard .skillValue {
+  margin: 10px;
+}
+
+.skillCard:hover {
+  transform: scale(1.05);
+}
+
+.highlighted {
+  background: linear-gradient(to right, #ec4899, #9333ea);
+}
+
+.assignedContainer {
+  display: flex;
+  gap: 20px;
+}
+
+.assignedGroup {
+  flex: 1;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 0 20px 20px 20px;
+  border-radius: 10px;
+}
+
+
+.assignedPerson, .assignedLeader {
+  padding: 10px;
+  border-radius: 8px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 8px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.assignedPerson {
+  background: linear-gradient(to right, #db2777, #9333ea);
+}
+
+.assignedLeader {
+  background: linear-gradient(to right, #4f46e5, #2563eb);
+}
+
+.assignedPerson:hover {
+  transform: scale(1.03);
+}
+
+.assignedLeader:hover {
+  transform: scale(1.03);
+}
+
+
+.buttonContainer {
+  display: flex;
+  justify-content:end;
+  gap: 15px;
+}
+
+.deleteButton, .completeButton {
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.deleteButton {
+  background: linear-gradient(to right, #b91c1c, #dc2626);
+}
+
+.completeButton {
+  background: linear-gradient(to right, #059669, #10b981);
+}
+
+.deleteButton:hover, .completeButton:hover {
+  transform: scale(1.05);
+}
+
+
+@media (max-width: 768px) {
+  .projectHeader {
+    flex-direction: column;
+  }
+
+  .skillsContainer {
+    justify-content: center;
+  }
+
+  .assignedContainer {
+    flex-direction: column;
+  }
+}
