@@ -13,28 +13,28 @@ services:
     env_file:
       - .env
     volumes:
-      - .:/var/www/html/  # ✅ Sync local files with container
-      - /var/www/html/node_modules  # ✅ Prevent overwriting node_modules
+      - .:/var/www/html/ # ✅ Sync local files with container
+      - /var/www/html/node_modules # ✅ Prevent overwriting node_modules
     ports:
       - "30001:3000"
     container_name: bizz-app
-    restart: unless-stopped  # ✅ Ensures container restarts if it crashes
+    restart: unless-stopped # ✅ Ensures container restarts if it crashes
 
   mysql:
     image: mysql:latest
     restart: always
     networks:
       - backend
-    environment: 
+    environment:
       - MYSQL_ROOT_USER=${DB_USER}
-      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}  # ✅ Required for root user
-      - MYSQL_DATABASE=${DB_NAME}  # ✅ Creates a database
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD} # ✅ Required for root user
+      - MYSQL_DATABASE=${DB_NAME} # ✅ Creates a database
     healthcheck:
-      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       timeout: 20s
       retries: 10
     volumes:
-      - mysql_data:/var/lib/mysql  # ✅ Persist database data
+      - mysql_data:/var/lib/mysql # ✅ Persist database data
     container_name: bizz-mysql-app
 
   phpmyadmin:
@@ -48,16 +48,15 @@ services:
     env_file:
       - .env
     environment:
-      - PMA_HOST=mysql  # ✅ Connect phpMyAdmin to MySQL container
+      - PMA_HOST=mysql # ✅ Connect phpMyAdmin to MySQL container
       - PMA_PORT=3306
     ports:
       - "30002:80"
-    restart: unless-stopped  # ✅ Ensures phpMyAdmin restarts if needed
+    restart: unless-stopped # ✅ Ensures phpMyAdmin restarts if needed
 
 networks:
   backend:
-     driver: bridge
+    driver: bridge
 
-  c 
 volumes:
-  mysql_data:  # ✅ Persistent MySQL storage to avoid losing data
+  mysql_data: # ✅ Persistent MySQL storage to avoid losing data

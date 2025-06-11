@@ -60,22 +60,34 @@ const MonthlyGrowthChart = ({ internID }) => {
   return (
     <div className={styles.monthlyGrowthContainer}>
       <h2>Monthly Growth Over Time</h2>
-      <ResponsiveContainer width="100%" height={230}>
+      <ResponsiveContainer width="100%" height={180}>
         <LineChart
           data={monthlyGrowthData}
-          margin={{ top: 20, right: 30, left: 20, bottom: 80 }}
+          margin={{ top: 20, right: 30, left: 20, bottom: 0 }}
         >
           <XAxis
             dataKey="month"
             angle={0}
-            textAnchor="end"
-            tick={{ fontSize: 14, dy: 10 }}
+            axisLine={{ stroke: "#ccc" }}
+            tick={{ fontSize: 14, dy: 10, fill: "#ccc" }}
           />
           <YAxis
-            label={{ value: "Growth %", angle: -90, position: "insideLeft" }}
+            axisLine={{ stroke: "#ccc" }}
+            label={{
+              value: "Growth %",
+              angle: -90,
+              dx: -25,
+              paddingBottom: "10px",
+              fill: "#ccc",
+            }}
+            tick={{ fontSize: 14, dy: 10, stroke: "#ccc" }}
           />
           <Tooltip content={<CustomTooltip />} />
-          <Legend />
+          <Legend
+            wrapperStyle={{
+              paddingTop: "30px",
+            }}
+          />
           <Line
             type="monotone"
             dataKey="growthPercentage"
