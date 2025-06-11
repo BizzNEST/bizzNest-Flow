@@ -38,40 +38,14 @@
   display: inline-block; Ensures it doesn't take full width */
 }
 
-/* ✅ Custom Tooltip Styling */
-.rechartsToolTipWrapper {
-  background: rgba(255, 255, 255, 0.9);
-  padding: 10px;
-  border-radius: 8px;
-  color: black;
-}
-
 /* ✅ Dark Purple Gradient for Bars */
 .rechartsBar {
   fill: url(#barGradient) !important;
 }
 
-/* ✅ Tooltip Styling */
-.customToolTip {
-  background: rgba(20, 20, 20, 0.9); /* Dark tooltip for contrast */
-  padding: 10px;
-  border-radius: 5px;
-  color: white;
-  font-size: 14px;
-  font-weight: bold;
-  text-align: center;
-}
-
-/* ✅ Tooltip Value Styling */
-.toolTipValue {
-  margin: 0;
-  padding: 5px;
-}
-
 /* ✅ Responsive Adjustments */
 @media (max-width: 768px) {
   .skillGrowthContainer {
-    width: 100%;
     padding: 20px;
   }
 }

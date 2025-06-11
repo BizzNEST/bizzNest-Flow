@@ -33,8 +33,6 @@
   text-decoration: none;
 }
 
-/* ✅ Underline that perfectly matches the text gradient */
-
 /* Custom tooltip styling */
 .recharts-tooltip-wrapper {
   background: rgba(255, 255, 255, 0.9);
@@ -68,6 +66,6 @@
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .monthlyGrowthContainer {
-    width: 100%;
+    padding: 20px;
   }
 }

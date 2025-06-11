@@ -4,7 +4,6 @@ import {
   Bar,
   XAxis,
   YAxis,
-  Tooltip,
   Legend,
   ResponsiveContainer,
   LabelList,
