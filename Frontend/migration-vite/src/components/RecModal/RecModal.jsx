@@ -1,21 +1,60 @@
-import React from 'react';
+import React from "react";
+import styles from "./RecModal.module.css";
 
-const RecModal = ({ isOpen, onClose, children }) => {
-    if (!isOpen) return null;
+const RecModal = ({
+  isOpen,
+  onClose,
+  intern,
+  isIntern,
+  isLeader,
+  isAscending,
+  isLoading,
+  onAssignIntern,
+  onMakeLeader,
+}) => {
+  if (!isOpen || !intern) return null;
 
-    return (
-        <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center">
-            <div className="bg-white rounded-lg shadow-lg p-6 relative max-w-md w-full">
-                <button
-                  className="absolute top-2 right-2 text-gray-700 hover:text-black text-2xl"
-                  onClick={onClose}
-                  >
-                    &times; // This is displayed as a "×" icon
-                  </button>
-                  {children}
-            </div>
+  return (
+    <div className={styles.modalOverlay} onClick={onClose}>
+      <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+        <button className={styles.closeBtn} onClick={onClose}>
+          ×
+        </button>
+        <h2 className={styles.modalTitle}>{intern.name}</h2>
+        <p>
+          {isAscending ? "Leadership Candidate" : "Learning Opportunity"}
+        </p>
+        <p>
+          {isAscending
+            ? intern.eligible
+              ? "Eligible for leadership"
+              : "Not eligible"
+            : `Potential Growth: ${intern.percent.toFixed(1)}%`}
+        </p>
+
+        <div className={styles.modalButtons}>
+          {!isLeader && (
+            <button
+              className={`${styles.assignBtn} ${isIntern ? styles.active : ""}`}
+              onClick={onAssignIntern}
+              disabled={isLoading}
+            >
+              {isIntern ? "Intern ✔" : "Assign Intern"}
+            </button>
+          )}
+          {intern.eligible && !isIntern && (
+            <button
+              className={`${styles.leaderBtn} ${isLeader ? styles.active : ""}`}
+              onClick={onMakeLeader}
+              disabled={isLoading}
+            >
+              {isLeader ? "Leader ⭐" : "Make Leader"}
+            </button>
+          )}
         </div>
-    );
+      </div>
+    </div>
+  );
 };
 
 export default RecModal;
