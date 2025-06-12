@@ -29,3 +29,29 @@
         cursor: pointer;
     }
 }
+.modalButtons {
+    margin-top: 1rem;
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .assignBtn,
+  .leaderBtn {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    background-color: #2dd4bf;
+    color: black;
+  }
+  
+  .leaderBtn {
+    background-color: #f472b5;
+  }
+  
+  .active {
+    background-color: #10b981 !important;
+    color: white;
+  }
+  

@@ -680,7 +680,7 @@ const Recommendations = () => {
                           </div>
                           <div className={styles.tabletButtons}>
                             {/* Intern Button: Show if not selected as Leader */}
-                            {!isSelectedAsLeader && (
+                            {/* {!isSelectedAsLeader && (
                               <button
                                 className={`${styles.assignButton} ${isSelectedAsIntern ? styles.selected : ""}`}
                                 onClick={() => toggleIntern(internRec.internID)}
@@ -691,14 +691,14 @@ const Recommendations = () => {
                                 }
                                 disabled={isLoading} // Disable during save
                               >
-                                {/* Conditional text based on selection */}
+                                // Conditional text based on selection 
                                 {isSelectedAsIntern
                                   ? "Intern ✔"
                                   : "Assign Intern"}
                               </button>
-                            )}
+                            )} */}
                             {/* Leader Button: Show if eligible AND not selected as Intern */}
-                            {internRec.eligible && !isSelectedAsIntern && (
+                            {/* {internRec.eligible && !isSelectedAsIntern && (
                               <button
                                 className={`${styles.leaderButton} ${isSelectedAsLeader ? styles.selected : ""}`}
                                 onClick={() => toggleLeader(internRec.internID)}
@@ -709,21 +709,21 @@ const Recommendations = () => {
                                 }
                                 disabled={isLoading} // Disable during save
                               >
-                                {/* Conditional text based on selection */}
+                                // Conditional text based on selection 
                                 {isSelectedAsLeader
                                   ? "Leader ⭐"
                                   : "Make Leader"}
                               </button>
-                            )}
+                            )} */}
                             {/* Indicator if not eligible for Leadership when in Leadership view */}
-                            {!internRec.eligible &&
+                            {/* {!internRec.eligible &&
                               !isSelectedAsIntern &&
                               !isSelectedAsLeader &&
                               isAscending && (
                                 <span className={styles.notEligibleInfo}>
                                   (Skill &lt; Difficulty)
                                 </span>
-                              )}
+                              )} */}
                           </div>
                         </div>
                       );
@@ -761,25 +761,17 @@ const Recommendations = () => {
           </button>
         </div>
       </div>
-      <RecModal isOpen={recModalOpen} onClose={() => setRecModalOpen(false)}>
-        {recModalInternData && (
-          <div>
-            <h2 className="text-x1 font-bold mb-2">
-              {recModalInternData.name}
-            </h2>
-            <p>
-              {isAscending ? "Leadership Candidate" : "Learning Opportunity"}
-            </p>
-            <p>
-              {isAscending
-                ? recModalInternData.eligible
-                  ? "Eligable for leadership"
-                  : "Not eligible"
-                : `Potential Growth: ${recModalInternData.percent.toFixed(1)}%`}
-            </p>
-          </div>
-        )}
-      </RecModal>
+      <RecModal
+  isOpen={recModalOpen}
+  onClose={() => setRecModalOpen(false)}
+  intern={recModalInternData}
+  isIntern={selectedInterns.has(recModalInternData?.internID)}
+  isLeader={selectedLeaders.has(recModalInternData?.internID)}
+  isAscending={isAscending}
+  isLoading={isLoading}
+  onAssignIntern={() => toggleIntern(recModalInternData.internID)}
+  onMakeLeader={() => toggleLeader(recModalInternData.internID)}
+/>
     </div>
   );
 };
