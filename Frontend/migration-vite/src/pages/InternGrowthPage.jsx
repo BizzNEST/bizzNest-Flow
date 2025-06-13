@@ -75,7 +75,7 @@ const InternGrowthPage = () => {
                 <img src={chartInfo} alt="Chart Info" />
               </span>
             </h1>
-
+            {/* 
             {intern && (
               <img
                 src={intern.profilePic}
@@ -86,7 +86,7 @@ const InternGrowthPage = () => {
                   e.target.src = profile;
                 }}
               />
-            )}
+            )} */}
             <div className={styles.skillUpdates}>
               <InitialSkills internID={internID} />
               <CurrentSkills internID={internID} />

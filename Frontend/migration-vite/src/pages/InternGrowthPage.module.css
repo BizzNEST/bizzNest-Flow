@@ -13,7 +13,28 @@
 }
 
 .newGrowthPageWrapper {
-  width: 30%;
+  width: 35%;
+}
+
+.returnToProjects {
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding-top: 10px;
+  padding-left: 20px;
+}
+
+.returnToProjects:hover {
+  transform: scale(1.25);
+}
+
+.graphsContainer {
+  display: flex;
+  width: 65%;
+  flex-direction: column;
+  justify-content: space-between;
+  row-gap: 10px;
+  box-sizing: border-box;
 }
 
 .internGrowthPageInfo {
@@ -55,7 +76,6 @@
 
 .monthlyGrowthGraph,
 .skillGrowthGraph {
-  padding-bottom: 2%;
   border-radius: 15px;
   transition: transform 0.4s ease;
 }
@@ -66,4 +86,45 @@
 
 .skillGrowthGraph:hover {
   transform: scale(1.02);
+}
+
+@media (max-width: 768px) {
+  .newGrowthPageContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 25px 0px;
+    width: 100%;
+    align-items: center;
+    row-gap: 20px;
+  }
+
+  .newGrowthPageWrapper {
+    width: 100%;
+    max-width: 600px;
+  }
+
+  .internGrowthPageInfo {
+    width: auto;
+  }
+
+  .graphsContainer {
+    width: 100%;
+    max-width: 600px;
+    row-gap: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .newGrowthPageContainer {
+    padding: 25px;
+    margin-bottom: 50px;
+    row-gap: 20px;
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 450px) {
+  .internGrowthTitle {
+    font-size: 27px;
+  }
 }

@@ -1,84 +1,57 @@
 .skillGrowthContainer {
-    background: linear-gradient(to bottom right, #2b2b2b, #1e1e1e); /* Dark Background */
-    padding: 40px;
-    border-radius: 15px;
-    text-align: center;
-    color: white;
-    /* height: 430px; Matches Monthly Growth */
-    height: 230px;
-    transition: transform 0.3s ease;
-    width: 91%;
-    border: 2px solid transparent;
-    background:
-      linear-gradient(#191919, #191919) padding-box, /* Background color */
-      linear-gradient(90deg, #c333fd, #00bcd4, #25ffc1) border-box; /* Gradient border */
+  background: linear-gradient(
+    to bottom right,
+    #2b2b2b,
+    #1e1e1e
+  ); /* Dark Background */
+  padding: 30px;
+  border-radius: 15px;
+  text-align: center;
+  color: white;
+  /* height: 430px; Matches Monthly Growth */
+  height: 230px;
+  transition: transform 0.3s ease;
+  border: 2px solid transparent;
+  background:
+    linear-gradient(#191919, #191919) padding-box,
+    /* Background color */ linear-gradient(90deg, #c333fd, #00bcd4, #25ffc1)
+      border-box; /* Gradient border */
 }
 
 /* ✅ Hover Effect (No Shadow) */
 .skillGrowthContainer:hover {
-    transform: scale(1.02);
+  transform: scale(1.02);
 }
 
 /* ✅ Chart Title with Gradient Text & Matching Underline */
 .skillGrowthContainer h2 {
-    font-size: 30px;
-    font-weight: 300;
-    margin-bottom: 15px;
-    /* background: linear-gradient(to right,#ec4899,  #a655f1);    */
-    background: linear-gradient(to right,#ec4899,#ec4899);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    position: relative;
-    display: inline-block; /* Ensures it doesn't take full width */
-}
-
-/* ✅ Underline that perfectly matches the text gradient */
-.skillGrowthContainer h2::after {
-    content: "";
-    display: block;
-    width: 100%;
-    height: 3px; /* Thickness of the underline */
-    background: linear-gradient(to right,#ec4899,  #ec4899);
-    position: absolute;
-    bottom: -5px; /* Adjust spacing */
-    left: 0;
-}
-
-/* ✅ Custom Tooltip Styling */
-.rechartsToolTipWrapper {
-    background: rgba(255, 255, 255, 0.9);
-    padding: 10px;
-    border-radius: 8px;
-    color: black;
+  font-size: 30px;
+  font-weight: 300;
+  margin-top: 0px;
+  margin-bottom: 15px;
+  /* background: linear-gradient(to right,#ec4899,  #a655f1);    */
+  background: linear-gradient(to right, #ec4899, #ec4899);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  /* position: relative;
+  display: inline-block; Ensures it doesn't take full width */
 }
 
 /* ✅ Dark Purple Gradient for Bars */
 .rechartsBar {
-    fill: url(#barGradient) !important;
-}
-
-/* ✅ Tooltip Styling */
-.customToolTip {
-    background: rgba(20, 20, 20, 0.9); /* Dark tooltip for contrast */
-    padding: 10px;
-    border-radius: 5px;
-    color: white;
-    font-size: 14px;
-    font-weight: bold;
-    text-align: center;
-}
-
-/* ✅ Tooltip Value Styling */
-.toolTipValue {
-    margin: 0;
-    padding: 5px;
+  fill: url(#barGradient) !important;
 }
 
 /* ✅ Responsive Adjustments */
 @media (max-width: 768px) {
-    .skillGrowthContainer {
-        width: 100%;
-        padding: 20px;
-    }
+  .skillGrowthContainer {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 450px) {
+  .skillGrowthContainer h2 {
+    font-size: 20px;
+  }
 }
