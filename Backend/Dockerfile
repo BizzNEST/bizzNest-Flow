@@ -24,7 +24,7 @@ COPY package*.json ./
  
 # Install dependencies, ensuring bcrypt is built from source
 RUN npm install --build-from-source bcrypt
-
+ 
 # Copy everything from your project directory into the container
 COPY . .  
   
