@@ -1,7 +1,8 @@
 .projectWorkloadsChart {
-    width: 100%;
-    text-align: center;
+ font-size: 16px;
+ width: 100%; 
     color: black;
-    font-weight: 300;
-    padding-right: 35px;
+    font-weight: bold;
+    position: relative;
+    bottom: 8px;
 }

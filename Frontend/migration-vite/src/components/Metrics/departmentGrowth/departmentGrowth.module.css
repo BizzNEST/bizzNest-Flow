@@ -9,9 +9,11 @@
 
 .chartTitle {
     font-size: 16px;
-    font-weight: 500;
+    font-weight: bold;
     color: black;
-    margin-bottom: 10px;
+   bottom: bold;
+   position: relative; 
+   bottom: 8px;
 }
 
 .radialCharts {

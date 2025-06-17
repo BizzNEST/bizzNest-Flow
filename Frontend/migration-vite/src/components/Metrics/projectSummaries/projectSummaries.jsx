@@ -64,10 +64,6 @@ const ProjectSummaries = () => {
                                 <td>{department}</td>
                                 <td>
                                 <span className={`${styles.statusBadge} ${styles[statusColor]}`}>{status}</span>
-<<<<<<< HEAD
-
-=======
->>>>>>> main
                                 </td>
                                 <td>{projectedGrowth}</td>
                             </tr>

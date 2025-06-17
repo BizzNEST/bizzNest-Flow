@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { LineChart, Line, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from "recharts";
-import './monthlyGrowth.css';
+import styles from './MonthlyGrowth.module.css';
 
 const ProgramMonthlyGrowth = () => {
     const [monthlyGrowthData, setMonthlyGrowthData] = useState([]);
@@ -45,7 +45,7 @@ const ProgramMonthlyGrowth = () => {
 
     return (
         <div className="program-monthly-growth-container">
-            <h3 className="chart-title">Monthly Growth</h3>
+            <h3 className={styles.monthlyGrowthHeader}>Monthly Growth</h3>
             <ResponsiveContainer width={600} height={170}>
                 <LineChart 
                     data={monthlyGrowthData} 

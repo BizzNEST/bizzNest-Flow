@@ -58,6 +58,5 @@ networks:
   backend:
      driver: bridge
 
-  c 
 volumes:
   mysql_data:  # ✅ Persistent MySQL storage to avoid losing data

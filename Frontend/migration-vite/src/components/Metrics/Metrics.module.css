@@ -22,7 +22,7 @@
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
   height: auto;
   min-height: 235px;
-  min-width: 0; /* Prevents flex items from overflowing */
+  min-width: 0;  
   display: flex;
   align-items: center;
   justify-content: center;
@@ -61,10 +61,8 @@
 
 .rectangleThird {
   flex: 1;
-  max-width: none;
+  max-width: none; 
 }
-
-/* Ensure the large container for the graph is properly constrained */
 
 
 /* Tablet breakpoint - maintain the same layout but scaled down */

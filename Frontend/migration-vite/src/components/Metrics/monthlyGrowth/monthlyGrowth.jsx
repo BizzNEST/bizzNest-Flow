@@ -46,20 +46,22 @@ const ProgramMonthlyGrowth = () => {
     return (
         <div className={styles.programMonthlyGrowthContainer}>
             <h3 className={styles.chartTitle}>Monthly Growth</h3>
-            <ResponsiveContainer width={600} height={170}>
+            <ResponsiveContainer width={700} height={150}>
                 <LineChart 
                     data={monthlyGrowthData} 
                     margin={{ top: 10, right: 10, left: 5, bottom: 10 }}
                 >
                     <XAxis 
                         dataKey="formattedMonth"
+                        stroke="#566573"
                         angle={-30} 
                         textAnchor="end" 
                         tick={{ fontSize: 10 }} 
                         height={40}
                     />
                     <YAxis 
-                        label={{ value: "Growth (%)", angle: -90, position: "insideLeft", fontSize: 10 }} 
+                        stroke="#566573"
+                        label={{ value: "Growth (%)", angle: -90, dx: -25, paddingBottom: "10px", fontSize: 14, fontWeight: 10,  stroke: "#c333fd" }} 
                         domain={['auto', 'auto']}
                     />
                     <Tooltip content={<CustomTooltip />} />
