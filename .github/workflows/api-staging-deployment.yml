@@ -91,6 +91,7 @@ jobs:
         done < <(env)
 
         echo -E $DB_NAME
+        docker system prune -a --volumes -f
         docker-compose down
         docker-compose up --build -d
         exit
